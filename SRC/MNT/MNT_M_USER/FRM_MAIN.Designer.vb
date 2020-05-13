@@ -128,7 +128,7 @@ Partial Class FRM_MAIN
         'LBL_NAME_USER_HEAD_GUIDE
         '
         Me.LBL_NAME_USER_HEAD_GUIDE.AutoEllipsis = True
-        Me.LBL_NAME_USER_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_NAME_USER_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_USER_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_USER_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
@@ -164,7 +164,7 @@ Partial Class FRM_MAIN
         'LBL_DATE_ACTIVE_HEAD_GUIDE
         '
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
@@ -264,7 +264,7 @@ Partial Class FRM_MAIN
         'LBL_FLAG_GRANT_GUIDE
         '
         Me.LBL_FLAG_GRANT_GUIDE.AutoEllipsis = True
-        Me.LBL_FLAG_GRANT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_FLAG_GRANT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_FLAG_GRANT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_FLAG_GRANT_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_FLAG_GRANT_GUIDE.Location = New System.Drawing.Point(1, 1)
@@ -296,7 +296,7 @@ Partial Class FRM_MAIN
         'LBL_PASS_WORD_GUIDE
         '
         Me.LBL_PASS_WORD_GUIDE.AutoEllipsis = True
-        Me.LBL_PASS_WORD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_PASS_WORD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_PASS_WORD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_PASS_WORD_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_PASS_WORD_GUIDE.Location = New System.Drawing.Point(1, 1)
@@ -328,7 +328,7 @@ Partial Class FRM_MAIN
         'LBL_USER_ID_GUIDE
         '
         Me.LBL_USER_ID_GUIDE.AutoEllipsis = True
-        Me.LBL_USER_ID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_USER_ID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_USER_ID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_USER_ID_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_USER_ID_GUIDE.Location = New System.Drawing.Point(1, 1)
@@ -360,7 +360,7 @@ Partial Class FRM_MAIN
         'LBL_NAME_STAFF_GUIDE
         '
         Me.LBL_NAME_STAFF_GUIDE.AutoEllipsis = True
-        Me.LBL_NAME_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_NAME_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_NAME_STAFF_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
@@ -394,7 +394,7 @@ Partial Class FRM_MAIN
         'LBL_CODE_STAFF_GUIDE
         '
         Me.LBL_CODE_STAFF_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        Me.LBL_CODE_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_CODE_STAFF_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_CODE_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
