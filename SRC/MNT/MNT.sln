@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MNT_LIB_COMMON", "MNT_LIB_C
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MNT_M_USER", "MNT_M_USER\MNT_M_USER.vbproj", "{516BDC4E-97A5-4F75-A57E-AEBD3A22FEDC}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MNT_M_OWNER", "MNT_M_OWNER\MNT_M_OWNER.vbproj", "{6252DDFE-6D89-423D-9EEE-D987D3073A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{516BDC4E-97A5-4F75-A57E-AEBD3A22FEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{516BDC4E-97A5-4F75-A57E-AEBD3A22FEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{516BDC4E-97A5-4F75-A57E-AEBD3A22FEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6252DDFE-6D89-423D-9EEE-D987D3073A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6252DDFE-6D89-423D-9EEE-D987D3073A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6252DDFE-6D89-423D-9EEE-D987D3073A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6252DDFE-6D89-423D-9EEE-D987D3073A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
