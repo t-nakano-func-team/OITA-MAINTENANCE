@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -130,7 +130,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_USER_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_USER_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_USER_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_USER_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_USER_HEAD_GUIDE.Name = "LBL_NAME_USER_HEAD_GUIDE"
         Me.LBL_NAME_USER_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -166,7 +166,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Name = "LBL_DATE_ACTIVE_HEAD_GUIDE"
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -199,14 +199,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -266,7 +266,7 @@ Partial Class FRM_MAIN
         Me.LBL_FLAG_GRANT_GUIDE.AutoEllipsis = True
         Me.LBL_FLAG_GRANT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_FLAG_GRANT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_GRANT_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_FLAG_GRANT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_FLAG_GRANT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_FLAG_GRANT_GUIDE.Name = "LBL_FLAG_GRANT_GUIDE"
         Me.LBL_FLAG_GRANT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -298,7 +298,7 @@ Partial Class FRM_MAIN
         Me.LBL_PASS_WORD_GUIDE.AutoEllipsis = True
         Me.LBL_PASS_WORD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_PASS_WORD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_PASS_WORD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_PASS_WORD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_PASS_WORD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_PASS_WORD_GUIDE.Name = "LBL_PASS_WORD_GUIDE"
         Me.LBL_PASS_WORD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -330,7 +330,7 @@ Partial Class FRM_MAIN
         Me.LBL_USER_ID_GUIDE.AutoEllipsis = True
         Me.LBL_USER_ID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_USER_ID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_USER_ID_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_USER_ID_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_USER_ID_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_USER_ID_GUIDE.Name = "LBL_USER_ID_GUIDE"
         Me.LBL_USER_ID_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -362,7 +362,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_STAFF_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_STAFF_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_STAFF_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_STAFF_GUIDE.Name = "LBL_NAME_STAFF_GUIDE"
         Me.LBL_NAME_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -396,7 +396,7 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_STAFF_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_STAFF_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_CODE_STAFF_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_CODE_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_STAFF_GUIDE.Name = "LBL_CODE_STAFF_GUIDE"
         Me.LBL_CODE_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
