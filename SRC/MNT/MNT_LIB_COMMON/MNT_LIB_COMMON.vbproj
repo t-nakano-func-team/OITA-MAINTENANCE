@@ -183,6 +183,7 @@
     <Compile Include="FRM_SYSTEM_TOTAL\FRM_SYSTEM_TOTAL_FONT_SETTING.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_INPUT_CHECK.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -227,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FRM_SYSTEM_INDVIDUAL\" />
-    <Folder Include="MOD_SYSTEM_INDIVIDUAL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
