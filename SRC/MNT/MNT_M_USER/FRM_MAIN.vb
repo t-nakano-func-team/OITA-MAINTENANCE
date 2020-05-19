@@ -732,15 +732,15 @@
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_DELETE)
     End Sub
 
-    Private Sub BTN_PREVIEW_Click(sender As Object, e As EventArgs) Handles BTN_PREVIEW.Click
+    Private Sub BTN_PREVIEW_Click(sender As Object, e As EventArgs)
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PREVIEW)
     End Sub
 
-    Private Sub BTN_PRINT_Click(sender As Object, e As EventArgs) Handles BTN_PRINT.Click
+    Private Sub BTN_PRINT_Click(sender As Object, e As EventArgs)
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PRINT)
     End Sub
 
-    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs) Handles BTN_PUT_FILE.Click
+    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs)
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PUT_FILE)
     End Sub
 

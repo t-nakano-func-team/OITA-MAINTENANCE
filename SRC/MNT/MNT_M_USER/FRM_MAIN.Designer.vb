@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -52,9 +52,6 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_STAFF = New System.Windows.Forms.TextBox()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
-        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
-        Me.BTN_PRINT = New System.Windows.Forms.Button()
-        Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
@@ -130,7 +127,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_USER_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_USER_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_USER_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_USER_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_USER_HEAD_GUIDE.Name = "LBL_NAME_USER_HEAD_GUIDE"
         Me.LBL_NAME_USER_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -166,7 +163,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Name = "LBL_DATE_ACTIVE_HEAD_GUIDE"
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -199,14 +196,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -266,7 +263,7 @@ Partial Class FRM_MAIN
         Me.LBL_FLAG_GRANT_GUIDE.AutoEllipsis = True
         Me.LBL_FLAG_GRANT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_FLAG_GRANT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_GRANT_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_FLAG_GRANT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_FLAG_GRANT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_FLAG_GRANT_GUIDE.Name = "LBL_FLAG_GRANT_GUIDE"
         Me.LBL_FLAG_GRANT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -298,7 +295,7 @@ Partial Class FRM_MAIN
         Me.LBL_PASS_WORD_GUIDE.AutoEllipsis = True
         Me.LBL_PASS_WORD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_PASS_WORD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_PASS_WORD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_PASS_WORD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_PASS_WORD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_PASS_WORD_GUIDE.Name = "LBL_PASS_WORD_GUIDE"
         Me.LBL_PASS_WORD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -330,7 +327,7 @@ Partial Class FRM_MAIN
         Me.LBL_USER_ID_GUIDE.AutoEllipsis = True
         Me.LBL_USER_ID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_USER_ID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_USER_ID_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_USER_ID_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_USER_ID_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_USER_ID_GUIDE.Name = "LBL_USER_ID_GUIDE"
         Me.LBL_USER_ID_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -362,7 +359,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_STAFF_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_STAFF_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_STAFF_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_STAFF_GUIDE.Name = "LBL_NAME_STAFF_GUIDE"
         Me.LBL_NAME_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -396,7 +393,7 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_STAFF_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_STAFF_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_CODE_STAFF_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_CODE_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_STAFF_GUIDE.Name = "LBL_CODE_STAFF_GUIDE"
         Me.LBL_CODE_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -431,60 +428,21 @@ Partial Class FRM_MAIN
         '
         Me.pnlFUNCTION_GROUP.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlFUNCTION_GROUP.AutoScroll = True
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PUT_FILE)
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PRINT)
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PREVIEW)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_CLEAR)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_DELETE)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_ENTER)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_END)
-        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(70, 15)
+        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(200, 15)
         Me.pnlFUNCTION_GROUP.MinimumSize = New System.Drawing.Size(190, 40)
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
-        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(620, 40)
+        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(355, 40)
         Me.pnlFUNCTION_GROUP.TabIndex = 1
-        '
-        'BTN_PUT_FILE
-        '
-        Me.BTN_PUT_FILE.AutoSize = True
-        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(350, 5)
-        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
-        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(90, 30)
-        Me.BTN_PUT_FILE.TabIndex = 4
-        Me.BTN_PUT_FILE.Text = "ファイル"
-        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
-        '
-        'BTN_PRINT
-        '
-        Me.BTN_PRINT.AutoSize = True
-        Me.BTN_PRINT.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PRINT.Location = New System.Drawing.Point(265, 5)
-        Me.BTN_PRINT.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PRINT.Name = "BTN_PRINT"
-        Me.BTN_PRINT.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PRINT.TabIndex = 3
-        Me.BTN_PRINT.Text = "印刷"
-        Me.BTN_PRINT.UseVisualStyleBackColor = False
-        '
-        'BTN_PREVIEW
-        '
-        Me.BTN_PREVIEW.AutoSize = True
-        Me.BTN_PREVIEW.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PREVIEW.Location = New System.Drawing.Point(180, 5)
-        Me.BTN_PREVIEW.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PREVIEW.Name = "BTN_PREVIEW"
-        Me.BTN_PREVIEW.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PREVIEW.TabIndex = 2
-        Me.BTN_PREVIEW.Text = "プレビュー"
-        Me.BTN_PREVIEW.UseVisualStyleBackColor = False
         '
         'BTN_CLEAR
         '
         Me.BTN_CLEAR.AutoSize = True
         Me.BTN_CLEAR.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_CLEAR.Location = New System.Drawing.Point(445, 5)
+        Me.BTN_CLEAR.Location = New System.Drawing.Point(180, 5)
         Me.BTN_CLEAR.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_CLEAR.Name = "BTN_CLEAR"
         Me.BTN_CLEAR.Size = New System.Drawing.Size(80, 30)
@@ -520,7 +478,7 @@ Partial Class FRM_MAIN
         '
         Me.BTN_END.AutoSize = True
         Me.BTN_END.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_END.Location = New System.Drawing.Point(530, 5)
+        Me.BTN_END.Location = New System.Drawing.Point(265, 5)
         Me.BTN_END.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_END.Name = "BTN_END"
         Me.BTN_END.Size = New System.Drawing.Size(80, 30)
@@ -597,9 +555,6 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_FLAG_GRANT_GUIDE As Label
     Friend WithEvents DGV_VIEW_DATA As DataGridView
     Friend WithEvents pnlFUNCTION_GROUP As Panel
-    Friend WithEvents BTN_PUT_FILE As Button
-    Friend WithEvents BTN_PRINT As Button
-    Friend WithEvents BTN_PREVIEW As Button
     Friend WithEvents BTN_CLEAR As Button
     Friend WithEvents BTN_DELETE As Button
     Friend WithEvents BTN_ENTER As Button
