@@ -183,7 +183,12 @@
     <Compile Include="FRM_SYSTEM_TOTAL\FRM_SYSTEM_TOTAL_FONT_SETTING.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_COMBO_TOOL.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_CONST.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_ENUM.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_INPUT_CHECK.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_MST_SELECT.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
