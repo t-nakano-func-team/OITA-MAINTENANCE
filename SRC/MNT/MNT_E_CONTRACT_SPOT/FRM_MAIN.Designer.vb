@@ -435,11 +435,11 @@ Partial Class FRM_MAIN
         '
         Me.TXT_KINGAKU_CONTRACT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_CONTRACT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KINGAKU_CONTRACT.MaxLength = 7
+        Me.TXT_KINGAKU_CONTRACT.MaxLength = 9
         Me.TXT_KINGAKU_CONTRACT.Name = "TXT_KINGAKU_CONTRACT"
         Me.TXT_KINGAKU_CONTRACT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_CONTRACT.TabIndex = 1
-        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=0000000,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
         Me.TXT_KINGAKU_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_NAME_MEMO
