@@ -593,7 +593,7 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_OWNER.Location = New System.Drawing.Point(100, 1)
         Me.TXT_CODE_OWNER.MaxLength = 9
         Me.TXT_CODE_OWNER.Name = "TXT_CODE_OWNER"
-        Me.TXT_CODE_OWNER.Size = New System.Drawing.Size(80, 25)
+        Me.TXT_CODE_OWNER.Size = New System.Drawing.Size(130, 25)
         Me.TXT_CODE_OWNER.TabIndex = 1
         Me.TXT_CODE_OWNER.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
         Me.TXT_CODE_OWNER.TextAlign = System.Windows.Forms.HorizontalAlignment.Right

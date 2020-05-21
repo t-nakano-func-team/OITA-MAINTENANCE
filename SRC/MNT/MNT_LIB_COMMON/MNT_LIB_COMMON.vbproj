@@ -177,6 +177,12 @@
     <Compile Include="..\..\COMMON\COMMON_LIB_BASE\MOD_SYSTEM_TOTAL\MOD_SYSTEM_TOTAL_XLS_TOOL.vb">
       <Link>MOD_SYSTEM_TOTAL\MOD_SYSTEM_TOTAL_XLS_TOOL.vb</Link>
     </Compile>
+    <Compile Include="FRM_SYSTEM_INDVIDUAL\FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER.Designer.vb">
+      <DependentUpon>FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRM_SYSTEM_INDVIDUAL\FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FRM_SYSTEM_TOTAL\FRM_SYSTEM_TOTAL_FONT_SETTING.designer.vb">
       <DependentUpon>FRM_SYSTEM_TOTAL_FONT_SETTING.vb</DependentUpon>
     </Compile>
@@ -188,6 +194,7 @@
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_ENUM.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_INPUT_CHECK.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_MST_SELECT.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_SHOW_SEARCH.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -206,6 +213,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FRM_SYSTEM_INDVIDUAL\FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER.resx">
+      <DependentUpon>FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FRM_SYSTEM_TOTAL\FRM_SYSTEM_TOTAL_FONT_SETTING.resx">
       <DependentUpon>FRM_SYSTEM_TOTAL_FONT_SETTING.vb</DependentUpon>
     </EmbeddedResource>
@@ -231,8 +241,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FRM_SYSTEM_INDVIDUAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

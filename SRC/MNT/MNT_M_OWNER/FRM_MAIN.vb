@@ -52,8 +52,8 @@
 #End Region
 
 #Region "画面用・変数"
-    Private blnPROCESS_DOING As Boolean
-    Private enmWINDOW_MODE_CURRENT As ENM_MY_WINDOW_MODE '現在の画面状態
+    Private BLN_PROCESS_DOING As Boolean
+    Private ENM_WINDOW_MODE_CURRENT As ENM_MY_WINDOW_MODE '現在の画面状態
     Private TBL_GRID_DATA_MAIN As DataTable
     Private SRT_GRID_DATA_MAIN() As SRT_MY_GRID_DATA
 #End Region
@@ -90,12 +90,12 @@
     Private Sub SUB_EXEC_DO(
     ByVal ENM_EXEC_DO As ENM_MY_EXEC_DO
     )
-        If blnPROCESS_DOING Then
+        If BLN_PROCESS_DOING Then
             Exit Sub
         End If
 
         Me.Cursor = Cursors.WaitCursor
-        blnPROCESS_DOING = True
+        BLN_PROCESS_DOING = True
         Call Application.DoEvents()
 
         '実処理を呼出
@@ -121,7 +121,7 @@
         End Select
 
         Call Application.DoEvents()
-        blnPROCESS_DOING = False
+        BLN_PROCESS_DOING = False
         Me.Cursor = Cursors.Default
     End Sub
 #End Region
@@ -404,7 +404,7 @@
     )
         Dim txtDUMMY As TextBox
 
-        If enmCHANGE_MODE = enmWINDOW_MODE_CURRENT Then
+        If enmCHANGE_MODE = ENM_WINDOW_MODE_CURRENT Then
             Exit Sub
         End If
         txtDUMMY = Nothing
@@ -441,7 +441,7 @@
 
         Call SUB_REMOVE_TEXTBOX(txtDUMMY, Me)
 
-        enmWINDOW_MODE_CURRENT = enmCHANGE_MODE
+        ENM_WINDOW_MODE_CURRENT = enmCHANGE_MODE
         Call Application.DoEvents()
     End Sub
 #End Region
