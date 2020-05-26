@@ -68,13 +68,19 @@
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,3,6,3,4,4,3", "RLLLLLLL")
 
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_CODE_SECTION, ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION)
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_OWNER, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER)
         Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_FIXED_DATE, ENM_MNT_M_KIND_CODE_FLAG.KIND_FIXED_DATE)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_CODE_SECTION)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_OWNER)
         Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_FIXED_DATE)
+
+        Call SUB_REFRESH_ENABLED_ADDRESS()
 
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS 'グリッド条件
         SRT_CONDITIONS = Nothing '条件の取得（項目がない為、クリア）
@@ -170,6 +176,7 @@
         End If
 
         Call SUB_WINDOW_MODE_CHANGE(ENM_CHANGE_MODE)
+        Call SUB_REFRESH_ENABLED_ADDRESS()
         Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me.PNL_INPUT_DATA)
     End Sub
 
@@ -444,6 +451,23 @@
         ENM_WINDOW_MODE_CURRENT = enmCHANGE_MODE
         Call Application.DoEvents()
     End Sub
+
+    Private Sub SUB_REFRESH_ENABLED_ADDRESS()
+        Dim ENM_KIND_OWNER As ENM_SYSTEM_INDIVIDUAL_KIND_OWNER
+        ENM_KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_OWNER)
+        Dim BLN_ENABLED As Boolean
+        BLN_ENABLED = (ENM_KIND_OWNER = ENM_SYSTEM_INDIVIDUAL_KIND_OWNER.NORMAL)
+
+        If Not BLN_ENABLED Then
+            TXT_CODE_POST.Text = ""
+            TXT_NAME_ADDRESS_01.Text = ""
+            TXT_NAME_ADDRESS_02.Text = ""
+        End If
+
+        TXT_CODE_POST.Enabled = BLN_ENABLED
+        TXT_NAME_ADDRESS_01.Enabled = BLN_ENABLED
+        TXT_NAME_ADDRESS_02.Enabled = BLN_ENABLED
+    End Sub
 #End Region
 
 #Region "チェック処理"
@@ -566,6 +590,8 @@
             .NAME_OWNER = CStr(TXT_NAME_OWNER.Text)
             .NAME_OWNER_SHORT = CStr(TXT_NAME_OWNER_SHORT.Text)
             .KANA_OWNER = CStr(TXT_KANA_OWNER.Text)
+            .CODE_SECTION = FUNC_GET_COMBO_KIND_CODE(CMB_CODE_SECTION)
+            .KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_OWNER)
             .CODE_POST = CStr(TXT_CODE_POST.Text)
             .NAME_ADDRESS_01 = CStr(TXT_NAME_ADDRESS_01.Text)
             .NAME_ADDRESS_02 = CStr(TXT_NAME_ADDRESS_02.Text)
@@ -580,6 +606,8 @@
             TXT_NAME_OWNER.Text = .NAME_OWNER
             TXT_NAME_OWNER_SHORT.Text = .NAME_OWNER_SHORT
             TXT_KANA_OWNER.Text = .KANA_OWNER
+            Call SUB_SET_COMBO_KIND_CODE(CMB_CODE_SECTION, .CODE_SECTION)
+            Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_OWNER, .KIND_OWNER)
             TXT_CODE_POST.Text = .CODE_POST
             TXT_NAME_ADDRESS_01.Text = .NAME_ADDRESS_01
             TXT_NAME_ADDRESS_02.Text = .NAME_ADDRESS_02
@@ -703,6 +731,12 @@
 #Region "イベント-グリッドダブルクリック"
     Private Sub DGV_VIEW_DATA_DoubleClick(sender As Object, e As EventArgs) Handles DGV_VIEW_DATA.DoubleClick
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SELECT_SEQ)
+    End Sub
+#End Region
+
+#Region "イベント-インデックスチェンジ"
+    Private Sub CMB_KIND_OWNER_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CMB_KIND_OWNER.SelectedIndexChanged
+        Call SUB_REFRESH_ENABLED_ADDRESS()
     End Sub
 #End Region
 

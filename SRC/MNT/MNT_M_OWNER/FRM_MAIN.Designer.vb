@@ -40,6 +40,12 @@ Partial Class FRM_MAIN
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
+        Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
+        Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_KIND_OWNER = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_OWNER = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_OWNER_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_KIND_FIXED_DATE = New System.Windows.Forms.Panel()
         Me.CMB_KIND_FIXED_DATE = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_FIXED_DATE_GUIDE = New System.Windows.Forms.Label()
@@ -74,6 +80,8 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_CODE_SECTION.SuspendLayout()
+        Me.PNL_KIND_OWNER.SuspendLayout()
         Me.PNL_KIND_FIXED_DATE.SuspendLayout()
         Me.PNL_NAME_ADDRESS_02.SuspendLayout()
         Me.PNL_NAME_ADDRESS_01.SuspendLayout()
@@ -291,7 +299,7 @@ Partial Class FRM_MAIN
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
+        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 205)
         Me.DGV_VIEW_DATA.MultiSelect = False
         Me.DGV_VIEW_DATA.Name = "DGV_VIEW_DATA"
         Me.DGV_VIEW_DATA.ReadOnly = True
@@ -306,7 +314,7 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowCellToolTips = False
         Me.DGV_VIEW_DATA.ShowEditingIcon = False
         Me.DGV_VIEW_DATA.ShowRowErrors = False
-        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 240)
+        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 215)
         Me.DGV_VIEW_DATA.TabIndex = 3
         Me.DGV_VIEW_DATA.TabStop = False
         '
@@ -316,6 +324,8 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_SECTION)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KIND_OWNER)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KIND_FIXED_DATE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_ADDRESS_02)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_ADDRESS_01)
@@ -325,17 +335,81 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_OWNER)
         Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 70)
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
-        Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 100)
+        Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 130)
         Me.PNL_INPUT_DATA.TabIndex = 1
+        '
+        'PNL_CODE_SECTION
+        '
+        Me.PNL_CODE_SECTION.Controls.Add(Me.CMB_CODE_SECTION)
+        Me.PNL_CODE_SECTION.Controls.Add(Me.LBL_CODE_SECTION_GUIDE)
+        Me.PNL_CODE_SECTION.Location = New System.Drawing.Point(5, 35)
+        Me.PNL_CODE_SECTION.Name = "PNL_CODE_SECTION"
+        Me.PNL_CODE_SECTION.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_SECTION.TabIndex = 3
+        '
+        'CMB_CODE_SECTION
+        '
+        Me.CMB_CODE_SECTION.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_CODE_SECTION.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_CODE_SECTION.Name = "CMB_CODE_SECTION"
+        Me.CMB_CODE_SECTION.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_CODE_SECTION.TabIndex = 1
+        Me.CMB_CODE_SECTION.Tag = "Clear"
+        '
+        'LBL_CODE_SECTION_GUIDE
+        '
+        Me.LBL_CODE_SECTION_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_SECTION_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_SECTION_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_SECTION_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_SECTION_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_SECTION_GUIDE.Name = "LBL_CODE_SECTION_GUIDE"
+        Me.LBL_CODE_SECTION_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_SECTION_GUIDE.TabIndex = 0
+        Me.LBL_CODE_SECTION_GUIDE.Text = "担当部署"
+        Me.LBL_CODE_SECTION_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_KIND_OWNER
+        '
+        Me.PNL_KIND_OWNER.Controls.Add(Me.CMB_KIND_OWNER)
+        Me.PNL_KIND_OWNER.Controls.Add(Me.LBL_KIND_OWNER_GUIDE)
+        Me.PNL_KIND_OWNER.Location = New System.Drawing.Point(255, 35)
+        Me.PNL_KIND_OWNER.Name = "PNL_KIND_OWNER"
+        Me.PNL_KIND_OWNER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_OWNER.TabIndex = 4
+        '
+        'CMB_KIND_OWNER
+        '
+        Me.CMB_KIND_OWNER.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_OWNER.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_OWNER.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_OWNER.Name = "CMB_KIND_OWNER"
+        Me.CMB_KIND_OWNER.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_OWNER.TabIndex = 1
+        Me.CMB_KIND_OWNER.Tag = "Clear"
+        '
+        'LBL_KIND_OWNER_GUIDE
+        '
+        Me.LBL_KIND_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_OWNER_GUIDE.Name = "LBL_KIND_OWNER_GUIDE"
+        Me.LBL_KIND_OWNER_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_KIND_OWNER_GUIDE.Text = "形式"
+        Me.LBL_KIND_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_KIND_FIXED_DATE
         '
         Me.PNL_KIND_FIXED_DATE.Controls.Add(Me.CMB_KIND_FIXED_DATE)
         Me.PNL_KIND_FIXED_DATE.Controls.Add(Me.LBL_KIND_FIXED_DATE_GUIDE)
-        Me.PNL_KIND_FIXED_DATE.Location = New System.Drawing.Point(5, 65)
+        Me.PNL_KIND_FIXED_DATE.Location = New System.Drawing.Point(5, 95)
         Me.PNL_KIND_FIXED_DATE.Name = "PNL_KIND_FIXED_DATE"
         Me.PNL_KIND_FIXED_DATE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_FIXED_DATE.TabIndex = 6
+        Me.PNL_KIND_FIXED_DATE.TabIndex = 8
         '
         'CMB_KIND_FIXED_DATE
         '
@@ -364,10 +438,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.TXT_NAME_ADDRESS_02)
         Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.LBL_NAME_ADDRESS_02)
-        Me.PNL_NAME_ADDRESS_02.Location = New System.Drawing.Point(500, 35)
+        Me.PNL_NAME_ADDRESS_02.Location = New System.Drawing.Point(500, 65)
         Me.PNL_NAME_ADDRESS_02.Name = "PNL_NAME_ADDRESS_02"
         Me.PNL_NAME_ADDRESS_02.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_ADDRESS_02.TabIndex = 5
+        Me.PNL_NAME_ADDRESS_02.TabIndex = 7
         '
         'TXT_NAME_ADDRESS_02
         '
@@ -396,10 +470,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.TXT_NAME_ADDRESS_01)
         Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.LBL_NAME_ADDRESS_01)
-        Me.PNL_NAME_ADDRESS_01.Location = New System.Drawing.Point(255, 35)
+        Me.PNL_NAME_ADDRESS_01.Location = New System.Drawing.Point(255, 65)
         Me.PNL_NAME_ADDRESS_01.Name = "PNL_NAME_ADDRESS_01"
         Me.PNL_NAME_ADDRESS_01.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_ADDRESS_01.TabIndex = 4
+        Me.PNL_NAME_ADDRESS_01.TabIndex = 6
         '
         'TXT_NAME_ADDRESS_01
         '
@@ -428,10 +502,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_CODE_POST.Controls.Add(Me.LBL_CODE_POST_GUIDE)
         Me.PNL_CODE_POST.Controls.Add(Me.TXT_CODE_POST)
-        Me.PNL_CODE_POST.Location = New System.Drawing.Point(5, 35)
+        Me.PNL_CODE_POST.Location = New System.Drawing.Point(5, 65)
         Me.PNL_CODE_POST.Name = "PNL_CODE_POST"
         Me.PNL_CODE_POST.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_POST.TabIndex = 3
+        Me.PNL_CODE_POST.TabIndex = 5
         '
         'LBL_CODE_POST_GUIDE
         '
@@ -623,6 +697,8 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_CODE_SECTION.ResumeLayout(False)
+        Me.PNL_KIND_OWNER.ResumeLayout(False)
         Me.PNL_KIND_FIXED_DATE.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.PerformLayout()
@@ -685,4 +761,10 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_KIND_FIXED_DATE As Panel
     Friend WithEvents CMB_KIND_FIXED_DATE As ComboBox
     Friend WithEvents LBL_KIND_FIXED_DATE_GUIDE As Label
+    Friend WithEvents PNL_CODE_SECTION As Panel
+    Friend WithEvents CMB_CODE_SECTION As ComboBox
+    Friend WithEvents LBL_CODE_SECTION_GUIDE As Label
+    Friend WithEvents PNL_KIND_OWNER As Panel
+    Friend WithEvents CMB_KIND_OWNER As ComboBox
+    Friend WithEvents LBL_KIND_OWNER_GUIDE As Label
 End Class
