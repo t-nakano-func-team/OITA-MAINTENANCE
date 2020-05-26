@@ -68,6 +68,7 @@
     <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
@@ -196,6 +197,8 @@
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_INPUT_CHECK.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_MST_SELECT.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_SHOW_SEARCH.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_SQL_TOOL.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_STRUCTURE.vb" />
     <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

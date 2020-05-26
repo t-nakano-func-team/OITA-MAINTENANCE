@@ -70,6 +70,8 @@
 
         '実処理を呼出
         Select Case ENM_EXEC_DO
+            Case ENM_MY_EXEC_DO.DO_SHOW_SEARCH
+                Call SUB_SHOW_SEARCH()
             Case ENM_MY_EXEC_DO.DO_DATA_EDIT
                 Call SUB_DATA_EDIT()
             Case ENM_MY_EXEC_DO.DO_ENTER
@@ -95,6 +97,49 @@
 #End Region
 
 #Region "実行処理群"
+
+    Private Sub SUB_SHOW_SEARCH()
+
+        Dim CTL_ACTIVE As Control
+        CTL_ACTIVE = Me.ActiveControl
+
+        Dim CTL_SEARCH As Control
+        CTL_SEARCH = Nothing
+        Select Case True
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER) Or (CTL_ACTIVE Is BTN_CODE_OWNER_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER
+            Case Else
+
+        End Select
+
+        If CTL_SEARCH Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim sngFONT_SIZE As Single
+        sngFONT_SIZE = Me.Font.Size
+
+        Dim BLN_RET As Boolean
+        Select Case True
+            Case (CTL_SEARCH Is TXT_CODE_OWNER)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_CODE_OWNER As Integer
+                INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
+
+                BLN_RET = FUNC_SHOW_FRM_SYSTEM_INDIVIDUAL_SEARCH_SHINTO(INT_CODE_OWNER, sngFONT_SIZE)
+
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
+
+            Case Else
+                'スルー
+        End Select
+    End Sub
+
 
     'データ入力モードへ変更
     Private Sub SUB_DATA_EDIT()
@@ -192,6 +237,42 @@
 
         ENM_WINDOW_MODE_CURRENT = enmCHANGE_MODE
         Call Application.DoEvents()
+    End Sub
+
+    Private Sub SUB_REFRESH_ENABLD_EXT_SPOT()
+        Dim INT_CODE_OWNER As Integer
+        If IsNumeric(TXT_CODE_OWNER.Text) Then
+            INT_CODE_OWNER = CInt(TXT_CODE_OWNER.Text)
+        Else
+            INT_CODE_OWNER = -1
+        End If
+
+        Dim ENM_KIND_OWNER As ENM_SYSTEM_INDIVIDUAL_KIND_OWNER
+        ENM_KIND_OWNER = FUNC_GET_MNT_M_OWNER_KIND_OWNER(INT_CODE_OWNER, True)
+
+        Dim BLN_EANBLED As Boolean
+        Select Case ENM_KIND_OWNER
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_OWNER.NORMAL
+                BLN_EANBLED = False
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_OWNER.SPOT
+                BLN_EANBLED = True
+            Case Else
+                BLN_EANBLED = False
+        End Select
+
+        If BLN_EANBLED Then
+            TXT_NAME_OWNER.Text = ""
+            TXT_CODE_POST.Text = ""
+            TXT_NAME_ADDRESS_01.Text = ""
+            TXT_NAME_ADDRESS_02.Text = ""
+        Else
+            TXT_NAME_OWNER.Text = FUNC_GET_MNT_M_OWNER_NAME_OWNER(INT_CODE_OWNER)
+            TXT_CODE_POST.Text = ""
+            TXT_NAME_ADDRESS_01.Text = FUNC_GET_MNT_M_OWNER_NAME_ADDRESS_01(INT_CODE_OWNER)
+            TXT_NAME_ADDRESS_02.Text = FUNC_GET_MNT_M_OWNER_NAME_ADDRESS_02(INT_CODE_OWNER)
+        End If
+
+        PNL_EXT_SPOT.Enabled = BLN_EANBLED
     End Sub
 #End Region
 
@@ -345,6 +426,20 @@
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
     End Sub
+
+    Private Sub BTN_CODE_OWNER_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+#End Region
+
+#Region "イベント-テキストチェンジ"
+    Private Sub TXT_CODE_OWNER_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+
+        Call SUB_REFRESH_ENABLD_EXT_SPOT()
+
+
+    End Sub
 #End Region
 
     Private Sub FRM_MAIN_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -378,4 +473,5 @@
     Private Sub FRM_MAIN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
+
 End Class

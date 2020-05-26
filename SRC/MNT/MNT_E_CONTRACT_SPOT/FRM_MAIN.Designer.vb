@@ -38,6 +38,19 @@ Partial Class FRM_MAIN
         Me.BTN_END = New System.Windows.Forms.Button()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_EXT_SPOT = New System.Windows.Forms.Panel()
+        Me.PNL_NAME_ADDRESS_02 = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_ADDRESS_02 = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_ADDRESS_02 = New System.Windows.Forms.Label()
+        Me.PNL_NAME_ADDRESS_01 = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_ADDRESS_01 = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_ADDRESS_01 = New System.Windows.Forms.Label()
+        Me.PNL_CODE_POST = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_POST_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_CODE_POST = New System.Windows.Forms.TextBox()
+        Me.PNL_NAME_OWNER = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_OWNER = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_OWNER_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_NAME_MEMO = New System.Windows.Forms.Panel()
         Me.TXT_NAME_MEMO = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_MEMO_GUIDE = New System.Windows.Forms.Label()
@@ -56,19 +69,6 @@ Partial Class FRM_MAIN
         Me.PNL_NUMBER_CONTRACT = New System.Windows.Forms.Panel()
         Me.LBL_NUMBER_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.TXT_NUMBER_CONTRACT = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.PNL_NAME_OWNER = New System.Windows.Forms.Panel()
-        Me.TXT_NAME_OWNER = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_OWNER_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_CODE_POST = New System.Windows.Forms.Panel()
-        Me.LBL_CODE_POST_GUIDE = New System.Windows.Forms.Label()
-        Me.TXT_CODE_POST = New System.Windows.Forms.TextBox()
-        Me.PNL_NAME_ADDRESS_01 = New System.Windows.Forms.Panel()
-        Me.TXT_NAME_ADDRESS_01 = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_ADDRESS_01 = New System.Windows.Forms.Label()
-        Me.PNL_NAME_ADDRESS_02 = New System.Windows.Forms.Panel()
-        Me.TXT_NAME_ADDRESS_02 = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_ADDRESS_02 = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -77,17 +77,17 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_EXT_SPOT.SuspendLayout()
+        Me.PNL_NAME_ADDRESS_02.SuspendLayout()
+        Me.PNL_NAME_ADDRESS_01.SuspendLayout()
+        Me.PNL_CODE_POST.SuspendLayout()
+        Me.PNL_NAME_OWNER.SuspendLayout()
         Me.PNL_NAME_MEMO.SuspendLayout()
         Me.PNL_KINGAKU_CONTRACT.SuspendLayout()
         Me.PNL_DATE_CONTRACT.SuspendLayout()
         Me.PNL_CODE_SHINTO_PARENT.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.PNL_NAME_OWNER.SuspendLayout()
-        Me.PNL_CODE_POST.SuspendLayout()
-        Me.PNL_NAME_ADDRESS_01.SuspendLayout()
-        Me.PNL_NAME_ADDRESS_02.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -282,7 +282,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.Panel1)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_EXT_SPOT)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_MEMO)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KINGAKU_CONTRACT)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DATE_CONTRACT)
@@ -292,6 +292,146 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
         '
+        'PNL_EXT_SPOT
+        '
+        Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_NAME_ADDRESS_02)
+        Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_NAME_ADDRESS_01)
+        Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_CODE_POST)
+        Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_NAME_OWNER)
+        Me.PNL_EXT_SPOT.Location = New System.Drawing.Point(5, 70)
+        Me.PNL_EXT_SPOT.Name = "PNL_EXT_SPOT"
+        Me.PNL_EXT_SPOT.Size = New System.Drawing.Size(720, 60)
+        Me.PNL_EXT_SPOT.TabIndex = 2
+        '
+        'PNL_NAME_ADDRESS_02
+        '
+        Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.TXT_NAME_ADDRESS_02)
+        Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.LBL_NAME_ADDRESS_02)
+        Me.PNL_NAME_ADDRESS_02.Location = New System.Drawing.Point(250, 30)
+        Me.PNL_NAME_ADDRESS_02.Name = "PNL_NAME_ADDRESS_02"
+        Me.PNL_NAME_ADDRESS_02.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NAME_ADDRESS_02.TabIndex = 3
+        '
+        'TXT_NAME_ADDRESS_02
+        '
+        Me.TXT_NAME_ADDRESS_02.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_ADDRESS_02.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_NAME_ADDRESS_02.MaxLength = 12
+        Me.TXT_NAME_ADDRESS_02.Name = "TXT_NAME_ADDRESS_02"
+        Me.TXT_NAME_ADDRESS_02.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_NAME_ADDRESS_02.TabIndex = 1
+        Me.TXT_NAME_ADDRESS_02.Tag = "Clear,Check,Char,NotNull"
+        '
+        'LBL_NAME_ADDRESS_02
+        '
+        Me.LBL_NAME_ADDRESS_02.AutoEllipsis = True
+        Me.LBL_NAME_ADDRESS_02.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_ADDRESS_02.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_ADDRESS_02.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_ADDRESS_02.Name = "LBL_NAME_ADDRESS_02"
+        Me.LBL_NAME_ADDRESS_02.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_NAME_ADDRESS_02.TabIndex = 0
+        Me.LBL_NAME_ADDRESS_02.Text = "住所2"
+        Me.LBL_NAME_ADDRESS_02.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_NAME_ADDRESS_01
+        '
+        Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.TXT_NAME_ADDRESS_01)
+        Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.LBL_NAME_ADDRESS_01)
+        Me.PNL_NAME_ADDRESS_01.Location = New System.Drawing.Point(0, 30)
+        Me.PNL_NAME_ADDRESS_01.Name = "PNL_NAME_ADDRESS_01"
+        Me.PNL_NAME_ADDRESS_01.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NAME_ADDRESS_01.TabIndex = 2
+        '
+        'TXT_NAME_ADDRESS_01
+        '
+        Me.TXT_NAME_ADDRESS_01.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_ADDRESS_01.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_NAME_ADDRESS_01.MaxLength = 12
+        Me.TXT_NAME_ADDRESS_01.Name = "TXT_NAME_ADDRESS_01"
+        Me.TXT_NAME_ADDRESS_01.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_NAME_ADDRESS_01.TabIndex = 1
+        Me.TXT_NAME_ADDRESS_01.Tag = "Clear,Check,Char,NotNull"
+        '
+        'LBL_NAME_ADDRESS_01
+        '
+        Me.LBL_NAME_ADDRESS_01.AutoEllipsis = True
+        Me.LBL_NAME_ADDRESS_01.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_ADDRESS_01.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_ADDRESS_01.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_ADDRESS_01.Name = "LBL_NAME_ADDRESS_01"
+        Me.LBL_NAME_ADDRESS_01.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_NAME_ADDRESS_01.TabIndex = 0
+        Me.LBL_NAME_ADDRESS_01.Text = "住所1"
+        Me.LBL_NAME_ADDRESS_01.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_CODE_POST
+        '
+        Me.PNL_CODE_POST.Controls.Add(Me.LBL_CODE_POST_GUIDE)
+        Me.PNL_CODE_POST.Controls.Add(Me.TXT_CODE_POST)
+        Me.PNL_CODE_POST.Location = New System.Drawing.Point(250, 0)
+        Me.PNL_CODE_POST.Name = "PNL_CODE_POST"
+        Me.PNL_CODE_POST.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_POST.TabIndex = 1
+        '
+        'LBL_CODE_POST_GUIDE
+        '
+        Me.LBL_CODE_POST_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_POST_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_POST_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_POST_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_POST_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_POST_GUIDE.Name = "LBL_CODE_POST_GUIDE"
+        Me.LBL_CODE_POST_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_POST_GUIDE.TabIndex = 3
+        Me.LBL_CODE_POST_GUIDE.Text = "郵便番号"
+        Me.LBL_CODE_POST_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TXT_CODE_POST
+        '
+        Me.TXT_CODE_POST.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_POST.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_CODE_POST.MaxLength = 7
+        Me.TXT_CODE_POST.Name = "TXT_CODE_POST"
+        Me.TXT_CODE_POST.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_CODE_POST.TabIndex = 1
+        Me.TXT_CODE_POST.Tag = "Clear,Numeric,Format=0000000,Check,NotNull,Plus"
+        Me.TXT_CODE_POST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'PNL_NAME_OWNER
+        '
+        Me.PNL_NAME_OWNER.Controls.Add(Me.TXT_NAME_OWNER)
+        Me.PNL_NAME_OWNER.Controls.Add(Me.LBL_NAME_OWNER_GUIDE)
+        Me.PNL_NAME_OWNER.Location = New System.Drawing.Point(0, 0)
+        Me.PNL_NAME_OWNER.Name = "PNL_NAME_OWNER"
+        Me.PNL_NAME_OWNER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NAME_OWNER.TabIndex = 0
+        '
+        'TXT_NAME_OWNER
+        '
+        Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
+        Me.TXT_NAME_OWNER.MaxLength = 12
+        Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
+        Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
+        Me.TXT_NAME_OWNER.TabIndex = 1
+        Me.TXT_NAME_OWNER.Tag = "Clear,Check,Char,NotNull"
+        '
+        'LBL_NAME_OWNER_GUIDE
+        '
+        Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
+        Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_NAME_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_NAME_OWNER_GUIDE.Text = "オーナー名称"
+        Me.LBL_NAME_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_NAME_MEMO
         '
         Me.PNL_NAME_MEMO.Controls.Add(Me.TXT_NAME_MEMO)
@@ -299,7 +439,7 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 170)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(360, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 3
+        Me.PNL_NAME_MEMO.TabIndex = 4
         '
         'TXT_NAME_MEMO
         '
@@ -331,7 +471,7 @@ Partial Class FRM_MAIN
         Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(5, 135)
         Me.PNL_KINGAKU_CONTRACT.Name = "PNL_KINGAKU_CONTRACT"
         Me.PNL_KINGAKU_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KINGAKU_CONTRACT.TabIndex = 2
+        Me.PNL_KINGAKU_CONTRACT.TabIndex = 3
         '
         'LBL_KINGAKU_CONTRACT_GUIDE
         '
@@ -493,146 +633,6 @@ Partial Class FRM_MAIN
         Me.TXT_NUMBER_CONTRACT.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
         Me.TXT_NUMBER_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.PNL_NAME_ADDRESS_02)
-        Me.Panel1.Controls.Add(Me.PNL_NAME_ADDRESS_01)
-        Me.Panel1.Controls.Add(Me.PNL_CODE_POST)
-        Me.Panel1.Controls.Add(Me.PNL_NAME_OWNER)
-        Me.Panel1.Location = New System.Drawing.Point(5, 70)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(720, 60)
-        Me.Panel1.TabIndex = 10
-        '
-        'PNL_NAME_OWNER
-        '
-        Me.PNL_NAME_OWNER.Controls.Add(Me.TXT_NAME_OWNER)
-        Me.PNL_NAME_OWNER.Controls.Add(Me.LBL_NAME_OWNER_GUIDE)
-        Me.PNL_NAME_OWNER.Location = New System.Drawing.Point(0, 0)
-        Me.PNL_NAME_OWNER.Name = "PNL_NAME_OWNER"
-        Me.PNL_NAME_OWNER.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_OWNER.TabIndex = 7
-        '
-        'TXT_NAME_OWNER
-        '
-        Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
-        Me.TXT_NAME_OWNER.MaxLength = 12
-        Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
-        Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
-        Me.TXT_NAME_OWNER.TabIndex = 1
-        Me.TXT_NAME_OWNER.Tag = "Clear,Check,Char,NotNull"
-        '
-        'LBL_NAME_OWNER_GUIDE
-        '
-        Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
-        Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
-        Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
-        Me.LBL_NAME_OWNER_GUIDE.TabIndex = 0
-        Me.LBL_NAME_OWNER_GUIDE.Text = "オーナー名称"
-        Me.LBL_NAME_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_CODE_POST
-        '
-        Me.PNL_CODE_POST.Controls.Add(Me.LBL_CODE_POST_GUIDE)
-        Me.PNL_CODE_POST.Controls.Add(Me.TXT_CODE_POST)
-        Me.PNL_CODE_POST.Location = New System.Drawing.Point(250, 0)
-        Me.PNL_CODE_POST.Name = "PNL_CODE_POST"
-        Me.PNL_CODE_POST.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_POST.TabIndex = 8
-        '
-        'LBL_CODE_POST_GUIDE
-        '
-        Me.LBL_CODE_POST_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_POST_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_POST_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_POST_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_POST_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_POST_GUIDE.Name = "LBL_CODE_POST_GUIDE"
-        Me.LBL_CODE_POST_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_POST_GUIDE.TabIndex = 3
-        Me.LBL_CODE_POST_GUIDE.Text = "郵便番号"
-        Me.LBL_CODE_POST_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'TXT_CODE_POST
-        '
-        Me.TXT_CODE_POST.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_CODE_POST.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_POST.MaxLength = 7
-        Me.TXT_CODE_POST.Name = "TXT_CODE_POST"
-        Me.TXT_CODE_POST.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_CODE_POST.TabIndex = 1
-        Me.TXT_CODE_POST.Tag = "Clear,Numeric,Format=0000000,Check,NotNull,Plus"
-        Me.TXT_CODE_POST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'PNL_NAME_ADDRESS_01
-        '
-        Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.TXT_NAME_ADDRESS_01)
-        Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.LBL_NAME_ADDRESS_01)
-        Me.PNL_NAME_ADDRESS_01.Location = New System.Drawing.Point(0, 30)
-        Me.PNL_NAME_ADDRESS_01.Name = "PNL_NAME_ADDRESS_01"
-        Me.PNL_NAME_ADDRESS_01.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_ADDRESS_01.TabIndex = 9
-        '
-        'TXT_NAME_ADDRESS_01
-        '
-        Me.TXT_NAME_ADDRESS_01.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_NAME_ADDRESS_01.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_ADDRESS_01.MaxLength = 12
-        Me.TXT_NAME_ADDRESS_01.Name = "TXT_NAME_ADDRESS_01"
-        Me.TXT_NAME_ADDRESS_01.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_NAME_ADDRESS_01.TabIndex = 1
-        Me.TXT_NAME_ADDRESS_01.Tag = "Clear,Check,Char,NotNull"
-        '
-        'LBL_NAME_ADDRESS_01
-        '
-        Me.LBL_NAME_ADDRESS_01.AutoEllipsis = True
-        Me.LBL_NAME_ADDRESS_01.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_ADDRESS_01.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_ADDRESS_01.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_ADDRESS_01.Name = "LBL_NAME_ADDRESS_01"
-        Me.LBL_NAME_ADDRESS_01.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_NAME_ADDRESS_01.TabIndex = 0
-        Me.LBL_NAME_ADDRESS_01.Text = "住所1"
-        Me.LBL_NAME_ADDRESS_01.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_NAME_ADDRESS_02
-        '
-        Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.TXT_NAME_ADDRESS_02)
-        Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.LBL_NAME_ADDRESS_02)
-        Me.PNL_NAME_ADDRESS_02.Location = New System.Drawing.Point(250, 30)
-        Me.PNL_NAME_ADDRESS_02.Name = "PNL_NAME_ADDRESS_02"
-        Me.PNL_NAME_ADDRESS_02.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_ADDRESS_02.TabIndex = 10
-        '
-        'TXT_NAME_ADDRESS_02
-        '
-        Me.TXT_NAME_ADDRESS_02.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_NAME_ADDRESS_02.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_ADDRESS_02.MaxLength = 12
-        Me.TXT_NAME_ADDRESS_02.Name = "TXT_NAME_ADDRESS_02"
-        Me.TXT_NAME_ADDRESS_02.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_NAME_ADDRESS_02.TabIndex = 1
-        Me.TXT_NAME_ADDRESS_02.Tag = "Clear,Check,Char,NotNull"
-        '
-        'LBL_NAME_ADDRESS_02
-        '
-        Me.LBL_NAME_ADDRESS_02.AutoEllipsis = True
-        Me.LBL_NAME_ADDRESS_02.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_ADDRESS_02.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_ADDRESS_02.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_ADDRESS_02.Name = "LBL_NAME_ADDRESS_02"
-        Me.LBL_NAME_ADDRESS_02.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_NAME_ADDRESS_02.TabIndex = 0
-        Me.LBL_NAME_ADDRESS_02.Text = "住所2"
-        Me.LBL_NAME_ADDRESS_02.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -657,6 +657,15 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.PerformLayout()
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_EXT_SPOT.ResumeLayout(False)
+        Me.PNL_NAME_ADDRESS_02.ResumeLayout(False)
+        Me.PNL_NAME_ADDRESS_02.PerformLayout()
+        Me.PNL_NAME_ADDRESS_01.ResumeLayout(False)
+        Me.PNL_NAME_ADDRESS_01.PerformLayout()
+        Me.PNL_CODE_POST.ResumeLayout(False)
+        Me.PNL_CODE_POST.PerformLayout()
+        Me.PNL_NAME_OWNER.ResumeLayout(False)
+        Me.PNL_NAME_OWNER.PerformLayout()
         Me.PNL_NAME_MEMO.ResumeLayout(False)
         Me.PNL_NAME_MEMO.PerformLayout()
         Me.PNL_KINGAKU_CONTRACT.ResumeLayout(False)
@@ -667,15 +676,6 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.ResumeLayout(False)
         Me.PNL_NUMBER_CONTRACT.ResumeLayout(False)
         Me.PNL_NUMBER_CONTRACT.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.PNL_NAME_OWNER.ResumeLayout(False)
-        Me.PNL_NAME_OWNER.PerformLayout()
-        Me.PNL_CODE_POST.ResumeLayout(False)
-        Me.PNL_CODE_POST.PerformLayout()
-        Me.PNL_NAME_ADDRESS_01.ResumeLayout(False)
-        Me.PNL_NAME_ADDRESS_01.PerformLayout()
-        Me.PNL_NAME_ADDRESS_02.ResumeLayout(False)
-        Me.PNL_NAME_ADDRESS_02.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -714,7 +714,7 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_NAME_MEMO As Panel
     Friend WithEvents TXT_NAME_MEMO As TextBox
     Friend WithEvents LBL_NAME_MEMO_GUIDE As Label
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents PNL_EXT_SPOT As Panel
     Friend WithEvents PNL_CODE_POST As Panel
     Friend WithEvents LBL_CODE_POST_GUIDE As Label
     Friend WithEvents TXT_CODE_POST As TextBox
