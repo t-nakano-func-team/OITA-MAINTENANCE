@@ -15,7 +15,8 @@
     Private Enum ENM_MY_GRID_MAIN
         CODE_OWNER = 0
         NAME_OWNER
-        UBOUND = NAME_OWNER
+        KANA_OWNER
+        UBOUND = KANA_OWNER
     End Enum
 
     Private Enum ENM_MY_WINDOW_MODE
@@ -28,7 +29,7 @@
     Private Structure SRT_MY_GRID_DATA
         Public CODE_OWNER As Integer
         Public NAME_OWNER As String
-
+        Public KANA_OWNER As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
@@ -176,9 +177,9 @@
 
     Private Sub SUB_CTRL_VIEW_INIT()
 
-        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称", "IS")
+        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称", "ISS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "3,8", "RL")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,6", "RLL")
 
         Me.RET_SEARCH_CANCEL = True 'プロパティ初期化
     End Sub
@@ -278,6 +279,7 @@
             With SRT_GRID_DATA_MAIN(INT_INDEX)
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
+                .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
             End With
         End While
         ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
@@ -309,6 +311,7 @@
             With SRT_GRID_DATA_MAIN(intLOOP_INDEX)
                 objTEMP(ENM_MY_GRID_MAIN.CODE_OWNER) = Format(.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH))
                 objTEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .NAME_OWNER
+                objTEMP(ENM_MY_GRID_MAIN.KANA_OWNER) = .KANA_OWNER
             End With
             Call glbSubAddRowDataTable(tblGRID_DATA_MAIN, objTEMP)
         Next

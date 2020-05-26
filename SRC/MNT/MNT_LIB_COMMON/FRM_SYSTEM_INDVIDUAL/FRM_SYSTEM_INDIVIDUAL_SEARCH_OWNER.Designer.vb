@@ -22,7 +22,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -39,18 +39,18 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
-        Me.PNL_KANA_OWNER = New System.Windows.Forms.Panel()
-        Me.TXT_KANA_OWNER = New System.Windows.Forms.TextBox()
-        Me.LBL_KANA_OWNER_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_NAME_OWNER = New System.Windows.Forms.Panel()
-        Me.TXT_NAME_OWNER = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_OWNER_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_SEARCH = New System.Windows.Forms.Panel()
         Me.LBL_COUNT_SEARCH_MAX = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_UNIT = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_SEARCH = New System.Windows.Forms.Button()
+        Me.PNL_KANA_OWNER = New System.Windows.Forms.Panel()
+        Me.TXT_KANA_OWNER = New System.Windows.Forms.TextBox()
+        Me.LBL_KANA_OWNER_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_NAME_OWNER = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_OWNER = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_OWNER_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -60,9 +60,9 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_SEARCH.SuspendLayout()
         Me.PNL_KANA_OWNER.SuspendLayout()
         Me.PNL_NAME_OWNER.SuspendLayout()
-        Me.PNL_SEARCH.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -75,7 +75,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_HEAD.Location = New System.Drawing.Point(10, 10)
         Me.GRP_HEAD.Name = "GRP_HEAD"
         Me.GRP_HEAD.Size = New System.Drawing.Size(760, 50)
-        Me.GRP_HEAD.TabIndex = 5
+        Me.GRP_HEAD.TabIndex = 0
         Me.GRP_HEAD.TabStop = False
         '
         'PNL_INFO_GUIDE
@@ -171,7 +171,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.grpFOOT.Location = New System.Drawing.Point(10, 490)
         Me.grpFOOT.Name = "grpFOOT"
         Me.grpFOOT.Size = New System.Drawing.Size(760, 60)
-        Me.grpFOOT.TabIndex = 16
+        Me.grpFOOT.TabIndex = 2
         Me.grpFOOT.TabStop = False
         '
         'pnlFUNCTION_GROUP
@@ -234,7 +234,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY.Location = New System.Drawing.Point(10, 60)
         Me.GRP_BODY.Name = "GRP_BODY"
         Me.GRP_BODY.Size = New System.Drawing.Size(760, 430)
-        Me.GRP_BODY.TabIndex = 17
+        Me.GRP_BODY.TabIndex = 1
         Me.GRP_BODY.TabStop = False
         '
         'DGV_VIEW_DATA
@@ -247,14 +247,14 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 70)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -288,70 +288,6 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 40)
         Me.PNL_INPUT_KEY.TabIndex = 1
-        '
-        'PNL_KANA_OWNER
-        '
-        Me.PNL_KANA_OWNER.Controls.Add(Me.TXT_KANA_OWNER)
-        Me.PNL_KANA_OWNER.Controls.Add(Me.LBL_KANA_OWNER_GUIDE)
-        Me.PNL_KANA_OWNER.Location = New System.Drawing.Point(250, 6)
-        Me.PNL_KANA_OWNER.Name = "PNL_KANA_OWNER"
-        Me.PNL_KANA_OWNER.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KANA_OWNER.TabIndex = 2
-        '
-        'TXT_KANA_OWNER
-        '
-        Me.TXT_KANA_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_KANA_OWNER.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KANA_OWNER.MaxLength = 12
-        Me.TXT_KANA_OWNER.Name = "TXT_KANA_OWNER"
-        Me.TXT_KANA_OWNER.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_KANA_OWNER.TabIndex = 1
-        Me.TXT_KANA_OWNER.Tag = "Clear,Check,Char,NotNull"
-        '
-        'LBL_KANA_OWNER_GUIDE
-        '
-        Me.LBL_KANA_OWNER_GUIDE.AutoEllipsis = True
-        Me.LBL_KANA_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_KANA_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KANA_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_KANA_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_KANA_OWNER_GUIDE.Name = "LBL_KANA_OWNER_GUIDE"
-        Me.LBL_KANA_OWNER_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_KANA_OWNER_GUIDE.TabIndex = 0
-        Me.LBL_KANA_OWNER_GUIDE.Text = "カナ名称"
-        Me.LBL_KANA_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_NAME_OWNER
-        '
-        Me.PNL_NAME_OWNER.Controls.Add(Me.TXT_NAME_OWNER)
-        Me.PNL_NAME_OWNER.Controls.Add(Me.LBL_NAME_OWNER_GUIDE)
-        Me.PNL_NAME_OWNER.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_NAME_OWNER.Name = "PNL_NAME_OWNER"
-        Me.PNL_NAME_OWNER.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_OWNER.TabIndex = 0
-        '
-        'TXT_NAME_OWNER
-        '
-        Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
-        Me.TXT_NAME_OWNER.MaxLength = 12
-        Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
-        Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
-        Me.TXT_NAME_OWNER.TabIndex = 1
-        Me.TXT_NAME_OWNER.Tag = "Clear,Check,Char,NotNull"
-        '
-        'LBL_NAME_OWNER_GUIDE
-        '
-        Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
-        Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
-        Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
-        Me.LBL_NAME_OWNER_GUIDE.TabIndex = 0
-        Me.LBL_NAME_OWNER_GUIDE.Text = "オーナー名称"
-        Me.LBL_NAME_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_SEARCH
         '
@@ -431,6 +367,70 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.BTN_SEARCH.Text = "検索"
         Me.BTN_SEARCH.UseVisualStyleBackColor = False
         '
+        'PNL_KANA_OWNER
+        '
+        Me.PNL_KANA_OWNER.Controls.Add(Me.TXT_KANA_OWNER)
+        Me.PNL_KANA_OWNER.Controls.Add(Me.LBL_KANA_OWNER_GUIDE)
+        Me.PNL_KANA_OWNER.Location = New System.Drawing.Point(250, 6)
+        Me.PNL_KANA_OWNER.Name = "PNL_KANA_OWNER"
+        Me.PNL_KANA_OWNER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KANA_OWNER.TabIndex = 2
+        '
+        'TXT_KANA_OWNER
+        '
+        Me.TXT_KANA_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_KANA_OWNER.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_KANA_OWNER.MaxLength = 12
+        Me.TXT_KANA_OWNER.Name = "TXT_KANA_OWNER"
+        Me.TXT_KANA_OWNER.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_KANA_OWNER.TabIndex = 1
+        Me.TXT_KANA_OWNER.Tag = "Clear,Check,Char"
+        '
+        'LBL_KANA_OWNER_GUIDE
+        '
+        Me.LBL_KANA_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_KANA_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KANA_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KANA_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KANA_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KANA_OWNER_GUIDE.Name = "LBL_KANA_OWNER_GUIDE"
+        Me.LBL_KANA_OWNER_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KANA_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_KANA_OWNER_GUIDE.Text = "カナ名称"
+        Me.LBL_KANA_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_NAME_OWNER
+        '
+        Me.PNL_NAME_OWNER.Controls.Add(Me.TXT_NAME_OWNER)
+        Me.PNL_NAME_OWNER.Controls.Add(Me.LBL_NAME_OWNER_GUIDE)
+        Me.PNL_NAME_OWNER.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_NAME_OWNER.Name = "PNL_NAME_OWNER"
+        Me.PNL_NAME_OWNER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NAME_OWNER.TabIndex = 0
+        '
+        'TXT_NAME_OWNER
+        '
+        Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
+        Me.TXT_NAME_OWNER.MaxLength = 12
+        Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
+        Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
+        Me.TXT_NAME_OWNER.TabIndex = 1
+        Me.TXT_NAME_OWNER.Tag = "Clear,Check,Char"
+        '
+        'LBL_NAME_OWNER_GUIDE
+        '
+        Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
+        Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_NAME_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_NAME_OWNER_GUIDE.Text = "オーナー名称"
+        Me.LBL_NAME_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -456,12 +456,12 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_SEARCH.ResumeLayout(False)
+        Me.PNL_SEARCH.PerformLayout()
         Me.PNL_KANA_OWNER.ResumeLayout(False)
         Me.PNL_KANA_OWNER.PerformLayout()
         Me.PNL_NAME_OWNER.ResumeLayout(False)
         Me.PNL_NAME_OWNER.PerformLayout()
-        Me.PNL_SEARCH.ResumeLayout(False)
-        Me.PNL_SEARCH.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

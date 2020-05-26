@@ -127,7 +127,7 @@
                 Dim INT_CODE_OWNER As Integer
                 INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
 
-                BLN_RET = FUNC_SHOW_FRM_SYSTEM_INDIVIDUAL_SEARCH_SHINTO(INT_CODE_OWNER, sngFONT_SIZE)
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_OWNER(INT_CODE_OWNER, sngFONT_SIZE)
 
                 If BLN_RET Then
                     TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
