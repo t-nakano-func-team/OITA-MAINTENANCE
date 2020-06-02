@@ -271,6 +271,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public DATE_WORK_FROM As DateTime
         Public DATE_WORK_TO As DateTime
         Public COUNT_INVOICE As Integer
+        Public NUMBER_LIST_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
         Public NAME_MEMO As String
         Public CODE_STAFF As Integer
@@ -342,6 +343,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .DATE_WORK_FROM = cstVB_DATE_MIN
             .DATE_WORK_TO = cstVB_DATE_MIN
             .COUNT_INVOICE = 0
+            .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = 0
             .NAME_MEMO = ""
             .CODE_STAFF = -1
@@ -393,6 +395,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .DATE_WORK_FROM = CDate(SDR_READER.Item("DATE_WORK_FROM"))
             .DATE_WORK_TO = CDate(SDR_READER.Item("DATE_WORK_TO"))
             .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
+            .NUMBER_LIST_INVOICE = CInt(SDR_READER.Item("NUMBER_LIST_INVOICE"))
             .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
             .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
@@ -460,6 +463,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_FROM) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_TO) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.COUNT_INVOICE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NUMBER_LIST_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_STAFF) & "," & Environment.NewLine)

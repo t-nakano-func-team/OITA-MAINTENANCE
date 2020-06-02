@@ -375,6 +375,7 @@
             .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
             .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
             .COUNT_INVOICE = 1
+            .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
             .NAME_MEMO = TXT_NAME_MEMO.Text
             .CODE_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF

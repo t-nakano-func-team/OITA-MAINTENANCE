@@ -65,6 +65,7 @@
         Call SUB_REFRESH_DATE_WORK_TO_VALUE()
 
         TXT_COUNT_INVOICE.Text = 12
+        TXT_NUMBER_LIST_INVOICE.Text = 1
         TXT_KINGAKU_CONTRACT.Text = Format(0, "#,##0")
     End Sub
 #End Region
@@ -300,6 +301,25 @@
             Exit Sub
         End If
 
+        Dim SRT_KEY As SRT_TABLE_MNT_T_CONTRACT_KEY
+        SRT_KEY = FUNC_GET_INPUT_KEY()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not FUNC_DELETE_TABLE_MNT_T_CONTRACT(SRT_KEY) Then
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         Call SUB_CLEAR()
 
     End Sub
@@ -353,6 +373,7 @@
             .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
             .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
             .COUNT_INVOICE = CInt(TXT_COUNT_INVOICE.Text)
+            .NUMBER_LIST_INVOICE = CInt(TXT_NUMBER_LIST_INVOICE.Text)
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
             .NAME_MEMO = TXT_NAME_MEMO.Text
             .CODE_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
@@ -370,6 +391,7 @@
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, .DATE_WORK_FROM)
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, .DATE_WORK_TO)
             TXT_COUNT_INVOICE.Text = CStr(.COUNT_INVOICE)
+            TXT_NUMBER_LIST_INVOICE.Text = CStr(.NUMBER_LIST_INVOICE)
             TXT_KINGAKU_CONTRACT.Text = Format(.KINGAKU_CONTRACT, "#,##0")
             TXT_NAME_MEMO.Text = .NAME_MEMO
         End With
