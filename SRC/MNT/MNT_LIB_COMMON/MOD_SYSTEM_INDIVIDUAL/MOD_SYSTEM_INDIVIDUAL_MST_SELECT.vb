@@ -282,6 +282,29 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_T_CONTRACT
 
         Return INT_RET
     End Function
+
+    Public Function FUNC_GET_MNT_T_CONTRACT_MAX_SERIAL_CONTRACT(
+    ByVal INT_NUMBER_CONTRACT As Integer
+    ) As Integer
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "MAX(SERIAL_CONTRACT)"
+            ReDim .WHERE(1)
+            .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
+            .WHERE(1).VALUE = INT_NUMBER_CONTRACT
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+
+        Dim INT_RET As Integer
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
+
+        Return INT_RET
+    End Function
 End Module
 
 

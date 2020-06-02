@@ -43,6 +43,12 @@
         Dim DAT_DATE_INPUT_MAX As DateTime
         DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_CONTRACT, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
+
+        DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_WORK_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
+
+        DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(2)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_WORK_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -52,6 +58,10 @@
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
 
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT, datSYSTEM_TOTAL_DATE_ACTIVE)
+
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, datSYSTEM_TOTAL_DATE_ACTIVE)
+        Call SUB_REFRESH_DATE_WORK_TO_VALUE()
+
         TXT_KINGAKU_CONTRACT.Text = Format(0, "#,##0")
     End Sub
 #End Region
@@ -144,25 +154,175 @@
     'データ入力モードへ変更
     Private Sub SUB_DATA_EDIT()
 
+        If Not FUNC_CHECK_INPUT_KEY() Then
+            Exit Sub
+        End If
+
         If TXT_NUMBER_CONTRACT.Text = "" Then
             Dim INT_NUMBER_CONTRACT As Integer
             INT_NUMBER_CONTRACT = FUNC_GET_NUMBER_CONTRACT_NEW(True)
-            TXT_NUMBER_CONTRACT.Text = CStr(INT_NUMBER_CONTRACT)
+            TXT_NUMBER_CONTRACT.Text = Format(INT_NUMBER_CONTRACT, New String("0", TXT_NUMBER_CONTRACT.MaxLength))
         End If
 
+        Dim SRT_KEY As SRT_TABLE_MNT_T_CONTRACT_KEY
+        SRT_KEY = FUNC_GET_INPUT_KEY()
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = FUNC_CHECK_TABLE_MNT_T_CONTRACT(SRT_KEY)
+
         Dim ENM_CHANGE_MODE As ENM_MY_WINDOW_MODE
-        ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT
+        If BLN_CHECK Then
+            ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
+
+            Dim SRT_DATA As SRT_TABLE_MNT_T_CONTRACT_DATA
+            SRT_DATA = Nothing
+            Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_KEY, SRT_DATA)
+
+            Dim SRT_KEY_SPOT As SRT_TABLE_MNT_T_CONTRACT_SPOT_KEY
+            With SRT_KEY_SPOT
+                .NUMBER_CONTRACT = SRT_KEY.NUMBER_CONTRACT
+                .SERIAL_CONTRACT = SRT_KEY.SERIAL_CONTRACT
+            End With
+            Dim SRT_DATA_SPOT As SRT_TABLE_MNT_T_CONTRACT_SPOT_DATA
+            SRT_DATA_SPOT = Nothing
+            Call FUNC_SELECT_TABLE_MNT_T_CONTRACT_SPOT(SRT_KEY_SPOT, SRT_DATA_SPOT)
+
+            Call SUB_SET_INPUT_DATA(SRT_DATA)
+            Call SUB_SET_INPUT_SPOT_DATA(SRT_DATA_SPOT)
+        Else
+            ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT
+        End If
         Call SUB_WINDOW_MODE_CHANGE(ENM_CHANGE_MODE)
         Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me.PNL_INPUT_DATA)
     End Sub
 
     '登録
     Private Sub SUB_ENTER()
+        If Not FUNC_CHECK_INPUT_DATA() Then
+            Exit Sub
+        End If
 
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show("データを登録します。" & Environment.NewLine & "よろしいですか？", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Dim SRT_RECORD As SRT_TABLE_MNT_T_CONTRACT
+        SRT_RECORD.KEY = FUNC_GET_INPUT_KEY()
+        SRT_RECORD.DATA = FUNC_GET_INPUT_DATA()
+
+        Dim SRT_RECORD_SPOT As SRT_TABLE_MNT_T_CONTRACT_SPOT
+        SRT_RECORD_SPOT.KEY = FUNC_GET_INPUT_SPOT_KEY()
+        SRT_RECORD_SPOT.DATA = FUNC_GET_INPUT_SPOT_DATA()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If ENM_WINDOW_MODE_CURRENT = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT Then '新規の場合は
+            Dim INT_NUMBER_CONTRACT As Integer
+            INT_NUMBER_CONTRACT = FUNC_CHECK_GET_NUMBER_CONTRACT(SRT_RECORD.KEY.NUMBER_CONTRACT)
+
+            SRT_RECORD.KEY.NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+            SRT_RECORD_SPOT.KEY.NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+        End If
+
+        Select Case ENM_WINDOW_MODE_CURRENT
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
+                If Not FUNC_INSERT_RECORD(SRT_RECORD, SRT_RECORD_SPOT) Then
+                    Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+                    Exit Sub
+                End If
+            Case Else
+                'スルー
+        End Select
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If ENM_WINDOW_MODE_CURRENT = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT Then
+            Dim STR_MSG As String
+            STR_MSG = ""
+            STR_MSG &= "契約番号：" & SRT_RECORD.KEY.NUMBER_CONTRACT & System.Environment.NewLine
+            STR_MSG &= "登録しました。" & System.Environment.NewLine
+            Call MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        Call SUB_CLEAR()
     End Sub
+
+#Region "登録等の内部処理"
+    Private Function FUNC_CHECK_GET_NUMBER_CONTRACT(ByVal INT_NUMBER_CONTRACT As Integer) As Integer
+
+        Dim SRT_KEY As SRT_TABLE_MNT_T_CONTRACT_KEY
+        With SRT_KEY
+            .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+            .SERIAL_CONTRACT = 1
+        End With
+
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = FUNC_CHECK_TABLE_MNT_T_CONTRACT(SRT_KEY) '既に該当の契約番号でレコードがあるか
+        If Not BLN_CHECK Then '無ければ
+            Return INT_NUMBER_CONTRACT 'その番号が使用可能
+        End If
+
+        '使用出来ない場合
+        Dim INT_RET As Integer
+        INT_RET = FUNC_GET_NUMBER_CONTRACT_NEW(True) '新規で採番
+        Return INT_RET
+    End Function
+
+    Private Function FUNC_INSERT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_T_CONTRACT, ByRef SRT_RECORD_SPOT As SRT_TABLE_MNT_T_CONTRACT_SPOT) As Boolean
+
+        If Not FUNC_DELETE_TABLE_MNT_T_CONTRACT(SRT_RECORD.KEY) Then 'SPOTも連動して削除
+            Return False
+        End If
+
+        If Not FUNC_INSERT_TABLE_MNT_T_CONTRACT(SRT_RECORD) Then
+            Return False
+        End If
+
+        If Not FUNC_INSERT_TABLE_MNT_T_CONTRACT_SPOT(SRT_RECORD_SPOT) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
 
     '削除
     Private Sub SUB_DELETE()
+
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show("データを削除します。" & Environment.NewLine & "よろしいですか？", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Dim SRT_KEY As SRT_TABLE_MNT_T_CONTRACT_KEY
+        SRT_KEY = FUNC_GET_INPUT_KEY()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not FUNC_DELETE_TABLE_MNT_T_CONTRACT(SRT_KEY) Then
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Call SUB_CLEAR()
 
     End Sub
 
@@ -188,6 +348,88 @@
 
     Private Sub SUB_SHOW_CONFIG_SETTINGS()
         Call SUB_SYSTEM_TOTAL_SHOW_SETTINGS(srtSYSTEM_TOTAL_CONFIG_SETTINGS)
+    End Sub
+
+#End Region
+
+#Region "画面コントロール←→構造体"
+
+    Private Function FUNC_GET_INPUT_KEY() As SRT_TABLE_MNT_T_CONTRACT_KEY
+        Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT_KEY
+
+        With SRT_RET
+            .NUMBER_CONTRACT = CInt(TXT_NUMBER_CONTRACT.Text)
+            .SERIAL_CONTRACT = 1
+        End With
+
+        Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_INPUT_DATA() As SRT_TABLE_MNT_T_CONTRACT_DATA
+        Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT_DATA
+
+        With SRT_RET
+            .KIND_CONTRACT = ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
+            .DATE_CONTRACT = DTP_DATE_CONTRACT.Value
+            .CODE_OWNER = CInt(TXT_CODE_OWNER.Text)
+            .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
+            .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
+            .COUNT_INVOICE = 1
+            .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
+            .NAME_MEMO = TXT_NAME_MEMO.Text
+            .CODE_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_INSERT = System.DateTime.Today
+        End With
+
+        Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_INPUT_SPOT_KEY() As SRT_TABLE_MNT_T_CONTRACT_SPOT_KEY
+        Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT_SPOT_KEY
+
+        With SRT_RET
+            .NUMBER_CONTRACT = CInt(TXT_NUMBER_CONTRACT.Text)
+            .SERIAL_CONTRACT = 1
+        End With
+
+        Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_INPUT_SPOT_DATA() As SRT_TABLE_MNT_T_CONTRACT_SPOT_DATA
+        Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT_SPOT_DATA
+
+        With SRT_RET
+            .NAME_OWNER = TXT_NAME_OWNER.Text
+            .CODE_POST = TXT_CODE_POST.Text
+            .NAME_ADDRESS_01 = TXT_NAME_ADDRESS_01.Text
+            .NAME_ADDRESS_02 = TXT_NAME_ADDRESS_02.Text
+        End With
+
+        Return SRT_RET
+    End Function
+
+    Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_T_CONTRACT_DATA)
+
+        With SRT_DATA
+            Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT, .DATE_CONTRACT)
+            TXT_CODE_OWNER.Text = Format(.CODE_OWNER, New String("0", TXT_CODE_OWNER.MaxLength))
+            Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, .DATE_WORK_FROM)
+            Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, .DATE_WORK_TO)
+            TXT_KINGAKU_CONTRACT.Text = Format(.KINGAKU_CONTRACT, "#,##0")
+            TXT_NAME_MEMO.Text = .NAME_MEMO
+        End With
+
+    End Sub
+
+    Private Sub SUB_SET_INPUT_SPOT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_T_CONTRACT_SPOT_DATA)
+
+        With SRT_DATA
+            TXT_NAME_OWNER.Text = .NAME_OWNER
+            TXT_CODE_POST.Text = .CODE_POST
+            TXT_NAME_ADDRESS_01.Text = .NAME_ADDRESS_01
+            TXT_NAME_ADDRESS_02.Text = .NAME_ADDRESS_02
+        End With
+
     End Sub
 
 #End Region
@@ -276,6 +518,43 @@
     End Sub
 #End Region
 
+#Region "チェック処理"
+    Private Function FUNC_CHECK_INPUT_KEY() As Boolean
+
+        Dim CTL_CONTROL As Control
+        CTL_CONTROL = Nothing
+        'Enable = True の入力項目すべてチェック対象(TAG=Check)
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_KEY, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Function FUNC_CHECK_INPUT_DATA() As Boolean
+
+        Dim CTL_CONTROL As Control
+        CTL_CONTROL = Nothing
+        'Enable = True の入力項目すべてチェック対象(TAG=Check)
+
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_DATA, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
 #Region "キー制御処理"
     '通常のコマンドキー制御(シフトマスク無し)
     Private Sub SUB_KEY_DOWN(ByVal ENM_KEY_CODE As Windows.Forms.Keys, ByRef BLN_HANDLED As Boolean)
@@ -338,6 +617,16 @@
         Return BLN_RET
         Return True
     End Function
+#End Region
+
+#Region "その他処理"
+    Private Sub SUB_REFRESH_DATE_WORK_TO_VALUE()
+        Dim DAT_FROM As DateTime
+        DAT_FROM = DTP_DATE_WORK_FROM.Value
+        Dim DAT_SET As DateTime
+        DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_FROM)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, DAT_SET)
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -437,8 +726,13 @@
         Call SUB_GET_NAME_OWNER_INPUT(sender)
 
         Call SUB_REFRESH_ENABLD_EXT_SPOT()
+    End Sub
+#End Region
 
+#Region "イベント-バリューチェンジ"
 
+    Private Sub DTP_DATE_WORK_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_FROM.ValueChanged
+        Call SUB_REFRESH_DATE_WORK_TO_VALUE()
     End Sub
 #End Region
 

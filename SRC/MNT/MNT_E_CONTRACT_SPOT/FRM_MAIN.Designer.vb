@@ -38,6 +38,11 @@ Partial Class FRM_MAIN
         Me.BTN_END = New System.Windows.Forms.Button()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_DATE_WORK = New System.Windows.Forms.Panel()
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.DTP_DATE_WORK_TO = New System.Windows.Forms.DateTimePicker()
+        Me.DTP_DATE_WORK_FROM = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_WORK_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_EXT_SPOT = New System.Windows.Forms.Panel()
         Me.PNL_NAME_ADDRESS_02 = New System.Windows.Forms.Panel()
         Me.TXT_NAME_ADDRESS_02 = New System.Windows.Forms.TextBox()
@@ -77,6 +82,7 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_DATE_WORK.SuspendLayout()
         Me.PNL_EXT_SPOT.SuspendLayout()
         Me.PNL_NAME_ADDRESS_02.SuspendLayout()
         Me.PNL_NAME_ADDRESS_01.SuspendLayout()
@@ -282,6 +288,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DATE_WORK)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_EXT_SPOT)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_MEMO)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KINGAKU_CONTRACT)
@@ -291,6 +298,59 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
+        '
+        'PNL_DATE_WORK
+        '
+        Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_FROM_TO_GUIDE)
+        Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_TO)
+        Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_FROM)
+        Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_GUIDE)
+        Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 135)
+        Me.PNL_DATE_WORK.Name = "PNL_DATE_WORK"
+        Me.PNL_DATE_WORK.Size = New System.Drawing.Size(490, 30)
+        Me.PNL_DATE_WORK.TabIndex = 3
+        '
+        'LBL_DATE_WORK_FROM_TO_GUIDE
+        '
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Location = New System.Drawing.Point(240, 1)
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Name = "LBL_DATE_WORK_FROM_TO_GUIDE"
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.TabIndex = 8
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_DATE_WORK_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'DTP_DATE_WORK_TO
+        '
+        Me.DTP_DATE_WORK_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_WORK_TO.Location = New System.Drawing.Point(270, 1)
+        Me.DTP_DATE_WORK_TO.Name = "DTP_DATE_WORK_TO"
+        Me.DTP_DATE_WORK_TO.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_WORK_TO.TabIndex = 7
+        Me.DTP_DATE_WORK_TO.Tag = "Clear"
+        '
+        'DTP_DATE_WORK_FROM
+        '
+        Me.DTP_DATE_WORK_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_WORK_FROM.Location = New System.Drawing.Point(80, 1)
+        Me.DTP_DATE_WORK_FROM.Name = "DTP_DATE_WORK_FROM"
+        Me.DTP_DATE_WORK_FROM.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_WORK_FROM.TabIndex = 1
+        Me.DTP_DATE_WORK_FROM.Tag = "Clear"
+        '
+        'LBL_DATE_WORK_GUIDE
+        '
+        Me.LBL_DATE_WORK_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_WORK_GUIDE.Name = "LBL_DATE_WORK_GUIDE"
+        Me.LBL_DATE_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_WORK_GUIDE.TabIndex = 0
+        Me.LBL_DATE_WORK_GUIDE.Text = "作業期間"
+        Me.LBL_DATE_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_EXT_SPOT
         '
@@ -436,10 +496,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_MEMO.Controls.Add(Me.TXT_NAME_MEMO)
         Me.PNL_NAME_MEMO.Controls.Add(Me.LBL_NAME_MEMO_GUIDE)
-        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 170)
+        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 205)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(360, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 4
+        Me.PNL_NAME_MEMO.TabIndex = 5
         '
         'TXT_NAME_MEMO
         '
@@ -468,10 +528,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.LBL_KINGAKU_CONTRACT_GUIDE)
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.TXT_KINGAKU_CONTRACT)
-        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(5, 135)
+        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(5, 170)
         Me.PNL_KINGAKU_CONTRACT.Name = "PNL_KINGAKU_CONTRACT"
         Me.PNL_KINGAKU_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KINGAKU_CONTRACT.TabIndex = 3
+        Me.PNL_KINGAKU_CONTRACT.TabIndex = 4
         '
         'LBL_KINGAKU_CONTRACT_GUIDE
         '
@@ -490,11 +550,11 @@ Partial Class FRM_MAIN
         '
         Me.TXT_KINGAKU_CONTRACT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_CONTRACT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KINGAKU_CONTRACT.MaxLength = 9
+        Me.TXT_KINGAKU_CONTRACT.MaxLength = 12
         Me.TXT_KINGAKU_CONTRACT.Name = "TXT_KINGAKU_CONTRACT"
         Me.TXT_KINGAKU_CONTRACT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_CONTRACT.TabIndex = 1
-        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus,NotZero"
         Me.TXT_KINGAKU_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_DATE_CONTRACT
@@ -508,6 +568,7 @@ Partial Class FRM_MAIN
         '
         'DTP_DATE_CONTRACT
         '
+        Me.DTP_DATE_CONTRACT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.DTP_DATE_CONTRACT.Location = New System.Drawing.Point(80, 1)
         Me.DTP_DATE_CONTRACT.Name = "DTP_DATE_CONTRACT"
         Me.DTP_DATE_CONTRACT.Size = New System.Drawing.Size(150, 25)
@@ -630,7 +691,7 @@ Partial Class FRM_MAIN
         Me.TXT_NUMBER_CONTRACT.Name = "TXT_NUMBER_CONTRACT"
         Me.TXT_NUMBER_CONTRACT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NUMBER_CONTRACT.TabIndex = 1
-        Me.TXT_NUMBER_CONTRACT.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
+        Me.TXT_NUMBER_CONTRACT.Tag = "Clear,Numeric,Format=000000000,Check,NotZero,Plus"
         Me.TXT_NUMBER_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FRM_MAIN
@@ -657,6 +718,7 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.PerformLayout()
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_DATE_WORK.ResumeLayout(False)
         Me.PNL_EXT_SPOT.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.PerformLayout()
@@ -727,4 +789,9 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_NAME_ADDRESS_01 As Panel
     Friend WithEvents TXT_NAME_ADDRESS_01 As TextBox
     Friend WithEvents LBL_NAME_ADDRESS_01 As Label
+    Friend WithEvents PNL_DATE_WORK As Panel
+    Friend WithEvents DTP_DATE_WORK_FROM As DateTimePicker
+    Friend WithEvents LBL_DATE_WORK_GUIDE As Label
+    Friend WithEvents LBL_DATE_WORK_FROM_TO_GUIDE As Label
+    Friend WithEvents DTP_DATE_WORK_TO As DateTimePicker
 End Class
