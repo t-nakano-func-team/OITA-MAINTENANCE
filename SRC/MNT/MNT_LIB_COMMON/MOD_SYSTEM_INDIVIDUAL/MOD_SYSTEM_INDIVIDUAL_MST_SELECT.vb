@@ -309,3 +309,83 @@ End Module
 
 
 #End Region
+
+#Region "MNT_T_INVOICE"
+Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_T_INVOICE
+
+#Region "モジュール用・定数"
+    Private Const CST_TABLE_NAME_DEFAULT As String = "MNT_T_INVOICE"
+#End Region
+
+    '最大請求連番取得
+    Public Function FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(
+    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer
+    ) As Integer
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "MAX(SERIAL_INVOICE)"
+            ReDim .WHERE(2)
+            .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
+            .WHERE(1).VALUE = INT_NUMBER_CONTRACT
+            .WHERE(2).COL_NAME = "SERIAL_CONTRACT"
+            .WHERE(2).VALUE = INT_SERIAL_CONTRACT
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+
+        Dim INT_RET As Integer
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
+
+        Return INT_RET
+    End Function
+
+    '該当月請求チェック
+    Public Function FUNC_CHECK_MNT_T_INVOICE_DATE_INVOICE_PERIOD(
+    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
+    ByVal DAT_DATE_FROM As DateTime, ByVal DAT_DATE_TO As DateTime
+    ) As Boolean
+
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "COUNT(*)"
+            ReDim .WHERE(1)
+            .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
+            .WHERE(1).VALUE = INT_NUMBER_CONTRACT
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            Call .Append("SELECT" & System.Environment.NewLine)
+            Call .Append("COUNT(*)" & System.Environment.NewLine)
+            Call .Append("FROM" & System.Environment.NewLine)
+            Call .Append(CST_TABLE_NAME_DEFAULT & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append(FUNC_GET_SQL_WHERE_INT(INT_NUMBER_CONTRACT, "NUMBER_CONTRACT", "="))
+            Call .Append(FUNC_GET_SQL_WHERE_INT(INT_SERIAL_CONTRACT, "SERIAL_CONTRACT", "="))
+            Dim SRT_DATE_INVOICE As SRT_DATE_PERIOD
+            SRT_DATE_INVOICE.DATE_FROM = DAT_DATE_FROM
+            SRT_DATE_INVOICE.DATE_TO = DAT_DATE_TO
+            Call .Append(FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_DATE_INVOICE, "DATE_INVOICE"))
+        End With
+
+        Dim INT_CNT As Integer
+        INT_CNT = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL.ToString, 0)
+
+        Dim BLN_RET As Boolean
+        BLN_RET = (INT_CNT > 0)
+
+        Return BLN_RET
+    End Function
+
+End Module
+
+#End Region

@@ -56,16 +56,68 @@
 #Region "内部処理"
 
     Private Function FUNC_GET_DB_VALUE() As Boolean
-        Const cstCODE_ACTIVE As Integer = 1 '処理日取得用
-        Dim blnCHECK As Boolean
+        Const CST_CODE_ACTIVE As Integer = 1 '処理日取得用
+        Dim BLN_CHECK As Boolean
 
-        blnCHECK = FUNC_CHECK_MNG_M_ACTIVE(cstCODE_ACTIVE)
-        If blnCHECK Then
-            datSYSTEM_TOTAL_DATE_ACTIVE = FUNC_GET_MNG_M_ACTIVE_DATE_ACTIVE(cstCODE_ACTIVE)
+        BLN_CHECK = FUNC_CHECK_MNG_M_ACTIVE(CST_CODE_ACTIVE)
+        If BLN_CHECK Then
+            datSYSTEM_TOTAL_DATE_ACTIVE = FUNC_GET_MNG_M_ACTIVE_DATE_ACTIVE(CST_CODE_ACTIVE)
         Else
             datSYSTEM_TOTAL_DATE_ACTIVE = System.DateTime.Today 'システム日付
         End If
 
+        If Not FUNC_GET_RATE_VAT() Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Function FUNC_GET_RATE_VAT() As Boolean
+        ReDim SRT_MNG_M_RATE_VAT_RECORD(0)
+
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            Call .Append("SELECT" & System.Environment.NewLine)
+            Call .Append("*" & System.Environment.NewLine)
+            Call .Append("FROM" & System.Environment.NewLine)
+            Call .Append(strSYSTEM_PUBLIC_MNGDB_PREFIX & "MNG_M_RATE_VAT" & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append("ORDER BY" & System.Environment.NewLine)
+            Call .Append("NUMBER_LINE" & System.Environment.NewLine)
+        End With
+
+        Dim SDR_READER As SqlClient.SqlDataReader
+        SDR_READER = Nothing
+        If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
+            SDR_READER = Nothing
+            Return False
+        End If
+
+        If Not SDR_READER.HasRows Then
+            Call SDR_READER.Close()
+            SDR_READER = Nothing
+            Return True
+        End If
+
+        Dim INT_INDEX As Integer
+        INT_INDEX = 0
+        While SDR_READER.Read
+            INT_INDEX += 1
+            ReDim Preserve SRT_MNG_M_RATE_VAT_RECORD(INT_INDEX)
+            With SRT_MNG_M_RATE_VAT_RECORD(INT_INDEX).KEY
+                .NUMBER_LINE = CInt(SDR_READER.Item("NUMBER_LINE"))
+            End With
+            With SRT_MNG_M_RATE_VAT_RECORD(INT_INDEX).DATA
+                .DATE_START = CDate(SDR_READER.Item("DATE_START"))
+                .DATE_END = CDate(SDR_READER.Item("DATE_END"))
+                .FLAG_RATE_VAT = CInt(SDR_READER.Item("FLAG_RATE_VAT"))
+            End With
+        End While
+
+        Call SDR_READER.Close()
         Return True
     End Function
 

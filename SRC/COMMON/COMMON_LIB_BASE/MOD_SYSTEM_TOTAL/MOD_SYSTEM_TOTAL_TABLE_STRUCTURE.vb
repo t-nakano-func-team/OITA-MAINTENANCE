@@ -2315,3 +2315,65 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_FISCAL_YEAR
 End Module
 
 #End Region
+
+#Region "MNG_M_RATE_VAT"
+
+Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNG_M_RATE_VAT
+
+#Region "モジュール用・定数"
+    Private Const CST_TABLE_NAME_DEFAULT As String = "MNG_M_RATE_VAT"
+#End Region
+
+#Region "KEY"
+    Public Structure SRT_TABLE_MNG_M_RATE_VAT_KEY
+        Public NUMBER_LINE As Integer
+    End Structure
+#End Region
+
+#Region "DATA"
+    Public Structure SRT_TABLE_MNG_M_RATE_VAT_DATA
+        Public DATE_START As DateTime
+        Public DATE_END As DateTime
+        Public FLAG_RATE_VAT As Integer
+    End Structure
+#End Region
+
+    Public Structure SRT_TABLE_MNG_M_RATE_VAT
+        Public KEY As SRT_TABLE_MNG_M_RATE_VAT_KEY
+        Public DATA As SRT_TABLE_MNG_M_RATE_VAT_DATA
+    End Structure
+
+End Module
+
+#End Region
+
+#Region "MNG_M_VALUE"
+
+Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNG_M_VALUE
+
+#Region "モジュール用・定数"
+    Private Const CST_TABLE_NAME_DEFAULT As String = "MNG_M_VALUE"
+#End Region
+
+
+#Region "KEY"
+    Public Structure SRT_TABLE_MNG_M_VALUE_KEY
+        Public CODE_FLAG As Integer
+        Public CODE_KIND As Integer
+    End Structure
+#End Region
+
+#Region "DATA"
+    Public Structure SRT_TABLE_MNG_M_VALUE_DATA
+        Public VALUE_KIND As Decimal
+    End Structure
+#End Region
+
+    Public Structure SRT_TABLE_MNG_M_VALUE
+        Public KEY As SRT_TABLE_MNG_M_VALUE_KEY
+        Public DATA As SRT_TABLE_MNG_M_VALUE_DATA
+    End Structure
+
+End Module
+
+#End Region

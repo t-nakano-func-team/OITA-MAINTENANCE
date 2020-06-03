@@ -1,47 +1,55 @@
-﻿Module MOD_SYSTEM_INDIVIDUAL_SQL_TOOL
+﻿Public Module MOD_SYSTEM_INDIVIDUAL_SQL_TOOL
 
-    Public Function FUNC_GET_SQL_WHERE_INT(ByVal intVALUE As Integer, ByVal srtFIELD As String, ByVal srtSIGN As String) As String
-        Dim strWHERE As String
-        strWHERE = ""
+    Public Function FUNC_GET_SQL_WHERE_INT(ByVal intVALUE As Integer, ByVal STR_FIELD As String, ByVal STR_SIGN As String) As String
+        Dim STR_WHERE As String
+        STR_WHERE = ""
 
         If intVALUE < 0 Then
-            Return strWHERE
+            Return STR_WHERE
         End If
 
-        strWHERE &= " AND " & srtFIELD & srtSIGN & intVALUE & Environment.NewLine
+        STR_WHERE &= " AND " & STR_FIELD & STR_SIGN & intVALUE & Environment.NewLine
 
-        Return strWHERE
+        Return STR_WHERE
     End Function
 
-    Public Function FUNC_GET_SQL_WHERE_STR(ByVal strVALUE As String, ByVal srtFIELD As String, ByVal srtSIGN As String) As String
-        Dim strWHERE As String
-        strWHERE = ""
+    Public Function FUNC_GET_SQL_WHERE_STR(ByVal strVALUE As String, ByVal STR_FIELD As String, ByVal STR_SIGN As String) As String
+        Dim STR_WHERE As String
+        STR_WHERE = ""
 
-        strWHERE &= " AND " & srtFIELD & srtSIGN & FUNC_ADD_ENCLOSED_SCOT(strVALUE) & Environment.NewLine
+        STR_WHERE &= " AND " & STR_FIELD & STR_SIGN & FUNC_ADD_ENCLOSED_SCOT(strVALUE) & Environment.NewLine
 
-        Return strWHERE
+        Return STR_WHERE
     End Function
 
-    Public Function FUNC_GET_SQL_WHERE_DATE_FROM_TO(ByVal srtVALUE As SRT_DATE_PERIOD, ByVal srtFIELD As String) As String
-        Dim strWHERE As String
-        strWHERE = ""
+    Public Function FUNC_GET_SQL_WHERE_DATE(ByVal DAT_VALUE As DateTime, ByVal STR_FIELD As String, ByVal STR_SIGN As String) As String
+        Dim STR_WHERE As String
+        STR_WHERE = ""
+        STR_WHERE &= " AND " & STR_FIELD & STR_SIGN & FUNC_ADD_ENCLOSED_SCOT(DAT_VALUE) & Environment.NewLine
 
-        strWHERE &= " AND " & srtFIELD & ">=" & FUNC_ADD_ENCLOSED_SCOT(srtVALUE.DATE_FROM.ToShortDateString) & Environment.NewLine
-        strWHERE &= " AND " & srtFIELD & "<=" & FUNC_ADD_ENCLOSED_SCOT(srtVALUE.DATE_TO.ToShortDateString) & Environment.NewLine
-
-        Return strWHERE
+        Return STR_WHERE
     End Function
 
-    Public Function FUNC_GET_SQL_WHERE_STR_LIKE(ByVal srtVALUE As String, ByVal srtFIELD As String) As String
-        Dim strWHERE As String
-        strWHERE = ""
+    Public Function FUNC_GET_SQL_WHERE_DATE_FROM_TO(ByVal SRT_VALUE As SRT_DATE_PERIOD, ByVal STR_FIELD As String) As String
+        Dim STR_WHERE As String
+        STR_WHERE = ""
 
-        If srtVALUE = "" Then
-            Return strWHERE
+        STR_WHERE &= " AND " & STR_FIELD & ">=" & FUNC_ADD_ENCLOSED_SCOT(SRT_VALUE.DATE_FROM.ToShortDateString) & Environment.NewLine
+        STR_WHERE &= " AND " & STR_FIELD & "<=" & FUNC_ADD_ENCLOSED_SCOT(SRT_VALUE.DATE_TO.ToShortDateString) & Environment.NewLine
+
+        Return STR_WHERE
+    End Function
+
+    Public Function FUNC_GET_SQL_WHERE_STR_LIKE(ByVal STR_VALUE As String, ByVal STR_FIELD As String) As String
+        Dim STR_WHERE As String
+        STR_WHERE = ""
+
+        If STR_VALUE = "" Then
+            Return STR_WHERE
         End If
 
-        strWHERE &= " AND " & srtFIELD & " LIKE '%" & srtVALUE & "%'" & Environment.NewLine
+        STR_WHERE &= " AND " & STR_FIELD & " LIKE '%" & STR_VALUE & "%'" & Environment.NewLine
 
-        Return strWHERE
+        Return STR_WHERE
     End Function
 End Module

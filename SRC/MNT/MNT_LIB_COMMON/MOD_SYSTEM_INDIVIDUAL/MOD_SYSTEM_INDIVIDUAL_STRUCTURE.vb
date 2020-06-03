@@ -1,4 +1,11 @@
-﻿Module MOD_SYSTEM_INDIVIDUAL_STRUCTURE
+﻿Public Module MOD_SYSTEM_INDIVIDUAL_STRUCTURE
+
+#Region "構造体：契約"
+    Public Structure SRT_NUMBER_SERIAL_CONTRACT
+        Public NUMBER_CONTRACT As Integer
+        Public SERIAL_CONTRACT As Integer
+    End Structure
+#End Region
 
 #Region "構造体：期間"
     Public Structure SRT_DATE_PERIOD

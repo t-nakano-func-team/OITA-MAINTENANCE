@@ -3,6 +3,7 @@
     'テーブルMNG_M_KINDのCODE_FLAG
     Public Enum ENM_MNG_M_KIND_CODE_FLAG
         FLAG_GRANT = 20 'ユーザー権限種別
+        FLAG_RATE_VAT = 50 '消費税率
     End Enum
 
     Public Enum ENM_SYSTEM_TOTAL_FLAG_GRANT

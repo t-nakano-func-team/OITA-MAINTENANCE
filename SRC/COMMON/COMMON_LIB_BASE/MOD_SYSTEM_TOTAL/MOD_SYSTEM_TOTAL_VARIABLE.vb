@@ -14,6 +14,7 @@
 
 #Region "初期処理でDBから取得するもの"
     Public datSYSTEM_TOTAL_DATE_ACTIVE As DateTime '処理日付(管理レコードがない場合は当日が入る)
+    Public SRT_MNG_M_RATE_VAT_RECORD() As SRT_TABLE_MNG_M_RATE_VAT '消費税レコード
 #End Region
 
 End Module

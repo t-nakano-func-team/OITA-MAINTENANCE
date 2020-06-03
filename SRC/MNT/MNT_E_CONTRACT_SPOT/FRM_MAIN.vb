@@ -372,6 +372,7 @@
             .KIND_CONTRACT = ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
             .DATE_CONTRACT = DTP_DATE_CONTRACT.Value
             .CODE_OWNER = CInt(TXT_CODE_OWNER.Text)
+            .NAME_CONTRACT = TXT_NAME_CONTRACT.Text
             .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
             .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
             .COUNT_INVOICE = 1
@@ -414,6 +415,7 @@
         With SRT_DATA
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT, .DATE_CONTRACT)
             TXT_CODE_OWNER.Text = Format(.CODE_OWNER, New String("0", TXT_CODE_OWNER.MaxLength))
+            TXT_NAME_CONTRACT.Text = .NAME_CONTRACT
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, .DATE_WORK_FROM)
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, .DATE_WORK_TO)
             TXT_KINGAKU_CONTRACT.Text = Format(.KINGAKU_CONTRACT, "#,##0")

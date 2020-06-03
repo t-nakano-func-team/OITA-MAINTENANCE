@@ -20,7 +20,7 @@
         CHECK = 0
         KIND_CONTRACT_NAME
         NUMBER_CONTRACT_VIEW
-        DATE_CONTRACT
+        DATE_INVOICE
         NAME_OWNER
         NAME_CONTRACT
         COUNT_INVOICE_VIEW
@@ -38,8 +38,10 @@
     Private Structure SRT_MY_GRID_DATA
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
+        Public SERIAL_INVOICE As Integer
+
         Public KIND_CONTRACT As Integer
-        Public DATE_CONTRACT As DateTime
+        Public DATE_INVOICE As DateTime
         Public CODE_OWNER As Integer
         Public NAME_CONTRACT As String
         Public COUNT_INVOICE As Integer
@@ -47,16 +49,15 @@
 
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
-        Public SERIAL_INVOICE_MAX As Integer
         Public KIND_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
 
         Public Function FUNC_GET_NUMBER_SERIAL_CONTRACT() As String
             Dim STR_NUMBER_CONTRACT As String
-            STR_NUMBER_CONTRACT = Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH))
+            STR_NUMBER_CONTRACT = MOD_CODE_TOOL.Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH))
 
             Dim STR_SERIAL_CONTRACT As String
-            STR_SERIAL_CONTRACT = Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH))
+            STR_SERIAL_CONTRACT = MOD_CODE_TOOL.Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH))
 
             Dim STR_RET As String
             STR_RET = ""
@@ -70,7 +71,7 @@
         Public Function FUNC_GET_COUNT_INVOICE_VIEW() As String
             Dim STR_RET As String
             STR_RET = ""
-            STR_RET &= (Me.SERIAL_INVOICE_MAX + 1) & ""
+            STR_RET &= (Me.SERIAL_INVOICE) & ""
             STR_RET &= "/"
             STR_RET &= (Me.COUNT_INVOICE) & ""
 
@@ -88,11 +89,13 @@
     Private Structure SRT_MY_INVOICE_DATA
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
-        Public ENABLED_INVOICE As Boolean
+        Public SERIAL_INVOICE As Integer
+        Public ENABLED_INVOICE_CANCEL As Boolean
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
-        Public DATE_INVOICE As DateTime
+        Public DATE_INVOICE_FROM As DateTime
+        Public DATE_INVOICE_TO As DateTime
     End Structure
 #End Region
 
@@ -125,13 +128,14 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,契約日付,オーナー,契約内容,回数,請求金額", "BSSSSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,請求日付,オーナー,契約内容,回数,請求金額", "BSSSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,5,6,6,2,6", "CLRRLLCR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
-        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE, cstVB_DATE_MIN, DAT_DATE_TO)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -140,7 +144,13 @@
         LBL_NAME_USER_HEAD.Text = FUNC_GET_MNG_M_USER_NAME_STAFF(srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF)
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
 
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE, datSYSTEM_TOTAL_DATE_ACTIVE)
+        Dim DAT_INVOICE_FROM As DateTime
+        DAT_INVOICE_FROM = FUNC_GET_DATE_FIRSMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_FROM, DAT_INVOICE_FROM)
+
+        Dim DAT_INVOICE_TO As DateTime
+        DAT_INVOICE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_INVOICE_TO)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -150,53 +160,7 @@
 #Region "実行処理群"
 
     Private Sub SUB_BATCH()
-        If Not FUNC_CHECK_INPUT_DATA() Then
-            Exit Sub
-        End If
 
-        Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
-        With SRT_CONDITIONS
-            .CONTRACT_ROW = FUNC_GET_GRID_CONTRACT()
-            .DATE_INVOICE = DTP_DATE_INVOICE.Value
-
-            .DATE_DO_BATCH = DateTime.Now
-            .FORM = Me
-        End With
-
-        If SRT_CONDITIONS.CONTRACT_ROW.Length <= 1 Then
-            Call MessageBox.Show("1件以上選択してください。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        Dim STR_MSG As String
-        STR_MSG = ""
-        STR_MSG &= (SRT_CONDITIONS.CONTRACT_ROW.Length - 1) & "件の" & Environment.NewLine
-        STR_MSG &= Me.Text & "を行います。" & Environment.NewLine & "よろしいですか？"
-        Dim RST_MSG As System.Windows.Forms.DialogResult
-        RST_MSG = MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-        If RST_MSG = Windows.Forms.DialogResult.No Then
-            Exit Sub
-        End If
-
-        Call SUB_PUT_PROGRESS_GUIDE(Me.Text & "を行っています")
-        Dim BLN_RET As Boolean
-        Dim BLN_PUT As Boolean
-        BLN_RET = MOD_BATCH.FUNC_BACTH_MAIN(BLN_PUT, SRT_CONDITIONS)
-        Call SUB_PUT_PROGRESS_GUIDE("")
-
-        If Not BLN_RET Then
-            Call MessageBox.Show(MOD_BATCH.STR_FUNC_BATCH_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-
-        If Not BLN_PUT Then
-            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        Call MessageBox.Show(Me.Text & "を完了しました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-        Call SUB_CLEAR()
     End Sub
 
     Private Sub SUB_SEARCH()
@@ -363,32 +327,29 @@
         Dim STR_WHERE As String
         STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS) '検索条件からWHERE条件取得
 
-        Dim STR_WHERE_SPOT As String
-        STR_WHERE_SPOT = FUNC_GET_SQL_WHERE_SPOT(SRT_CONDITIONS) '検索条件からWHERE条件取得
-
         Dim STR_SQL As System.Text.StringBuilder
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("*" & Environment.NewLine)
+            Call .Append("MAIN.*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
-            Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("1=1" & Environment.NewLine)
-            Call .Append("AND KIND_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR & Environment.NewLine)
-            Call .Append(STR_WHERE) 'WHERE条件
-            Call .Append("UNION ALL" & Environment.NewLine)
+            Call .Append("(" & Environment.NewLine)
             Call .Append("SELECT" & Environment.NewLine)
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
-            Call .Append("AND KIND_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT & Environment.NewLine)
-            Call .Append(STR_WHERE_SPOT) 'WHERE条件
+            Call .Append(STR_WHERE) 'WHERE条件
+            Call .Append(") AS MAIN" & Environment.NewLine)
+            Call .Append("INNER JOIN" & Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT AS SUB_01" & Environment.NewLine)
+            Call .Append("ON" & Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("KIND_CONTRACT DESC,NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("SUB_01.KIND_CONTRACT DESC,MAIN.DATE_INVOICE,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader
@@ -417,7 +378,9 @@
             With SRT_TEMP(INT_INDEX)
                 .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
                 .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
-                .ENABLED_INVOICE = True
+                .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
+
+                .ENABLED_INVOICE_CANCEL = True
             End With
         End While
         ReDim Preserve SRT_TEMP(INT_INDEX)
@@ -426,7 +389,7 @@
 
         For i = 1 To (SRT_TEMP.Length - 1) '補助情報取得
             With SRT_TEMP(i)
-                .ENABLED_INVOICE = FUNC_GET_ENABLED_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT, SRT_CONDITIONS.DATE_INVOICE)
+                .ENABLED_INVOICE_CANCEL = FUNC_GET_ENABLED_INVOICE_CANCEL(.NUMBER_CONTRACT, .SERIAL_CONTRACT, SRT_CONDITIONS.DATE_INVOICE_FROM)
             End With
         Next
 
@@ -437,21 +400,31 @@
                 Exit For
             End If
 
-            If Not SRT_TEMP(i).ENABLED_INVOICE Then
+            If Not SRT_TEMP(i).ENABLED_INVOICE_CANCEL Then
                 Continue For
             End If
 
             INT_INDEX += 1
             SRT_GRID_DATA_MAIN(INT_INDEX).NUMBER_CONTRACT = SRT_TEMP(i).NUMBER_CONTRACT
             SRT_GRID_DATA_MAIN(INT_INDEX).SERIAL_CONTRACT = SRT_TEMP(i).SERIAL_CONTRACT
+            SRT_GRID_DATA_MAIN(INT_INDEX).SERIAL_INVOICE = SRT_TEMP(i).SERIAL_INVOICE
         Next
         ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
-            Dim SRT_RECORD_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
-            With SRT_RECORD_CONTRACT.KEY
+            Dim SRT_RECORD_INVOICE As SRT_TABLE_MNT_T_INVOICE
+            With SRT_RECORD_INVOICE.KEY
                 .NUMBER_CONTRACT = SRT_GRID_DATA_MAIN(i).NUMBER_CONTRACT
                 .SERIAL_CONTRACT = SRT_GRID_DATA_MAIN(i).SERIAL_CONTRACT
+                .SERIAL_INVOICE = SRT_GRID_DATA_MAIN(i).SERIAL_INVOICE
+            End With
+            SRT_RECORD_INVOICE.DATA = Nothing
+            Call FUNC_SELECT_TABLE_MNT_T_INVOICE(SRT_RECORD_INVOICE.KEY, SRT_RECORD_INVOICE.DATA, False)
+
+            Dim SRT_RECORD_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
+            With SRT_RECORD_CONTRACT.KEY
+                .NUMBER_CONTRACT = SRT_RECORD_INVOICE.KEY.NUMBER_CONTRACT
+                .SERIAL_CONTRACT = SRT_RECORD_INVOICE.KEY.SERIAL_CONTRACT
             End With
             SRT_RECORD_CONTRACT.DATA = Nothing
             Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_RECORD_CONTRACT.KEY, SRT_RECORD_CONTRACT.DATA, True)
@@ -465,14 +438,14 @@
             Call FUNC_SELECT_TABLE_MNT_T_CONTRACT_SPOT(SRT_RECORD_CONTRACT_SPOT.KEY, SRT_RECORD_CONTRACT_SPOT.DATA, True)
 
             With SRT_GRID_DATA_MAIN(i)
+                .DATE_INVOICE = SRT_RECORD_INVOICE.DATA.DATE_INVOICE
+
                 .KIND_CONTRACT = SRT_RECORD_CONTRACT.DATA.KIND_CONTRACT
                 .CODE_OWNER = SRT_RECORD_CONTRACT.DATA.CODE_OWNER
                 .NAME_CONTRACT = SRT_RECORD_CONTRACT.DATA.NAME_CONTRACT
                 .COUNT_INVOICE = SRT_RECORD_CONTRACT.DATA.COUNT_INVOICE
-                .DATE_CONTRACT = SRT_RECORD_CONTRACT.DATA.DATE_CONTRACT
                 .KINGAKU_CONTRACT = SRT_RECORD_CONTRACT.DATA.KINGAKU_CONTRACT
 
-                .SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
                 .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT)
                 Select Case .KIND_CONTRACT
                     Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
@@ -483,8 +456,8 @@
                         .CODE_OWNER_NAME = ""
                 End Select
 
-                .KINGAKU_INVOICE_DETAIL = .KINGAKU_CONTRACT
-                .KINGAKU_INVOICE_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_INVOICE_DETAIL, SRT_CONDITIONS.DATE_INVOICE)
+                .KINGAKU_INVOICE_DETAIL = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_DETAIL
+                .KINGAKU_INVOICE_VAT = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_VAT
             End With
         Next
     End Sub
@@ -506,7 +479,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CHECK) = False
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
-                OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_CONTRACT.ToLongDateString
+                OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_INVOICE) = .DATE_INVOICE.ToLongDateString
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
@@ -540,76 +513,22 @@
         Call SUB_DATA_GRID_REFRESH_CHG_SELECTION_MODE(DGV_VIEW_DATA)
     End Sub
 
-    Private Function FUNC_GET_ENABLED_INVOICE(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer, ByVal DAT_DATE_INVOICE As DateTime) As Boolean
-
-        Dim SRT_RECORD As SRT_TABLE_MNT_T_CONTRACT
-        With SRT_RECORD.KEY
-            .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
-            .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
-        End With
-        SRT_RECORD.DATA = Nothing
-        Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_RECORD.KEY, SRT_RECORD.DATA, True)
-
-        Dim INT_MAX_INVOICE As Integer
-        INT_MAX_INVOICE = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT)
-
-        If INT_MAX_INVOICE >= SRT_RECORD.DATA.COUNT_INVOICE Then '請求回数分の請求レコードがある場合は
-            Return False '請求不可（スポットの既請求分はここで抜ける）
-        End If
-
-        If INT_MAX_INVOICE = 0 Then '請求レコードがない場合は
-            Return True '請求可能（スポットの未請求分はここで抜ける）
-        End If
-
-        'ここからは定期のみ
-        Dim DAT_DATE_INVOICE_FROM As DateTime
-        Dim DAT_DATE_INVOICE_TO As DateTime
-
-        DAT_DATE_INVOICE_FROM = FUNC_GET_DATE_FIRSMONTH(DAT_DATE_INVOICE) '月初
-        DAT_DATE_INVOICE_TO = FUNC_GET_DATE_LASTMONTH(DAT_DATE_INVOICE) '月末
-
-        Dim BLN_CHECK As Boolean
-        BLN_CHECK = FUNC_CHECK_MNT_T_INVOICE_DATE_INVOICE_PERIOD(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT, DAT_DATE_INVOICE_FROM, DAT_DATE_INVOICE_TO)
-        If BLN_CHECK Then '今回請求日付と同一月の請求レコードがある場合は
-            Return False '請求不可
-        End If
+    Private Function FUNC_GET_ENABLED_INVOICE_CANCEL(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer, ByVal DAT_DATE_INVOICE As DateTime) As Boolean
 
         Return True
     End Function
 
     Private Function FUNC_GET_GRID_CONTRACT() As SRT_NUMBER_SERIAL_CONTRACT()
 
-        Dim TBL_DATA_TABLE As DataTable
-        TBL_DATA_TABLE = DGV_VIEW_DATA.DataSource
-
         Dim SRT_RET() As SRT_NUMBER_SERIAL_CONTRACT
         ReDim SRT_RET(0)
-        If TBL_DATA_TABLE Is Nothing Then
-            Return SRT_RET
-        End If
 
         Dim INT_MAX_INDEX As Integer
         INT_MAX_INDEX = (SRT_GRID_DATA_MAIN.Length - 1)
         For i = 1 To INT_MAX_INDEX '構造体のLength分のデータがありきとする
-            Dim INT_TABLE_INDEX As Integer
-            INT_TABLE_INDEX = (i - 1)
-
-            Dim ROW_DATA As DataRow
-            Try
-                ROW_DATA = TBL_DATA_TABLE.Rows(INT_TABLE_INDEX)
-            Catch ex As Exception
-                Exit For '行無
-            End Try
-
-            Dim OBJ_TEMP As Object
-            Try
-                OBJ_TEMP = ROW_DATA.Item(ENM_MY_GRID_MAIN.CHECK)
-            Catch ex As Exception
-                Exit For '列定義数不一致
-            End Try
 
             Dim BLN_CHECK As Boolean
-            BLN_CHECK = CBool(OBJ_TEMP)
+            BLN_CHECK = FUNC_GET_CHECK_STATE_GRID(i)
 
             If BLN_CHECK Then
                 Dim INT_INDEX As Integer
@@ -618,11 +537,41 @@
                 SRT_RET(INT_INDEX).NUMBER_CONTRACT = SRT_GRID_DATA_MAIN(i).NUMBER_CONTRACT
                 SRT_RET(INT_INDEX).SERIAL_CONTRACT = SRT_GRID_DATA_MAIN(i).SERIAL_CONTRACT
             End If
-
-            ROW_DATA = Nothing
         Next
 
         Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_CHECK_STATE_GRID(ByVal INT_ROW_INDEX As Integer) As Boolean
+        Dim INT_TABLE_INDEX As Integer
+        INT_TABLE_INDEX = (INT_ROW_INDEX - 1)
+
+        Dim TBL_DATA_TABLE As DataTable
+        TBL_DATA_TABLE = DGV_VIEW_DATA.DataSource
+        If TBL_DATA_TABLE Is Nothing Then
+            Return False
+        End If
+
+        Dim ROW_DATA As DataRow
+        Try
+            ROW_DATA = TBL_DATA_TABLE.Rows(INT_TABLE_INDEX)
+        Catch ex As Exception
+            Return False '行無
+        End Try
+
+        Dim OBJ_TEMP As Object
+        Try
+            OBJ_TEMP = ROW_DATA.Item(ENM_MY_GRID_MAIN.CHECK)
+        Catch ex As Exception
+            Return False '列定義数不一致
+        End Try
+
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = CBool(OBJ_TEMP)
+
+        ROW_DATA = Nothing
+
+        Return BLN_CHECK
     End Function
 #End Region
 
@@ -636,6 +585,18 @@
         CTL_CONTROL = Nothing
         If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_KEY, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
             STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        CTL_CONTROL = DTP_DATE_INVOICE_FROM
+        Dim DAT_DATE_INVOICE_FROM As DateTime
+        DAT_DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
+        Dim DAT_DATE_INVOICE_TO As DateTime
+        DAT_DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
+        If DAT_DATE_INVOICE_FROM > DAT_DATE_INVOICE_TO Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_FROM_TO, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
             Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Call CTL_CONTROL.Focus()
             Return False
@@ -658,6 +619,29 @@
             Return False
         End If
 
+        CTL_CONTROL = DGV_VIEW_DATA
+        Dim INT_MAX_INDEX As Integer
+        INT_MAX_INDEX = (SRT_GRID_DATA_MAIN.Length - 1)
+        For i = 1 To INT_MAX_INDEX
+            Dim BLN_CEHCK As Boolean
+            BLN_CEHCK = FUNC_GET_CHECK_STATE_GRID(i)
+            If BLN_CEHCK Then
+                With SRT_GRID_DATA_MAIN(i)
+                    Dim INT_SERIAL_INVOICE_MAX As Integer
+                    INT_SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+
+                    If INT_SERIAL_INVOICE_MAX > .SERIAL_INVOICE Then
+                        STR_ERR_MSG = ""
+                        STR_ERR_MSG &= "契約番号：" & .FUNC_GET_NUMBER_SERIAL_CONTRACT & System.Environment.NewLine
+                        STR_ERR_MSG &= "は以後に新しい請求がある為、キャンセル出来ません。" & System.Environment.NewLine
+                        Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        Call CTL_CONTROL.Focus()
+                        Return False
+                    End If
+                End With
+            End If
+        Next
+
         Return True
     End Function
 
@@ -676,7 +660,8 @@
     Private Function FUNC_GET_SEARCH_CONDITHIONS() As SRT_SEARCH_CONDITIONS
         Dim srtCONDITIONS As SRT_SEARCH_CONDITIONS
         With srtCONDITIONS
-            .DATE_INVOICE = DTP_DATE_INVOICE.Value
+            .DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
+            .DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
         End With
 
         Return srtCONDITIONS
@@ -687,23 +672,14 @@
         STR_WHERE = ""
 
         With SRT_CONDITIONS
-            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_WORK_FROM", "<=")
+            Dim SRT_INVOICE_PERIOD As SRT_DATE_PERIOD
+            SRT_INVOICE_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_INVOICE_FROM
+            SRT_INVOICE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_INVOICE_TO
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_INVOICE_PERIOD, "DATE_INVOICE")
         End With
 
         Return STR_WHERE
     End Function
-
-    Private Function FUNC_GET_SQL_WHERE_SPOT(ByVal SRT_CONDITIONS As SRT_SEARCH_CONDITIONS)
-        Dim STR_WHERE As String
-        STR_WHERE = ""
-
-        With SRT_CONDITIONS
-            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_WORK_TO", "<=")
-        End With
-
-        Return STR_WHERE
-    End Function
-
 
     Public Sub SUB_PUT_PROGRESS_GUIDE(ByVal STR_PROGRESS As String)
 
@@ -874,6 +850,16 @@
 
         Me.CHECK_ALL = Not Me.CHECK_ALL
         Call SUB_EDIT_GRID_VIEW_FLAG(Me.CHECK_ALL)
+    End Sub
+#End Region
+
+#Region "イベント-バリューチェンジ"
+    Private Sub DTP_DATE_INVOICE_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_INVOICE_FROM.ValueChanged
+        Dim DAT_FROM As DateTime
+        DAT_FROM = sender.Value
+        Dim DAT_TO As DateTime
+        DAT_TO = FUNC_GET_DATE_LASTMONTH(DAT_FROM)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_TO)
     End Sub
 #End Region
 
