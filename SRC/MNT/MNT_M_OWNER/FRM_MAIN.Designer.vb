@@ -447,7 +447,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_ADDRESS_02.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_ADDRESS_02.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_ADDRESS_02.MaxLength = 12
+        Me.TXT_NAME_ADDRESS_02.MaxLength = 30
         Me.TXT_NAME_ADDRESS_02.Name = "TXT_NAME_ADDRESS_02"
         Me.TXT_NAME_ADDRESS_02.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_ADDRESS_02.TabIndex = 1
@@ -479,7 +479,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_ADDRESS_01.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_ADDRESS_01.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_ADDRESS_01.MaxLength = 12
+        Me.TXT_NAME_ADDRESS_01.MaxLength = 30
         Me.TXT_NAME_ADDRESS_01.Name = "TXT_NAME_ADDRESS_01"
         Me.TXT_NAME_ADDRESS_01.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_ADDRESS_01.TabIndex = 1
@@ -544,7 +544,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_KANA_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_KANA_OWNER.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KANA_OWNER.MaxLength = 12
+        Me.TXT_KANA_OWNER.MaxLength = 40
         Me.TXT_KANA_OWNER.Name = "TXT_KANA_OWNER"
         Me.TXT_KANA_OWNER.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KANA_OWNER.TabIndex = 1
@@ -576,7 +576,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_OWNER_SHORT.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_OWNER_SHORT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_OWNER_SHORT.MaxLength = 12
+        Me.TXT_NAME_OWNER_SHORT.MaxLength = 40
         Me.TXT_NAME_OWNER_SHORT.Name = "TXT_NAME_OWNER_SHORT"
         Me.TXT_NAME_OWNER_SHORT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_OWNER_SHORT.TabIndex = 1
@@ -608,7 +608,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
-        Me.TXT_NAME_OWNER.MaxLength = 12
+        Me.TXT_NAME_OWNER.MaxLength = 40
         Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
         Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
         Me.TXT_NAME_OWNER.TabIndex = 1
