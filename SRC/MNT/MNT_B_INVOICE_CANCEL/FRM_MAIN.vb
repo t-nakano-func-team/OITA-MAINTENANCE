@@ -160,6 +160,52 @@
 #Region "実行処理群"
 
     Private Sub SUB_BATCH()
+        If Not FUNC_CHECK_INPUT_DATA() Then
+            Exit Sub
+        End If
+
+        Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
+        With SRT_CONDITIONS
+            .INVOICE_ROW = FUNC_GET_GRID_INVOICE()
+
+            .DATE_DO_BATCH = DateTime.Now
+            .FORM = Me
+        End With
+
+        If SRT_CONDITIONS.INVOICE_ROW.Length <= 1 Then
+            Call MessageBox.Show("1件以上選択してください。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim STR_MSG As String
+        STR_MSG = ""
+        STR_MSG &= (SRT_CONDITIONS.INVOICE_ROW.Length - 1) & "件の" & Environment.NewLine
+        STR_MSG &= Me.Text & "を行います。" & Environment.NewLine & "よろしいですか？"
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Call SUB_PUT_PROGRESS_GUIDE(Me.Text & "を行っています")
+        Dim BLN_RET As Boolean
+        Dim BLN_PUT As Boolean
+        BLN_RET = MOD_BATCH.FUNC_BACTH_MAIN(BLN_PUT, SRT_CONDITIONS)
+        Call SUB_PUT_PROGRESS_GUIDE("")
+
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_BATCH.STR_FUNC_BATCH_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not BLN_PUT Then
+            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Call MessageBox.Show(Me.Text & "を完了しました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Call SUB_CLEAR()
 
     End Sub
 
@@ -518,9 +564,9 @@
         Return True
     End Function
 
-    Private Function FUNC_GET_GRID_CONTRACT() As SRT_NUMBER_SERIAL_CONTRACT()
+    Private Function FUNC_GET_GRID_INVOICE() As SRT_NUMBER_SERIAL_INVOICE()
 
-        Dim SRT_RET() As SRT_NUMBER_SERIAL_CONTRACT
+        Dim SRT_RET() As SRT_NUMBER_SERIAL_INVOICE
         ReDim SRT_RET(0)
 
         Dim INT_MAX_INDEX As Integer
@@ -536,6 +582,7 @@
                 ReDim Preserve SRT_RET(INT_INDEX)
                 SRT_RET(INT_INDEX).NUMBER_CONTRACT = SRT_GRID_DATA_MAIN(i).NUMBER_CONTRACT
                 SRT_RET(INT_INDEX).SERIAL_CONTRACT = SRT_GRID_DATA_MAIN(i).SERIAL_CONTRACT
+                SRT_RET(INT_INDEX).SERIAL_INVOICE = SRT_GRID_DATA_MAIN(i).SERIAL_INVOICE
             End If
         Next
 

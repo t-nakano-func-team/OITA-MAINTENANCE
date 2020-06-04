@@ -7,6 +7,14 @@
     End Structure
 #End Region
 
+#Region "構造体：請求"
+    Public Structure SRT_NUMBER_SERIAL_INVOICE
+        Public NUMBER_CONTRACT As Integer
+        Public SERIAL_CONTRACT As Integer
+        Public SERIAL_INVOICE As Integer
+    End Structure
+#End Region
+
 #Region "構造体：期間"
     Public Structure SRT_DATE_PERIOD
         Public DATE_FROM As DateTime
