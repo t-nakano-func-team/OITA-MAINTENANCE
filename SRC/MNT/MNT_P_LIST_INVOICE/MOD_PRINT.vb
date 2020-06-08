@@ -40,6 +40,12 @@
         Public NAME_ADDRESS_02 As String
         Public NAME_OWNER As String
 
+        Public KEY As SRT_PTINT_INVOICE_KEY
+        Public KINGAKU_TOTAL_INVOICE_BEFORE As Long
+        Public KINGAKU_TOTAL_BUY As Long
+        Public KINGAKU_TOTAL_DEPOSIT As Long
+        Public KINGAKU_TOTAL_INVOICE As Long
+
         Public NAME_CONTRACT As String
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
@@ -88,6 +94,12 @@
         End If
 
         BLN_PUT = True
+
+        INT_LOOP_INDEX_MAX = (SRT_DATA.Length - 1)
+        For i = 1 To INT_LOOP_INDEX_MAX
+            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "情報取得中：" & i & "/" & INT_LOOP_INDEX_MAX)
+            Call SUB_REPLACE_DATA(SRT_CONDITIONS, SRT_DATA(i))
+        Next
 
         STR_FILE_NAME_PRINT_DATA = CST_PRINT_DEFINITION & CST_PRINT_DATA_FILE_EXTENT
         STR_PATH_PRINT_DATA = srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_DATA & "\" & STR_FILE_NAME_PRINT_DATA
@@ -147,85 +159,88 @@
     ByVal DAT_DATE_INVOICE_FROM As DateTime, ByVal DAT_DATE_INVOICE_TO As DateTime
     )
 
-        Dim DAT_DATE_INVOICE_KEY_FROM As DateTime
-        DAT_DATE_INVOICE_KEY_FROM = New DateTime(SRT_CONDITION_KEY.YEAR_INVOICE, SRT_CONDITION_KEY.MONTH_INVOICE, 1)
-        Dim DAT_DATE_INVOICE_KEY_TO As DateTime
-        DAT_DATE_INVOICE_KEY_TO = FUNC_GET_DATE_LASTMONTH(DAT_DATE_INVOICE_KEY_FROM)
+        'Dim DAT_DATE_INVOICE_KEY_FROM As DateTime
+        'DAT_DATE_INVOICE_KEY_FROM = New DateTime(SRT_CONDITION_KEY.YEAR_INVOICE, SRT_CONDITION_KEY.MONTH_INVOICE, 1)
+        'Dim DAT_DATE_INVOICE_KEY_TO As DateTime
+        'DAT_DATE_INVOICE_KEY_TO = FUNC_GET_DATE_LASTMONTH(DAT_DATE_INVOICE_KEY_FROM)
 
-        Dim STR_SQL As System.Text.StringBuilder
-        STR_SQL = New System.Text.StringBuilder
-        With STR_SQL
-            Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("MAIN.NUMBER_CONTRACT" & "," & Environment.NewLine)
-            Call .Append("MAIN.SERIAL_CONTRACT" & "," & Environment.NewLine)
-            Call .Append("MAIN.SERIAL_INVOICE" & "" & Environment.NewLine)
-            Call .Append("FROM" & Environment.NewLine)
-            Call .Append("(" & Environment.NewLine)
-            Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("*" & Environment.NewLine)
-            Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & Environment.NewLine)
-            Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("1=1" & Environment.NewLine)
-            Call .Append("AND DATE_INVOICE>=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_FROM.ToShortDateString) & Environment.NewLine)
-            Call .Append("AND DATE_INVOICE<=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_TO.ToShortDateString) & Environment.NewLine)
-            Call .Append("AND DATE_INVOICE>=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_KEY_FROM.ToShortDateString) & Environment.NewLine)
-            Call .Append("AND DATE_INVOICE<=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_KEY_TO.ToShortDateString) & Environment.NewLine)
-            Call .Append(") AS MAIN" & Environment.NewLine)
-            Call .Append("INNER JOIN" & Environment.NewLine)
-            Call .Append("(" & Environment.NewLine)
-            Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("*" & Environment.NewLine)
-            Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
-            Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("1=1" & Environment.NewLine)
-            Call .Append("AND CODE_OWNER=" & SRT_CONDITION_KEY.CODE_OWNER & Environment.NewLine)
-            Call .Append("AND NUMBER_LIST_INVOICE=" & SRT_CONDITION_KEY.NUMBER_LIST_INVOICE & Environment.NewLine)
-            Call .Append(") AS SUB_01" & Environment.NewLine)
-            Call .Append("ON" & Environment.NewLine)
-            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
-            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
-            Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & Environment.NewLine)
-        End With
+        'Dim STR_SQL As System.Text.StringBuilder
+        'STR_SQL = New System.Text.StringBuilder
+        'With STR_SQL
+        '    Call .Append("SELECT" & Environment.NewLine)
+        '    Call .Append("MAIN.NUMBER_CONTRACT" & "," & Environment.NewLine)
+        '    Call .Append("MAIN.SERIAL_CONTRACT" & "," & Environment.NewLine)
+        '    Call .Append("MAIN.SERIAL_INVOICE" & "" & Environment.NewLine)
+        '    Call .Append("FROM" & Environment.NewLine)
+        '    Call .Append("(" & Environment.NewLine)
+        '    Call .Append("SELECT" & Environment.NewLine)
+        '    Call .Append("*" & Environment.NewLine)
+        '    Call .Append("FROM" & Environment.NewLine)
+        '    Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & Environment.NewLine)
+        '    Call .Append("WHERE" & Environment.NewLine)
+        '    Call .Append("1=1" & Environment.NewLine)
+        '    Call .Append("AND DATE_INVOICE>=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_FROM.ToShortDateString) & Environment.NewLine)
+        '    Call .Append("AND DATE_INVOICE<=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_TO.ToShortDateString) & Environment.NewLine)
+        '    Call .Append("AND DATE_INVOICE>=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_KEY_FROM.ToShortDateString) & Environment.NewLine)
+        '    Call .Append("AND DATE_INVOICE<=" & FUNC_ADD_ENCLOSED_SCOT(DAT_DATE_INVOICE_KEY_TO.ToShortDateString) & Environment.NewLine)
+        '    Call .Append(") AS MAIN" & Environment.NewLine)
+        '    Call .Append("INNER JOIN" & Environment.NewLine)
+        '    Call .Append("(" & Environment.NewLine)
+        '    Call .Append("SELECT" & Environment.NewLine)
+        '    Call .Append("*" & Environment.NewLine)
+        '    Call .Append("FROM" & Environment.NewLine)
+        '    Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
+        '    Call .Append("WHERE" & Environment.NewLine)
+        '    Call .Append("1=1" & Environment.NewLine)
+        '    Call .Append("AND CODE_OWNER=" & SRT_CONDITION_KEY.CODE_OWNER & Environment.NewLine)
+        '    Call .Append("AND NUMBER_LIST_INVOICE=" & SRT_CONDITION_KEY.NUMBER_LIST_INVOICE & Environment.NewLine)
+        '    Call .Append(") AS SUB_01" & Environment.NewLine)
+        '    Call .Append("ON" & Environment.NewLine)
+        '    Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
+        '    Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
+        '    Call .Append("ORDER BY" & Environment.NewLine)
+        '    Call .Append("NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & Environment.NewLine)
+        'End With
 
-        Dim SDR_READER As SqlClient.SqlDataReader
-        SDR_READER = Nothing
-        If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
-            SDR_READER = Nothing
-            Exit Sub
-        End If
+        'Dim SDR_READER As SqlClient.SqlDataReader
+        'SDR_READER = Nothing
+        'If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
+        '    SDR_READER = Nothing
+        '    Exit Sub
+        'End If
 
-        If Not SDR_READER.HasRows Then
-            Call SDR_READER.Close()
-            SDR_READER = Nothing
-            Exit Sub
-        End If
+        'If Not SDR_READER.HasRows Then
+        '    Call SDR_READER.Close()
+        '    SDR_READER = Nothing
+        '    Exit Sub
+        'End If
 
-        Dim INT_INDEX As Integer
-        INT_INDEX = 0
+        'Dim INT_INDEX As Integer
+        'INT_INDEX = 0
+        'Dim SRT_KEY_INVOICE() As SRT_NUMBER_SERIAL_INVOICE
+        'ReDim SRT_KEY_INVOICE(0)
+        'While SDR_READER.Read
+        '    INT_INDEX += 1
+        '    ReDim Preserve SRT_KEY_INVOICE(INT_INDEX)
+        '    With SRT_KEY_INVOICE(INT_INDEX)
+        '        .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
+        '        .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
+        '        .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
+        '    End With
+        'End While
+
+        'Call SDR_READER.Close()
+        'SDR_READER = Nothing
+
         Dim SRT_KEY_INVOICE() As SRT_NUMBER_SERIAL_INVOICE
-        ReDim SRT_KEY_INVOICE(0)
-        While SDR_READER.Read
-            INT_INDEX += 1
-            ReDim Preserve SRT_KEY_INVOICE(INT_INDEX)
-            With SRT_KEY_INVOICE(INT_INDEX)
-                .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
-                .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
-                .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
-            End With
-        End While
-
-        Call SDR_READER.Close()
-        SDR_READER = Nothing
+        SRT_KEY_INVOICE = FUNC_GET_INVOICE_FROM_REGULAR(SRT_CONDITION_KEY.YEAR_INVOICE, SRT_CONDITION_KEY.MONTH_INVOICE, DAT_DATE_INVOICE_FROM, DAT_DATE_INVOICE_TO, SRT_CONDITION_KEY.CODE_OWNER, SRT_CONDITION_KEY.NUMBER_LIST_INVOICE)
 
         For i = 1 To (SRT_KEY_INVOICE.Length - 1)
-            Call SUB_ADD_DATA_REGULAR_ONE(INT_NUMBER_BREAK, i, SRT_DATA, SRT_KEY_INVOICE(i))
+            Call SUB_ADD_DATA_REGULAR_ONE(INT_NUMBER_BREAK, i, SRT_DATA, SRT_KEY_INVOICE(i), SRT_CONDITION_KEY)
         Next
     End Sub
 
-    Private Sub SUB_ADD_DATA_REGULAR_ONE(ByVal INT_NUMBER_BREAK As Integer, ByVal INT_ROW_BREAK As Integer, ByRef SRT_DATA() As SRT_PRINT_DATA, ByRef SRT_INVOICE_KEY As SRT_NUMBER_SERIAL_INVOICE)
+    Private Sub SUB_ADD_DATA_REGULAR_ONE(ByVal INT_NUMBER_BREAK As Integer, ByVal INT_ROW_BREAK As Integer, ByRef SRT_DATA() As SRT_PRINT_DATA, ByRef SRT_INVOICE_KEY As SRT_NUMBER_SERIAL_INVOICE, ByRef SRT_CONDITION_KEY As SRT_PTINT_INVOICE_KEY)
 
         Dim SRT_RECORD_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
         With SRT_RECORD_CONTRACT.KEY
@@ -248,6 +263,8 @@
         INT_INDEX = SRT_DATA.Length
         ReDim Preserve SRT_DATA(INT_INDEX)
         With SRT_DATA(INT_INDEX)
+            .KEY = SRT_CONDITION_KEY
+
             .NUMBER_BREAK = INT_NUMBER_BREAK
             .NUMBER_ROW = INT_ROW_BREAK
 
@@ -295,6 +312,8 @@
         INT_INDEX = SRT_DATA.Length
         ReDim Preserve SRT_DATA(INT_INDEX)
         With SRT_DATA(INT_INDEX)
+            .KEY = SRT_CONDITION_KEY
+
             .NUMBER_BREAK = INT_NUMBER_BREAK
             .NUMBER_ROW = 1
 
@@ -307,6 +326,23 @@
             .KINGAKU_INVOICE_DETAIL = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_DETAIL
             .KINGAKU_INVOICE_VAT = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_VAT
             .KINGAKU_INVOICE_TOTAL = .KINGAKU_INVOICE_DETAIL + .KINGAKU_INVOICE_VAT
+        End With
+    End Sub
+
+    Private Sub SUB_REPLACE_DATA(ByRef SRT_CONDITIONS As SRT_PRINT_CONDITIONS, ByRef SRT_DATA As SRT_PRINT_DATA)
+        With SRT_DATA
+
+            If .KEY.NUMBER_LIST_INVOICE <= 0 Then
+                .KINGAKU_TOTAL_INVOICE_BEFORE = 0
+                .KINGAKU_TOTAL_BUY = .KINGAKU_INVOICE_TOTAL
+                .KINGAKU_TOTAL_DEPOSIT = 0
+            Else
+                .KINGAKU_TOTAL_INVOICE_BEFORE = 0
+                .KINGAKU_TOTAL_BUY = FUNC_GETTOTAL_KINGAKU_INVOICE_FROM_REGULAR(SRT_DATA.KEY.YEAR_INVOICE, SRT_DATA.KEY.MONTH_INVOICE, SRT_CONDITIONS.DATE_INVOICE_FROM, SRT_CONDITIONS.DATE_INVOICE_TO, SRT_DATA.KEY.CODE_OWNER, SRT_DATA.KEY.NUMBER_LIST_INVOICE)
+                .KINGAKU_TOTAL_DEPOSIT = 0
+            End If
+
+            .KINGAKU_TOTAL_INVOICE = .KINGAKU_TOTAL_INVOICE_BEFORE - .KINGAKU_TOTAL_DEPOSIT + .KINGAKU_TOTAL_BUY
         End With
     End Sub
 
@@ -326,6 +362,8 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_01))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_02))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_OWNER))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_TOTAL_BUY))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_TOTAL_INVOICE))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_DETAIL))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_VAT))
