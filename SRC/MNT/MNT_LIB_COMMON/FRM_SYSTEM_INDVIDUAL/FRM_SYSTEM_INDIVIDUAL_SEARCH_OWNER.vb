@@ -177,7 +177,7 @@
 
     Private Sub SUB_CTRL_VIEW_INIT()
 
-        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称", "ISS")
+        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称", "SSS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,6", "RLL")
 

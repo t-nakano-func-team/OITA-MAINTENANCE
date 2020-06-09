@@ -35,7 +35,7 @@
         Public NUMBER_BREAK As Integer 'ブレイク連番
         Public NUMBER_ROW As Integer '行番号
 
-        Public CODE_POST As String
+        Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
         Public NAME_ADDRESS_02 As String
         Public NAME_OWNER As String
