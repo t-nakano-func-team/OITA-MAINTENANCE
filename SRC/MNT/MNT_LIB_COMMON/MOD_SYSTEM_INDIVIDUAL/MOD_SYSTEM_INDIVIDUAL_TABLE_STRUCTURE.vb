@@ -1,5 +1,5 @@
 ﻿Module MOD_SYSTEM_INDIVIDUAL_TABLE_STRUCTURE
-
+    'コメントテスト
 End Module
 
 #Region "MNT_M_OWNER"
