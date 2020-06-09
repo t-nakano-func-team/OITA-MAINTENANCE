@@ -16,7 +16,8 @@
         CODE_OWNER = 0
         NAME_OWNER
         KANA_OWNER
-        UBOUND = KANA_OWNER
+        CODE_SECTION_NAME
+        UBOUND = CODE_SECTION_NAME
     End Enum
 
     Private Enum ENM_MY_WINDOW_MODE
@@ -30,11 +31,17 @@
         Public CODE_OWNER As Integer
         Public NAME_OWNER As String
         Public KANA_OWNER As String
+        Public CODE_SECTION As Integer
+        Public KIND_OWNER As Integer
+
+        Public CODE_SECTION_NAME As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
         Public NAME_OWNER As String
         Public KANA_OWNER As String
+        Public CODE_SECTION As Integer
+        Public KIND_OWNER As Integer
     End Structure
 #End Region
 
@@ -105,26 +112,25 @@
 
 #Region "実行処理群"
     Private Sub SUB_SEARCH()
-        Dim srtCONDITIONS As SRT_SEARCH_CONDITIONS
-        Dim strERR_MSG As String
 
         If Not FUNC_CHECK_INPUT_KEY() Then
             Exit Sub
         End If
 
-        '検索条件取得
-        srtCONDITIONS = FUNC_GET_SEARCH_CONDITHIONS()
+        Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS
+        SRT_CONDITIONS = FUNC_GET_SEARCH_CONDITHIONS() '検索条件取得
 
         ReDim SRT_GRID_DATA_MAIN(0)
-        Call SUB_MAKE_GRID_DATA(srtCONDITIONS)
+        Call SUB_MAKE_GRID_DATA(SRT_CONDITIONS)
 
+        Dim STR_ERR_MSG As String
         Dim INT_COUNT As Integer
         INT_COUNT = UBound(SRT_GRID_DATA_MAIN)
         Call SUB_REFRESH_COUNT(INT_COUNT)
         If INT_COUNT <= 0 Then
             Call SUB_REFRESH_GRID()
-            strERR_MSG = "対象データがありません。"
-            Call System.Windows.Forms.MessageBox.Show(strERR_MSG, Me.Text, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information)
+            STR_ERR_MSG = "対象データがありません。"
+            Call System.Windows.Forms.MessageBox.Show(STR_ERR_MSG, Me.Text, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information)
             Call SUB_FOCUS_FIRST_INPUT_CONTROL(PNL_INPUT_KEY)
             Exit Sub
         End If
@@ -177,15 +183,21 @@
 
     Private Sub SUB_CTRL_VIEW_INIT()
 
-        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称", "SSS")
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_CODE_SECTION, ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, True, "全て")
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_OWNER, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, True, "全て")
+
+        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称,担当部署", "SSSS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,6", "RLL")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,6,5", "RLLL")
 
         Me.RET_SEARCH_CANCEL = True 'プロパティ初期化
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
+
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_CODE_SECTION)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_OWNER)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -231,15 +243,13 @@
 #End Region
 
 #Region "グリッド関連"
-    Private Sub SUB_MAKE_GRID_DATA(ByVal srtCONDITIONS As SRT_SEARCH_CONDITIONS)
-        Dim STR_SQL As System.Text.StringBuilder
-        Dim SDR_READER As SqlClient.SqlDataReader
-        Dim STR_WHERE As String
+    Private Sub SUB_MAKE_GRID_DATA(ByVal SRT_CONDITIONS As SRT_SEARCH_CONDITIONS)
         ReDim SRT_GRID_DATA_MAIN(0)
 
-        '検索条件からWHERE条件取得
-        STR_WHERE = FUNC_GET_SQL_WHERE(srtCONDITIONS)
+        Dim STR_WHERE As String
+        STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS) '検索条件からWHERE条件取得
 
+        Dim STR_SQL As System.Text.StringBuilder
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & Environment.NewLine)
@@ -254,6 +264,7 @@
         End With
 
         Call SUB_TIME_MEASUREMEN_START()
+        Dim SDR_READER As SqlClient.SqlDataReader
         SDR_READER = Nothing
         If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
             SDR_READER = Nothing
@@ -280,6 +291,8 @@
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
                 .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
+                .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
+                .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
             End With
         End While
         ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
@@ -290,30 +303,33 @@
         Call SUB_TIME_MEASUREMEN_START()
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
+                .CODE_SECTION_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, .CODE_SECTION)
             End With
         Next
         Call SUB_TIME_MEASUREMENT_STOP_AND_PUT_LOG(Me.Text & ":" & "補助情報取得")
     End Sub
 
     Private Sub SUB_REFRESH_GRID()
-        Dim objTEMP(ENM_MY_GRID_MAIN.UBOUND) As Object
-        Dim intMAX_INDEX As Integer
+
 
         Call tblGRID_DATA_MAIN.Clear()
 
-        intMAX_INDEX = (SRT_GRID_DATA_MAIN.Length - 1)
+        Dim INT_MAX_INDEX As Integer
+        INT_MAX_INDEX = (SRT_GRID_DATA_MAIN.Length - 1)
 
-        If intMAX_INDEX <= 0 Then
+        If INT_MAX_INDEX <= 0 Then
             Exit Sub
         End If
 
-        For intLOOP_INDEX = 1 To intMAX_INDEX
+        For intLOOP_INDEX = 1 To INT_MAX_INDEX
+            Dim OBJ_TEMP(ENM_MY_GRID_MAIN.UBOUND) As Object
             With SRT_GRID_DATA_MAIN(intLOOP_INDEX)
-                objTEMP(ENM_MY_GRID_MAIN.CODE_OWNER) = Format(.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH))
-                objTEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .NAME_OWNER
-                objTEMP(ENM_MY_GRID_MAIN.KANA_OWNER) = .KANA_OWNER
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_OWNER) = Format(.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH))
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .NAME_OWNER
+                OBJ_TEMP(ENM_MY_GRID_MAIN.KANA_OWNER) = .KANA_OWNER
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_NAME
             End With
-            Call glbSubAddRowDataTable(tblGRID_DATA_MAIN, objTEMP)
+            Call glbSubAddRowDataTable(tblGRID_DATA_MAIN, OBJ_TEMP)
         Next
 
         Call DGV_VIEW_DATA.Refresh()
@@ -418,6 +434,8 @@
         With SRT_CONDITIONS
             .NAME_OWNER = TXT_NAME_OWNER.Text
             .KANA_OWNER = TXT_KANA_OWNER.Text
+            .CODE_SECTION = FUNC_GET_COMBO_KIND_CODE(CMB_CODE_SECTION)
+            .KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_OWNER)
         End With
 
         Return SRT_CONDITIONS
@@ -431,6 +449,12 @@
         With SRT_CONDITIONS
             STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_OWNER, "NAME_OWNER")
             STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.KANA_OWNER, "KANA_OWNER")
+            If .CODE_SECTION >= 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_SECTION, "CODE_SECTION", "=")
+            End If
+            If .KIND_OWNER >= 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KIND_OWNER, "KIND_OWNER", "=")
+            End If
         End With
         Return STR_WHERE
     End Function
