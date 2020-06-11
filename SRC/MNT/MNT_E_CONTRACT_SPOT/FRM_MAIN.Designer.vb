@@ -154,7 +154,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_USER_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_USER_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_USER_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_USER_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_USER_HEAD_GUIDE.Name = "LBL_NAME_USER_HEAD_GUIDE"
         Me.LBL_NAME_USER_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -190,7 +190,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Name = "LBL_DATE_ACTIVE_HEAD_GUIDE"
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -328,7 +328,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_CONTRACT_GUIDE.Name = "LBL_NAME_CONTRACT_GUIDE"
         Me.LBL_NAME_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -381,7 +381,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_WORK_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_WORK_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_DATE_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_WORK_GUIDE.Name = "LBL_DATE_WORK_GUIDE"
         Me.LBL_DATE_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -424,7 +424,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_ADDRESS_02.AutoEllipsis = True
         Me.LBL_NAME_ADDRESS_02.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_ADDRESS_02.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_ADDRESS_02.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_ADDRESS_02.Name = "LBL_NAME_ADDRESS_02"
         Me.LBL_NAME_ADDRESS_02.Size = New System.Drawing.Size(79, 25)
@@ -456,7 +456,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_ADDRESS_01.AutoEllipsis = True
         Me.LBL_NAME_ADDRESS_01.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_ADDRESS_01.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_ADDRESS_01.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_ADDRESS_01.Name = "LBL_NAME_ADDRESS_01"
         Me.LBL_NAME_ADDRESS_01.Size = New System.Drawing.Size(79, 25)
@@ -478,7 +478,7 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_POST_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_POST_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_POST_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_POST_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_POST_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_CODE_POST_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_POST_GUIDE.Name = "LBL_CODE_POST_GUIDE"
         Me.LBL_CODE_POST_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -521,7 +521,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
         Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
@@ -553,7 +553,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_MEMO_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_MEMO_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_MEMO_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_MEMO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_MEMO_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NAME_MEMO_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_MEMO_GUIDE.Name = "LBL_NAME_MEMO_GUIDE"
         Me.LBL_NAME_MEMO_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -575,7 +575,7 @@ Partial Class FRM_MAIN
         Me.LBL_KINGAKU_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_KINGAKU_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_KINGAKU_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KINGAKU_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KINGAKU_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_KINGAKU_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_KINGAKU_CONTRACT_GUIDE.Name = "LBL_KINGAKU_CONTRACT_GUIDE"
         Me.LBL_KINGAKU_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -617,7 +617,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_DATE_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_CONTRACT_GUIDE.Name = "LBL_DATE_CONTRACT_GUIDE"
         Me.LBL_DATE_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -641,7 +641,7 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_OWNER_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_OWNER_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_CODE_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_OWNER_GUIDE.Name = "LBL_CODE_OWNER_GUIDE"
         Me.LBL_CODE_OWNER_GUIDE.Size = New System.Drawing.Size(99, 25)
@@ -712,7 +712,7 @@ Partial Class FRM_MAIN
         Me.LBL_NUMBER_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_NUMBER_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NUMBER_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NUMBER_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NUMBER_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
         Me.LBL_NUMBER_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NUMBER_CONTRACT_GUIDE.Name = "LBL_NUMBER_CONTRACT_GUIDE"
         Me.LBL_NUMBER_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)

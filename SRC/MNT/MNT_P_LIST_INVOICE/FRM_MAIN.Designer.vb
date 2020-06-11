@@ -174,9 +174,8 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(240, Byte), Integer))
         Me.GRP_FOOT.Controls.Add(Me.pnlFUNCTION_GROUP)
         Me.GRP_FOOT.Location = New System.Drawing.Point(10, 490)
-        Me.GRP_FOOT.MinimumSize = New System.Drawing.Size(800, 600)
         Me.GRP_FOOT.Name = "GRP_FOOT"
-        Me.GRP_FOOT.Size = New System.Drawing.Size(800, 600)
+        Me.GRP_FOOT.Size = New System.Drawing.Size(760, 60)
         Me.GRP_FOOT.TabIndex = 2
         Me.GRP_FOOT.TabStop = False
         '
@@ -188,7 +187,7 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PREVIEW)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_CLEAR)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_END)
-        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(240, 285)
+        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(220, 15)
         Me.pnlFUNCTION_GROUP.MinimumSize = New System.Drawing.Size(190, 40)
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
         Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(355, 40)
@@ -483,6 +482,7 @@ Partial Class FRM_MAIN
         Me.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "FRM_MAIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "***"
