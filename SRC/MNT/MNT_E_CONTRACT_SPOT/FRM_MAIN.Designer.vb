@@ -743,6 +743,7 @@ Partial Class FRM_MAIN
         Me.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "FRM_MAIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "***"

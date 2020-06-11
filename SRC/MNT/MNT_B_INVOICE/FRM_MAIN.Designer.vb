@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -37,6 +37,9 @@ Partial Class FRM_MAIN
         Me.BTN_BATCH = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
+        Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_BATCH_PROGRESS = New System.Windows.Forms.Panel()
+        Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
         Me.PNL_DATE_INVOICE = New System.Windows.Forms.Panel()
@@ -48,9 +51,6 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_SEARCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_SEARCH = New System.Windows.Forms.Button()
-        Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
-        Me.PNL_BATCH_PROGRESS = New System.Windows.Forms.Panel()
-        Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -58,12 +58,12 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
+        Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_BATCH_PROGRESS.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_SEARCH.SuspendLayout()
-        Me.PNL_INPUT_DATA.SuspendLayout()
-        Me.PNL_BATCH_PROGRESS.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -240,6 +240,38 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.TabIndex = 7
         Me.GRP_BODY.TabStop = False
         '
+        'PNL_INPUT_DATA
+        '
+        Me.PNL_INPUT_DATA.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_BATCH_PROGRESS)
+        Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 380)
+        Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
+        Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 40)
+        Me.PNL_INPUT_DATA.TabIndex = 3
+        '
+        'PNL_BATCH_PROGRESS
+        '
+        Me.PNL_BATCH_PROGRESS.Controls.Add(Me.LBL_BATCH_PROGRESS)
+        Me.PNL_BATCH_PROGRESS.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_BATCH_PROGRESS.Name = "PNL_BATCH_PROGRESS"
+        Me.PNL_BATCH_PROGRESS.Size = New System.Drawing.Size(730, 30)
+        Me.PNL_BATCH_PROGRESS.TabIndex = 4
+        '
+        'LBL_BATCH_PROGRESS
+        '
+        Me.LBL_BATCH_PROGRESS.AutoSize = True
+        Me.LBL_BATCH_PROGRESS.ForeColor = System.Drawing.Color.Black
+        Me.LBL_BATCH_PROGRESS.Location = New System.Drawing.Point(5, 5)
+        Me.LBL_BATCH_PROGRESS.Name = "LBL_BATCH_PROGRESS"
+        Me.LBL_BATCH_PROGRESS.Size = New System.Drawing.Size(29, 18)
+        Me.LBL_BATCH_PROGRESS.TabIndex = 9
+        Me.LBL_BATCH_PROGRESS.Tag = "Clear"
+        Me.LBL_BATCH_PROGRESS.Text = "***"
+        Me.LBL_BATCH_PROGRESS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'DGV_VIEW_DATA
         '
         Me.DGV_VIEW_DATA.AllowUserToAddRows = False
@@ -250,14 +282,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 65)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -400,38 +432,6 @@ Partial Class FRM_MAIN
         Me.BTN_SEARCH.Text = "検索"
         Me.BTN_SEARCH.UseVisualStyleBackColor = False
         '
-        'PNL_INPUT_DATA
-        '
-        Me.PNL_INPUT_DATA.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_BATCH_PROGRESS)
-        Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 380)
-        Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
-        Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 40)
-        Me.PNL_INPUT_DATA.TabIndex = 3
-        '
-        'PNL_BATCH_PROGRESS
-        '
-        Me.PNL_BATCH_PROGRESS.Controls.Add(Me.LBL_BATCH_PROGRESS)
-        Me.PNL_BATCH_PROGRESS.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_BATCH_PROGRESS.Name = "PNL_BATCH_PROGRESS"
-        Me.PNL_BATCH_PROGRESS.Size = New System.Drawing.Size(730, 30)
-        Me.PNL_BATCH_PROGRESS.TabIndex = 4
-        '
-        'LBL_BATCH_PROGRESS
-        '
-        Me.LBL_BATCH_PROGRESS.AutoSize = True
-        Me.LBL_BATCH_PROGRESS.ForeColor = System.Drawing.Color.Black
-        Me.LBL_BATCH_PROGRESS.Location = New System.Drawing.Point(5, 5)
-        Me.LBL_BATCH_PROGRESS.Name = "LBL_BATCH_PROGRESS"
-        Me.LBL_BATCH_PROGRESS.Size = New System.Drawing.Size(29, 18)
-        Me.LBL_BATCH_PROGRESS.TabIndex = 9
-        Me.LBL_BATCH_PROGRESS.Tag = "Clear"
-        Me.LBL_BATCH_PROGRESS.Text = "***"
-        Me.LBL_BATCH_PROGRESS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -444,6 +444,7 @@ Partial Class FRM_MAIN
         Me.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "FRM_MAIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "***"
@@ -455,14 +456,14 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
         Me.GRP_BODY.ResumeLayout(False)
+        Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_BATCH_PROGRESS.ResumeLayout(False)
+        Me.PNL_BATCH_PROGRESS.PerformLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_SEARCH.ResumeLayout(False)
         Me.PNL_SEARCH.PerformLayout()
-        Me.PNL_INPUT_DATA.ResumeLayout(False)
-        Me.PNL_BATCH_PROGRESS.ResumeLayout(False)
-        Me.PNL_BATCH_PROGRESS.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

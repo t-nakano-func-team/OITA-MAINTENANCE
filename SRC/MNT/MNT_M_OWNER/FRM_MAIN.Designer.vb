@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -290,14 +290,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 205)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -684,6 +684,7 @@ Partial Class FRM_MAIN
         Me.Font = New System.Drawing.Font("メイリオ", 9.0!)
         Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "FRM_MAIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "***"

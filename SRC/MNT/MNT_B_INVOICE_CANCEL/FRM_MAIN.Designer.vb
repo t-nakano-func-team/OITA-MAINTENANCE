@@ -38,6 +38,8 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
         Me.PNL_DATE_INVOICE = New System.Windows.Forms.Panel()
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.DTP_DATE_INVOICE_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_INVOICE_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_INVOICE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_SEARCH = New System.Windows.Forms.Panel()
@@ -51,8 +53,6 @@ Partial Class FRM_MAIN
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_BATCH = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.DTP_DATE_INVOICE_TO = New System.Windows.Forms.DateTimePicker()
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -275,6 +275,26 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_INVOICE.Size = New System.Drawing.Size(420, 30)
         Me.PNL_DATE_INVOICE.TabIndex = 0
         '
+        'LBL_DATE_INVOICE_FROM_TO_GUIDE
+        '
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Name = "LBL_DATE_INVOICE_FROM_TO_GUIDE"
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.TabIndex = 9
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'DTP_DATE_INVOICE_TO
+        '
+        Me.DTP_DATE_INVOICE_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_INVOICE_TO.Location = New System.Drawing.Point(260, 1)
+        Me.DTP_DATE_INVOICE_TO.Name = "DTP_DATE_INVOICE_TO"
+        Me.DTP_DATE_INVOICE_TO.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_INVOICE_TO.TabIndex = 2
+        Me.DTP_DATE_INVOICE_TO.Tag = "Clear"
+        '
         'DTP_DATE_INVOICE_FROM
         '
         Me.DTP_DATE_INVOICE_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
@@ -436,26 +456,6 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'DTP_DATE_INVOICE_TO
-        '
-        Me.DTP_DATE_INVOICE_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_INVOICE_TO.Location = New System.Drawing.Point(260, 1)
-        Me.DTP_DATE_INVOICE_TO.Name = "DTP_DATE_INVOICE_TO"
-        Me.DTP_DATE_INVOICE_TO.Size = New System.Drawing.Size(150, 25)
-        Me.DTP_DATE_INVOICE_TO.TabIndex = 2
-        Me.DTP_DATE_INVOICE_TO.Tag = "Clear"
-        '
-        'LBL_DATE_INVOICE_FROM_TO_GUIDE
-        '
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Name = "LBL_DATE_INVOICE_FROM_TO_GUIDE"
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.TabIndex = 9
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Text = "～"
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -468,6 +468,7 @@ Partial Class FRM_MAIN
         Me.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "FRM_MAIN"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "***"
