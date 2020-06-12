@@ -58,9 +58,7 @@
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
 
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT, datSYSTEM_TOTAL_DATE_ACTIVE)
-
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, datSYSTEM_TOTAL_DATE_ACTIVE)
-        Call SUB_REFRESH_DATE_WORK_TO_VALUE()
+        Call SUB_REFRESH_DATE_WORK()
 
         TXT_KINGAKU_CONTRACT.Text = Format(0, "#,##0")
     End Sub
@@ -375,6 +373,7 @@
             .NAME_CONTRACT = TXT_NAME_CONTRACT.Text
             .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
             .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
+            .DATE_INVOICE_BASE = DTP_DATE_INVOICE_BASE.Value
             .COUNT_INVOICE = 1
             .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
@@ -401,6 +400,7 @@
         Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT_SPOT_DATA
 
         With SRT_RET
+            .NUMBER_ORDER = CInt(TXT_NUMBER_ORDER.Text)
             .NAME_OWNER = TXT_NAME_OWNER.Text
             .CODE_POST = TXT_CODE_POST.Text
             .NAME_ADDRESS_01 = TXT_NAME_ADDRESS_01.Text
@@ -623,11 +623,21 @@
 #End Region
 
 #Region "その他処理"
+
+    Private Sub SUB_REFRESH_DATE_WORK()
+        Dim DAT_SET_FROM As DateTime
+        DAT_SET_FROM = DTP_DATE_CONTRACT.Value.AddDays(-1)
+
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, DAT_SET_FROM)
+
+        Call SUB_REFRESH_DATE_WORK_TO_VALUE()
+    End Sub
+
     Private Sub SUB_REFRESH_DATE_WORK_TO_VALUE()
         Dim DAT_FROM As DateTime
         DAT_FROM = DTP_DATE_WORK_FROM.Value
         Dim DAT_SET As DateTime
-        DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_FROM)
+        DAT_SET = DAT_FROM
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, DAT_SET)
     End Sub
 #End Region
@@ -733,6 +743,10 @@
 #End Region
 
 #Region "イベント-バリューチェンジ"
+
+    Private Sub DTP_DATE_CONTRACT_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_CONTRACT.ValueChanged
+        Call SUB_REFRESH_DATE_WORK()
+    End Sub
 
     Private Sub DTP_DATE_WORK_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_FROM.ValueChanged
         Call SUB_REFRESH_DATE_WORK_TO_VALUE()

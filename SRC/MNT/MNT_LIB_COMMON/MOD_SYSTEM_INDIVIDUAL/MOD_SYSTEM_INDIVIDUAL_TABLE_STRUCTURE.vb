@@ -271,6 +271,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public NAME_CONTRACT As String
         Public DATE_WORK_FROM As DateTime
         Public DATE_WORK_TO As DateTime
+        Public DATE_INVOICE_BASE As DateTime
         Public COUNT_INVOICE As Integer
         Public NUMBER_LIST_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
@@ -344,6 +345,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .NAME_CONTRACT = ""
             .DATE_WORK_FROM = cstVB_DATE_MIN
             .DATE_WORK_TO = cstVB_DATE_MIN
+            .DATE_INVOICE_BASE = cstVB_DATE_MIN
             .COUNT_INVOICE = 0
             .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = 0
@@ -397,6 +399,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             .DATE_WORK_FROM = CDate(SDR_READER.Item("DATE_WORK_FROM"))
             .DATE_WORK_TO = CDate(SDR_READER.Item("DATE_WORK_TO"))
+            .DATE_INVOICE_BASE = CDate(SDR_READER.Item("DATE_INVOICE_BASE"))
             .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
             .NUMBER_LIST_INVOICE = CInt(SDR_READER.Item("NUMBER_LIST_INVOICE"))
             .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
@@ -466,6 +469,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_FROM) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_TO) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_INVOICE_BASE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.COUNT_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NUMBER_LIST_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_CONTRACT) & "," & Environment.NewLine)
@@ -533,6 +537,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT_SPOT
 
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_T_CONTRACT_SPOT_DATA
+        Public NUMBER_ORDER As Integer
         Public NAME_OWNER As String
         Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
@@ -597,6 +602,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT_SPOT
     ) As Boolean
 
         With SRT_RET
+            .NUMBER_ORDER = 0
             .NAME_OWNER = ""
             .CODE_POST = 0
             .NAME_ADDRESS_01 = ""
@@ -642,6 +648,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT_SPOT
         Call SDR_READER.Read()
 
         With SRT_RET
+            .NUMBER_ORDER = CInt(SDR_READER.Item("NUMBER_ORDER"))
             .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
             .CODE_POST = CInt(SDR_READER.Item("CODE_POST"))
             .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
@@ -703,6 +710,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT_SPOT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_CONTRACT) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NUMBER_ORDER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_OWNER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_POST) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_01) & "," & Environment.NewLine)

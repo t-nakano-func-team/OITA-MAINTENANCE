@@ -38,6 +38,9 @@ Partial Class FRM_MAIN
         Me.BTN_END = New System.Windows.Forms.Button()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_NUMBER_ORDER = New System.Windows.Forms.Panel()
+        Me.LBL_NUMBER_ORDER_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_NUMBER_ORDER = New System.Windows.Forms.TextBox()
         Me.PNL_NAME_CONTRACT = New System.Windows.Forms.Panel()
         Me.TXT_NAME_CONTRACT = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_CONTRACT_GUIDE = New System.Windows.Forms.Label()
@@ -77,6 +80,9 @@ Partial Class FRM_MAIN
         Me.PNL_NUMBER_CONTRACT = New System.Windows.Forms.Panel()
         Me.LBL_NUMBER_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.TXT_NUMBER_CONTRACT = New System.Windows.Forms.TextBox()
+        Me.PNL_DATE_INVOICE_BASE = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_INVOICE_BASE = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_INVOICE_BASE_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -85,6 +91,7 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_NUMBER_ORDER.SuspendLayout()
         Me.PNL_NAME_CONTRACT.SuspendLayout()
         Me.PNL_DATE_WORK.SuspendLayout()
         Me.PNL_EXT_SPOT.SuspendLayout()
@@ -98,6 +105,7 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_SHINTO_PARENT.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
+        Me.PNL_DATE_INVOICE_BASE.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -154,7 +162,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_USER_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_USER_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_USER_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_USER_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_USER_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_USER_HEAD_GUIDE.Name = "LBL_NAME_USER_HEAD_GUIDE"
         Me.LBL_NAME_USER_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -190,7 +198,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_DATE_ACTIVE_HEAD_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Name = "LBL_DATE_ACTIVE_HEAD_GUIDE"
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -292,6 +300,8 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DATE_INVOICE_BASE)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NUMBER_ORDER)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_CONTRACT)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DATE_WORK)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_EXT_SPOT)
@@ -304,14 +314,47 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
         '
+        'PNL_NUMBER_ORDER
+        '
+        Me.PNL_NUMBER_ORDER.Controls.Add(Me.LBL_NUMBER_ORDER_GUIDE)
+        Me.PNL_NUMBER_ORDER.Controls.Add(Me.TXT_NUMBER_ORDER)
+        Me.PNL_NUMBER_ORDER.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_NUMBER_ORDER.Name = "PNL_NUMBER_ORDER"
+        Me.PNL_NUMBER_ORDER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NUMBER_ORDER.TabIndex = 0
+        '
+        'LBL_NUMBER_ORDER_GUIDE
+        '
+        Me.LBL_NUMBER_ORDER_GUIDE.AutoEllipsis = True
+        Me.LBL_NUMBER_ORDER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NUMBER_ORDER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NUMBER_ORDER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NUMBER_ORDER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NUMBER_ORDER_GUIDE.Name = "LBL_NUMBER_ORDER_GUIDE"
+        Me.LBL_NUMBER_ORDER_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_NUMBER_ORDER_GUIDE.TabIndex = 3
+        Me.LBL_NUMBER_ORDER_GUIDE.Text = "受注番号"
+        Me.LBL_NUMBER_ORDER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TXT_NUMBER_ORDER
+        '
+        Me.TXT_NUMBER_ORDER.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_NUMBER_ORDER.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_NUMBER_ORDER.MaxLength = 6
+        Me.TXT_NUMBER_ORDER.Name = "TXT_NUMBER_ORDER"
+        Me.TXT_NUMBER_ORDER.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_NUMBER_ORDER.TabIndex = 1
+        Me.TXT_NUMBER_ORDER.Tag = "Clear,Numeric,Format=000000,Check,Plus"
+        Me.TXT_NUMBER_ORDER.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'PNL_NAME_CONTRACT
         '
         Me.PNL_NAME_CONTRACT.Controls.Add(Me.TXT_NAME_CONTRACT)
         Me.PNL_NAME_CONTRACT.Controls.Add(Me.LBL_NAME_CONTRACT_GUIDE)
-        Me.PNL_NAME_CONTRACT.Location = New System.Drawing.Point(5, 135)
+        Me.PNL_NAME_CONTRACT.Location = New System.Drawing.Point(5, 170)
         Me.PNL_NAME_CONTRACT.Name = "PNL_NAME_CONTRACT"
         Me.PNL_NAME_CONTRACT.Size = New System.Drawing.Size(490, 30)
-        Me.PNL_NAME_CONTRACT.TabIndex = 3
+        Me.PNL_NAME_CONTRACT.TabIndex = 4
         '
         'TXT_NAME_CONTRACT
         '
@@ -328,7 +371,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_CONTRACT_GUIDE.Name = "LBL_NAME_CONTRACT_GUIDE"
         Me.LBL_NAME_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -342,10 +385,10 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_TO)
         Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_FROM)
         Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_GUIDE)
-        Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 170)
+        Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 205)
         Me.PNL_DATE_WORK.Name = "PNL_DATE_WORK"
         Me.PNL_DATE_WORK.Size = New System.Drawing.Size(490, 30)
-        Me.PNL_DATE_WORK.TabIndex = 4
+        Me.PNL_DATE_WORK.TabIndex = 5
         '
         'LBL_DATE_WORK_FROM_TO_GUIDE
         '
@@ -381,7 +424,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_WORK_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_WORK_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_DATE_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_WORK_GUIDE.Name = "LBL_DATE_WORK_GUIDE"
         Me.LBL_DATE_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -395,10 +438,10 @@ Partial Class FRM_MAIN
         Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_NAME_ADDRESS_01)
         Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_CODE_POST)
         Me.PNL_EXT_SPOT.Controls.Add(Me.PNL_NAME_OWNER)
-        Me.PNL_EXT_SPOT.Location = New System.Drawing.Point(5, 70)
+        Me.PNL_EXT_SPOT.Location = New System.Drawing.Point(5, 105)
         Me.PNL_EXT_SPOT.Name = "PNL_EXT_SPOT"
         Me.PNL_EXT_SPOT.Size = New System.Drawing.Size(720, 60)
-        Me.PNL_EXT_SPOT.TabIndex = 2
+        Me.PNL_EXT_SPOT.TabIndex = 3
         '
         'PNL_NAME_ADDRESS_02
         '
@@ -424,7 +467,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_ADDRESS_02.AutoEllipsis = True
         Me.LBL_NAME_ADDRESS_02.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_ADDRESS_02.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_ADDRESS_02.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_ADDRESS_02.Name = "LBL_NAME_ADDRESS_02"
         Me.LBL_NAME_ADDRESS_02.Size = New System.Drawing.Size(79, 25)
@@ -456,7 +499,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_ADDRESS_01.AutoEllipsis = True
         Me.LBL_NAME_ADDRESS_01.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_ADDRESS_01.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_ADDRESS_01.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_ADDRESS_01.Name = "LBL_NAME_ADDRESS_01"
         Me.LBL_NAME_ADDRESS_01.Size = New System.Drawing.Size(79, 25)
@@ -478,7 +521,7 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_POST_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_POST_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_POST_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_POST_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_CODE_POST_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_CODE_POST_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_POST_GUIDE.Name = "LBL_CODE_POST_GUIDE"
         Me.LBL_CODE_POST_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -521,7 +564,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
         Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
@@ -533,10 +576,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_MEMO.Controls.Add(Me.TXT_NAME_MEMO)
         Me.PNL_NAME_MEMO.Controls.Add(Me.LBL_NAME_MEMO_GUIDE)
-        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 240)
+        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 310)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(360, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 6
+        Me.PNL_NAME_MEMO.TabIndex = 8
         '
         'TXT_NAME_MEMO
         '
@@ -553,7 +596,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_MEMO_GUIDE.AutoEllipsis = True
         Me.LBL_NAME_MEMO_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NAME_MEMO_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_MEMO_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NAME_MEMO_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NAME_MEMO_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NAME_MEMO_GUIDE.Name = "LBL_NAME_MEMO_GUIDE"
         Me.LBL_NAME_MEMO_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -565,17 +608,17 @@ Partial Class FRM_MAIN
         '
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.LBL_KINGAKU_CONTRACT_GUIDE)
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.TXT_KINGAKU_CONTRACT)
-        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(5, 205)
+        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(5, 275)
         Me.PNL_KINGAKU_CONTRACT.Name = "PNL_KINGAKU_CONTRACT"
         Me.PNL_KINGAKU_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KINGAKU_CONTRACT.TabIndex = 5
+        Me.PNL_KINGAKU_CONTRACT.TabIndex = 7
         '
         'LBL_KINGAKU_CONTRACT_GUIDE
         '
         Me.LBL_KINGAKU_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_KINGAKU_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_KINGAKU_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KINGAKU_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_KINGAKU_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_KINGAKU_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_KINGAKU_CONTRACT_GUIDE.Name = "LBL_KINGAKU_CONTRACT_GUIDE"
         Me.LBL_KINGAKU_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -591,17 +634,17 @@ Partial Class FRM_MAIN
         Me.TXT_KINGAKU_CONTRACT.Name = "TXT_KINGAKU_CONTRACT"
         Me.TXT_KINGAKU_CONTRACT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_CONTRACT.TabIndex = 1
-        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus,NotZero"
+        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
         Me.TXT_KINGAKU_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_DATE_CONTRACT
         '
         Me.PNL_DATE_CONTRACT.Controls.Add(Me.DTP_DATE_CONTRACT)
         Me.PNL_DATE_CONTRACT.Controls.Add(Me.LBL_DATE_CONTRACT_GUIDE)
-        Me.PNL_DATE_CONTRACT.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_DATE_CONTRACT.Location = New System.Drawing.Point(5, 40)
         Me.PNL_DATE_CONTRACT.Name = "PNL_DATE_CONTRACT"
         Me.PNL_DATE_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DATE_CONTRACT.TabIndex = 0
+        Me.PNL_DATE_CONTRACT.TabIndex = 1
         '
         'DTP_DATE_CONTRACT
         '
@@ -617,7 +660,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_DATE_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_DATE_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_CONTRACT_GUIDE.Name = "LBL_DATE_CONTRACT_GUIDE"
         Me.LBL_DATE_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -631,17 +674,17 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.LBL_CODE_OWNER_NAME)
         Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.BTN_CODE_OWNER_SEARCH)
         Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.TXT_CODE_OWNER)
-        Me.PNL_CODE_SHINTO_PARENT.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_CODE_SHINTO_PARENT.Location = New System.Drawing.Point(5, 75)
         Me.PNL_CODE_SHINTO_PARENT.Name = "PNL_CODE_SHINTO_PARENT"
         Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(360, 30)
-        Me.PNL_CODE_SHINTO_PARENT.TabIndex = 1
+        Me.PNL_CODE_SHINTO_PARENT.TabIndex = 2
         '
         'LBL_CODE_OWNER_GUIDE
         '
         Me.LBL_CODE_OWNER_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_CODE_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_OWNER_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_CODE_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_CODE_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_OWNER_GUIDE.Name = "LBL_CODE_OWNER_GUIDE"
         Me.LBL_CODE_OWNER_GUIDE.Size = New System.Drawing.Size(99, 25)
@@ -712,7 +755,7 @@ Partial Class FRM_MAIN
         Me.LBL_NUMBER_CONTRACT_GUIDE.AutoEllipsis = True
         Me.LBL_NUMBER_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.LBL_NUMBER_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NUMBER_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.White
+        Me.LBL_NUMBER_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_NUMBER_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NUMBER_CONTRACT_GUIDE.Name = "LBL_NUMBER_CONTRACT_GUIDE"
         Me.LBL_NUMBER_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
@@ -730,6 +773,37 @@ Partial Class FRM_MAIN
         Me.TXT_NUMBER_CONTRACT.TabIndex = 1
         Me.TXT_NUMBER_CONTRACT.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
         Me.TXT_NUMBER_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'PNL_DATE_INVOICE_BASE
+        '
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.DTP_DATE_INVOICE_BASE)
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.LBL_DATE_INVOICE_BASE_GUIDE)
+        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 240)
+        Me.PNL_DATE_INVOICE_BASE.Name = "PNL_DATE_INVOICE_BASE"
+        Me.PNL_DATE_INVOICE_BASE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_DATE_INVOICE_BASE.TabIndex = 6
+        '
+        'DTP_DATE_INVOICE_BASE
+        '
+        Me.DTP_DATE_INVOICE_BASE.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_INVOICE_BASE.Location = New System.Drawing.Point(90, 1)
+        Me.DTP_DATE_INVOICE_BASE.Name = "DTP_DATE_INVOICE_BASE"
+        Me.DTP_DATE_INVOICE_BASE.Size = New System.Drawing.Size(140, 25)
+        Me.DTP_DATE_INVOICE_BASE.TabIndex = 1
+        Me.DTP_DATE_INVOICE_BASE.Tag = "Clear"
+        '
+        'LBL_DATE_INVOICE_BASE_GUIDE
+        '
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Name = "LBL_DATE_INVOICE_BASE_GUIDE"
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.TabIndex = 0
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Text = "請求基準日付"
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FRM_MAIN
         '
@@ -756,6 +830,8 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.PerformLayout()
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_NUMBER_ORDER.ResumeLayout(False)
+        Me.PNL_NUMBER_ORDER.PerformLayout()
         Me.PNL_NAME_CONTRACT.ResumeLayout(False)
         Me.PNL_NAME_CONTRACT.PerformLayout()
         Me.PNL_DATE_WORK.ResumeLayout(False)
@@ -778,6 +854,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.ResumeLayout(False)
         Me.PNL_NUMBER_CONTRACT.ResumeLayout(False)
         Me.PNL_NUMBER_CONTRACT.PerformLayout()
+        Me.PNL_DATE_INVOICE_BASE.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -837,4 +914,10 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_NAME_CONTRACT As Panel
     Friend WithEvents TXT_NAME_CONTRACT As TextBox
     Friend WithEvents LBL_NAME_CONTRACT_GUIDE As Label
+    Friend WithEvents PNL_NUMBER_ORDER As Panel
+    Friend WithEvents LBL_NUMBER_ORDER_GUIDE As Label
+    Friend WithEvents TXT_NUMBER_ORDER As TextBox
+    Friend WithEvents PNL_DATE_INVOICE_BASE As Panel
+    Friend WithEvents DTP_DATE_INVOICE_BASE As DateTimePicker
+    Friend WithEvents LBL_DATE_INVOICE_BASE_GUIDE As Label
 End Class

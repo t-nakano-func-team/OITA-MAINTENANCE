@@ -10,6 +10,13 @@
         FLAG_OUTPUT_DONE = 16
     End Enum
 
+    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
+        FIX_10 = 10
+        FIX_20 = 20
+        FIX_25 = 25
+        FIX_LAST = 99
+    End Enum
+
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_OWNER
         NORMAL = 1
         SPOT = 2

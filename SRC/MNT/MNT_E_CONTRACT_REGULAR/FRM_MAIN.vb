@@ -49,6 +49,9 @@
 
         DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(2)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_WORK_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
+
+        DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(1)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_BASE, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -63,6 +66,7 @@
         DAT_SET = FUNC_GET_DATE_FIRSMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, DAT_SET)
         Call SUB_REFRESH_DATE_WORK_TO_VALUE()
+        Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
 
         TXT_COUNT_INVOICE.Text = 12
         TXT_NUMBER_LIST_INVOICE.Text = 1
@@ -373,6 +377,7 @@
             .NAME_CONTRACT = TXT_NAME_CONTRACT.Text
             .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
             .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
+            .DATE_INVOICE_BASE = DTP_DATE_INVOICE_BASE.Value
             .COUNT_INVOICE = CInt(TXT_COUNT_INVOICE.Text)
             .NUMBER_LIST_INVOICE = CInt(TXT_NUMBER_LIST_INVOICE.Text)
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
@@ -598,6 +603,36 @@
         DAT_SET = DAT_SET.AddDays(-1)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, DAT_SET)
     End Sub
+
+    Private Sub SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
+
+        Dim INT_CODE_OWNER As Integer
+        INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER.Text)
+        Dim ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
+        ENM_KIND_FIX_DATE = FUNC_GET_MNT_M_OWNER_KIND_FIXED_DATE(INT_CODE_OWNER, True)
+        If ENM_KIND_FIX_DATE <= 0 Then
+            ENM_KIND_FIX_DATE = ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_LAST
+        End If
+
+        Dim DAT_DATE_WORK_FROM As DateTime
+        DAT_DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
+
+        Dim DAT_SET As DateTime
+        Select Case ENM_KIND_FIX_DATE
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_10, ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_20, ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_25
+                If CInt(ENM_KIND_FIX_DATE) < DAT_DATE_WORK_FROM.Day Then '作業開始が請求基準より大きい場合
+                    Dim DAT_CALC As DateTime
+                    DAT_CALC = DAT_DATE_WORK_FROM.AddMonths(1) '翌月基準
+                    DAT_SET = New Date(DAT_CALC.Year, DAT_CALC.Month, CInt(ENM_KIND_FIX_DATE))
+                Else
+                    DAT_SET = New Date(DAT_DATE_WORK_FROM.Year, DAT_DATE_WORK_FROM.Month, CInt(ENM_KIND_FIX_DATE))
+                End If
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_LAST
+                DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_WORK_FROM)
+        End Select
+
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -695,6 +730,7 @@
 #Region "イベント-テキストチェンジ"
     Private Sub TXT_CODE_OWNER_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER.TextChanged
         Call SUB_GET_NAME_OWNER_INPUT(sender)
+        Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
     End Sub
 #End Region
 
@@ -702,6 +738,7 @@
 
     Private Sub DTP_DATE_WORK_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_FROM.ValueChanged
         Call SUB_REFRESH_DATE_WORK_TO_VALUE()
+        Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
     End Sub
 #End Region
 
