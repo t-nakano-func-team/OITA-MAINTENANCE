@@ -32,6 +32,9 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_DATE_INVOICE_BASE = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_INVOICE_BASE = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_INVOICE_BASE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_NAME_CONTRACT = New System.Windows.Forms.Panel()
         Me.TXT_NAME_CONTRACT = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_CONTRACT_GUIDE = New System.Windows.Forms.Label()
@@ -74,15 +77,17 @@ Partial Class FRM_MAIN
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_DATE_INVOICE_BASE = New System.Windows.Forms.Panel()
-        Me.DTP_DATE_INVOICE_BASE = New System.Windows.Forms.DateTimePicker()
-        Me.LBL_DATE_INVOICE_BASE_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_SPAN_INVOICE = New System.Windows.Forms.Panel()
+        Me.LBL_SPAN_INVOICE_UNIT = New System.Windows.Forms.Label()
+        Me.LBL_SPAN_INVOICE_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_SPAN_INVOICE = New System.Windows.Forms.TextBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_DATE_INVOICE_BASE.SuspendLayout()
         Me.PNL_NAME_CONTRACT.SuspendLayout()
         Me.PNL_NUMBER_LIST_INVOICE.SuspendLayout()
         Me.PNL_COUNT_INVOICE.SuspendLayout()
@@ -96,7 +101,7 @@ Partial Class FRM_MAIN
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_DATE_INVOICE_BASE.SuspendLayout()
+        Me.PNL_SPAN_INVOICE.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -217,6 +222,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_SPAN_INVOICE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DATE_INVOICE_BASE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_CONTRACT)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NUMBER_LIST_INVOICE)
@@ -230,6 +236,37 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
+        '
+        'PNL_DATE_INVOICE_BASE
+        '
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.DTP_DATE_INVOICE_BASE)
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.LBL_DATE_INVOICE_BASE_GUIDE)
+        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 145)
+        Me.PNL_DATE_INVOICE_BASE.Name = "PNL_DATE_INVOICE_BASE"
+        Me.PNL_DATE_INVOICE_BASE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_DATE_INVOICE_BASE.TabIndex = 4
+        '
+        'DTP_DATE_INVOICE_BASE
+        '
+        Me.DTP_DATE_INVOICE_BASE.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_INVOICE_BASE.Location = New System.Drawing.Point(90, 1)
+        Me.DTP_DATE_INVOICE_BASE.Name = "DTP_DATE_INVOICE_BASE"
+        Me.DTP_DATE_INVOICE_BASE.Size = New System.Drawing.Size(140, 25)
+        Me.DTP_DATE_INVOICE_BASE.TabIndex = 1
+        Me.DTP_DATE_INVOICE_BASE.Tag = "Clear"
+        '
+        'LBL_DATE_INVOICE_BASE_GUIDE
+        '
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Name = "LBL_DATE_INVOICE_BASE_GUIDE"
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.TabIndex = 0
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Text = "請求基準日付"
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_NAME_CONTRACT
         '
@@ -267,10 +304,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NUMBER_LIST_INVOICE.Controls.Add(Me.LBL_NUMBER_LIST_INVOICE_GUIDE)
         Me.PNL_NUMBER_LIST_INVOICE.Controls.Add(Me.TXT_NUMBER_LIST_INVOICE)
-        Me.PNL_NUMBER_LIST_INVOICE.Location = New System.Drawing.Point(5, 215)
+        Me.PNL_NUMBER_LIST_INVOICE.Location = New System.Drawing.Point(5, 180)
         Me.PNL_NUMBER_LIST_INVOICE.Name = "PNL_NUMBER_LIST_INVOICE"
         Me.PNL_NUMBER_LIST_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NUMBER_LIST_INVOICE.TabIndex = 5
+        Me.PNL_NUMBER_LIST_INVOICE.TabIndex = 7
         '
         'LBL_NUMBER_LIST_INVOICE_GUIDE
         '
@@ -301,10 +338,10 @@ Partial Class FRM_MAIN
         Me.PNL_COUNT_INVOICE.Controls.Add(Me.LBL_COUNT_INVOICE_UNIT)
         Me.PNL_COUNT_INVOICE.Controls.Add(Me.LBL_COUNT_INVOICE_GUIDE)
         Me.PNL_COUNT_INVOICE.Controls.Add(Me.TXT_COUNT_INVOICE)
-        Me.PNL_COUNT_INVOICE.Location = New System.Drawing.Point(5, 180)
+        Me.PNL_COUNT_INVOICE.Location = New System.Drawing.Point(495, 145)
         Me.PNL_COUNT_INVOICE.Name = "PNL_COUNT_INVOICE"
         Me.PNL_COUNT_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_COUNT_INVOICE.TabIndex = 4
+        Me.PNL_COUNT_INVOICE.TabIndex = 6
         '
         'LBL_COUNT_INVOICE_UNIT
         '
@@ -398,10 +435,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_MEMO.Controls.Add(Me.TXT_NAME_MEMO)
         Me.PNL_NAME_MEMO.Controls.Add(Me.LBL_NAME_MEMO_GUIDE)
-        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 285)
+        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 250)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(360, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 7
+        Me.PNL_NAME_MEMO.TabIndex = 9
         '
         'TXT_NAME_MEMO
         '
@@ -430,10 +467,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.LBL_KINGAKU_CONTRACT_GUIDE)
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.TXT_KINGAKU_CONTRACT)
-        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(6, 250)
+        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(6, 215)
         Me.PNL_KINGAKU_CONTRACT.Name = "PNL_KINGAKU_CONTRACT"
         Me.PNL_KINGAKU_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KINGAKU_CONTRACT.TabIndex = 6
+        Me.PNL_KINGAKU_CONTRACT.TabIndex = 8
         '
         'LBL_KINGAKU_CONTRACT_GUIDE
         '
@@ -704,36 +741,50 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_DATE_INVOICE_BASE
+        'PNL_SPAN_INVOICE
         '
-        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.DTP_DATE_INVOICE_BASE)
-        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.LBL_DATE_INVOICE_BASE_GUIDE)
-        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 145)
-        Me.PNL_DATE_INVOICE_BASE.Name = "PNL_DATE_INVOICE_BASE"
-        Me.PNL_DATE_INVOICE_BASE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DATE_INVOICE_BASE.TabIndex = 8
+        Me.PNL_SPAN_INVOICE.Controls.Add(Me.LBL_SPAN_INVOICE_UNIT)
+        Me.PNL_SPAN_INVOICE.Controls.Add(Me.LBL_SPAN_INVOICE_GUIDE)
+        Me.PNL_SPAN_INVOICE.Controls.Add(Me.TXT_SPAN_INVOICE)
+        Me.PNL_SPAN_INVOICE.Location = New System.Drawing.Point(250, 145)
+        Me.PNL_SPAN_INVOICE.Name = "PNL_SPAN_INVOICE"
+        Me.PNL_SPAN_INVOICE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_SPAN_INVOICE.TabIndex = 5
         '
-        'DTP_DATE_INVOICE_BASE
+        'LBL_SPAN_INVOICE_UNIT
         '
-        Me.DTP_DATE_INVOICE_BASE.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_INVOICE_BASE.Location = New System.Drawing.Point(90, 1)
-        Me.DTP_DATE_INVOICE_BASE.Name = "DTP_DATE_INVOICE_BASE"
-        Me.DTP_DATE_INVOICE_BASE.Size = New System.Drawing.Size(140, 25)
-        Me.DTP_DATE_INVOICE_BASE.TabIndex = 1
-        Me.DTP_DATE_INVOICE_BASE.Tag = "Clear"
+        Me.LBL_SPAN_INVOICE_UNIT.AutoEllipsis = True
+        Me.LBL_SPAN_INVOICE_UNIT.ForeColor = System.Drawing.Color.Black
+        Me.LBL_SPAN_INVOICE_UNIT.Location = New System.Drawing.Point(140, 1)
+        Me.LBL_SPAN_INVOICE_UNIT.Name = "LBL_SPAN_INVOICE_UNIT"
+        Me.LBL_SPAN_INVOICE_UNIT.Size = New System.Drawing.Size(40, 25)
+        Me.LBL_SPAN_INVOICE_UNIT.TabIndex = 9
+        Me.LBL_SPAN_INVOICE_UNIT.Text = "か月"
+        Me.LBL_SPAN_INVOICE_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'LBL_DATE_INVOICE_BASE_GUIDE
+        'LBL_SPAN_INVOICE_GUIDE
         '
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.Name = "LBL_DATE_INVOICE_BASE_GUIDE"
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.Size = New System.Drawing.Size(89, 25)
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.Text = "請求基準日付"
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_SPAN_INVOICE_GUIDE.AutoEllipsis = True
+        Me.LBL_SPAN_INVOICE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_SPAN_INVOICE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_SPAN_INVOICE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_SPAN_INVOICE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_SPAN_INVOICE_GUIDE.Name = "LBL_SPAN_INVOICE_GUIDE"
+        Me.LBL_SPAN_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_SPAN_INVOICE_GUIDE.TabIndex = 3
+        Me.LBL_SPAN_INVOICE_GUIDE.Text = "請求スパン"
+        Me.LBL_SPAN_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TXT_SPAN_INVOICE
+        '
+        Me.TXT_SPAN_INVOICE.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_SPAN_INVOICE.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_SPAN_INVOICE.MaxLength = 2
+        Me.TXT_SPAN_INVOICE.Name = "TXT_SPAN_INVOICE"
+        Me.TXT_SPAN_INVOICE.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_SPAN_INVOICE.TabIndex = 1
+        Me.TXT_SPAN_INVOICE.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus,NotZero"
+        Me.TXT_SPAN_INVOICE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FRM_MAIN
         '
@@ -757,6 +808,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_DATE_INVOICE_BASE.ResumeLayout(False)
         Me.PNL_NAME_CONTRACT.ResumeLayout(False)
         Me.PNL_NAME_CONTRACT.PerformLayout()
         Me.PNL_NUMBER_LIST_INVOICE.ResumeLayout(False)
@@ -779,7 +831,8 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_DATE_INVOICE_BASE.ResumeLayout(False)
+        Me.PNL_SPAN_INVOICE.ResumeLayout(False)
+        Me.PNL_SPAN_INVOICE.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -839,4 +892,8 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_DATE_INVOICE_BASE As Panel
     Friend WithEvents DTP_DATE_INVOICE_BASE As DateTimePicker
     Friend WithEvents LBL_DATE_INVOICE_BASE_GUIDE As Label
+    Friend WithEvents PNL_SPAN_INVOICE As Panel
+    Friend WithEvents LBL_SPAN_INVOICE_UNIT As Label
+    Friend WithEvents LBL_SPAN_INVOICE_GUIDE As Label
+    Friend WithEvents TXT_SPAN_INVOICE As TextBox
 End Class

@@ -374,6 +374,7 @@
             .DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
             .DATE_WORK_TO = DTP_DATE_WORK_TO.Value
             .DATE_INVOICE_BASE = DTP_DATE_INVOICE_BASE.Value
+            .SPAN_INVOICE = 1
             .COUNT_INVOICE = 1
             .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
@@ -418,6 +419,7 @@
             TXT_NAME_CONTRACT.Text = .NAME_CONTRACT
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_FROM, .DATE_WORK_FROM)
             Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, .DATE_WORK_TO)
+            Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, .DATE_INVOICE_BASE)
             TXT_KINGAKU_CONTRACT.Text = Format(.KINGAKU_CONTRACT, "#,##0")
             TXT_NAME_MEMO.Text = .NAME_MEMO
         End With
