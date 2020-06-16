@@ -3,7 +3,7 @@
 #Region "名称取得"
     Public Sub SUB_GET_NAME_OWNER_INPUT(ByRef TXT_INPUT As System.Windows.Forms.TextBox)
         Dim CTL_NAME As System.Windows.Forms.Label
-        CTL_NAME = FUNC_GET_CONTROL_NAME_LABEL(TXT_INPUT)
+        CTL_NAME = FUNC_GET_CONTROL_NAME_LABEL(TXT_INPUT, False)
         If CTL_NAME Is Nothing Then
             Exit Sub
         End If
@@ -72,8 +72,12 @@
             .KINGAKU_INVOICE_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_INVOICE_DETAIL, .DATE_INVOICE)
             .FLAG_DEPOSIT_DONE = ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.NOT_DONE
             .DATE_DEPOSIT = cstVB_DATE_MAX
+            .KIND_DEPOSIT = 0
             .KINGAKU_FEE_DETAIL = 0
             .KINGAKU_FEE_VAT = 0
+            .KIND_COST = 0
+            .KINGAKU_COST_DETAIL = 0
+            .KINGAKU_COST_VAT = 0
             .FLAG_OUTPUT_DONE = ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.NOT_DONE
         End With
 

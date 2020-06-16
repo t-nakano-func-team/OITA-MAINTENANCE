@@ -574,6 +574,50 @@
             Return False '請求不可
         End If
 
+        '請求見込日を過ぎているか（初回以外）
+        Dim INT_CNT As Integer
+        INT_CNT = FUNC_GET_MNT_T_INVOICE_COUNT(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT) '既請求回数を取得
+        If INT_CNT > 0 Then '既に1回以上請求されている場合
+            Dim INT_YYYYMM_INVOICE_BASE As Integer
+            INT_YYYYMM_INVOICE_BASE = FUNC_GET_YYYYMM_FROM_DATE(SRT_RECORD.DATA.DATE_INVOICE_BASE)
+
+            Dim INT_YYYYMM_INVOICE_CALC As Integer '請求可能月
+            INT_YYYYMM_INVOICE_CALC = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM_INVOICE_BASE, INT_CNT * SRT_RECORD.DATA.SPAN_INVOICE)
+
+            Dim INT_YEAR As Integer
+            INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_INVOICE_CALC)
+
+            Dim INT_MONTH As Integer
+            INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_INVOICE_CALC)
+
+            Dim INT_DAY As Integer
+            INT_DAY = SRT_RECORD.DATA.DATE_INVOICE_BASE.Day
+
+            Dim DAT_DATE_INVOICE_ENABLED As DateTime
+            If INT_DAY >= 28 Then
+                DAT_DATE_INVOICE_ENABLED = New DateTime(INT_YEAR, INT_MONTH, 1)
+                DAT_DATE_INVOICE_ENABLED = FUNC_GET_DATE_LASTMONTH(DAT_DATE_INVOICE_ENABLED)
+            Else
+                DAT_DATE_INVOICE_ENABLED = New DateTime(INT_YEAR, INT_MONTH, INT_DAY)
+            End If
+
+            If DAT_DATE_INVOICE.Date < DAT_DATE_INVOICE_ENABLED.Date Then
+                Return False '請求不可
+            End If
+        End If
+
+        If SRT_RECORD.DATA.SPAN_INVOICE > 1 Then '請求スパンが2～の場合は
+            Dim INT_ADD_MONTH As Integer
+            INT_ADD_MONTH = (SRT_RECORD.DATA.SPAN_INVOICE - 1) '前月以前の請求も確認
+            INT_ADD_MONTH *= -1
+            DAT_DATE_INVOICE_FROM = FUNC_GET_DATE_FIRSMONTH(DAT_DATE_INVOICE.AddMonths(INT_ADD_MONTH)) '月初
+            DAT_DATE_INVOICE_TO = FUNC_GET_DATE_LASTMONTH(DAT_DATE_INVOICE) '月末
+            BLN_CHECK = FUNC_CHECK_MNT_T_INVOICE_DATE_INVOICE_PERIOD(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT, DAT_DATE_INVOICE_FROM, DAT_DATE_INVOICE_TO)
+            If BLN_CHECK Then '対象期間に請求レコードがある場合は
+                Return False '請求不可
+            End If
+        End If
+
         Return True
     End Function
 
@@ -687,7 +731,7 @@
         STR_WHERE = ""
 
         With SRT_CONDITIONS
-            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_WORK_FROM", "<=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_INVOICE_BASE", "<=")
         End With
 
         Return STR_WHERE
@@ -698,7 +742,7 @@
         STR_WHERE = ""
 
         With SRT_CONDITIONS
-            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_WORK_TO", "<=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_INVOICE_BASE", "<=")
         End With
 
         Return STR_WHERE

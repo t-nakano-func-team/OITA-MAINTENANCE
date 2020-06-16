@@ -59,6 +59,7 @@
 
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT, datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_REFRESH_DATE_WORK()
+        Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
 
         TXT_KINGAKU_CONTRACT.Text = Format(0, "#,##0")
     End Sub
@@ -642,6 +643,39 @@
         DAT_SET = DAT_FROM
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_WORK_TO, DAT_SET)
     End Sub
+
+    Private Sub SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
+
+        Dim INT_CODE_OWNER As Integer
+        INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER.Text)
+        Dim ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
+        ENM_KIND_FIX_DATE = FUNC_GET_MNT_M_OWNER_KIND_FIXED_DATE(INT_CODE_OWNER, True)
+        If ENM_KIND_FIX_DATE <= 0 Then
+            ENM_KIND_FIX_DATE = ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_LAST
+        End If
+
+        Dim DAT_DATE_WORK_FROM As DateTime
+        DAT_DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
+
+        Dim DAT_DATE_CALC_BASE As DateTime
+        DAT_DATE_CALC_BASE = DTP_DATE_WORK_TO.Value 'FUNC_GET_DATE_FIRSMONTH(DAT_DATE_WORK_FROM.AddMonths(1))
+
+        Dim DAT_SET As DateTime
+        Select Case ENM_KIND_FIX_DATE
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_10, ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_20, ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_25
+                If CInt(ENM_KIND_FIX_DATE) < DAT_DATE_CALC_BASE.Day Then '作業開始が請求基準より大きい場合
+                    Dim DAT_CALC As DateTime
+                    DAT_CALC = DAT_DATE_CALC_BASE.AddMonths(1) '翌月基準
+                    DAT_SET = New Date(DAT_CALC.Year, DAT_CALC.Month, CInt(ENM_KIND_FIX_DATE))
+                Else
+                    DAT_SET = New Date(DAT_DATE_CALC_BASE.Year, DAT_DATE_CALC_BASE.Month, CInt(ENM_KIND_FIX_DATE))
+                End If
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_LAST
+                DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_CALC_BASE)
+        End Select
+
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -741,6 +775,7 @@
         Call SUB_GET_NAME_OWNER_INPUT(sender)
 
         Call SUB_REFRESH_ENABLD_EXT_SPOT()
+        Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
     End Sub
 #End Region
 
@@ -752,6 +787,10 @@
 
     Private Sub DTP_DATE_WORK_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_FROM.ValueChanged
         Call SUB_REFRESH_DATE_WORK_TO_VALUE()
+    End Sub
+
+    Private Sub DTP_DATE_WORK_TO_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_TO.ValueChanged
+        Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
     End Sub
 #End Region
 

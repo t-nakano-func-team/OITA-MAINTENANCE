@@ -222,7 +222,7 @@
         Call SUB_MAKE_GRID_DATA(SRT_CONDITIONS)
 
         Dim INT_COUNT As Integer
-        INT_COUNT = UBound(SRT_GRID_DATA_MAIN)
+        INT_COUNT = (SRT_GRID_DATA_MAIN.Length - 1)
         Call SUB_REFRESH_COUNT(INT_COUNT)
 
         If INT_COUNT <= 0 Then

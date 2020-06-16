@@ -621,22 +621,82 @@
         Dim DAT_DATE_WORK_FROM As DateTime
         DAT_DATE_WORK_FROM = DTP_DATE_WORK_FROM.Value
 
+        Dim DAT_DATE_CALC_BASE As DateTime
+        DAT_DATE_CALC_BASE = FUNC_GET_DATE_FIRSMONTH(DAT_DATE_WORK_FROM.AddMonths(1))
+
         Dim DAT_SET As DateTime
         Select Case ENM_KIND_FIX_DATE
             Case ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_10, ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_20, ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_25
-                If CInt(ENM_KIND_FIX_DATE) < DAT_DATE_WORK_FROM.Day Then '作業開始が請求基準より大きい場合
+                If CInt(ENM_KIND_FIX_DATE) < DAT_DATE_CALC_BASE.Day Then '作業開始が請求基準より大きい場合
                     Dim DAT_CALC As DateTime
-                    DAT_CALC = DAT_DATE_WORK_FROM.AddMonths(1) '翌月基準
+                    DAT_CALC = DAT_DATE_CALC_BASE.AddMonths(1) '翌月基準
                     DAT_SET = New Date(DAT_CALC.Year, DAT_CALC.Month, CInt(ENM_KIND_FIX_DATE))
                 Else
-                    DAT_SET = New Date(DAT_DATE_WORK_FROM.Year, DAT_DATE_WORK_FROM.Month, CInt(ENM_KIND_FIX_DATE))
+                    DAT_SET = New Date(DAT_DATE_CALC_BASE.Year, DAT_DATE_CALC_BASE.Month, CInt(ENM_KIND_FIX_DATE))
                 End If
             Case ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE.FIX_LAST
-                DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_WORK_FROM)
+                DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_CALC_BASE)
         End Select
 
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
     End Sub
+
+    Private Sub SUB_REFRESH_COUNT_INVOICE()
+        TXT_COUNT_INVOICE.Text = FUNC_GET_COUNT_INVOICE_DEFAULT()
+    End Sub
+
+    Private Function FUNC_GET_COUNT_INVOICE_DEFAULT() As Integer
+        Dim DAT_FROM As DateTime
+        DAT_FROM = DTP_DATE_WORK_FROM.Value
+
+        Dim DAT_TO As DateTime
+        DAT_TO = DTP_DATE_WORK_TO.Value
+
+        Dim INT_COUNT_MONTH As Integer
+        INT_COUNT_MONTH = FUNC_GET_MONTH_DATE_FROM_TO(DAT_FROM, DAT_TO)
+
+        Dim INT_SPAN_INVOICE As Integer
+        INT_SPAN_INVOICE = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SPAN_INVOICE.Text, 0)
+        If INT_SPAN_INVOICE <= 0 Then
+            Return 0
+        End If
+
+        Dim INT_NUM As Integer
+        INT_NUM = (INT_COUNT_MONTH \ INT_SPAN_INVOICE)
+
+        Dim INT_MOD As Integer
+        INT_MOD = (INT_COUNT_MONTH Mod INT_SPAN_INVOICE)
+
+        Dim INT_ADD As Integer
+        INT_ADD = If(INT_MOD > 0, 1, 0)
+
+        Dim INT_RET As Integer
+        INT_RET = INT_NUM + INT_ADD
+
+        Return INT_RET
+    End Function
+
+    Private Function FUNC_GET_MONTH_DATE_FROM_TO(ByVal DAT_FROM As DateTime, ByVal DAT_TO As DateTime) As Integer
+        If DAT_FROM > DAT_TO Then
+            Return 0
+        End If
+
+        Dim INT_RET As Integer
+        INT_RET = 1
+        Dim DAT_CUR As DateTime
+        DAT_CUR = DAT_FROM
+        Do
+            DAT_CUR = FUNC_GET_DATE_LASTMONTH(DAT_CUR)
+            If DAT_CUR >= DAT_TO Then
+                Exit Do
+            End If
+            DAT_CUR = DAT_CUR.AddMonths(1)
+            INT_RET += 1
+        Loop
+
+        Return INT_RET
+    End Function
+
 #End Region
 
 #Region "NEW"
@@ -736,6 +796,10 @@
         Call SUB_GET_NAME_OWNER_INPUT(sender)
         Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
     End Sub
+
+    Private Sub TXT_SPAN_INVOICE_TextChanged(sender As Object, e As EventArgs) Handles TXT_SPAN_INVOICE.TextChanged
+        Call SUB_REFRESH_COUNT_INVOICE()
+    End Sub
 #End Region
 
 #Region "イベント-バリューチェンジ"
@@ -743,6 +807,11 @@
     Private Sub DTP_DATE_WORK_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_FROM.ValueChanged
         Call SUB_REFRESH_DATE_WORK_TO_VALUE()
         Call SUB_REFRESH_DATE_INVOICE_BASE_VALUE()
+        Call SUB_REFRESH_COUNT_INVOICE()
+    End Sub
+
+    Private Sub DTP_DATE_WORK_TO_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_WORK_TO.ValueChanged
+        Call SUB_REFRESH_COUNT_INVOICE()
     End Sub
 #End Region
 

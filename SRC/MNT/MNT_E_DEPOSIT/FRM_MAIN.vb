@@ -94,8 +94,13 @@
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
+        Public KIND_CONTRACT As Integer
         Public DATE_INVOICE_FROM As DateTime
         Public DATE_INVOICE_TO As DateTime
+        Public CODE_OWNER_FROM As Integer
+        Public CODE_OWNER_TO As Integer
+        Public NAME_OWNER As String
+        Public FLAG_DEPOSIT_DONE As Integer
     End Structure
 #End Region
 
@@ -120,6 +125,9 @@
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
+
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, True, "全て")
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_DEPOSIT_DONE, ENM_MNT_M_KIND_CODE_FLAG.FLAG_DEPOSIT_DONE, True, "全て")
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -135,6 +143,10 @@
         Dim DAT_INVOICE_TO As DateTime
         DAT_INVOICE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_INVOICE_TO)
+
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_CONTRACT)
+        Call SUB_REFRESH_ENABLED_NAME_OWNER()
+        Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_DEPOSIT_DONE, ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.NOT_DONE)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -180,6 +192,31 @@
 
     Private Sub SUB_SEARCH()
 
+        If Not FUNC_CHECK_INPUT_KEY() Then
+            Exit Sub
+        End If
+
+        Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS
+        SRT_CONDITIONS = FUNC_GET_SEARCH_CONDITHIONS() '検索条件取得
+
+        ReDim SRT_GRID_DATA_MAIN(0)
+        Call SUB_MAKE_GRID_DATA(SRT_CONDITIONS)
+
+        Dim INT_COUNT As Integer
+        INT_COUNT = (SRT_GRID_DATA_MAIN.Length - 1)
+        Call SUB_REFRESH_COUNT(INT_COUNT)
+
+        If INT_COUNT <= 0 Then
+            Call SUB_REFRESH_GRID()
+            Dim STR_ERR_MSG As String
+            STR_ERR_MSG = "対象データがありません。"
+            Call System.Windows.Forms.MessageBox.Show(STR_ERR_MSG, Me.Text, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information)
+            Call SUB_FOCUS_FIRST_INPUT_CONTROL(PNL_INPUT_KEY)
+            Exit Sub
+        End If
+
+        Call SUB_WINDOW_MODE_CHANGE(ENM_MY_WINDOW_MODE.INPUT_DATA)
+        Call SUB_REFRESH_GRID()
     End Sub
 
     Private Sub SUB_CLEAR()
@@ -214,7 +251,10 @@
         Dim CTL_SEARCH As Control
         CTL_SEARCH = Nothing
         Select Case True
-
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_FROM) Or (CTL_ACTIVE Is BTN_CODE_OWNER_FROM_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_FROM
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_TO) Or (CTL_ACTIVE Is BTN_CODE_OWNER_TO_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_TO
             Case Else
 
         End Select
@@ -229,6 +269,19 @@
         Dim BLN_RET As Boolean
         BLN_RET = False
         Select Case True
+            Case (CTL_SEARCH Is TXT_CODE_OWNER_FROM) Or (CTL_SEARCH Is TXT_CODE_OWNER_TO)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_CODE_OWNER As Integer
+                INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
+
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_OWNER(INT_CODE_OWNER, SNG_FONT_SIZE)
+
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
             Case Else
                 'スルー
         End Select
@@ -237,6 +290,39 @@
 
 #Region "グリッド関連"
     Private Sub SUB_MAKE_GRID_DATA(ByVal SRT_CONDITIONS As SRT_SEARCH_CONDITIONS)
+        ReDim SRT_GRID_DATA_MAIN(0)
+
+        Dim STR_WHERE As String
+        STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS) '検索条件からWHERE条件取得
+
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            Call .Append("SELECT" & Environment.NewLine)
+            Call .Append("MAIN.*" & Environment.NewLine)
+            Call .Append("FROM" & Environment.NewLine)
+            Call .Append("(" & Environment.NewLine)
+            Call .Append("SELECT" & Environment.NewLine)
+            Call .Append("MAIN.*" & "," & Environment.NewLine)
+            Call .Append("SUB_01.KIND_CONTRACT" & "," & Environment.NewLine)
+            Call .Append("SUB_01.CODE_OWNER" & "," & Environment.NewLine)
+            Call .Append("FROM" & Environment.NewLine)
+            Call .Append("MNT_T_INVOICE AS MAIN WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("INNER JOIN" & Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT AS SUB_01 WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("ON" & Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append(") AS MAIN" & Environment.NewLine)
+
+            Call .Append("WHERE" & Environment.NewLine)
+            Call .Append("1=1" & Environment.NewLine)
+            Call .Append(STR_WHERE) 'WHERE条件
+
+
+            Call .Append("ORDER BY" & Environment.NewLine)
+            Call .Append("SUB_01.KIND_CONTRACT DESC,MAIN.DATE_INVOICE,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & Environment.NewLine)
+        End With
 
     End Sub
 
@@ -275,6 +361,38 @@
 
         Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, 0)
     End Sub
+#End Region
+
+#Region "チェック処理"
+    Private Function FUNC_CHECK_INPUT_KEY() As Boolean
+        Dim CTL_CONTROL As Control
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+
+        'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
+        CTL_CONTROL = Nothing
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_KEY, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        CTL_CONTROL = DTP_DATE_INVOICE_FROM
+        Dim DAT_DATE_INVOICE_FROM As DateTime
+        DAT_DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
+        Dim DAT_DATE_INVOICE_TO As DateTime
+        DAT_DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
+        If DAT_DATE_INVOICE_FROM > DAT_DATE_INVOICE_TO Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_FROM_TO, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+
 #End Region
 
 #Region "画面状態遷移"
@@ -361,6 +479,13 @@
         CTL_ACTIVE = Me.ActiveControl
 
         Select Case True
+            Case CTL_ACTIVE Is TXT_CODE_OWNER_FROM
+                If Not (CTL_ACTIVE.Text = "") Then
+                    If TXT_CODE_OWNER_TO.Text = "" Then
+                        TXT_CODE_OWNER_TO.Text = CTL_ACTIVE.Text
+                    End If
+                End If
+                BLN_RET = True
             Case Else
                 BLN_RET = True
         End Select
@@ -371,6 +496,69 @@
 
         Return True
     End Function
+#End Region
+
+#Region "内部処理"
+    Private Sub SUB_REFRESH_COUNT(ByVal INT_COUNT As Integer)
+        LBL_COUNT_SEARCH_MAX.Visible = False
+        LBL_COUNT_SEARCH.Text = Format(INT_COUNT, "#,##0")
+
+        If INT_COUNT >= CST_MY_GRID_COUNT_MAX Then
+            LBL_COUNT_SEARCH_MAX.Visible = True
+        End If
+    End Sub
+
+    Private Function FUNC_GET_SEARCH_CONDITHIONS() As SRT_SEARCH_CONDITIONS
+        Dim SRT_RET As SRT_SEARCH_CONDITIONS
+        With SRT_RET
+            .DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
+            .DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
+            .KIND_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_CONTRACT)
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
+            .NAME_OWNER = TXT_NAME_OWNER.Text
+            .FLAG_DEPOSIT_DONE = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_DEPOSIT_DONE)
+        End With
+
+        Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_SQL_WHERE(ByVal SRT_CONDITIONS As SRT_SEARCH_CONDITIONS)
+        Dim STR_WHERE As String
+        STR_WHERE = ""
+
+        With SRT_CONDITIONS
+            Dim SRT_INVOICE_PERIOD As SRT_DATE_PERIOD
+            SRT_INVOICE_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_INVOICE_FROM
+            SRT_INVOICE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_INVOICE_TO
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_INVOICE_PERIOD, "DATE_INVOICE")
+            If .KIND_CONTRACT >= 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KIND_CONTRACT, "KIND_CONTRACT", "=")
+            End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_FROM, "CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_TO, "CODE_OWNER", "<=")
+            If .FLAG_DEPOSIT_DONE >= 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.FLAG_DEPOSIT_DONE, "FLAG_DEPOSIT_DONE", "=")
+            End If
+        End With
+
+        Return STR_WHERE
+    End Function
+#End Region
+
+#Region "その他処理"
+    Private Sub SUB_REFRESH_ENABLED_NAME_OWNER()
+        Dim ENM_KIND_CONTRACT As ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT
+        ENM_KIND_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_CONTRACT)
+        Dim BLN_ENABLED As Boolean
+        If ENM_KIND_CONTRACT = ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT Then
+            BLN_ENABLED = True
+        Else
+            BLN_ENABLED = False
+        End If
+
+        PNL_NAME_OWNER.Enabled = BLN_ENABLED
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -444,7 +632,6 @@
 #End Region
 
 #Region "イベント-ボタンクリック"
-
     Private Sub BTN_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_SEARCH.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SEARCH)
     End Sub
@@ -454,6 +641,30 @@
 
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_FROM_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_FROM_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_TO_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_TO_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+#End Region
+
+#Region "イベント-テキストチェンジ"
+    Private Sub TXT_CODE_OWNER_FROM_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_FROM.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+
+    Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+#End Region
+
+#Region "イベント-セレクトインデックスチェンジ"
+    Private Sub CMB_KIND_CONTRACT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CMB_KIND_CONTRACT.SelectedIndexChanged
+        Call SUB_REFRESH_ENABLED_NAME_OWNER()
     End Sub
 #End Region
 

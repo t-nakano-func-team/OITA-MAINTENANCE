@@ -37,6 +37,24 @@ Partial Class FRM_MAIN
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_FLAG_DEPOSIT_DONE = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_DEPOSIT_DONE = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_NAME_OWNER = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_OWNER = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_OWNER_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_KIND_CONTRACT = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_CONTRACT = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_CONTRACT_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_CODE_SHINTO_PARENT = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.BTN_CODE_OWNER_TO_SEARCH = New System.Windows.Forms.Button()
+        Me.TXT_CODE_OWNER_TO = New System.Windows.Forms.TextBox()
+        Me.LBL_CODE_OWNER_TO_NAME = New System.Windows.Forms.Label()
+        Me.LBL_CODE_OWNER_GUIDE = New System.Windows.Forms.Label()
+        Me.LBL_CODE_OWNER_FROM_NAME = New System.Windows.Forms.Label()
+        Me.BTN_CODE_OWNER_FROM_SEARCH = New System.Windows.Forms.Button()
+        Me.TXT_CODE_OWNER_FROM = New System.Windows.Forms.TextBox()
         Me.PNL_DATE_INVOICE = New System.Windows.Forms.Panel()
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE = New System.Windows.Forms.Label()
         Me.DTP_DATE_INVOICE_TO = New System.Windows.Forms.DateTimePicker()
@@ -61,6 +79,10 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_FLAG_DEPOSIT_DONE.SuspendLayout()
+        Me.PNL_NAME_OWNER.SuspendLayout()
+        Me.PNL_KIND_CONTRACT.SuspendLayout()
+        Me.PNL_CODE_SHINTO_PARENT.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_SEARCH.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
@@ -231,7 +253,7 @@ Partial Class FRM_MAIN
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 65)
+        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 135)
         Me.DGV_VIEW_DATA.MultiSelect = False
         Me.DGV_VIEW_DATA.Name = "DGV_VIEW_DATA"
         Me.DGV_VIEW_DATA.ReadOnly = True
@@ -246,7 +268,7 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowCellToolTips = False
         Me.DGV_VIEW_DATA.ShowEditingIcon = False
         Me.DGV_VIEW_DATA.ShowRowErrors = False
-        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 310)
+        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 240)
         Me.DGV_VIEW_DATA.TabIndex = 3
         Me.DGV_VIEW_DATA.TabStop = False
         '
@@ -256,12 +278,225 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_DEPOSIT_DONE)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_NAME_OWNER)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_CONTRACT)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_SHINTO_PARENT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_INVOICE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_SEARCH)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
-        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 40)
+        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 110)
         Me.PNL_INPUT_KEY.TabIndex = 0
+        '
+        'PNL_FLAG_DEPOSIT_DONE
+        '
+        Me.PNL_FLAG_DEPOSIT_DONE.Controls.Add(Me.CMB_FLAG_DEPOSIT_DONE)
+        Me.PNL_FLAG_DEPOSIT_DONE.Controls.Add(Me.LBL_FLAG_DEPOSIT_DONE_GUIDE)
+        Me.PNL_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(250, 75)
+        Me.PNL_FLAG_DEPOSIT_DONE.Name = "PNL_FLAG_DEPOSIT_DONE"
+        Me.PNL_FLAG_DEPOSIT_DONE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 4
+        '
+        'CMB_FLAG_DEPOSIT_DONE
+        '
+        Me.CMB_FLAG_DEPOSIT_DONE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_DEPOSIT_DONE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_DEPOSIT_DONE.Name = "CMB_FLAG_DEPOSIT_DONE"
+        Me.CMB_FLAG_DEPOSIT_DONE.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_DEPOSIT_DONE.TabIndex = 1
+        Me.CMB_FLAG_DEPOSIT_DONE.Tag = "Clear"
+        '
+        'LBL_FLAG_DEPOSIT_DONE_GUIDE
+        '
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.Name = "LBL_FLAG_DEPOSIT_DONE_GUIDE"
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.Text = "入金状態"
+        Me.LBL_FLAG_DEPOSIT_DONE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_NAME_OWNER
+        '
+        Me.PNL_NAME_OWNER.Controls.Add(Me.TXT_NAME_OWNER)
+        Me.PNL_NAME_OWNER.Controls.Add(Me.LBL_NAME_OWNER_GUIDE)
+        Me.PNL_NAME_OWNER.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_NAME_OWNER.Name = "PNL_NAME_OWNER"
+        Me.PNL_NAME_OWNER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NAME_OWNER.TabIndex = 3
+        '
+        'TXT_NAME_OWNER
+        '
+        Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
+        Me.TXT_NAME_OWNER.MaxLength = 12
+        Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
+        Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
+        Me.TXT_NAME_OWNER.TabIndex = 1
+        Me.TXT_NAME_OWNER.Tag = "Clear,Check,Char,NotNull"
+        '
+        'LBL_NAME_OWNER_GUIDE
+        '
+        Me.LBL_NAME_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_OWNER_GUIDE.Name = "LBL_NAME_OWNER_GUIDE"
+        Me.LBL_NAME_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_NAME_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_NAME_OWNER_GUIDE.Text = "オーナー名称"
+        Me.LBL_NAME_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_KIND_CONTRACT
+        '
+        Me.PNL_KIND_CONTRACT.Controls.Add(Me.CMB_KIND_CONTRACT)
+        Me.PNL_KIND_CONTRACT.Controls.Add(Me.LBL_KIND_CONTRACT_GUIDE)
+        Me.PNL_KIND_CONTRACT.Location = New System.Drawing.Point(495, 5)
+        Me.PNL_KIND_CONTRACT.Name = "PNL_KIND_CONTRACT"
+        Me.PNL_KIND_CONTRACT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_CONTRACT.TabIndex = 1
+        '
+        'CMB_KIND_CONTRACT
+        '
+        Me.CMB_KIND_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_CONTRACT.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_CONTRACT.Name = "CMB_KIND_CONTRACT"
+        Me.CMB_KIND_CONTRACT.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_CONTRACT.TabIndex = 1
+        Me.CMB_KIND_CONTRACT.Tag = "Clear"
+        '
+        'LBL_KIND_CONTRACT_GUIDE
+        '
+        Me.LBL_KIND_CONTRACT_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_CONTRACT_GUIDE.Name = "LBL_KIND_CONTRACT_GUIDE"
+        Me.LBL_KIND_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_CONTRACT_GUIDE.TabIndex = 0
+        Me.LBL_KIND_CONTRACT_GUIDE.Text = "契約種別"
+        Me.LBL_KIND_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_CODE_SHINTO_PARENT
+        '
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.LBL_CODE_OWNER_FROM_TO_GUIDE)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.BTN_CODE_OWNER_TO_SEARCH)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.TXT_CODE_OWNER_TO)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.LBL_CODE_OWNER_TO_NAME)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.LBL_CODE_OWNER_GUIDE)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.LBL_CODE_OWNER_FROM_NAME)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.BTN_CODE_OWNER_FROM_SEARCH)
+        Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.TXT_CODE_OWNER_FROM)
+        Me.PNL_CODE_SHINTO_PARENT.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_CODE_SHINTO_PARENT.Name = "PNL_CODE_SHINTO_PARENT"
+        Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(730, 30)
+        Me.PNL_CODE_SHINTO_PARENT.TabIndex = 2
+        '
+        'LBL_CODE_OWNER_FROM_TO_GUIDE
+        '
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Location = New System.Drawing.Point(400, 1)
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Name = "LBL_CODE_OWNER_FROM_TO_GUIDE"
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.TabIndex = 4
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BTN_CODE_OWNER_TO_SEARCH
+        '
+        Me.BTN_CODE_OWNER_TO_SEARCH.BackgroundImage = Global.MNT_E_DEPOSIT.My.Resources.Resources.Search_16x
+        Me.BTN_CODE_OWNER_TO_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BTN_CODE_OWNER_TO_SEARCH.Location = New System.Drawing.Point(485, 1)
+        Me.BTN_CODE_OWNER_TO_SEARCH.Margin = New System.Windows.Forms.Padding(0)
+        Me.BTN_CODE_OWNER_TO_SEARCH.Name = "BTN_CODE_OWNER_TO_SEARCH"
+        Me.BTN_CODE_OWNER_TO_SEARCH.Size = New System.Drawing.Size(25, 25)
+        Me.BTN_CODE_OWNER_TO_SEARCH.TabIndex = 6
+        Me.BTN_CODE_OWNER_TO_SEARCH.TabStop = False
+        Me.BTN_CODE_OWNER_TO_SEARCH.UseVisualStyleBackColor = True
+        '
+        'TXT_CODE_OWNER_TO
+        '
+        Me.TXT_CODE_OWNER_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_OWNER_TO.Location = New System.Drawing.Point(425, 1)
+        Me.TXT_CODE_OWNER_TO.MaxLength = 6
+        Me.TXT_CODE_OWNER_TO.Name = "TXT_CODE_OWNER_TO"
+        Me.TXT_CODE_OWNER_TO.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_CODE_OWNER_TO.TabIndex = 5
+        Me.TXT_CODE_OWNER_TO.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
+        Me.TXT_CODE_OWNER_TO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LBL_CODE_OWNER_TO_NAME
+        '
+        Me.LBL_CODE_OWNER_TO_NAME.AutoEllipsis = True
+        Me.LBL_CODE_OWNER_TO_NAME.BackColor = System.Drawing.Color.White
+        Me.LBL_CODE_OWNER_TO_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_OWNER_TO_NAME.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_CODE_OWNER_TO_NAME.Location = New System.Drawing.Point(510, 1)
+        Me.LBL_CODE_OWNER_TO_NAME.Name = "LBL_CODE_OWNER_TO_NAME"
+        Me.LBL_CODE_OWNER_TO_NAME.Size = New System.Drawing.Size(210, 25)
+        Me.LBL_CODE_OWNER_TO_NAME.TabIndex = 7
+        Me.LBL_CODE_OWNER_TO_NAME.Tag = "Clear"
+        Me.LBL_CODE_OWNER_TO_NAME.Text = "＊＊＊"
+        Me.LBL_CODE_OWNER_TO_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_CODE_OWNER_GUIDE
+        '
+        Me.LBL_CODE_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_OWNER_GUIDE.Name = "LBL_CODE_OWNER_GUIDE"
+        Me.LBL_CODE_OWNER_GUIDE.Size = New System.Drawing.Size(99, 25)
+        Me.LBL_CODE_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_CODE_OWNER_GUIDE.Text = "オーナーコード"
+        Me.LBL_CODE_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'LBL_CODE_OWNER_FROM_NAME
+        '
+        Me.LBL_CODE_OWNER_FROM_NAME.AutoEllipsis = True
+        Me.LBL_CODE_OWNER_FROM_NAME.BackColor = System.Drawing.Color.White
+        Me.LBL_CODE_OWNER_FROM_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_OWNER_FROM_NAME.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_CODE_OWNER_FROM_NAME.Location = New System.Drawing.Point(185, 1)
+        Me.LBL_CODE_OWNER_FROM_NAME.Name = "LBL_CODE_OWNER_FROM_NAME"
+        Me.LBL_CODE_OWNER_FROM_NAME.Size = New System.Drawing.Size(210, 25)
+        Me.LBL_CODE_OWNER_FROM_NAME.TabIndex = 3
+        Me.LBL_CODE_OWNER_FROM_NAME.Tag = "Clear"
+        Me.LBL_CODE_OWNER_FROM_NAME.Text = "＊＊＊"
+        Me.LBL_CODE_OWNER_FROM_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'BTN_CODE_OWNER_FROM_SEARCH
+        '
+        Me.BTN_CODE_OWNER_FROM_SEARCH.BackgroundImage = Global.MNT_E_DEPOSIT.My.Resources.Resources.Search_16x
+        Me.BTN_CODE_OWNER_FROM_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BTN_CODE_OWNER_FROM_SEARCH.Location = New System.Drawing.Point(160, 1)
+        Me.BTN_CODE_OWNER_FROM_SEARCH.Margin = New System.Windows.Forms.Padding(0)
+        Me.BTN_CODE_OWNER_FROM_SEARCH.Name = "BTN_CODE_OWNER_FROM_SEARCH"
+        Me.BTN_CODE_OWNER_FROM_SEARCH.Size = New System.Drawing.Size(25, 25)
+        Me.BTN_CODE_OWNER_FROM_SEARCH.TabIndex = 2
+        Me.BTN_CODE_OWNER_FROM_SEARCH.TabStop = False
+        Me.BTN_CODE_OWNER_FROM_SEARCH.UseVisualStyleBackColor = True
+        '
+        'TXT_CODE_OWNER_FROM
+        '
+        Me.TXT_CODE_OWNER_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_OWNER_FROM.Location = New System.Drawing.Point(100, 1)
+        Me.TXT_CODE_OWNER_FROM.MaxLength = 6
+        Me.TXT_CODE_OWNER_FROM.Name = "TXT_CODE_OWNER_FROM"
+        Me.TXT_CODE_OWNER_FROM.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_CODE_OWNER_FROM.TabIndex = 1
+        Me.TXT_CODE_OWNER_FROM.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
+        Me.TXT_CODE_OWNER_FROM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_DATE_INVOICE
         '
@@ -271,14 +506,14 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_INVOICE.Controls.Add(Me.LBL_DATE_INVOICE_GUIDE)
         Me.PNL_DATE_INVOICE.Location = New System.Drawing.Point(5, 5)
         Me.PNL_DATE_INVOICE.Name = "PNL_DATE_INVOICE"
-        Me.PNL_DATE_INVOICE.Size = New System.Drawing.Size(420, 30)
+        Me.PNL_DATE_INVOICE.Size = New System.Drawing.Size(485, 30)
         Me.PNL_DATE_INVOICE.TabIndex = 0
         '
         'LBL_DATE_INVOICE_FROM_TO_GUIDE
         '
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Location = New System.Drawing.Point(268, 1)
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Name = "LBL_DATE_INVOICE_FROM_TO_GUIDE"
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.TabIndex = 9
@@ -288,9 +523,9 @@ Partial Class FRM_MAIN
         'DTP_DATE_INVOICE_TO
         '
         Me.DTP_DATE_INVOICE_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_INVOICE_TO.Location = New System.Drawing.Point(260, 1)
+        Me.DTP_DATE_INVOICE_TO.Location = New System.Drawing.Point(295, 1)
         Me.DTP_DATE_INVOICE_TO.Name = "DTP_DATE_INVOICE_TO"
-        Me.DTP_DATE_INVOICE_TO.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_INVOICE_TO.Size = New System.Drawing.Size(180, 25)
         Me.DTP_DATE_INVOICE_TO.TabIndex = 2
         Me.DTP_DATE_INVOICE_TO.Tag = "Clear"
         '
@@ -299,7 +534,7 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_INVOICE_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.DTP_DATE_INVOICE_FROM.Location = New System.Drawing.Point(80, 1)
         Me.DTP_DATE_INVOICE_FROM.Name = "DTP_DATE_INVOICE_FROM"
-        Me.DTP_DATE_INVOICE_FROM.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_INVOICE_FROM.Size = New System.Drawing.Size(180, 25)
         Me.DTP_DATE_INVOICE_FROM.TabIndex = 1
         Me.DTP_DATE_INVOICE_FROM.Tag = "Clear"
         '
@@ -324,11 +559,11 @@ Partial Class FRM_MAIN
         Me.PNL_SEARCH.Controls.Add(Me.LBL_COUNT_SEARCH)
         Me.PNL_SEARCH.Controls.Add(Me.LBL_COUNT_SEARCH_GUIDE)
         Me.PNL_SEARCH.Controls.Add(Me.BTN_SEARCH)
-        Me.PNL_SEARCH.Location = New System.Drawing.Point(430, 5)
+        Me.PNL_SEARCH.Location = New System.Drawing.Point(495, 75)
         Me.PNL_SEARCH.MinimumSize = New System.Drawing.Size(100, 25)
         Me.PNL_SEARCH.Name = "PNL_SEARCH"
         Me.PNL_SEARCH.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_SEARCH.TabIndex = 1
+        Me.PNL_SEARCH.TabIndex = 5
         '
         'LBL_COUNT_SEARCH_MAX
         '
@@ -468,6 +703,12 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.PerformLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_FLAG_DEPOSIT_DONE.ResumeLayout(False)
+        Me.PNL_NAME_OWNER.ResumeLayout(False)
+        Me.PNL_NAME_OWNER.PerformLayout()
+        Me.PNL_KIND_CONTRACT.ResumeLayout(False)
+        Me.PNL_CODE_SHINTO_PARENT.ResumeLayout(False)
+        Me.PNL_CODE_SHINTO_PARENT.PerformLayout()
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_SEARCH.ResumeLayout(False)
         Me.PNL_SEARCH.PerformLayout()
@@ -507,4 +748,22 @@ Partial Class FRM_MAIN
     Friend WithEvents DTP_DATE_INVOICE_TO As DateTimePicker
     Friend WithEvents DTP_DATE_INVOICE_FROM As DateTimePicker
     Friend WithEvents LBL_DATE_INVOICE_GUIDE As Label
+    Friend WithEvents PNL_CODE_SHINTO_PARENT As Panel
+    Friend WithEvents LBL_CODE_OWNER_GUIDE As Label
+    Friend WithEvents LBL_CODE_OWNER_FROM_NAME As Label
+    Friend WithEvents BTN_CODE_OWNER_FROM_SEARCH As Button
+    Friend WithEvents TXT_CODE_OWNER_FROM As TextBox
+    Friend WithEvents LBL_CODE_OWNER_FROM_TO_GUIDE As Label
+    Friend WithEvents BTN_CODE_OWNER_TO_SEARCH As Button
+    Friend WithEvents TXT_CODE_OWNER_TO As TextBox
+    Friend WithEvents LBL_CODE_OWNER_TO_NAME As Label
+    Friend WithEvents PNL_KIND_CONTRACT As Panel
+    Friend WithEvents CMB_KIND_CONTRACT As ComboBox
+    Friend WithEvents LBL_KIND_CONTRACT_GUIDE As Label
+    Friend WithEvents PNL_NAME_OWNER As Panel
+    Friend WithEvents TXT_NAME_OWNER As TextBox
+    Friend WithEvents LBL_NAME_OWNER_GUIDE As Label
+    Friend WithEvents PNL_FLAG_DEPOSIT_DONE As Panel
+    Friend WithEvents CMB_FLAG_DEPOSIT_DONE As ComboBox
+    Friend WithEvents LBL_FLAG_DEPOSIT_DONE_GUIDE As Label
 End Class
