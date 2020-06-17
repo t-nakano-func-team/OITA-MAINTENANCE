@@ -27,6 +27,8 @@
         Public PRINT_DATA() As SRT_PTINT_INVOICE_KEY
         Public DATE_INVOICE_FROM As DateTime
         Public DATE_INVOICE_TO As DateTime
+        Public ENABLED_DATE_PRINT As Boolean
+        Public DATE_PRINT As DateTime
 
         Public FORM As Object
     End Structure
@@ -368,6 +370,18 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_DETAIL))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_VAT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_TOTAL))
+
+        End With
+        With SRT_CONDITIONS
+            If .ENABLED_DATE_PRINT Then
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT.Year))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT.Month))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT.Day))
+            Else
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+            End If
         End With
         STR_RET = FUNC_GET_ONE_ROW_LIST_CSV(STR_ROW)
 

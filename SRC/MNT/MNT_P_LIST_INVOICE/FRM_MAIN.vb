@@ -115,6 +115,8 @@
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
+
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_PRINT, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -133,6 +135,9 @@
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
+
+        CHK_DATE_PRINT.Checked = True
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_PRINT, datSYSTEM_TOTAL_DATE_ACTIVE)
     End Sub
 #End Region
 
@@ -222,6 +227,8 @@
             .DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
             .DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
 
+            .ENABLED_DATE_PRINT = CHK_DATE_PRINT.Checked
+            .DATE_PRINT = DTP_DATE_PRINT.Value
             .FORM = Me
         End With
 
@@ -324,6 +331,7 @@
         Select Case ENM_CHANGE_MODE
             Case ENM_MY_WINDOW_MODE.INPUT_KEY
                 PNL_INPUT_KEY.Enabled = True
+                PNL_INPUT_DATA.Enabled = False
 
                 BTN_PREVIEW.Enabled = False
                 BTN_PRINT.Enabled = False
@@ -331,6 +339,7 @@
                 BTN_END.Enabled = True
             Case ENM_MY_WINDOW_MODE.INPUT_DATA
                 PNL_INPUT_KEY.Enabled = False
+                PNL_INPUT_DATA.Enabled = True
 
                 BTN_PREVIEW.Enabled = True
                 BTN_PRINT.Enabled = True
@@ -721,6 +730,16 @@
         Call LBL_BATCH_PROGRESS.Refresh()
         Call Application.DoEvents()
     End Sub
+
+    Private Sub SUB_REFRESH_ENABLED_DATE_PRINT()
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = CHK_DATE_PRINT.Checked
+        If BLN_CHECK Then
+            DTP_DATE_PRINT.Enabled = True
+        Else
+            DTP_DATE_PRINT.Enabled = False
+        End If
+    End Sub
 #End Region
 
 #Region "キー制御処理"
@@ -898,6 +917,13 @@
         Dim DAT_TO As DateTime
         DAT_TO = FUNC_GET_DATE_LASTMONTH(DAT_FROM)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_TO)
+    End Sub
+#End Region
+
+#Region "イベント-チェックチェンジ"
+
+    Private Sub CHK_DATE_PRINT_CheckedChanged(sender As Object, e As EventArgs) Handles CHK_DATE_PRINT.CheckedChanged
+        Call SUB_REFRESH_ENABLED_DATE_PRINT()
     End Sub
 #End Region
 
