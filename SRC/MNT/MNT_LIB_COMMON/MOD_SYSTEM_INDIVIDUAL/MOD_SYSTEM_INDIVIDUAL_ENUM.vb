@@ -36,4 +36,9 @@
         NOT_DONE = 0
         DONE = 1
     End Enum
+
+    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT
+        KIND_DEPOSIT = 1
+        KIND_COST = 2
+    End Enum
 End Module

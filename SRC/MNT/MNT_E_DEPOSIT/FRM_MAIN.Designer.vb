@@ -270,7 +270,6 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowRowErrors = False
         Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 240)
         Me.DGV_VIEW_DATA.TabIndex = 3
-        Me.DGV_VIEW_DATA.TabStop = False
         '
         'PNL_INPUT_KEY
         '

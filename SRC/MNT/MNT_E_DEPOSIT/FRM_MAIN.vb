@@ -10,6 +10,7 @@
         DO_SEARCH
         DO_BATCH
         DO_CLEAR
+        DO_SHOW_SUB_WINDOW
         DO_END = 81
         DO_SHOW_SETTING
         DO_SHOW_COMMANDLINE
@@ -17,15 +18,15 @@
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
-        CHECK = 0
+        DATE_INVOICE = 0
         KIND_CONTRACT_NAME
         NUMBER_CONTRACT_VIEW
-        DATE_INVOICE
         NAME_OWNER
         NAME_CONTRACT
         COUNT_INVOICE_VIEW
-        KINGAKU_CONTRACT
-        UBOUND = KINGAKU_CONTRACT
+        KINGAKU_INVOICE
+        FLAG_DEPOSIT_DONE_NAME
+        UBOUND = FLAG_DEPOSIT_DONE_NAME
     End Enum
 
     Private Enum ENM_MY_WINDOW_MODE
@@ -40,17 +41,19 @@
         Public SERIAL_CONTRACT As Integer
         Public SERIAL_INVOICE As Integer
 
-        Public KIND_CONTRACT As Integer
         Public DATE_INVOICE As DateTime
+        Public KIND_CONTRACT As Integer
+        Public FLAG_DEPOSIT_DONE As Integer
+
         Public CODE_OWNER As Integer
         Public NAME_CONTRACT As String
         Public COUNT_INVOICE As Integer
-        Public KINGAKU_CONTRACT As Long
 
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
         Public KIND_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
+        Public FLAG_DEPOSIT_DONE_NAME As String
 
         Public Function FUNC_GET_NUMBER_SERIAL_CONTRACT() As String
             Dim STR_NUMBER_CONTRACT As String
@@ -117,9 +120,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,請求日付,オーナー,契約内容,回数,請求金額", "BSSSSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "請求日付,形態,契約番号,オーナー,契約内容,回数,請求金額,入金", "SSSSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,5,6,6,2,6", "CLRRLLCR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,3,4,6,6,2,4,3", "LLRLLCRL")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
@@ -172,6 +175,8 @@
                 Call SUB_SEARCH()
             Case ENM_MY_EXEC_DO.DO_CLEAR
                 Call SUB_CLEAR()
+            Case ENM_MY_EXEC_DO.DO_SHOW_SUB_WINDOW
+                Call SUB_SHOW_SUB_WINDOW()
             Case ENM_MY_EXEC_DO.DO_END
                 Call SUB_END()
             Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
@@ -224,6 +229,43 @@
         Call SUB_CTRL_VALUE_INIT() '値を初期化
         Call SUB_WINDOW_MODE_CHANGE(ENM_MY_WINDOW_MODE.INPUT_KEY)
         Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me)
+    End Sub
+
+    Private Sub SUB_SHOW_SUB_WINDOW()
+
+        Dim INT_SELECT_ROW_INDEX As Integer
+        INT_SELECT_ROW_INDEX = FUNC_GET_SELECT_ROW_INDEX(DGV_VIEW_DATA)
+
+        If INT_SELECT_ROW_INDEX <= 0 Then
+            Exit Sub
+        End If
+
+        Dim INT_SRT_INDEX As Integer
+        INT_SRT_INDEX = INT_SELECT_ROW_INDEX
+        With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
+            Dim FRM_SHOW As FRM_SUB_01
+            FRM_SHOW = New FRM_SUB_01
+            FRM_SHOW.Font = New System.Drawing.Font(FRM_SHOW.Font.Name, Me.Font.Size)
+            FRM_SHOW.Text = Me.Text
+            FRM_SHOW.NUMBER_CONTRACT = .NUMBER_CONTRACT
+            FRM_SHOW.SERIAL_CONTRACT = .SERIAL_CONTRACT
+            FRM_SHOW.SERIAL_INVOICE = .SERIAL_INVOICE
+
+            Call FRM_SHOW.ShowDialog()
+
+            Dim BLN_CNACEL As Boolean
+            BLN_CNACEL = FRM_SHOW.RET_EDIT_CANCEL
+
+            Call FRM_SHOW.Dispose()
+            FRM_SHOW = Nothing
+
+            If BLN_CNACEL Then
+                Exit Sub
+            End If
+        End With
+
+        Call SUB_REFRESH_DATA_ONE(SRT_GRID_DATA_MAIN(INT_SRT_INDEX))
+        Call SUB_REFRESH_GRID_ROW(INT_SRT_INDEX)
     End Sub
 
     Private Sub SUB_END()
@@ -306,6 +348,8 @@
             Call .Append("MAIN.*" & "," & Environment.NewLine)
             Call .Append("SUB_01.KIND_CONTRACT" & "," & Environment.NewLine)
             Call .Append("SUB_01.CODE_OWNER" & "," & Environment.NewLine)
+            Call .Append("SUB_01.NAME_CONTRACT" & "," & Environment.NewLine)
+            Call .Append("SUB_01.COUNT_INVOICE" & "" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_INVOICE AS MAIN WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("INNER JOIN" & Environment.NewLine)
@@ -319,11 +363,76 @@
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
 
-
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("SUB_01.KIND_CONTRACT DESC,MAIN.DATE_INVOICE,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("DATE_INVOICE,CODE_OWNER,NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & Environment.NewLine)
         End With
 
+        Dim SDR_READER As SqlClient.SqlDataReader
+        SDR_READER = Nothing
+        If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
+            SDR_READER = Nothing
+            Exit Sub
+        End If
+
+        If Not SDR_READER.HasRows Then
+            Call SDR_READER.Close()
+            SDR_READER = Nothing
+            Exit Sub
+        End If
+
+        ReDim SRT_GRID_DATA_MAIN(CST_MY_GRID_COUNT_MAX)
+        Dim INT_INDEX As Integer
+        INT_INDEX = 0
+        While SDR_READER.Read
+            If INT_INDEX >= (SRT_GRID_DATA_MAIN.Length - 1) Then
+            End If
+            INT_INDEX += 1
+            With SRT_GRID_DATA_MAIN(INT_INDEX)
+                .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
+                .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
+                .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
+
+                .DATE_INVOICE = CDate(SDR_READER.Item("DATE_INVOICE"))
+                .FLAG_DEPOSIT_DONE = CInt(SDR_READER.Item("FLAG_DEPOSIT_DONE"))
+                .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
+                .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
+
+                .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
+                .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
+                .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
+                .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
+            End With
+        End While
+
+        ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
+        Call SDR_READER.Close()
+        SDR_READER = Nothing
+
+        For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
+            Call SUB_GET_AUX_DATA_ONE(SRT_GRID_DATA_MAIN(i))
+        Next
+    End Sub
+
+    '補助情報取得
+    Private Sub SUB_GET_AUX_DATA_ONE(ByRef SRT_DATA As SRT_MY_GRID_DATA)
+        With SRT_DATA
+            .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT, True)
+            .FLAG_DEPOSIT_DONE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_DEPOSIT_DONE, .FLAG_DEPOSIT_DONE, True)
+
+            Select Case .KIND_CONTRACT
+                Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
+                    .CODE_OWNER_NAME = FUNC_GET_MNT_M_OWNER_NAME_OWNER(.CODE_OWNER, True)
+                Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
+                    Dim SRT_RECORD_CONTRACT_SPOT As SRT_TABLE_MNT_T_CONTRACT_SPOT
+                    SRT_RECORD_CONTRACT_SPOT.KEY.NUMBER_CONTRACT = .NUMBER_CONTRACT
+                    SRT_RECORD_CONTRACT_SPOT.KEY.SERIAL_CONTRACT = .SERIAL_CONTRACT
+                    SRT_RECORD_CONTRACT_SPOT.DATA = Nothing
+                    Call FUNC_SELECT_TABLE_MNT_T_CONTRACT_SPOT(SRT_RECORD_CONTRACT_SPOT.KEY, SRT_RECORD_CONTRACT_SPOT.DATA, True)
+                    .CODE_OWNER_NAME = SRT_RECORD_CONTRACT_SPOT.DATA.NAME_OWNER
+                Case Else
+                    .CODE_OWNER_NAME = ""
+            End Select
+        End With
     End Sub
 
     Private Sub SUB_REFRESH_GRID()
@@ -340,26 +449,22 @@
 
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CHECK) = False
+                OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_INVOICE) = .DATE_INVOICE.ToLongDateString
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
-                OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_INVOICE) = .DATE_INVOICE.ToLongDateString
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KINGAKU_CONTRACT) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
+                OBJ_TEMP(ENM_MY_GRID_MAIN.KINGAKU_INVOICE) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_DEPOSIT_DONE_NAME) = .FLAG_DEPOSIT_DONE_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
         Next
 
-        'グリッドのセルの編集可項目を変更
-        Call SUB_DATA_GRID_SET_READ_ONLY_MODE_CELL(DGV_VIEW_DATA)
-        Call SUB_DATA_GRID_CELL_READ_ONLY_MODE(DGV_VIEW_DATA, ENM_MY_GRID_MAIN.CHECK, False)
-
         Call DGV_VIEW_DATA.Refresh()
         Call System.Windows.Forms.Application.DoEvents()
 
-        Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, 0)
+        Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, 1)
     End Sub
 #End Region
 
@@ -486,6 +591,9 @@
                     End If
                 End If
                 BLN_RET = True
+            Case CTL_ACTIVE Is DGV_VIEW_DATA
+                Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SUB_WINDOW)
+                BLN_RET = False
             Case Else
                 BLN_RET = True
         End Select
@@ -499,6 +607,44 @@
 #End Region
 
 #Region "内部処理"
+
+    Private Sub SUB_REFRESH_DATA_ONE(ByRef SRT_DATA As SRT_MY_GRID_DATA)
+        With SRT_DATA
+            Dim SRT_INVOICE As SRT_TABLE_MNT_T_INVOICE
+            SRT_INVOICE.KEY.NUMBER_CONTRACT = .NUMBER_CONTRACT
+            SRT_INVOICE.KEY.SERIAL_CONTRACT = .SERIAL_CONTRACT
+            SRT_INVOICE.KEY.SERIAL_INVOICE = .SERIAL_INVOICE
+            SRT_INVOICE.DATA = Nothing
+            Call FUNC_SELECT_TABLE_MNT_T_INVOICE(SRT_INVOICE.KEY, SRT_INVOICE.DATA)
+
+            .DATE_INVOICE = SRT_INVOICE.DATA.DATE_INVOICE
+            .FLAG_DEPOSIT_DONE = SRT_INVOICE.DATA.FLAG_DEPOSIT_DONE
+            .KINGAKU_INVOICE_DETAIL = SRT_INVOICE.DATA.KINGAKU_INVOICE_DETAIL
+            .KINGAKU_INVOICE_VAT = SRT_INVOICE.DATA.KINGAKU_INVOICE_VAT
+        End With
+
+        Call SUB_GET_AUX_DATA_ONE(SRT_DATA)
+    End Sub
+
+    Private Sub SUB_REFRESH_GRID_ROW(ByVal INT_INDEX_SRT As Integer)
+        Dim INT_INDEX_GRID As Integer
+        INT_INDEX_GRID = (INT_INDEX_SRT - 1)
+
+        With SRT_GRID_DATA_MAIN(INT_INDEX_SRT)
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.DATE_INVOICE) = .DATE_INVOICE.ToLongDateString
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.KINGAKU_INVOICE) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.FLAG_DEPOSIT_DONE_NAME) = .FLAG_DEPOSIT_DONE_NAME
+        End With
+
+        Call DGV_VIEW_DATA.Refresh()
+        Call System.Windows.Forms.Application.DoEvents()
+    End Sub
+
     Private Sub SUB_REFRESH_COUNT(ByVal INT_COUNT As Integer)
         LBL_COUNT_SEARCH_MAX.Visible = False
         LBL_COUNT_SEARCH.Text = Format(INT_COUNT, "#,##0")
@@ -665,6 +811,12 @@
 #Region "イベント-セレクトインデックスチェンジ"
     Private Sub CMB_KIND_CONTRACT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CMB_KIND_CONTRACT.SelectedIndexChanged
         Call SUB_REFRESH_ENABLED_NAME_OWNER()
+    End Sub
+#End Region
+
+#Region "イベント-グリッドダブルクリック"
+    Private Sub DGV_VIEW_DATA_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_VIEW_DATA.CellDoubleClick
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SUB_WINDOW)
     End Sub
 #End Region
 

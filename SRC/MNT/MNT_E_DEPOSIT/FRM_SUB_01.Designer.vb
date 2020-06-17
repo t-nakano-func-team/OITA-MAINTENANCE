@@ -32,23 +32,23 @@ Partial Class FRM_SUB_01
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.PNL_DEPOSIT_INPUT_AREA = New System.Windows.Forms.Panel()
         Me.PNL_NAME_MEMO = New System.Windows.Forms.Panel()
         Me.TXT_NAME_MEMO = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_MEMO_GUIDE = New System.Windows.Forms.Label()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL = New System.Windows.Forms.Label()
+        Me.PNL_KINGAKU_COST = New System.Windows.Forms.Panel()
+        Me.LBL_KINGAKU_COST_TOTAL = New System.Windows.Forms.Label()
+        Me.TXT_KINGAKU_COST_VAT = New System.Windows.Forms.TextBox()
+        Me.LBL_KINGAKU_COST_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_KINGAKU_COST_DETAIL = New System.Windows.Forms.TextBox()
+        Me.PNL_KIND_COST = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_COST = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_COST_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_KINGAKU_FEE = New System.Windows.Forms.Panel()
+        Me.CMB_KINGAKU_FEE_DETAIL = New System.Windows.Forms.ComboBox()
+        Me.LBL_KINGAKU_FEE_TOTAL = New System.Windows.Forms.Label()
         Me.TXT_KINGAKU_FEE_VAT = New System.Windows.Forms.TextBox()
         Me.LBL_KINGAKU_FEE_GUIDE = New System.Windows.Forms.Label()
-        Me.TXT_KINGAKU_FEE_DETAIL = New System.Windows.Forms.TextBox()
         Me.PNL_KIND_DEPOSIT = New System.Windows.Forms.Panel()
         Me.CMB_KIND_DEPOSIT = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
@@ -78,7 +78,7 @@ Partial Class FRM_SUB_01
         Me.LBL_CODE_OWNER_GUIDE = New System.Windows.Forms.Label()
         Me.LBL_CODE_OWNER_NAME = New System.Windows.Forms.Label()
         Me.PNL_NUMBER_CONTRACT = New System.Windows.Forms.Panel()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.LBL_NUMBER_CONTRACT_LINK = New System.Windows.Forms.Label()
         Me.LBL_SERIAL_CONTRACT = New System.Windows.Forms.Label()
         Me.LBL_NUMBER_CONTRACT = New System.Windows.Forms.Label()
         Me.LBL_NUMBER_CONTRACT_GUIDE = New System.Windows.Forms.Label()
@@ -87,17 +87,18 @@ Partial Class FRM_SUB_01
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
-        Me.Panel3.SuspendLayout()
+        Me.PNL_DEPOSIT_INPUT_AREA.SuspendLayout()
         Me.PNL_NAME_MEMO.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.PNL_KINGAKU_COST.SuspendLayout()
+        Me.PNL_KIND_COST.SuspendLayout()
+        Me.PNL_KINGAKU_FEE.SuspendLayout()
         Me.PNL_KIND_DEPOSIT.SuspendLayout()
         Me.PNL_DATE_DEPOSIT.SuspendLayout()
         Me.PNL_FLAG_DEPOSIT_DONE.SuspendLayout()
@@ -122,7 +123,7 @@ Partial Class FRM_SUB_01
         Me.GRP_HEAD.Location = New System.Drawing.Point(10, 10)
         Me.GRP_HEAD.Name = "GRP_HEAD"
         Me.GRP_HEAD.Size = New System.Drawing.Size(760, 50)
-        Me.GRP_HEAD.TabIndex = 1
+        Me.GRP_HEAD.TabIndex = 0
         Me.GRP_HEAD.TabStop = False
         '
         'PNL_INFO_GUIDE
@@ -221,7 +222,7 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY.Location = New System.Drawing.Point(10, 60)
         Me.GRP_BODY.Name = "GRP_BODY"
         Me.GRP_BODY.Size = New System.Drawing.Size(760, 430)
-        Me.GRP_BODY.TabIndex = 3
+        Me.GRP_BODY.TabIndex = 1
         Me.GRP_BODY.TabStop = False
         '
         'PNL_INPUT_DATA
@@ -230,7 +231,7 @@ Partial Class FRM_SUB_01
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.Panel3)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DEPOSIT_INPUT_AREA)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_DEPOSIT_DONE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KINGAKU_INVOICE)
         Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 100)
@@ -238,18 +239,18 @@ Partial Class FRM_SUB_01
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 302)
         Me.PNL_INPUT_DATA.TabIndex = 1
         '
-        'Panel3
+        'PNL_DEPOSIT_INPUT_AREA
         '
-        Me.Panel3.Controls.Add(Me.PNL_NAME_MEMO)
-        Me.Panel3.Controls.Add(Me.Panel5)
-        Me.Panel3.Controls.Add(Me.Panel4)
-        Me.Panel3.Controls.Add(Me.Panel2)
-        Me.Panel3.Controls.Add(Me.PNL_KIND_DEPOSIT)
-        Me.Panel3.Controls.Add(Me.PNL_DATE_DEPOSIT)
-        Me.Panel3.Location = New System.Drawing.Point(0, 70)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(740, 140)
-        Me.Panel3.TabIndex = 12
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_NAME_MEMO)
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_KINGAKU_COST)
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_KIND_COST)
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_KINGAKU_FEE)
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_KIND_DEPOSIT)
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_DATE_DEPOSIT)
+        Me.PNL_DEPOSIT_INPUT_AREA.Location = New System.Drawing.Point(0, 70)
+        Me.PNL_DEPOSIT_INPUT_AREA.Name = "PNL_DEPOSIT_INPUT_AREA"
+        Me.PNL_DEPOSIT_INPUT_AREA.Size = New System.Drawing.Size(740, 140)
+        Me.PNL_DEPOSIT_INPUT_AREA.TabIndex = 2
         '
         'PNL_NAME_MEMO
         '
@@ -258,7 +259,7 @@ Partial Class FRM_SUB_01
         Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 110)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 16
+        Me.PNL_NAME_MEMO.TabIndex = 5
         '
         'TXT_NAME_MEMO
         '
@@ -283,122 +284,132 @@ Partial Class FRM_SUB_01
         Me.LBL_NAME_MEMO_GUIDE.Text = "備考"
         Me.LBL_NAME_MEMO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Panel5
+        'PNL_KINGAKU_COST
         '
-        Me.Panel5.Controls.Add(Me.Label13)
-        Me.Panel5.Controls.Add(Me.TextBox4)
-        Me.Panel5.Controls.Add(Me.Label14)
-        Me.Panel5.Controls.Add(Me.TextBox5)
-        Me.Panel5.Location = New System.Drawing.Point(250, 75)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(485, 30)
-        Me.Panel5.TabIndex = 15
+        Me.PNL_KINGAKU_COST.Controls.Add(Me.LBL_KINGAKU_COST_TOTAL)
+        Me.PNL_KINGAKU_COST.Controls.Add(Me.TXT_KINGAKU_COST_VAT)
+        Me.PNL_KINGAKU_COST.Controls.Add(Me.LBL_KINGAKU_COST_GUIDE)
+        Me.PNL_KINGAKU_COST.Controls.Add(Me.TXT_KINGAKU_COST_DETAIL)
+        Me.PNL_KINGAKU_COST.Location = New System.Drawing.Point(250, 75)
+        Me.PNL_KINGAKU_COST.Name = "PNL_KINGAKU_COST"
+        Me.PNL_KINGAKU_COST.Size = New System.Drawing.Size(485, 30)
+        Me.PNL_KINGAKU_COST.TabIndex = 4
         '
-        'Label13
+        'LBL_KINGAKU_COST_TOTAL
         '
-        Me.Label13.AutoEllipsis = True
-        Me.Label13.BackColor = System.Drawing.Color.White
-        Me.Label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label13.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label13.Location = New System.Drawing.Point(325, 1)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(150, 25)
-        Me.Label13.TabIndex = 5
-        Me.Label13.Tag = "Clear"
-        Me.Label13.Text = "＊＊＊"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBL_KINGAKU_COST_TOTAL.AutoEllipsis = True
+        Me.LBL_KINGAKU_COST_TOTAL.BackColor = System.Drawing.Color.White
+        Me.LBL_KINGAKU_COST_TOTAL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KINGAKU_COST_TOTAL.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_KINGAKU_COST_TOTAL.Location = New System.Drawing.Point(325, 1)
+        Me.LBL_KINGAKU_COST_TOTAL.Name = "LBL_KINGAKU_COST_TOTAL"
+        Me.LBL_KINGAKU_COST_TOTAL.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_KINGAKU_COST_TOTAL.TabIndex = 5
+        Me.LBL_KINGAKU_COST_TOTAL.Tag = "Clear"
+        Me.LBL_KINGAKU_COST_TOTAL.Text = "＊＊＊"
+        Me.LBL_KINGAKU_COST_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TextBox4
+        'TXT_KINGAKU_COST_VAT
         '
-        Me.TextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TextBox4.Location = New System.Drawing.Point(230, 1)
-        Me.TextBox4.MaxLength = 12
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(95, 25)
-        Me.TextBox4.TabIndex = 4
-        Me.TextBox4.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
-        Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TXT_KINGAKU_COST_VAT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_KINGAKU_COST_VAT.Location = New System.Drawing.Point(230, 1)
+        Me.TXT_KINGAKU_COST_VAT.MaxLength = 12
+        Me.TXT_KINGAKU_COST_VAT.Name = "TXT_KINGAKU_COST_VAT"
+        Me.TXT_KINGAKU_COST_VAT.Size = New System.Drawing.Size(95, 25)
+        Me.TXT_KINGAKU_COST_VAT.TabIndex = 4
+        Me.TXT_KINGAKU_COST_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_COST_VAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label14
+        'LBL_KINGAKU_COST_GUIDE
         '
-        Me.Label14.AutoEllipsis = True
-        Me.Label14.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.Label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label14.ForeColor = System.Drawing.Color.Black
-        Me.Label14.Location = New System.Drawing.Point(1, 1)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(79, 25)
-        Me.Label14.TabIndex = 3
-        Me.Label14.Text = "費用金額"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_KINGAKU_COST_GUIDE.AutoEllipsis = True
+        Me.LBL_KINGAKU_COST_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KINGAKU_COST_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KINGAKU_COST_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KINGAKU_COST_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KINGAKU_COST_GUIDE.Name = "LBL_KINGAKU_COST_GUIDE"
+        Me.LBL_KINGAKU_COST_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KINGAKU_COST_GUIDE.TabIndex = 3
+        Me.LBL_KINGAKU_COST_GUIDE.Text = "費用金額"
+        Me.LBL_KINGAKU_COST_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TextBox5
+        'TXT_KINGAKU_COST_DETAIL
         '
-        Me.TextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TextBox5.Location = New System.Drawing.Point(80, 1)
-        Me.TextBox5.MaxLength = 12
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(150, 25)
-        Me.TextBox5.TabIndex = 1
-        Me.TextBox5.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
-        Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TXT_KINGAKU_COST_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_KINGAKU_COST_DETAIL.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_KINGAKU_COST_DETAIL.MaxLength = 12
+        Me.TXT_KINGAKU_COST_DETAIL.Name = "TXT_KINGAKU_COST_DETAIL"
+        Me.TXT_KINGAKU_COST_DETAIL.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_KINGAKU_COST_DETAIL.TabIndex = 1
+        Me.TXT_KINGAKU_COST_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_COST_DETAIL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Panel4
+        'PNL_KIND_COST
         '
-        Me.Panel4.Controls.Add(Me.ComboBox1)
-        Me.Panel4.Controls.Add(Me.Label12)
-        Me.Panel4.Location = New System.Drawing.Point(5, 75)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(240, 30)
-        Me.Panel4.TabIndex = 14
+        Me.PNL_KIND_COST.Controls.Add(Me.CMB_KIND_COST)
+        Me.PNL_KIND_COST.Controls.Add(Me.LBL_KIND_COST_GUIDE)
+        Me.PNL_KIND_COST.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_KIND_COST.Name = "PNL_KIND_COST"
+        Me.PNL_KIND_COST.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_COST.TabIndex = 3
         '
-        'ComboBox1
+        'CMB_KIND_COST
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ComboBox1.Location = New System.Drawing.Point(80, 1)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(150, 26)
-        Me.ComboBox1.TabIndex = 1
-        Me.ComboBox1.Tag = "Clear"
+        Me.CMB_KIND_COST.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_COST.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_COST.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_COST.Name = "CMB_KIND_COST"
+        Me.CMB_KIND_COST.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_COST.TabIndex = 1
+        Me.CMB_KIND_COST.Tag = "Clear"
         '
-        'Label12
+        'LBL_KIND_COST_GUIDE
         '
-        Me.Label12.AutoEllipsis = True
-        Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label12.ForeColor = System.Drawing.Color.Black
-        Me.Label12.Location = New System.Drawing.Point(1, 1)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(79, 25)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "費用科目"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_KIND_COST_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_COST_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_COST_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_COST_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_COST_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_COST_GUIDE.Name = "LBL_KIND_COST_GUIDE"
+        Me.LBL_KIND_COST_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_COST_GUIDE.TabIndex = 0
+        Me.LBL_KIND_COST_GUIDE.Text = "費用科目"
+        Me.LBL_KIND_COST_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Panel2
+        'PNL_KINGAKU_FEE
         '
-        Me.Panel2.Controls.Add(Me.LBL_KINGAKU_FEE_DETAIL_TOTAL)
-        Me.Panel2.Controls.Add(Me.TXT_KINGAKU_FEE_VAT)
-        Me.Panel2.Controls.Add(Me.LBL_KINGAKU_FEE_GUIDE)
-        Me.Panel2.Controls.Add(Me.TXT_KINGAKU_FEE_DETAIL)
-        Me.Panel2.Location = New System.Drawing.Point(5, 40)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(485, 30)
-        Me.Panel2.TabIndex = 13
+        Me.PNL_KINGAKU_FEE.Controls.Add(Me.CMB_KINGAKU_FEE_DETAIL)
+        Me.PNL_KINGAKU_FEE.Controls.Add(Me.LBL_KINGAKU_FEE_TOTAL)
+        Me.PNL_KINGAKU_FEE.Controls.Add(Me.TXT_KINGAKU_FEE_VAT)
+        Me.PNL_KINGAKU_FEE.Controls.Add(Me.LBL_KINGAKU_FEE_GUIDE)
+        Me.PNL_KINGAKU_FEE.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_KINGAKU_FEE.Name = "PNL_KINGAKU_FEE"
+        Me.PNL_KINGAKU_FEE.Size = New System.Drawing.Size(485, 30)
+        Me.PNL_KINGAKU_FEE.TabIndex = 2
         '
-        'LBL_KINGAKU_FEE_DETAIL_TOTAL
+        'CMB_KINGAKU_FEE_DETAIL
         '
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.AutoEllipsis = True
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.BackColor = System.Drawing.Color.White
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.Location = New System.Drawing.Point(325, 1)
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.Name = "LBL_KINGAKU_FEE_DETAIL_TOTAL"
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.Size = New System.Drawing.Size(150, 25)
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.TabIndex = 5
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.Tag = "Clear"
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.Text = "＊＊＊"
-        Me.LBL_KINGAKU_FEE_DETAIL_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CMB_KINGAKU_FEE_DETAIL.FormattingEnabled = True
+        Me.CMB_KINGAKU_FEE_DETAIL.Items.AddRange(New Object() {"0", "200", "300", "400", "500", "600", "700"})
+        Me.CMB_KINGAKU_FEE_DETAIL.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KINGAKU_FEE_DETAIL.Name = "CMB_KINGAKU_FEE_DETAIL"
+        Me.CMB_KINGAKU_FEE_DETAIL.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KINGAKU_FEE_DETAIL.TabIndex = 0
+        Me.CMB_KINGAKU_FEE_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        '
+        'LBL_KINGAKU_FEE_TOTAL
+        '
+        Me.LBL_KINGAKU_FEE_TOTAL.AutoEllipsis = True
+        Me.LBL_KINGAKU_FEE_TOTAL.BackColor = System.Drawing.Color.White
+        Me.LBL_KINGAKU_FEE_TOTAL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KINGAKU_FEE_TOTAL.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_KINGAKU_FEE_TOTAL.Location = New System.Drawing.Point(325, 1)
+        Me.LBL_KINGAKU_FEE_TOTAL.Name = "LBL_KINGAKU_FEE_TOTAL"
+        Me.LBL_KINGAKU_FEE_TOTAL.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_KINGAKU_FEE_TOTAL.TabIndex = 2
+        Me.LBL_KINGAKU_FEE_TOTAL.Tag = "Clear"
+        Me.LBL_KINGAKU_FEE_TOTAL.Text = "＊＊＊"
+        Me.LBL_KINGAKU_FEE_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TXT_KINGAKU_FEE_VAT
         '
@@ -407,7 +418,7 @@ Partial Class FRM_SUB_01
         Me.TXT_KINGAKU_FEE_VAT.MaxLength = 12
         Me.TXT_KINGAKU_FEE_VAT.Name = "TXT_KINGAKU_FEE_VAT"
         Me.TXT_KINGAKU_FEE_VAT.Size = New System.Drawing.Size(95, 25)
-        Me.TXT_KINGAKU_FEE_VAT.TabIndex = 4
+        Me.TXT_KINGAKU_FEE_VAT.TabIndex = 1
         Me.TXT_KINGAKU_FEE_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
         Me.TXT_KINGAKU_FEE_VAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -424,17 +435,6 @@ Partial Class FRM_SUB_01
         Me.LBL_KINGAKU_FEE_GUIDE.Text = "振込手数料"
         Me.LBL_KINGAKU_FEE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TXT_KINGAKU_FEE_DETAIL
-        '
-        Me.TXT_KINGAKU_FEE_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_KINGAKU_FEE_DETAIL.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KINGAKU_FEE_DETAIL.MaxLength = 12
-        Me.TXT_KINGAKU_FEE_DETAIL.Name = "TXT_KINGAKU_FEE_DETAIL"
-        Me.TXT_KINGAKU_FEE_DETAIL.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_KINGAKU_FEE_DETAIL.TabIndex = 1
-        Me.TXT_KINGAKU_FEE_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
-        Me.TXT_KINGAKU_FEE_DETAIL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'PNL_KIND_DEPOSIT
         '
         Me.PNL_KIND_DEPOSIT.Controls.Add(Me.CMB_KIND_DEPOSIT)
@@ -442,7 +442,7 @@ Partial Class FRM_SUB_01
         Me.PNL_KIND_DEPOSIT.Location = New System.Drawing.Point(250, 5)
         Me.PNL_KIND_DEPOSIT.Name = "PNL_KIND_DEPOSIT"
         Me.PNL_KIND_DEPOSIT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_DEPOSIT.TabIndex = 12
+        Me.PNL_KIND_DEPOSIT.TabIndex = 1
         '
         'CMB_KIND_DEPOSIT
         '
@@ -474,7 +474,7 @@ Partial Class FRM_SUB_01
         Me.PNL_DATE_DEPOSIT.Location = New System.Drawing.Point(5, 5)
         Me.PNL_DATE_DEPOSIT.Name = "PNL_DATE_DEPOSIT"
         Me.PNL_DATE_DEPOSIT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DATE_DEPOSIT.TabIndex = 11
+        Me.PNL_DATE_DEPOSIT.TabIndex = 0
         '
         'DTP_DATE_DEPOSIT
         '
@@ -502,19 +502,21 @@ Partial Class FRM_SUB_01
         '
         Me.PNL_FLAG_DEPOSIT_DONE.Controls.Add(Me.CHK_FLAG_DEPOSIT_DONE)
         Me.PNL_FLAG_DEPOSIT_DONE.Controls.Add(Me.LBL_FLAG_DEPOSIT_DONE_GUIDE)
+        Me.PNL_FLAG_DEPOSIT_DONE.Controls.Add(Me.LBL_FLAG_DEPOSIT_DONE_BACK)
         Me.PNL_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(5, 40)
         Me.PNL_FLAG_DEPOSIT_DONE.Name = "PNL_FLAG_DEPOSIT_DONE"
         Me.PNL_FLAG_DEPOSIT_DONE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 7
+        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 1
         '
         'CHK_FLAG_DEPOSIT_DONE
         '
         Me.CHK_FLAG_DEPOSIT_DONE.AutoSize = True
-        Me.CHK_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(90, 6)
+        Me.CHK_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(86, 7)
         Me.CHK_FLAG_DEPOSIT_DONE.Name = "CHK_FLAG_DEPOSIT_DONE"
         Me.CHK_FLAG_DEPOSIT_DONE.Size = New System.Drawing.Size(15, 14)
         Me.CHK_FLAG_DEPOSIT_DONE.TabIndex = 11
-        Me.CHK_FLAG_DEPOSIT_DONE.UseVisualStyleBackColor = True
+        Me.CHK_FLAG_DEPOSIT_DONE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.CHK_FLAG_DEPOSIT_DONE.UseVisualStyleBackColor = False
         '
         'LBL_FLAG_DEPOSIT_DONE_GUIDE
         '
@@ -538,7 +540,7 @@ Partial Class FRM_SUB_01
         Me.PNL_KINGAKU_INVOICE.Location = New System.Drawing.Point(5, 5)
         Me.PNL_KINGAKU_INVOICE.Name = "PNL_KINGAKU_INVOICE"
         Me.PNL_KINGAKU_INVOICE.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_KINGAKU_INVOICE.TabIndex = 8
+        Me.PNL_KINGAKU_INVOICE.TabIndex = 0
         '
         'LBL_KINGAKU_INVOICE_TOTAL
         '
@@ -552,7 +554,7 @@ Partial Class FRM_SUB_01
         Me.LBL_KINGAKU_INVOICE_TOTAL.TabIndex = 5
         Me.LBL_KINGAKU_INVOICE_TOTAL.Tag = "Clear"
         Me.LBL_KINGAKU_INVOICE_TOTAL.Text = "＊＊＊"
-        Me.LBL_KINGAKU_INVOICE_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBL_KINGAKU_INVOICE_TOTAL.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TXT_KINGAKU_INVOICE_VAT
         '
@@ -662,7 +664,7 @@ Partial Class FRM_SUB_01
         Me.LBL_KINGAKU_CONTRACT.TabIndex = 4
         Me.LBL_KINGAKU_CONTRACT.Tag = "Clear"
         Me.LBL_KINGAKU_CONTRACT.Text = "＊＊＊"
-        Me.LBL_KINGAKU_CONTRACT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LBL_KINGAKU_CONTRACT.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'LBL_KINGAKU_CONTRACT_GUIDE
         '
@@ -681,9 +683,9 @@ Partial Class FRM_SUB_01
         '
         Me.PNL_NAME_CONTRACT.Controls.Add(Me.LBL_NAME_CONTRACT)
         Me.PNL_NAME_CONTRACT.Controls.Add(Me.LBL_NAME_CONTRACT_GUIDE)
-        Me.PNL_NAME_CONTRACT.Location = New System.Drawing.Point(250, 5)
+        Me.PNL_NAME_CONTRACT.Location = New System.Drawing.Point(370, 5)
         Me.PNL_NAME_CONTRACT.Name = "PNL_NAME_CONTRACT"
-        Me.PNL_NAME_CONTRACT.Size = New System.Drawing.Size(485, 30)
+        Me.PNL_NAME_CONTRACT.Size = New System.Drawing.Size(365, 30)
         Me.PNL_NAME_CONTRACT.TabIndex = 3
         '
         'LBL_NAME_CONTRACT
@@ -694,7 +696,7 @@ Partial Class FRM_SUB_01
         Me.LBL_NAME_CONTRACT.ForeColor = System.Drawing.SystemColors.ControlText
         Me.LBL_NAME_CONTRACT.Location = New System.Drawing.Point(80, 1)
         Me.LBL_NAME_CONTRACT.Name = "LBL_NAME_CONTRACT"
-        Me.LBL_NAME_CONTRACT.Size = New System.Drawing.Size(395, 25)
+        Me.LBL_NAME_CONTRACT.Size = New System.Drawing.Size(275, 25)
         Me.LBL_NAME_CONTRACT.TabIndex = 4
         Me.LBL_NAME_CONTRACT.Tag = "Clear"
         Me.LBL_NAME_CONTRACT.Text = "＊＊＊"
@@ -720,7 +722,7 @@ Partial Class FRM_SUB_01
         Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.LBL_CODE_OWNER_NAME)
         Me.PNL_CODE_SHINTO_PARENT.Location = New System.Drawing.Point(5, 5)
         Me.PNL_CODE_SHINTO_PARENT.Name = "PNL_CODE_SHINTO_PARENT"
-        Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(360, 30)
         Me.PNL_CODE_SHINTO_PARENT.TabIndex = 2
         '
         'LBL_CODE_OWNER
@@ -758,7 +760,7 @@ Partial Class FRM_SUB_01
         Me.LBL_CODE_OWNER_NAME.ForeColor = System.Drawing.SystemColors.ControlText
         Me.LBL_CODE_OWNER_NAME.Location = New System.Drawing.Point(140, 1)
         Me.LBL_CODE_OWNER_NAME.Name = "LBL_CODE_OWNER_NAME"
-        Me.LBL_CODE_OWNER_NAME.Size = New System.Drawing.Size(90, 25)
+        Me.LBL_CODE_OWNER_NAME.Size = New System.Drawing.Size(210, 25)
         Me.LBL_CODE_OWNER_NAME.TabIndex = 3
         Me.LBL_CODE_OWNER_NAME.Tag = "Clear"
         Me.LBL_CODE_OWNER_NAME.Text = "＊＊＊"
@@ -766,7 +768,7 @@ Partial Class FRM_SUB_01
         '
         'PNL_NUMBER_CONTRACT
         '
-        Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.Label5)
+        Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.LBL_NUMBER_CONTRACT_LINK)
         Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.LBL_SERIAL_CONTRACT)
         Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.LBL_NUMBER_CONTRACT)
         Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.LBL_NUMBER_CONTRACT_GUIDE)
@@ -775,16 +777,16 @@ Partial Class FRM_SUB_01
         Me.PNL_NUMBER_CONTRACT.Size = New System.Drawing.Size(240, 30)
         Me.PNL_NUMBER_CONTRACT.TabIndex = 0
         '
-        'Label5
+        'LBL_NUMBER_CONTRACT_LINK
         '
-        Me.Label5.AutoEllipsis = True
-        Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(140, 1)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(20, 25)
-        Me.Label5.TabIndex = 9
-        Me.Label5.Text = "-"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LBL_NUMBER_CONTRACT_LINK.AutoEllipsis = True
+        Me.LBL_NUMBER_CONTRACT_LINK.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NUMBER_CONTRACT_LINK.Location = New System.Drawing.Point(140, 1)
+        Me.LBL_NUMBER_CONTRACT_LINK.Name = "LBL_NUMBER_CONTRACT_LINK"
+        Me.LBL_NUMBER_CONTRACT_LINK.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_NUMBER_CONTRACT_LINK.TabIndex = 9
+        Me.LBL_NUMBER_CONTRACT_LINK.Text = "-"
+        Me.LBL_NUMBER_CONTRACT_LINK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LBL_SERIAL_CONTRACT
         '
@@ -836,7 +838,7 @@ Partial Class FRM_SUB_01
         Me.GRP_FOOT.Location = New System.Drawing.Point(10, 490)
         Me.GRP_FOOT.Name = "GRP_FOOT"
         Me.GRP_FOOT.Size = New System.Drawing.Size(760, 60)
-        Me.GRP_FOOT.TabIndex = 4
+        Me.GRP_FOOT.TabIndex = 2
         Me.GRP_FOOT.TabStop = False
         '
         'pnlFUNCTION_GROUP
@@ -888,6 +890,15 @@ Partial Class FRM_SUB_01
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
+        'LBL_FLAG_DEPOSIT_DONE_BACK
+        '
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(215, Byte), Integer))
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK.Name = "LBL_FLAG_DEPOSIT_DONE_BACK"
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK.Size = New System.Drawing.Size(24, 24)
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK.TabIndex = 12
+        Me.LBL_FLAG_DEPOSIT_DONE_BACK.Visible = False
+        '
         'FRM_SUB_01
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -910,14 +921,14 @@ Partial Class FRM_SUB_01
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
+        Me.PNL_DEPOSIT_INPUT_AREA.ResumeLayout(False)
         Me.PNL_NAME_MEMO.ResumeLayout(False)
         Me.PNL_NAME_MEMO.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.PNL_KINGAKU_COST.ResumeLayout(False)
+        Me.PNL_KINGAKU_COST.PerformLayout()
+        Me.PNL_KIND_COST.ResumeLayout(False)
+        Me.PNL_KINGAKU_FEE.ResumeLayout(False)
+        Me.PNL_KINGAKU_FEE.PerformLayout()
         Me.PNL_KIND_DEPOSIT.ResumeLayout(False)
         Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
         Me.PNL_FLAG_DEPOSIT_DONE.ResumeLayout(False)
@@ -969,7 +980,7 @@ Partial Class FRM_SUB_01
     Friend WithEvents LBL_NAME_CONTRACT As Label
     Friend WithEvents PNL_KINGAKU_CONTRACT As Panel
     Friend WithEvents LBL_KINGAKU_CONTRACT_GUIDE As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents LBL_NUMBER_CONTRACT_LINK As Label
     Friend WithEvents LBL_SERIAL_CONTRACT As Label
     Friend WithEvents LBL_NUMBER_CONTRACT As Label
     Friend WithEvents LBL_KINGAKU_INVOICE_TOTAL As Label
@@ -979,27 +990,28 @@ Partial Class FRM_SUB_01
     Friend WithEvents PNL_DATE_INVOICE As Panel
     Friend WithEvents LBL_DATE_INVOICE As Label
     Friend WithEvents LBL_DATE_INVOICE_GUIDE As Label
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents LBL_KINGAKU_FEE_DETAIL_TOTAL As Label
+    Friend WithEvents PNL_KINGAKU_FEE As Panel
+    Friend WithEvents LBL_KINGAKU_FEE_TOTAL As Label
     Friend WithEvents TXT_KINGAKU_FEE_VAT As TextBox
     Friend WithEvents LBL_KINGAKU_FEE_GUIDE As Label
-    Friend WithEvents TXT_KINGAKU_FEE_DETAIL As TextBox
-    Friend WithEvents Panel3 As Panel
+    Friend WithEvents PNL_DEPOSIT_INPUT_AREA As Panel
     Friend WithEvents PNL_KIND_DEPOSIT As Panel
     Friend WithEvents CMB_KIND_DEPOSIT As ComboBox
     Friend WithEvents LBL_KIND_DEPOSIT_GUIDE As Label
     Friend WithEvents PNL_DATE_DEPOSIT As Panel
     Friend WithEvents DTP_DATE_DEPOSIT As DateTimePicker
     Friend WithEvents LBL_DATE_DEPOSIT_GUIDE As Label
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents Label13 As Label
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents Label14 As Label
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents PNL_KIND_COST As Panel
+    Friend WithEvents CMB_KIND_COST As ComboBox
+    Friend WithEvents LBL_KIND_COST_GUIDE As Label
+    Friend WithEvents PNL_KINGAKU_COST As Panel
+    Friend WithEvents LBL_KINGAKU_COST_TOTAL As Label
+    Friend WithEvents TXT_KINGAKU_COST_VAT As TextBox
+    Friend WithEvents LBL_KINGAKU_COST_GUIDE As Label
+    Friend WithEvents TXT_KINGAKU_COST_DETAIL As TextBox
     Friend WithEvents PNL_NAME_MEMO As Panel
     Friend WithEvents TXT_NAME_MEMO As TextBox
     Friend WithEvents LBL_NAME_MEMO_GUIDE As Label
+    Friend WithEvents CMB_KINGAKU_FEE_DETAIL As ComboBox
+    Friend WithEvents LBL_FLAG_DEPOSIT_DONE_BACK As Label
 End Class

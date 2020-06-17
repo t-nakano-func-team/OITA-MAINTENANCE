@@ -17,6 +17,8 @@
     Private Const cst_COMMON_CONTROL_SUFFIX_TO As String = "TO"
     Private Const cst_COMMON_CONTROL_SUFFIX_FIRST As String = "FIRST"
     Private Const cst_COMMON_CONTROL_SUFFIX_LAST As String = "LAST"
+    Private Const cst_COMMON_CONTROL_SUFFIX_DETAIL As String = "DETAIL"
+    Private Const cst_COMMON_CONTROL_SUFFIX_VAT As String = "VAT"
 
     Private Const cst_COMMON_CONTROL_SUFFIX_GUIDE As String = "GUIDE"
     Private Const cst_COMMON_CONTROL_SUFFIX_NAME As String = "NAME"
@@ -347,6 +349,9 @@
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_TO) '"_TO"を外す
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_FIRST) '"_FIRST"を外す
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_LAST) '"_LAST"を外す
+        strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_DETAIL) '"_DETAIL"を外す
+        strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_VAT) '"_VAT"を外す
+
         Return strRET
     End Function
 

@@ -171,7 +171,7 @@
         Return SRT_RET
     End Function
 
-    Public Function FUNC_GETTOTAL_KINGAKU_INVOICE_FROM_REGULAR(
+    Public Function FUNC_GET_TOTAL_KINGAKU_INVOICE_FROM_REGULAR(
     ByVal INT_YEAR As Integer, ByVal INT_MONTH As Integer,
     ByVal DAT_DATE_INVOICE_FROM As DateTime, ByVal DAT_DATE_INVOICE_TO As DateTime,
     ByVal INT_CODE_OWNER As Integer, ByVal INT_NUMBER_LIST_INVOICE As Integer
@@ -202,4 +202,5 @@
         Return LNG_RET
     End Function
 #End Region
+
 End Module
