@@ -17,7 +17,8 @@
     Private Enum ENM_MY_WINDOW_MODE
         INPUT_KEY = 1
         INPUT_DATA_INSERT
-        INPUT_DATA_UPDATE
+        INPUT_DATA_UPDATE_NORMAL
+        INPUT_DATA_UPDATE_INVOICE
     End Enum
 
 #End Region
@@ -25,6 +26,11 @@
 #Region "画面用・構造体"
 
     Public Structure SRT_MY_SEARCH_CONDITIONS '検索条件
+    End Structure
+
+    Public Structure SRT_COUNT_ALREADY
+        Public COUNT_INVOICE_ALREADY As Integer
+        Public COUNT_DEPOSIT_ALREADY As Integer
     End Structure
 #End Region
 
@@ -193,16 +199,31 @@
         BLN_CHECK = FUNC_CHECK_TABLE_MNT_T_CONTRACT(SRT_KEY)
 
         Dim ENM_CHANGE_MODE As ENM_MY_WINDOW_MODE
+        Dim SRT_ALREADY As SRT_COUNT_ALREADY
         If BLN_CHECK Then
-            ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
+
+            With SRT_ALREADY
+                .COUNT_INVOICE_ALREADY = FUNC_GET_MNT_T_INVOICE_COUNT(SRT_KEY.NUMBER_CONTRACT, SRT_KEY.SERIAL_CONTRACT)
+                .COUNT_DEPOSIT_ALREADY = FUNC_GET_MNT_T_INVOICE_COUNT_DEPOSIT_DONE(SRT_KEY.NUMBER_CONTRACT, SRT_KEY.SERIAL_CONTRACT)
+            End With
+
+            If SRT_ALREADY.COUNT_INVOICE_ALREADY > 0 Then
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE
+            Else
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL
+            End If
             Dim SRT_DATA As SRT_TABLE_MNT_T_CONTRACT_DATA
             SRT_DATA = Nothing
             Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_KEY, SRT_DATA)
             Call SUB_SET_INPUT_DATA(SRT_DATA)
         Else
             ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT
+            With SRT_ALREADY
+                .COUNT_INVOICE_ALREADY = 0
+                .COUNT_DEPOSIT_ALREADY = 0
+            End With
         End If
-
+        Call SUB_REFRESH_COUNT_ALREADY(SRT_ALREADY)
         Call SUB_WINDOW_MODE_CHANGE(ENM_CHANGE_MODE)
         Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me.PNL_INPUT_DATA)
     End Sub
@@ -236,7 +257,7 @@
         End If
 
         Select Case ENM_WINDOW_MODE_CURRENT
-            Case ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE
                 If Not FUNC_INSERT_RECORD(SRT_RECORD) Then
                     Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
@@ -285,6 +306,9 @@
 
     Private Function FUNC_INSERT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_T_CONTRACT) As Boolean
 
+        Dim SRT_INVOICE_ROW() As SRT_TABLE_MNT_T_INVOICE
+        SRT_INVOICE_ROW = FUNC_GET_INVOICE_RECORD_ALL(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT)
+
         If Not FUNC_DELETE_TABLE_MNT_T_CONTRACT(SRT_RECORD.KEY) Then
             Return False
         End If
@@ -292,6 +316,12 @@
         If Not FUNC_INSERT_TABLE_MNT_T_CONTRACT(SRT_RECORD) Then
             Return False
         End If
+
+        For i = 1 To (SRT_INVOICE_ROW.Length - 1)
+            If Not FUNC_INSERT_TABLE_MNT_T_INVOICE(SRT_INVOICE_ROW(i)) Then
+                Return False
+            End If
+        Next
 
         Return True
     End Function
@@ -439,9 +469,23 @@
                 BTN_DELETE.Enabled = False
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
-            Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL
                 PNL_INPUT_KEY.Enabled = False
                 PNL_INPUT_DATA.Enabled = True
+
+                PNL_KINGAKU_CONTRACT.Enabled = True
+                PNL_DATE_INVOICE_BASE.Enabled = True
+
+                BTN_ENTER.Enabled = True
+                BTN_DELETE.Enabled = True
+                BTN_CLEAR.Enabled = True
+                BTN_END.Enabled = True
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE
+                PNL_INPUT_KEY.Enabled = False
+                PNL_INPUT_DATA.Enabled = True
+
+                PNL_KINGAKU_CONTRACT.Enabled = False
+                PNL_DATE_INVOICE_BASE.Enabled = False
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = True
@@ -697,6 +741,12 @@
         Return INT_RET
     End Function
 
+    Private Sub SUB_REFRESH_COUNT_ALREADY(ByRef SRT_DATA As SRT_COUNT_ALREADY)
+        With SRT_DATA
+            LBL_COUNT_INVOICE_ALREADY.Text = Format(.COUNT_INVOICE_ALREADY, "#,##0")
+            LBL_COUNT_DEPOSIT_ALREADY.Text = Format(.COUNT_DEPOSIT_ALREADY, "#,##0")
+        End With
+    End Sub
 #End Region
 
 #Region "NEW"

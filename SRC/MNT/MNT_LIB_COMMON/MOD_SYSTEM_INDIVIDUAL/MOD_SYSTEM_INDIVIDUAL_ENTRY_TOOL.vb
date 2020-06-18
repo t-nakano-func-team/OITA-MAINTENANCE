@@ -201,6 +201,70 @@
         LNG_RET = LNG_KINGAKU_DETAIL_TOTAL + LNG_KINGAKU_VAT_TOTAL
         Return LNG_RET
     End Function
+
+    Public Function FUNC_GET_INVOICE_RECORD_ALL(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As SRT_TABLE_MNT_T_INVOICE()
+
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("SELECT" & System.Environment.NewLine)
+            .Append("*" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_INVOICE WITH(NOLOCK)" & System.Environment.NewLine)
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append("AND NUMBER_CONTRACT=" & INT_NUMBER_CONTRACT & System.Environment.NewLine)
+            .Append("AND SERIAL_CONTRACT=" & INT_SERIAL_CONTRACT & System.Environment.NewLine)
+            .Append("ORDER BY" & System.Environment.NewLine)
+            .Append("NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & System.Environment.NewLine)
+        End With
+
+        Dim SRT_RET() As SRT_TABLE_MNT_T_INVOICE
+        ReDim SRT_RET(0)
+
+        Dim SDR_READER As SqlClient.SqlDataReader
+        SDR_READER = Nothing
+        If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
+            SDR_READER = Nothing
+            Return SRT_RET
+        End If
+
+        If Not SDR_READER.HasRows Then
+            Call SDR_READER.Close()
+            SDR_READER = Nothing
+            Return SRT_RET
+        End If
+
+        While SDR_READER.Read
+            Dim INT_INDEX As Integer
+            INT_INDEX = SRT_RET.Length
+            ReDim Preserve SRT_RET(INT_INDEX)
+            With SRT_RET(INT_INDEX).KEY
+                .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
+                .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
+                .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
+            End With
+            With SRT_RET(INT_INDEX).DATA
+                .DATE_INVOICE = CDate(SDR_READER.Item("DATE_INVOICE"))
+                .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
+                .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
+                .FLAG_DEPOSIT_DONE = CInt(SDR_READER.Item("FLAG_DEPOSIT_DONE"))
+                .DATE_DEPOSIT = CDate(SDR_READER.Item("DATE_DEPOSIT"))
+                .KIND_DEPOSIT = CInt(SDR_READER.Item("KIND_DEPOSIT"))
+                .KINGAKU_FEE_DETAIL = CLng(SDR_READER.Item("KINGAKU_FEE_DETAIL"))
+                .KINGAKU_FEE_VAT = CLng(SDR_READER.Item("KINGAKU_FEE_VAT"))
+                .KIND_COST = CInt(SDR_READER.Item("KIND_COST"))
+                .KINGAKU_COST_DETAIL = CLng(SDR_READER.Item("KINGAKU_FEE_DETAIL"))
+                .KINGAKU_COST_VAT = CLng(SDR_READER.Item("KINGAKU_FEE_VAT"))
+                .FLAG_OUTPUT_DONE = CInt(SDR_READER.Item("FLAG_OUTPUT_DONE"))
+            End With
+        End While
+
+        Call SDR_READER.Close()
+        SDR_READER = Nothing
+
+        Return SRT_RET
+    End Function
 #End Region
 
 End Module

@@ -8,6 +8,7 @@
         KIND_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
         FLAG_OUTPUT_DONE = 16
+        FLAG_DONE = 18 '済み／未済み　汎用
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
@@ -41,4 +42,10 @@
         KIND_DEPOSIT = 1
         KIND_COST = 2
     End Enum
+
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_DONE
+        NOT_DONE = 0
+        DONE = 1
+    End Enum
+
 End Module
