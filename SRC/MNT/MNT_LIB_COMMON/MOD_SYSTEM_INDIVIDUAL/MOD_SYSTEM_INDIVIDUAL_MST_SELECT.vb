@@ -627,3 +627,37 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_T_INVOICE
 End Module
 
 #End Region
+
+#Region "MNT_T_DEPOSIT"
+Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_T_DEPOSIT
+
+#Region "モジュール用・定数"
+    Private Const CST_TABLE_NAME_DEFAULT As String = "MNT_T_DEPOSIT"
+#End Region
+    '最大入金連番
+    Public Function FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(
+    ByVal DAT_DATE_ACTIVE As DateTime
+    ) As Integer
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "MAX(SERIAL_DEPOSIT)"
+            ReDim .WHERE(1)
+            .WHERE(1).COL_NAME = "DATE_ACTIVE"
+            .WHERE(1).VALUE = DAT_DATE_ACTIVE
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+
+        Dim INT_RET As Integer
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
+
+        Return INT_RET
+    End Function
+
+End Module
+
+#End Region

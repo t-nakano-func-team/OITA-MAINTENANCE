@@ -28,6 +28,7 @@
     Private BLN_PROCESS_DOING As Boolean
     Private ENM_WINDOW_MODE_CURRENT As ENM_MY_WINDOW_MODE '現在の画面状態
     Private SRT_RECORD As SRT_TABLE_MNT_T_INVOICE
+    Private SRT_RECORD_DEPOSIT As SRT_TABLE_MNT_T_DEPOSIT
 #End Region
 
 #Region "プロパティ用"
@@ -92,11 +93,20 @@
         SRT_RECORD.DATA = Nothing
         Call FUNC_SELECT_TABLE_MNT_T_INVOICE(SRT_RECORD.KEY, SRT_RECORD.DATA)
 
+        With SRT_RECORD_DEPOSIT.KEY
+            .NUMBER_CONTRACT = Me.NUMBER_CONTRACT
+            .SERIAL_CONTRACT = Me.SERIAL_CONTRACT
+            .SERIAL_INVOICE = Me.SERIAL_INVOICE
+        End With
+        SRT_RECORD_DEPOSIT.DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNT_T_DEPOSIT(SRT_RECORD_DEPOSIT.KEY, SRT_RECORD_DEPOSIT.DATA)
+
         Dim DAT_DATE_INPUT_MAX As DateTime
         DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_DEPOSIT, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
 
         Call SUB_SYSTEM_COMMBO_MNT_M_ACCOUNT(CMB_KIND_DEPOSIT, ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_DEPOSIT)
+        Call SUB_SYSTEM_COMMBO_MNT_M_ACCOUNT(CMB_KIND_DEPOSIT_SUB, ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_PAYEE)
         Call SUB_SYSTEM_COMMBO_MNT_M_ACCOUNT(CMB_KIND_COST, ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_COST, True, "なし")
     End Sub
 
@@ -108,6 +118,8 @@
 
         Call SUB_SET_INPUT_KEY(SRT_RECORD.KEY)
         Call SUB_SET_INPUT_DATA(SRT_RECORD.DATA)
+
+        Call SUB_SET_INPUT_DATA_DEPOSIT(SRT_RECORD_DEPOSIT.DATA)
     End Sub
 
 #End Region
@@ -163,12 +175,16 @@
         SRT_UPDATE.KEY = FUNC_GET_INPUT_KEY()
         SRT_UPDATE.DATA = FUNC_GET_INPUT_DATA()
 
+        Dim SRT_INSERT As SRT_TABLE_MNT_T_DEPOSIT
+        SRT_INSERT.KEY = FUNC_GET_INPUT_KEY_DEPOSIT()
+        SRT_INSERT.DATA = FUNC_GET_INPUT_DATA_DEPOSIT()
+
         If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
             Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
-        If Not FUNC_INSERT_RECORD(SRT_UPDATE) Then
+        If Not FUNC_INSERT_RECORD(SRT_UPDATE, CHK_FLAG_DEPOSIT_DONE.Checked, SRT_INSERT) Then
             Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
             Exit Sub
@@ -185,7 +201,7 @@
     End Sub
 
 #Region "登録時の内部処理"
-    Private Function FUNC_INSERT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_T_INVOICE) As Boolean
+    Private Function FUNC_INSERT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_T_INVOICE, ByVal BLN_ADD_DEPOSIT As Boolean, ByRef SRT_RECORD_DEPOSIT As SRT_TABLE_MNT_T_DEPOSIT) As Boolean
 
         If Not FUNC_DELETE_TABLE_MNT_T_INVOICE(SRT_RECORD.KEY) Then
             Return False
@@ -193,6 +209,12 @@
 
         If Not FUNC_INSERT_TABLE_MNT_T_INVOICE(SRT_RECORD) Then
             Return False
+        End If
+
+        If BLN_ADD_DEPOSIT Then
+            If Not FUNC_INSERT_TABLE_MNT_T_DEPOSIT(SRT_RECORD_DEPOSIT) Then
+                Return False
+            End If
         End If
 
         Return True
@@ -328,8 +350,36 @@
         End With
     End Sub
 
+    Private Sub SUB_SET_INPUT_DATA_DEPOSIT(ByRef SRT_DATA As SRT_TABLE_MNT_T_DEPOSIT_DATA)
+        With SRT_DATA
+            If CHK_FLAG_DEPOSIT_DONE.Checked Then
+                If .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE Then
+                    LBL_SERIAL_DEPOSIT.Text = .SERIAL_DEPOSIT
+                Else
+                    LBL_SERIAL_DEPOSIT.Text = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(datSYSTEM_TOTAL_DATE_ACTIVE) + 1
+                End If
+                Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT_SUB, .KIND_DEPOSIT_SUB)
+            Else
+                LBL_SERIAL_DEPOSIT.Text = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(datSYSTEM_TOTAL_DATE_ACTIVE) + 1
+                Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT_SUB, -1)
+            End If
+        End With
+    End Sub
+
     Private Function FUNC_GET_INPUT_KEY() As SRT_TABLE_MNT_T_INVOICE_KEY
         Return SRT_RECORD.KEY
+    End Function
+
+    Private Function FUNC_GET_INPUT_KEY_DEPOSIT() As SRT_TABLE_MNT_T_DEPOSIT_KEY
+        Dim SRT_RET As SRT_TABLE_MNT_T_DEPOSIT_KEY
+
+        With SRT_RET
+            .NUMBER_CONTRACT = SRT_RECORD.KEY.NUMBER_CONTRACT
+            .SERIAL_CONTRACT = SRT_RECORD.KEY.SERIAL_CONTRACT
+            .SERIAL_INVOICE = SRT_RECORD.KEY.SERIAL_INVOICE
+        End With
+
+        Return SRT_RET
     End Function
 
     Private Function FUNC_GET_INPUT_DATA() As SRT_TABLE_MNT_T_INVOICE_DATA
@@ -364,6 +414,18 @@
 
         Return SRT_RET
     End Function
+
+    Private Function FUNC_GET_INPUT_DATA_DEPOSIT() As SRT_TABLE_MNT_T_DEPOSIT_DATA
+        Dim SRT_RET As SRT_TABLE_MNT_T_DEPOSIT_DATA
+        With SRT_RET
+            .KIND_DEPOSIT_SUB = 99
+            .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
+            .SERIAL_DEPOSIT = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(.DATE_ACTIVE) + 1
+        End With
+
+        Return SRT_RET
+    End Function
+
 #End Region
 
 #Region "画面状態遷移"

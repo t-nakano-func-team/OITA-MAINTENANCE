@@ -41,6 +41,7 @@
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT
         KIND_DEPOSIT = 1
         KIND_COST = 2
+        KIND_PAYEE = 3
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_DONE

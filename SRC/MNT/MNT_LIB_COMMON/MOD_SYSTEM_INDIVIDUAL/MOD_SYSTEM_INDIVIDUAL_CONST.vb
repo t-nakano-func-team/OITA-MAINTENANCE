@@ -19,4 +19,8 @@
 
 #End Region
 
+#Region "種別特定関連"
+    Public Const CST_SYSTEM_ACCOUNT_CODE_KIND_ORDINARY_DEPOSIT As Integer = 1 '普通預金
+#End Region
+
 End Module
