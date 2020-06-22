@@ -267,4 +267,65 @@
     End Function
 #End Region
 
+#Region "オーナー関連"
+    Public Function FUNC_GET_CODE_OWNER_FROM_COTRACT(ByVal INT_NUMBER_COTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As Integer
+        Dim BLN_CHASH As Boolean
+        BLN_CHASH = True
+
+        Dim SRT_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
+        With SRT_CONTRACT.KEY
+            .NUMBER_CONTRACT = INT_NUMBER_COTRACT
+            .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
+        End With
+
+        SRT_CONTRACT.DATA = Nothing
+        If Not FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_CONTRACT.KEY, SRT_CONTRACT.DATA, BLN_CHASH) Then
+            Return -1
+        End If
+
+        Dim INT_RET As Integer
+        INT_RET = SRT_CONTRACT.DATA.CODE_OWNER
+
+        Return INT_RET
+    End Function
+
+    Public Function FUNC_GET_NAME_OWNER_FROM_COTRACT(ByVal INT_NUMBER_COTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As String
+        Dim BLN_CHASH As Boolean
+        BLN_CHASH = True
+
+        Dim SRT_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
+        With SRT_CONTRACT.KEY
+            .NUMBER_CONTRACT = INT_NUMBER_COTRACT
+            .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
+        End With
+
+        SRT_CONTRACT.DATA = Nothing
+        If Not FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_CONTRACT.KEY, SRT_CONTRACT.DATA, BLN_CHASH) Then
+            Return ""
+        End If
+
+        Dim STR_RET As String
+
+        With SRT_CONTRACT.DATA
+            If .KIND_CONTRACT = ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR Then
+                STR_RET = FUNC_GET_MNT_M_OWNER_NAME_OWNER(.CODE_OWNER, BLN_CHASH)
+                Return STR_RET
+            End If
+        End With
+
+        Dim SRT_CONTRACT_SPOT As SRT_TABLE_MNT_T_CONTRACT_SPOT
+        With SRT_CONTRACT_SPOT.KEY
+            .NUMBER_CONTRACT = INT_NUMBER_COTRACT
+            .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
+        End With
+        SRT_CONTRACT_SPOT.DATA = Nothing
+        If Not FUNC_SELECT_TABLE_MNT_T_CONTRACT_SPOT(SRT_CONTRACT_SPOT.KEY, SRT_CONTRACT_SPOT.DATA) Then
+            Return ""
+        End If
+
+        STR_RET = SRT_CONTRACT_SPOT.DATA.NAME_OWNER
+        Return STR_RET
+    End Function
+#End Region
+
 End Module

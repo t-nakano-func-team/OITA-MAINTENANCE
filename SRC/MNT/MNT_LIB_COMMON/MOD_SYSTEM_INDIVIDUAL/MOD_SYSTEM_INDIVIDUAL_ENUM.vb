@@ -9,6 +9,7 @@
         FLAG_DEPOSIT_DONE = 15
         FLAG_OUTPUT_DONE = 16
         FLAG_DONE = 18 '済み／未済み　汎用
+        KIND_SORT_CHECK_DEPOSIT = 19
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE

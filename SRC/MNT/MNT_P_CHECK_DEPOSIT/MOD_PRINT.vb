@@ -7,8 +7,8 @@
 #End Region
 
 #Region "帳票用・定数"
-    Private Const CST_PRINT_DEFINITION As String = "MNT_M_USER" '定義体名称
-    Private Const CST_PRINT_LIST_NAME As String = "ユーザーマスタリスト"
+    Private Const CST_PRINT_DEFINITION As String = "MNT_P_CHECK_DEPOSIT" '定義体名称
+    Private Const CST_PRINT_LIST_NAME As String = "入金チェックリスト"
     Private Const CST_PRINT_DATA_FILE_EXTENT As String = ".dat"
 #End Region
 
@@ -22,13 +22,31 @@
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
-        Public CODE_STAFF As Integer
-        Public NAME_STAFF As String
-        Public USER_ID As String
-        Public PASS_WORD As String
-        Public FLAG_GRANT As Integer
+        Public NUMBER_CONTRACT As Integer
+        Public SERIAL_CONTRACT As Integer
+        Public SERIAL_INVOICE As Integer
 
-        Public FLAG_GRANT_NAME As String
+        Public DATE_ACTIVE As DateTime
+        Public SERIAL_DEPOSIT As Integer
+        Public DATE_DEPOSIT As DateTime
+        Public KINGAKU_INVOICE_DETAIL As Long
+        Public KINGAKU_INVOICE_VAT As Long
+        Public KIND_DEPOSIT As Integer
+        Public KIND_DEPOSIT_SUB As Integer
+
+        Public DATE_ACTIVE_INT As Integer
+        Public DATE_DEPOSIT_INT As Integer
+        Public CODE_OWNER As Integer
+        Public CODE_OWNER_NAME As String
+        Public KIND_DEPOSIT_NAME As String
+        Public KIND_DEPOSIT_SUB_NAME As String
+
+        Public Function KINGAKU_INVOICE_TOTAL() As Long
+            Dim LNG_RET As Long
+            LNG_RET = Me.KINGAKU_INVOICE_DETAIL + Me.KINGAKU_INVOICE_VAT
+
+            Return LNG_RET
+        End Function
     End Structure
 #End Region
 
@@ -70,13 +88,17 @@
             INT_INDEX = (SRT_DATA.Length)
             ReDim Preserve SRT_DATA(INT_INDEX)
             With SRT_DATA(INT_INDEX)
-                .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
-                .NAME_STAFF = CStr(SDR_READER.Item("NAME_STAFF"))
-                .USER_ID = CStr(SDR_READER.Item("USER_ID"))
-                .PASS_WORD = CStr(SDR_READER.Item("PASS_WORD"))
-                .FLAG_GRANT = CInt(SDR_READER.Item("FLAG_GRANT"))
+                .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
+                .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
+                .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
 
-                .FLAG_GRANT_NAME = ""
+                .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
+                .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
+                .DATE_DEPOSIT = CDate(SDR_READER.Item("DATE_DEPOSIT"))
+                .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
+                .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
+                .KIND_DEPOSIT = CInt(SDR_READER.Item("KIND_DEPOSIT"))
+                .KIND_DEPOSIT_SUB = CInt(SDR_READER.Item("KIND_DEPOSIT_SUB"))
             End With
         End While
 
@@ -146,13 +168,25 @@
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & System.Environment.NewLine)
-            Call .Append("*" & System.Environment.NewLine)
+            Call .Append("MAIN.*" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.DATE_DEPOSIT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KIND_DEPOSIT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_INVOICE_DETAIL" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_INVOICE_VAT" & "" & System.Environment.NewLine)
+
             Call .Append("FROM" & System.Environment.NewLine)
-            Call .Append(strSYSTEM_PUBLIC_MNGDB_PREFIX & "MNG_M_USER WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("MNT_T_DEPOSIT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("INNER JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_INVOICE AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_INVOICE=SUB_01.SERIAL_INVOICE" & System.Environment.NewLine)
+
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_STAFF" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT,MAIN.SERIAL_INVOICE" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -161,7 +195,14 @@
     '補助情報の取得
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
-            .FLAG_GRANT_NAME = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_GRANT, .FLAG_GRANT)
+            .CODE_OWNER = FUNC_GET_CODE_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+            .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+
+            .DATE_ACTIVE_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_ACTIVE)
+            .DATE_DEPOSIT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_DEPOSIT)
+
+            .KIND_DEPOSIT_NAME = FUNC_GET_MNT_M_ACCOUNT_NAME_KIND(ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_DEPOSIT, .KIND_DEPOSIT)
+            .KIND_DEPOSIT_SUB_NAME = FUNC_GET_MNT_M_ACCOUNT_NAME_KIND(ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_PAYEE, .KIND_DEPOSIT_SUB)
         End With
     End Sub
 
@@ -175,12 +216,21 @@
 
         ReDim STR_ROW(0)
         With SRT_DATA
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_STAFF))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_STAFF))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.USER_ID))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.PASS_WORD))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_GRANT))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_GRANT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_INVOICE))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_ACTIVE_INT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_DEPOSIT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_DEPOSIT_INT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_DETAIL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_VAT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT_SUB))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT_SUB_NAME))
         End With
         STR_RET = FUNC_GET_ONE_ROW_LIST_CSV(STR_ROW)
 
