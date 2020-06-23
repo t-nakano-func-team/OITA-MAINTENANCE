@@ -50,4 +50,8 @@
         DONE = 1
     End Enum
 
+    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT
+        DATE_ACTIVE = 1
+        DATE_DEPOSIT = 2
+    End Enum
 End Module

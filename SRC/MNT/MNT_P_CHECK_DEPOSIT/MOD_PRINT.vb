@@ -18,7 +18,14 @@
 
 #Region "帳票用・構造体"
     Public Structure SRT_PRINT_CONDITIONS '印刷条件
-        '条件なし
+        Public DATE_DPOSIT_FROM As DateTime
+        Public DATE_DPOSIT_TO As DateTime
+        Public DATE_ACTIVE_FROM As DateTime
+        Public DATE_ACTIVE_TO As DateTime
+        Public CODE_OWNER_FROM As Integer
+        Public CODE_OWNER_TO As Integer
+
+        Public KIND_SORT As ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
@@ -33,6 +40,12 @@
         Public KINGAKU_INVOICE_VAT As Long
         Public KIND_DEPOSIT As Integer
         Public KIND_DEPOSIT_SUB As Integer
+        Public KINGAKU_FEE_DETAIL As Long
+        Public KINGAKU_FEE_VAT As Long
+        Public KIND_COST As Integer
+        Public KINGAKU_COST_DETAIL As Long
+        Public KINGAKU_COST_VAT As Long
+        Public NAME_MEMO As String
 
         Public DATE_ACTIVE_INT As Integer
         Public DATE_DEPOSIT_INT As Integer
@@ -40,10 +53,25 @@
         Public CODE_OWNER_NAME As String
         Public KIND_DEPOSIT_NAME As String
         Public KIND_DEPOSIT_SUB_NAME As String
+        Public KIND_COST_NAME As String
 
         Public Function KINGAKU_INVOICE_TOTAL() As Long
             Dim LNG_RET As Long
             LNG_RET = Me.KINGAKU_INVOICE_DETAIL + Me.KINGAKU_INVOICE_VAT
+
+            Return LNG_RET
+        End Function
+
+        Public Function KINGAKU_FEE_TOTAL() As Long
+            Dim LNG_RET As Long
+            LNG_RET = Me.KINGAKU_FEE_DETAIL + Me.KINGAKU_FEE_VAT
+
+            Return LNG_RET
+        End Function
+
+        Public Function KINGAKU_COST_TOTAL() As Long
+            Dim LNG_RET As Long
+            LNG_RET = Me.KINGAKU_COST_DETAIL + Me.KINGAKU_COST_VAT
 
             Return LNG_RET
         End Function
@@ -99,6 +127,12 @@
                 .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
                 .KIND_DEPOSIT = CInt(SDR_READER.Item("KIND_DEPOSIT"))
                 .KIND_DEPOSIT_SUB = CInt(SDR_READER.Item("KIND_DEPOSIT_SUB"))
+                .KINGAKU_FEE_DETAIL = CLng(SDR_READER.Item("KINGAKU_FEE_DETAIL"))
+                .KINGAKU_FEE_VAT = CLng(SDR_READER.Item("KINGAKU_FEE_VAT"))
+                .KIND_COST = CInt(SDR_READER.Item("KIND_COST"))
+                .KINGAKU_COST_DETAIL = CLng(SDR_READER.Item("KINGAKU_COST_DETAIL"))
+                .KINGAKU_COST_VAT = CLng(SDR_READER.Item("KINGAKU_COST_VAT"))
+                .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
             End With
         End While
 
@@ -164,7 +198,6 @@
 
     Private Function FUNC_GET_SQL(ByRef SRT_CONDITIONS As SRT_PRINT_CONDITIONS) As String
         Dim STR_SQL As System.Text.StringBuilder
-
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & System.Environment.NewLine)
@@ -172,10 +205,16 @@
             Call .Append("SUB_01.DATE_DEPOSIT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.KIND_DEPOSIT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.KINGAKU_INVOICE_DETAIL" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KINGAKU_INVOICE_VAT" & "" & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_INVOICE_VAT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_FEE_DETAIL" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_FEE_VAT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KIND_COST" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_COST_DETAIL" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_COST_VAT" & "" & System.Environment.NewLine)
 
             Call .Append("FROM" & System.Environment.NewLine)
             Call .Append("MNT_T_DEPOSIT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+
             Call .Append("INNER JOIN" & System.Environment.NewLine)
             Call .Append("MNT_T_INVOICE AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
             Call .Append("ON" & System.Environment.NewLine)
@@ -183,13 +222,50 @@
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_INVOICE=SUB_01.SERIAL_INVOICE" & System.Environment.NewLine)
 
+            Call .Append("INNER JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT AS SUB_02 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_02.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_02.SERIAL_CONTRACT" & System.Environment.NewLine)
+
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
+            Dim STR_WHERE As String
+            STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
+            Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
+            Select Case SRT_CONDITIONS.KIND_SORT
+                Case ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT.DATE_ACTIVE
+                    Call .Append("MAIN.DATE_ACTIVE,MAIN.SERIAL_DEPOSIT," & System.Environment.NewLine)
+                Case ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT.DATE_DEPOSIT
+                    Call .Append("SUB_01.DATE_DEPOSIT,MAIN.DATE_ACTIVE,MAIN.SERIAL_DEPOSIT," & System.Environment.NewLine)
+            End Select
             Call .Append("MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT,MAIN.SERIAL_INVOICE" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
+    End Function
+
+    Private Function FUNC_GET_SQL_WHERE(ByRef SRT_CONDITIONS As SRT_PRINT_CONDITIONS)
+        Dim STR_WHERE As String
+        STR_WHERE = ""
+
+        Dim SRT_DEPOSIT_PERIOD As SRT_DATE_PERIOD
+        SRT_DEPOSIT_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_DPOSIT_FROM
+        SRT_DEPOSIT_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_DPOSIT_TO
+
+        Dim SRT_ACTIVE_PERIOD As SRT_DATE_PERIOD
+        SRT_ACTIVE_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_ACTIVE_FROM
+        SRT_ACTIVE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_ACTIVE_TO
+
+        With SRT_CONDITIONS
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_DEPOSIT_PERIOD, "SUB_01.DATE_DEPOSIT")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_ACTIVE_PERIOD, "MAIN.DATE_ACTIVE")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_FROM, "SUB_02.CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_TO, "SUB_02.CODE_OWNER", "<=")
+        End With
+
+        Return STR_WHERE
     End Function
 
     '補助情報の取得
@@ -203,6 +279,11 @@
 
             .KIND_DEPOSIT_NAME = FUNC_GET_MNT_M_ACCOUNT_NAME_KIND(ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_DEPOSIT, .KIND_DEPOSIT)
             .KIND_DEPOSIT_SUB_NAME = FUNC_GET_MNT_M_ACCOUNT_NAME_KIND(ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_PAYEE, .KIND_DEPOSIT_SUB)
+            If .KIND_COST <= 0 Then
+                .KIND_COST_NAME = ""
+            Else
+                .KIND_COST_NAME = FUNC_GET_MNT_M_ACCOUNT_NAME_KIND(ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT.KIND_COST, .KIND_COST)
+            End If
         End With
     End Sub
 
@@ -231,6 +312,15 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT_SUB))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_DEPOSIT_SUB_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_FEE_DETAIL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_FEE_VAT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_FEE_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_COST))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_COST_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_COST_DETAIL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_COST_VAT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_COST_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_MEMO))
         End With
         STR_RET = FUNC_GET_ONE_ROW_LIST_CSV(STR_ROW)
 

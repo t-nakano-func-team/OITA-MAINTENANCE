@@ -327,6 +327,7 @@
             If CHK_FLAG_DEPOSIT_DONE.Checked Then
                 Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, .DATE_DEPOSIT)
                 Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT, .KIND_DEPOSIT)
+                Call SUB_REFRSH_ENABLED_KIND_DEPOSIT_SUB()
                 CMB_KINGAKU_FEE_DETAIL.Text = Format(.KINGAKU_FEE_DETAIL, "#,##0")
                 TXT_KINGAKU_FEE_VAT.Text = Format(.KINGAKU_FEE_VAT, "#,##0")
                 Call SUB_REFRESH_KINGAKU_FEE_TOTAL()
@@ -338,6 +339,7 @@
             Else
                 Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, datSYSTEM_TOTAL_DATE_ACTIVE)
                 Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_DEPOSIT)
+                Call SUB_REFRSH_ENABLED_KIND_DEPOSIT_SUB()
                 CMB_KINGAKU_FEE_DETAIL.Text = Format(0, "#,##0")
                 TXT_KINGAKU_FEE_VAT.Text = Format(0, "#,##0")
                 Call SUB_REFRESH_KINGAKU_FEE_TOTAL()
@@ -359,9 +361,10 @@
                     LBL_SERIAL_DEPOSIT.Text = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(datSYSTEM_TOTAL_DATE_ACTIVE) + 1
                 End If
                 Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT_SUB, .KIND_DEPOSIT_SUB)
+                TXT_NAME_MEMO.Text = .NAME_MEMO
             Else
                 LBL_SERIAL_DEPOSIT.Text = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(datSYSTEM_TOTAL_DATE_ACTIVE) + 1
-                Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT_SUB, -1)
+                TXT_NAME_MEMO.Text = ""
             End If
         End With
     End Sub
@@ -418,9 +421,15 @@
     Private Function FUNC_GET_INPUT_DATA_DEPOSIT() As SRT_TABLE_MNT_T_DEPOSIT_DATA
         Dim SRT_RET As SRT_TABLE_MNT_T_DEPOSIT_DATA
         With SRT_RET
-            .KIND_DEPOSIT_SUB = 99
+            .KIND_DEPOSIT_SUB = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT_SUB)
             .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
-            .SERIAL_DEPOSIT = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(.DATE_ACTIVE) + 1
+
+            If FUNC_CHECK_TABLE_MNT_T_DEPOSIT(SRT_RECORD_DEPOSIT.KEY) Then
+                .SERIAL_DEPOSIT = SRT_RECORD_DEPOSIT.DATA.SERIAL_DEPOSIT
+            Else
+                .SERIAL_DEPOSIT = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(.DATE_ACTIVE) + 1
+            End If
+            .NAME_MEMO = TXT_NAME_MEMO.Text
         End With
 
         Return SRT_RET
@@ -636,6 +645,26 @@
 
         PNL_KINGAKU_COST.Enabled = BLN_ENABLED
     End Sub
+
+    Private Sub SUB_REFRSH_ENABLED_KIND_DEPOSIT_SUB()
+        Dim INT_KIND_DEPOSIT As Integer
+        INT_KIND_DEPOSIT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT)
+
+        Dim BLN_ENABLED As Boolean
+        If INT_KIND_DEPOSIT = CST_SYSTEM_ACCOUNT_CODE_KIND_ORDINARY_DEPOSIT Then
+            BLN_ENABLED = True
+        Else
+            BLN_ENABLED = False
+        End If
+
+        If BLN_ENABLED Then
+            Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_DEPOSIT_SUB)
+        Else
+            Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT_SUB, -1)
+        End If
+        PNL_KIND_DEPOSIT_SUB.Enabled = BLN_ENABLED
+        PNL_KINGAKU_FEE.Enabled = BLN_ENABLED
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -768,6 +797,11 @@
 #End Region
 
 #Region "イベント-セレクトインデックスチェンジ"
+
+    Private Sub CMB_KIND_DEPOSIT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CMB_KIND_DEPOSIT.SelectedIndexChanged
+        Call SUB_REFRSH_ENABLED_KIND_DEPOSIT_SUB()
+    End Sub
+
     Private Sub CMB_KIND_COST_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CMB_KIND_COST.SelectedIndexChanged
         Call SUB_REFRSH_ENABLED_KINGAKU_COST()
     End Sub

@@ -1014,7 +1014,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
         With SRT_SQL
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             .COL_NAME = "COUNT(*)"
-            ReDim .WHERE(2)
+            ReDim .WHERE(3)
             .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
             .WHERE(1).VALUE = SRT_DATA.NUMBER_CONTRACT
             .WHERE(2).COL_NAME = "SERIAL_CONTRACT"
@@ -1061,6 +1061,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         Public KIND_DEPOSIT_SUB As Integer
         Public DATE_ACTIVE As DateTime
         Public SERIAL_DEPOSIT As Integer
+        Public NAME_MEMO As String
     End Structure
 #End Region
 
@@ -1126,6 +1127,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             .KIND_DEPOSIT_SUB = -1
             .DATE_ACTIVE = cstVB_DATE_MIN
             .SERIAL_DEPOSIT = 0
+            .NAME_MEMO = ""
         End With
 
         If BLN_CASH Then
@@ -1172,6 +1174,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             .KIND_DEPOSIT_SUB = CInt(SDR_READER.Item("KIND_DEPOSIT_SUB"))
             .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
             .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
+            .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
         End With
 
         Call SDR_READER.Close()
@@ -1234,7 +1237,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT_SUB) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_DEPOSIT) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_DEPOSIT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -1255,7 +1259,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         With SRT_SQL
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             .COL_NAME = "COUNT(*)"
-            ReDim .WHERE(2)
+            ReDim .WHERE(3)
             .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
             .WHERE(1).VALUE = SRT_DATA.NUMBER_CONTRACT
             .WHERE(2).COL_NAME = "SERIAL_CONTRACT"

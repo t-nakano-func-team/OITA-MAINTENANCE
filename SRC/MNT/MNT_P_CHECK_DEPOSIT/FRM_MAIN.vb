@@ -57,8 +57,8 @@
         DAT_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT_TO, DAT_TO)
 
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_ACTIVE_FROM, DAT_FROM)
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_ACTIVE_TO, DAT_TO)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_ACTIVE_FROM, datSYSTEM_TOTAL_DATE_ACTIVE)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_ACTIVE_TO, datSYSTEM_TOTAL_DATE_ACTIVE)
 
         Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_SORT)
     End Sub
@@ -106,9 +106,19 @@
     '印刷/プレビュー/ファイル出力
     Private Sub SUB_PRINT(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean)
 
-        Dim STR_CONDITIONS As MOD_PRINT.SRT_PRINT_CONDITIONS
-        With STR_CONDITIONS
-            '条件なし
+        If Not FUNC_CHECK_INPUT_KEY() Then
+            Exit Sub
+        End If
+
+        Dim SRT_CONDITIONS As MOD_PRINT.SRT_PRINT_CONDITIONS
+        With SRT_CONDITIONS
+            .DATE_DPOSIT_FROM = DTP_DATE_DEPOSIT_FROM.Value
+            .DATE_DPOSIT_TO = DTP_DATE_DEPOSIT_TO.Value
+            .DATE_ACTIVE_FROM = DTP_DATE_ACTIVE_FROM.Value
+            .DATE_ACTIVE_TO = DTP_DATE_ACTIVE_TO.Value
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
+            .KIND_SORT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_SORT)
         End With
 
         Dim BLN_PUT As Boolean
@@ -117,7 +127,7 @@
         BLN_CANCEL = False
 
         Dim BLN_RET As Boolean
-        BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, STR_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
+        BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, SRT_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
 
         If Not BLN_RET Then
             Call MessageBox.Show(MOD_PRINT.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -198,6 +208,25 @@
                 'スルー
         End Select
     End Sub
+#End Region
+
+#Region "チェック処理"
+    Private Function FUNC_CHECK_INPUT_KEY() As Boolean
+        Dim CTL_CONTROL As Control
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+
+        'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
+        CTL_CONTROL = Nothing
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_KEY, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
 #End Region
 
 #Region "キー制御処理"
