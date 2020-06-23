@@ -19,7 +19,9 @@
         DEC_TEMP /= 100
 
         Dim LNG_RET As Long
-        LNG_RET = CLng(Math.Round(DEC_TEMP, MidpointRounding.AwayFromZero))
+        'LNG_RET = CLng(Math.Round(DEC_TEMP, MidpointRounding.AwayFromZero)) '四捨五入
+        LNG_RET = CLng(Math.Floor(DEC_TEMP)) '切捨
+
 
         LNG_RET = INT_MINUS * LNG_RET
         Return LNG_RET
