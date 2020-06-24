@@ -33,6 +33,9 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
         Me.PNL_DEPOSIT_INPUT_AREA = New System.Windows.Forms.Panel()
+        Me.PNL_SERIAL_DEPOSIT = New System.Windows.Forms.Panel()
+        Me.LBL_SERIAL_DEPOSIT = New System.Windows.Forms.Label()
+        Me.LBL_SERIAL_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_KIND_DEPOSIT_SUB = New System.Windows.Forms.Panel()
         Me.CMB_KIND_DEPOSIT_SUB = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_DEPOSIT_SUB_GUIDE = New System.Windows.Forms.Label()
@@ -91,9 +94,6 @@ Partial Class FRM_SUB_01
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_SERIAL_DEPOSIT = New System.Windows.Forms.Panel()
-        Me.LBL_SERIAL_DEPOSIT = New System.Windows.Forms.Label()
-        Me.LBL_SERIAL_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -101,6 +101,7 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_DEPOSIT_INPUT_AREA.SuspendLayout()
+        Me.PNL_SERIAL_DEPOSIT.SuspendLayout()
         Me.PNL_KIND_DEPOSIT_SUB.SuspendLayout()
         Me.PNL_NAME_MEMO.SuspendLayout()
         Me.PNL_KINGAKU_COST.SuspendLayout()
@@ -118,7 +119,6 @@ Partial Class FRM_SUB_01
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_SERIAL_DEPOSIT.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -261,6 +261,42 @@ Partial Class FRM_SUB_01
         Me.PNL_DEPOSIT_INPUT_AREA.Name = "PNL_DEPOSIT_INPUT_AREA"
         Me.PNL_DEPOSIT_INPUT_AREA.Size = New System.Drawing.Size(740, 215)
         Me.PNL_DEPOSIT_INPUT_AREA.TabIndex = 2
+        '
+        'PNL_SERIAL_DEPOSIT
+        '
+        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.LBL_SERIAL_DEPOSIT)
+        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.LBL_SERIAL_DEPOSIT_GUIDE)
+        Me.PNL_SERIAL_DEPOSIT.Location = New System.Drawing.Point(250, 5)
+        Me.PNL_SERIAL_DEPOSIT.Name = "PNL_SERIAL_DEPOSIT"
+        Me.PNL_SERIAL_DEPOSIT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_SERIAL_DEPOSIT.TabIndex = 1
+        '
+        'LBL_SERIAL_DEPOSIT
+        '
+        Me.LBL_SERIAL_DEPOSIT.AutoEllipsis = True
+        Me.LBL_SERIAL_DEPOSIT.BackColor = System.Drawing.Color.White
+        Me.LBL_SERIAL_DEPOSIT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_SERIAL_DEPOSIT.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_SERIAL_DEPOSIT.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_SERIAL_DEPOSIT.Name = "LBL_SERIAL_DEPOSIT"
+        Me.LBL_SERIAL_DEPOSIT.Size = New System.Drawing.Size(60, 25)
+        Me.LBL_SERIAL_DEPOSIT.TabIndex = 10
+        Me.LBL_SERIAL_DEPOSIT.Tag = "Clear"
+        Me.LBL_SERIAL_DEPOSIT.Text = "＊＊＊"
+        Me.LBL_SERIAL_DEPOSIT.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'LBL_SERIAL_DEPOSIT_GUIDE
+        '
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.AutoEllipsis = True
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Name = "LBL_SERIAL_DEPOSIT_GUIDE"
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.TabIndex = 3
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Text = "入金連番"
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_KIND_DEPOSIT_SUB
         '
@@ -432,6 +468,7 @@ Partial Class FRM_SUB_01
         'CMB_KINGAKU_FEE_DETAIL
         '
         Me.CMB_KINGAKU_FEE_DETAIL.FormattingEnabled = True
+        Me.CMB_KINGAKU_FEE_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.CMB_KINGAKU_FEE_DETAIL.Items.AddRange(New Object() {"0", "200", "300", "400", "500", "600", "700"})
         Me.CMB_KINGAKU_FEE_DETAIL.Location = New System.Drawing.Point(80, 1)
         Me.CMB_KINGAKU_FEE_DETAIL.Name = "CMB_KINGAKU_FEE_DETAIL"
@@ -941,42 +978,6 @@ Partial Class FRM_SUB_01
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_SERIAL_DEPOSIT
-        '
-        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.LBL_SERIAL_DEPOSIT)
-        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.LBL_SERIAL_DEPOSIT_GUIDE)
-        Me.PNL_SERIAL_DEPOSIT.Location = New System.Drawing.Point(250, 5)
-        Me.PNL_SERIAL_DEPOSIT.Name = "PNL_SERIAL_DEPOSIT"
-        Me.PNL_SERIAL_DEPOSIT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_SERIAL_DEPOSIT.TabIndex = 1
-        '
-        'LBL_SERIAL_DEPOSIT
-        '
-        Me.LBL_SERIAL_DEPOSIT.AutoEllipsis = True
-        Me.LBL_SERIAL_DEPOSIT.BackColor = System.Drawing.Color.White
-        Me.LBL_SERIAL_DEPOSIT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_SERIAL_DEPOSIT.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_SERIAL_DEPOSIT.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_SERIAL_DEPOSIT.Name = "LBL_SERIAL_DEPOSIT"
-        Me.LBL_SERIAL_DEPOSIT.Size = New System.Drawing.Size(60, 25)
-        Me.LBL_SERIAL_DEPOSIT.TabIndex = 10
-        Me.LBL_SERIAL_DEPOSIT.Tag = "Clear"
-        Me.LBL_SERIAL_DEPOSIT.Text = "＊＊＊"
-        Me.LBL_SERIAL_DEPOSIT.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'LBL_SERIAL_DEPOSIT_GUIDE
-        '
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.AutoEllipsis = True
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.Name = "LBL_SERIAL_DEPOSIT_GUIDE"
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.TabIndex = 3
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.Text = "入金連番"
-        Me.LBL_SERIAL_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'FRM_SUB_01
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -1000,6 +1001,7 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
         Me.PNL_DEPOSIT_INPUT_AREA.ResumeLayout(False)
+        Me.PNL_SERIAL_DEPOSIT.ResumeLayout(False)
         Me.PNL_KIND_DEPOSIT_SUB.ResumeLayout(False)
         Me.PNL_NAME_MEMO.ResumeLayout(False)
         Me.PNL_NAME_MEMO.PerformLayout()
@@ -1023,7 +1025,6 @@ Partial Class FRM_SUB_01
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_SERIAL_DEPOSIT.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
