@@ -491,6 +491,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public KIND_CONTRACT As Integer
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
+        Public CODE_HANDLE As Integer
+        Public CODE_WORK As Integer
         Public NAME_CONTRACT As String
         Public DATE_WORK_FROM As DateTime
         Public DATE_WORK_TO As DateTime
@@ -566,6 +568,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .KIND_CONTRACT = -1
             .DATE_CONTRACT = cstVB_DATE_MIN
             .CODE_OWNER = -1
+            .CODE_HANDLE = -1
+            .CODE_WORK = -1
             .NAME_CONTRACT = ""
             .DATE_WORK_FROM = cstVB_DATE_MIN
             .DATE_WORK_TO = cstVB_DATE_MIN
@@ -621,6 +625,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
             .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
             .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
+            .CODE_HANDLE = CInt(SDR_READER.Item("CODE_HANDLE"))
+            .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
             .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             .DATE_WORK_FROM = CDate(SDR_READER.Item("DATE_WORK_FROM"))
             .DATE_WORK_TO = CDate(SDR_READER.Item("DATE_WORK_TO"))
@@ -692,6 +698,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_OWNER) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_HANDLE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_WORK) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_FROM) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_TO) & "," & Environment.NewLine)

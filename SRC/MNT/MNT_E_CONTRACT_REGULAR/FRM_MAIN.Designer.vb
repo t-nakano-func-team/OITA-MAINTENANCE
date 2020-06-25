@@ -32,6 +32,14 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_COUNT_DEPOSIT_ALREADY = New System.Windows.Forms.Panel()
+        Me.LBL_COUNT_DEPOSIT_ALREADY = New System.Windows.Forms.Label()
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT = New System.Windows.Forms.Label()
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_COUNT_INVOICE_ALREADY = New System.Windows.Forms.Panel()
+        Me.LBL_COUNT_INVOICE_ALREADY = New System.Windows.Forms.Label()
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT = New System.Windows.Forms.Label()
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_SPAN_INVOICE = New System.Windows.Forms.Panel()
         Me.LBL_SPAN_INVOICE_UNIT = New System.Windows.Forms.Label()
         Me.LBL_SPAN_INVOICE_GUIDE = New System.Windows.Forms.Label()
@@ -81,20 +89,24 @@ Partial Class FRM_MAIN
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_COUNT_INVOICE_ALREADY = New System.Windows.Forms.Panel()
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT = New System.Windows.Forms.Label()
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE = New System.Windows.Forms.Label()
-        Me.LBL_COUNT_INVOICE_ALREADY = New System.Windows.Forms.Label()
-        Me.PNL_COUNT_DEPOSIT_ALREADY = New System.Windows.Forms.Panel()
-        Me.LBL_COUNT_DEPOSIT_ALREADY = New System.Windows.Forms.Label()
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT = New System.Windows.Forms.Label()
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_CODE_HANDLE = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_SECTION_NAME = New System.Windows.Forms.Label()
+        Me.CMB_CODE_HANDLE = New System.Windows.Forms.ComboBox()
+        Me.LBL_CODE_HANDLE_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_CODE_WORK = New System.Windows.Forms.Panel()
+        Me.CMB_CODE_WORK = New System.Windows.Forms.ComboBox()
+        Me.LBL_CODE_WORK_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_KIND_WORK = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_WORK = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_WORK_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_COUNT_DEPOSIT_ALREADY.SuspendLayout()
+        Me.PNL_COUNT_INVOICE_ALREADY.SuspendLayout()
         Me.PNL_SPAN_INVOICE.SuspendLayout()
         Me.PNL_DATE_INVOICE_BASE.SuspendLayout()
         Me.PNL_NAME_CONTRACT.SuspendLayout()
@@ -110,8 +122,9 @@ Partial Class FRM_MAIN
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_COUNT_INVOICE_ALREADY.SuspendLayout()
-        Me.PNL_COUNT_DEPOSIT_ALREADY.SuspendLayout()
+        Me.PNL_CODE_HANDLE.SuspendLayout()
+        Me.PNL_CODE_WORK.SuspendLayout()
+        Me.PNL_KIND_WORK.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -232,6 +245,9 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_WORK)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KIND_WORK)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_HANDLE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_COUNT_DEPOSIT_ALREADY)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_COUNT_INVOICE_ALREADY)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_SPAN_INVOICE)
@@ -249,15 +265,111 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
         '
+        'PNL_COUNT_DEPOSIT_ALREADY
+        '
+        Me.PNL_COUNT_DEPOSIT_ALREADY.Controls.Add(Me.LBL_COUNT_DEPOSIT_ALREADY)
+        Me.PNL_COUNT_DEPOSIT_ALREADY.Controls.Add(Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT)
+        Me.PNL_COUNT_DEPOSIT_ALREADY.Controls.Add(Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE)
+        Me.PNL_COUNT_DEPOSIT_ALREADY.Location = New System.Drawing.Point(495, 5)
+        Me.PNL_COUNT_DEPOSIT_ALREADY.Name = "PNL_COUNT_DEPOSIT_ALREADY"
+        Me.PNL_COUNT_DEPOSIT_ALREADY.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_COUNT_DEPOSIT_ALREADY.TabIndex = 2
+        '
+        'LBL_COUNT_DEPOSIT_ALREADY
+        '
+        Me.LBL_COUNT_DEPOSIT_ALREADY.AutoEllipsis = True
+        Me.LBL_COUNT_DEPOSIT_ALREADY.BackColor = System.Drawing.Color.White
+        Me.LBL_COUNT_DEPOSIT_ALREADY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_COUNT_DEPOSIT_ALREADY.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_COUNT_DEPOSIT_ALREADY.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_COUNT_DEPOSIT_ALREADY.Name = "LBL_COUNT_DEPOSIT_ALREADY"
+        Me.LBL_COUNT_DEPOSIT_ALREADY.Size = New System.Drawing.Size(60, 25)
+        Me.LBL_COUNT_DEPOSIT_ALREADY.TabIndex = 10
+        Me.LBL_COUNT_DEPOSIT_ALREADY.Tag = "Clear"
+        Me.LBL_COUNT_DEPOSIT_ALREADY.Text = "＊＊＊"
+        Me.LBL_COUNT_DEPOSIT_ALREADY.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'LBL_COUNT_DEPOSIT_ALREADY_UNIT
+        '
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.AutoEllipsis = True
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Location = New System.Drawing.Point(140, 1)
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Name = "LBL_COUNT_DEPOSIT_ALREADY_UNIT"
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.TabIndex = 9
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Text = "回"
+        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBL_COUNT_DEPOSIT_ALREADY_GUIDE
+        '
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.AutoEllipsis = True
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Name = "LBL_COUNT_DEPOSIT_ALREADY_GUIDE"
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.TabIndex = 3
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Text = "既入金回数"
+        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_COUNT_INVOICE_ALREADY
+        '
+        Me.PNL_COUNT_INVOICE_ALREADY.Controls.Add(Me.LBL_COUNT_INVOICE_ALREADY)
+        Me.PNL_COUNT_INVOICE_ALREADY.Controls.Add(Me.LBL_COUNT_INVOICE_ALREADY_UNIT)
+        Me.PNL_COUNT_INVOICE_ALREADY.Controls.Add(Me.LBL_COUNT_INVOICE_ALREADY_GUIDE)
+        Me.PNL_COUNT_INVOICE_ALREADY.Location = New System.Drawing.Point(250, 5)
+        Me.PNL_COUNT_INVOICE_ALREADY.Name = "PNL_COUNT_INVOICE_ALREADY"
+        Me.PNL_COUNT_INVOICE_ALREADY.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_COUNT_INVOICE_ALREADY.TabIndex = 1
+        '
+        'LBL_COUNT_INVOICE_ALREADY
+        '
+        Me.LBL_COUNT_INVOICE_ALREADY.AutoEllipsis = True
+        Me.LBL_COUNT_INVOICE_ALREADY.BackColor = System.Drawing.Color.White
+        Me.LBL_COUNT_INVOICE_ALREADY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_COUNT_INVOICE_ALREADY.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_COUNT_INVOICE_ALREADY.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_COUNT_INVOICE_ALREADY.Name = "LBL_COUNT_INVOICE_ALREADY"
+        Me.LBL_COUNT_INVOICE_ALREADY.Size = New System.Drawing.Size(60, 25)
+        Me.LBL_COUNT_INVOICE_ALREADY.TabIndex = 10
+        Me.LBL_COUNT_INVOICE_ALREADY.Tag = "Clear"
+        Me.LBL_COUNT_INVOICE_ALREADY.Text = "＊＊＊"
+        Me.LBL_COUNT_INVOICE_ALREADY.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'LBL_COUNT_INVOICE_ALREADY_UNIT
+        '
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.AutoEllipsis = True
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Location = New System.Drawing.Point(140, 1)
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Name = "LBL_COUNT_INVOICE_ALREADY_UNIT"
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.TabIndex = 9
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Text = "回"
+        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBL_COUNT_INVOICE_ALREADY_GUIDE
+        '
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.AutoEllipsis = True
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Name = "LBL_COUNT_INVOICE_ALREADY_GUIDE"
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.TabIndex = 3
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Text = "既請求回数"
+        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_SPAN_INVOICE
         '
         Me.PNL_SPAN_INVOICE.Controls.Add(Me.LBL_SPAN_INVOICE_UNIT)
         Me.PNL_SPAN_INVOICE.Controls.Add(Me.LBL_SPAN_INVOICE_GUIDE)
         Me.PNL_SPAN_INVOICE.Controls.Add(Me.TXT_SPAN_INVOICE)
-        Me.PNL_SPAN_INVOICE.Location = New System.Drawing.Point(250, 145)
+        Me.PNL_SPAN_INVOICE.Location = New System.Drawing.Point(250, 180)
         Me.PNL_SPAN_INVOICE.Name = "PNL_SPAN_INVOICE"
         Me.PNL_SPAN_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_SPAN_INVOICE.TabIndex = 5
+        Me.PNL_SPAN_INVOICE.TabIndex = 10
         '
         'LBL_SPAN_INVOICE_UNIT
         '
@@ -298,10 +410,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.DTP_DATE_INVOICE_BASE)
         Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.LBL_DATE_INVOICE_BASE_GUIDE)
-        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 145)
+        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 180)
         Me.PNL_DATE_INVOICE_BASE.Name = "PNL_DATE_INVOICE_BASE"
         Me.PNL_DATE_INVOICE_BASE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DATE_INVOICE_BASE.TabIndex = 4
+        Me.PNL_DATE_INVOICE_BASE.TabIndex = 9
         '
         'DTP_DATE_INVOICE_BASE
         '
@@ -329,10 +441,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_CONTRACT.Controls.Add(Me.TXT_NAME_CONTRACT)
         Me.PNL_NAME_CONTRACT.Controls.Add(Me.LBL_NAME_CONTRACT_GUIDE)
-        Me.PNL_NAME_CONTRACT.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_NAME_CONTRACT.Location = New System.Drawing.Point(5, 110)
         Me.PNL_NAME_CONTRACT.Name = "PNL_NAME_CONTRACT"
         Me.PNL_NAME_CONTRACT.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_NAME_CONTRACT.TabIndex = 2
+        Me.PNL_NAME_CONTRACT.TabIndex = 7
         '
         'TXT_NAME_CONTRACT
         '
@@ -361,10 +473,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NUMBER_LIST_INVOICE.Controls.Add(Me.LBL_NUMBER_LIST_INVOICE_GUIDE)
         Me.PNL_NUMBER_LIST_INVOICE.Controls.Add(Me.TXT_NUMBER_LIST_INVOICE)
-        Me.PNL_NUMBER_LIST_INVOICE.Location = New System.Drawing.Point(5, 180)
+        Me.PNL_NUMBER_LIST_INVOICE.Location = New System.Drawing.Point(5, 215)
         Me.PNL_NUMBER_LIST_INVOICE.Name = "PNL_NUMBER_LIST_INVOICE"
         Me.PNL_NUMBER_LIST_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NUMBER_LIST_INVOICE.TabIndex = 7
+        Me.PNL_NUMBER_LIST_INVOICE.TabIndex = 12
         '
         'LBL_NUMBER_LIST_INVOICE_GUIDE
         '
@@ -395,10 +507,10 @@ Partial Class FRM_MAIN
         Me.PNL_COUNT_INVOICE.Controls.Add(Me.LBL_COUNT_INVOICE_UNIT)
         Me.PNL_COUNT_INVOICE.Controls.Add(Me.LBL_COUNT_INVOICE_GUIDE)
         Me.PNL_COUNT_INVOICE.Controls.Add(Me.TXT_COUNT_INVOICE)
-        Me.PNL_COUNT_INVOICE.Location = New System.Drawing.Point(495, 145)
+        Me.PNL_COUNT_INVOICE.Location = New System.Drawing.Point(495, 180)
         Me.PNL_COUNT_INVOICE.Name = "PNL_COUNT_INVOICE"
         Me.PNL_COUNT_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_COUNT_INVOICE.TabIndex = 6
+        Me.PNL_COUNT_INVOICE.TabIndex = 11
         '
         'LBL_COUNT_INVOICE_UNIT
         '
@@ -441,10 +553,10 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_TO)
         Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_FROM)
         Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_GUIDE)
-        Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 110)
+        Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 145)
         Me.PNL_DATE_WORK.Name = "PNL_DATE_WORK"
         Me.PNL_DATE_WORK.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_DATE_WORK.TabIndex = 3
+        Me.PNL_DATE_WORK.TabIndex = 8
         '
         'LBL_DATE_WORK_FROM_TO_GUIDE
         '
@@ -492,10 +604,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_NAME_MEMO.Controls.Add(Me.TXT_NAME_MEMO)
         Me.PNL_NAME_MEMO.Controls.Add(Me.LBL_NAME_MEMO_GUIDE)
-        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 250)
+        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 285)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 9
+        Me.PNL_NAME_MEMO.TabIndex = 14
         '
         'TXT_NAME_MEMO
         '
@@ -524,10 +636,10 @@ Partial Class FRM_MAIN
         '
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.LBL_KINGAKU_CONTRACT_GUIDE)
         Me.PNL_KINGAKU_CONTRACT.Controls.Add(Me.TXT_KINGAKU_CONTRACT)
-        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(6, 215)
+        Me.PNL_KINGAKU_CONTRACT.Location = New System.Drawing.Point(5, 250)
         Me.PNL_KINGAKU_CONTRACT.Name = "PNL_KINGAKU_CONTRACT"
         Me.PNL_KINGAKU_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KINGAKU_CONTRACT.TabIndex = 8
+        Me.PNL_KINGAKU_CONTRACT.TabIndex = 13
         '
         'LBL_KINGAKU_CONTRACT_GUIDE
         '
@@ -593,7 +705,7 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_SHINTO_PARENT.Location = New System.Drawing.Point(5, 40)
         Me.PNL_CODE_SHINTO_PARENT.Name = "PNL_CODE_SHINTO_PARENT"
         Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(360, 30)
-        Me.PNL_CODE_SHINTO_PARENT.TabIndex = 1
+        Me.PNL_CODE_SHINTO_PARENT.TabIndex = 3
         '
         'LBL_CODE_OWNER_GUIDE
         '
@@ -798,101 +910,116 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_COUNT_INVOICE_ALREADY
+        'PNL_CODE_HANDLE
         '
-        Me.PNL_COUNT_INVOICE_ALREADY.Controls.Add(Me.LBL_COUNT_INVOICE_ALREADY)
-        Me.PNL_COUNT_INVOICE_ALREADY.Controls.Add(Me.LBL_COUNT_INVOICE_ALREADY_UNIT)
-        Me.PNL_COUNT_INVOICE_ALREADY.Controls.Add(Me.LBL_COUNT_INVOICE_ALREADY_GUIDE)
-        Me.PNL_COUNT_INVOICE_ALREADY.Location = New System.Drawing.Point(250, 5)
-        Me.PNL_COUNT_INVOICE_ALREADY.Name = "PNL_COUNT_INVOICE_ALREADY"
-        Me.PNL_COUNT_INVOICE_ALREADY.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_COUNT_INVOICE_ALREADY.TabIndex = 10
+        Me.PNL_CODE_HANDLE.Controls.Add(Me.LBL_CODE_SECTION_NAME)
+        Me.PNL_CODE_HANDLE.Controls.Add(Me.CMB_CODE_HANDLE)
+        Me.PNL_CODE_HANDLE.Controls.Add(Me.LBL_CODE_HANDLE_GUIDE)
+        Me.PNL_CODE_HANDLE.Location = New System.Drawing.Point(370, 40)
+        Me.PNL_CODE_HANDLE.Name = "PNL_CODE_HANDLE"
+        Me.PNL_CODE_HANDLE.Size = New System.Drawing.Size(365, 30)
+        Me.PNL_CODE_HANDLE.TabIndex = 4
         '
-        'LBL_COUNT_INVOICE_ALREADY_UNIT
+        'LBL_CODE_SECTION_NAME
         '
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.AutoEllipsis = True
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.ForeColor = System.Drawing.Color.Black
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Location = New System.Drawing.Point(140, 1)
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Name = "LBL_COUNT_INVOICE_ALREADY_UNIT"
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Size = New System.Drawing.Size(20, 25)
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.TabIndex = 9
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.Text = "回"
-        Me.LBL_COUNT_INVOICE_ALREADY_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LBL_CODE_SECTION_NAME.AutoEllipsis = True
+        Me.LBL_CODE_SECTION_NAME.BackColor = System.Drawing.Color.White
+        Me.LBL_CODE_SECTION_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_SECTION_NAME.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_CODE_SECTION_NAME.Location = New System.Drawing.Point(205, 1)
+        Me.LBL_CODE_SECTION_NAME.Name = "LBL_CODE_SECTION_NAME"
+        Me.LBL_CODE_SECTION_NAME.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_CODE_SECTION_NAME.TabIndex = 4
+        Me.LBL_CODE_SECTION_NAME.Tag = "Clear"
+        Me.LBL_CODE_SECTION_NAME.Text = "＊＊＊"
+        Me.LBL_CODE_SECTION_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'LBL_COUNT_INVOICE_ALREADY_GUIDE
+        'CMB_CODE_HANDLE
         '
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.AutoEllipsis = True
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Name = "LBL_COUNT_INVOICE_ALREADY_GUIDE"
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.TabIndex = 3
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.Text = "既請求回数"
-        Me.LBL_COUNT_INVOICE_ALREADY_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CMB_CODE_HANDLE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_CODE_HANDLE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_CODE_HANDLE.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_CODE_HANDLE.Name = "CMB_CODE_HANDLE"
+        Me.CMB_CODE_HANDLE.Size = New System.Drawing.Size(125, 26)
+        Me.CMB_CODE_HANDLE.TabIndex = 1
+        Me.CMB_CODE_HANDLE.Tag = "Clear"
         '
-        'LBL_COUNT_INVOICE_ALREADY
+        'LBL_CODE_HANDLE_GUIDE
         '
-        Me.LBL_COUNT_INVOICE_ALREADY.AutoEllipsis = True
-        Me.LBL_COUNT_INVOICE_ALREADY.BackColor = System.Drawing.Color.White
-        Me.LBL_COUNT_INVOICE_ALREADY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_COUNT_INVOICE_ALREADY.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_COUNT_INVOICE_ALREADY.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_COUNT_INVOICE_ALREADY.Name = "LBL_COUNT_INVOICE_ALREADY"
-        Me.LBL_COUNT_INVOICE_ALREADY.Size = New System.Drawing.Size(60, 25)
-        Me.LBL_COUNT_INVOICE_ALREADY.TabIndex = 10
-        Me.LBL_COUNT_INVOICE_ALREADY.Tag = "Clear"
-        Me.LBL_COUNT_INVOICE_ALREADY.Text = "＊＊＊"
-        Me.LBL_COUNT_INVOICE_ALREADY.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_CODE_HANDLE_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_HANDLE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_HANDLE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_HANDLE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_HANDLE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_HANDLE_GUIDE.Name = "LBL_CODE_HANDLE_GUIDE"
+        Me.LBL_CODE_HANDLE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_HANDLE_GUIDE.TabIndex = 0
+        Me.LBL_CODE_HANDLE_GUIDE.Text = "作業担当"
+        Me.LBL_CODE_HANDLE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'PNL_COUNT_DEPOSIT_ALREADY
+        'PNL_CODE_WORK
         '
-        Me.PNL_COUNT_DEPOSIT_ALREADY.Controls.Add(Me.LBL_COUNT_DEPOSIT_ALREADY)
-        Me.PNL_COUNT_DEPOSIT_ALREADY.Controls.Add(Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT)
-        Me.PNL_COUNT_DEPOSIT_ALREADY.Controls.Add(Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE)
-        Me.PNL_COUNT_DEPOSIT_ALREADY.Location = New System.Drawing.Point(495, 5)
-        Me.PNL_COUNT_DEPOSIT_ALREADY.Name = "PNL_COUNT_DEPOSIT_ALREADY"
-        Me.PNL_COUNT_DEPOSIT_ALREADY.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_COUNT_DEPOSIT_ALREADY.TabIndex = 11
+        Me.PNL_CODE_WORK.Controls.Add(Me.CMB_CODE_WORK)
+        Me.PNL_CODE_WORK.Controls.Add(Me.LBL_CODE_WORK_GUIDE)
+        Me.PNL_CODE_WORK.Location = New System.Drawing.Point(250, 75)
+        Me.PNL_CODE_WORK.Name = "PNL_CODE_WORK"
+        Me.PNL_CODE_WORK.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_WORK.TabIndex = 6
         '
-        'LBL_COUNT_DEPOSIT_ALREADY
+        'CMB_CODE_WORK
         '
-        Me.LBL_COUNT_DEPOSIT_ALREADY.AutoEllipsis = True
-        Me.LBL_COUNT_DEPOSIT_ALREADY.BackColor = System.Drawing.Color.White
-        Me.LBL_COUNT_DEPOSIT_ALREADY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_COUNT_DEPOSIT_ALREADY.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_COUNT_DEPOSIT_ALREADY.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_COUNT_DEPOSIT_ALREADY.Name = "LBL_COUNT_DEPOSIT_ALREADY"
-        Me.LBL_COUNT_DEPOSIT_ALREADY.Size = New System.Drawing.Size(60, 25)
-        Me.LBL_COUNT_DEPOSIT_ALREADY.TabIndex = 10
-        Me.LBL_COUNT_DEPOSIT_ALREADY.Tag = "Clear"
-        Me.LBL_COUNT_DEPOSIT_ALREADY.Text = "＊＊＊"
-        Me.LBL_COUNT_DEPOSIT_ALREADY.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CMB_CODE_WORK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_CODE_WORK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_CODE_WORK.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_CODE_WORK.Name = "CMB_CODE_WORK"
+        Me.CMB_CODE_WORK.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_CODE_WORK.TabIndex = 1
+        Me.CMB_CODE_WORK.Tag = "Clear"
         '
-        'LBL_COUNT_DEPOSIT_ALREADY_UNIT
+        'LBL_CODE_WORK_GUIDE
         '
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.AutoEllipsis = True
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.ForeColor = System.Drawing.Color.Black
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Location = New System.Drawing.Point(140, 1)
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Name = "LBL_COUNT_DEPOSIT_ALREADY_UNIT"
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Size = New System.Drawing.Size(20, 25)
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.TabIndex = 9
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.Text = "回"
-        Me.LBL_COUNT_DEPOSIT_ALREADY_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LBL_CODE_WORK_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_WORK_GUIDE.Name = "LBL_CODE_WORK_GUIDE"
+        Me.LBL_CODE_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_WORK_GUIDE.TabIndex = 0
+        Me.LBL_CODE_WORK_GUIDE.Text = "作業"
+        Me.LBL_CODE_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'LBL_COUNT_DEPOSIT_ALREADY_GUIDE
+        'PNL_KIND_WORK
         '
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.AutoEllipsis = True
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Name = "LBL_COUNT_DEPOSIT_ALREADY_GUIDE"
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.TabIndex = 3
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.Text = "既入金回数"
-        Me.LBL_COUNT_DEPOSIT_ALREADY_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.PNL_KIND_WORK.Controls.Add(Me.CMB_KIND_WORK)
+        Me.PNL_KIND_WORK.Controls.Add(Me.LBL_KIND_WORK_GUIDE)
+        Me.PNL_KIND_WORK.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_KIND_WORK.Name = "PNL_KIND_WORK"
+        Me.PNL_KIND_WORK.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_WORK.TabIndex = 5
+        '
+        'CMB_KIND_WORK
+        '
+        Me.CMB_KIND_WORK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_WORK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_WORK.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_WORK.Name = "CMB_KIND_WORK"
+        Me.CMB_KIND_WORK.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_WORK.TabIndex = 1
+        Me.CMB_KIND_WORK.Tag = "Clear"
+        '
+        'LBL_KIND_WORK_GUIDE
+        '
+        Me.LBL_KIND_WORK_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_WORK_GUIDE.Name = "LBL_KIND_WORK_GUIDE"
+        Me.LBL_KIND_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_WORK_GUIDE.TabIndex = 0
+        Me.LBL_KIND_WORK_GUIDE.Text = "作業区分"
+        Me.LBL_KIND_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FRM_MAIN
         '
@@ -916,6 +1043,8 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_COUNT_DEPOSIT_ALREADY.ResumeLayout(False)
+        Me.PNL_COUNT_INVOICE_ALREADY.ResumeLayout(False)
         Me.PNL_SPAN_INVOICE.ResumeLayout(False)
         Me.PNL_SPAN_INVOICE.PerformLayout()
         Me.PNL_DATE_INVOICE_BASE.ResumeLayout(False)
@@ -941,8 +1070,9 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_COUNT_INVOICE_ALREADY.ResumeLayout(False)
-        Me.PNL_COUNT_DEPOSIT_ALREADY.ResumeLayout(False)
+        Me.PNL_CODE_HANDLE.ResumeLayout(False)
+        Me.PNL_CODE_WORK.ResumeLayout(False)
+        Me.PNL_KIND_WORK.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1014,4 +1144,14 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_COUNT_INVOICE_ALREADY As Label
     Friend WithEvents LBL_COUNT_INVOICE_ALREADY_UNIT As Label
     Friend WithEvents LBL_COUNT_INVOICE_ALREADY_GUIDE As Label
+    Friend WithEvents PNL_CODE_HANDLE As Panel
+    Friend WithEvents LBL_CODE_SECTION_NAME As Label
+    Friend WithEvents CMB_CODE_HANDLE As ComboBox
+    Friend WithEvents LBL_CODE_HANDLE_GUIDE As Label
+    Friend WithEvents PNL_CODE_WORK As Panel
+    Friend WithEvents CMB_CODE_WORK As ComboBox
+    Friend WithEvents LBL_CODE_WORK_GUIDE As Label
+    Friend WithEvents PNL_KIND_WORK As Panel
+    Friend WithEvents CMB_KIND_WORK As ComboBox
+    Friend WithEvents LBL_KIND_WORK_GUIDE As Label
 End Class

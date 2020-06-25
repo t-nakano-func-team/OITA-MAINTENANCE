@@ -55,4 +55,11 @@
         DATE_ACTIVE = 1
         DATE_DEPOSIT = 2
     End Enum
+
+    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_WORK
+        ALWAYS = 1
+        REGULAR = 2
+    End Enum
+
+
 End Module
