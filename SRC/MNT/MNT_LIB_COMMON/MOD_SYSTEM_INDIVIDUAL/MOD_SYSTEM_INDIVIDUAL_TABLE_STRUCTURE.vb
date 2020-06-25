@@ -1013,6 +1013,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_T_INVOICE_DATA
         Public DATE_INVOICE As DateTime
+        Public CODE_SECTION As Integer
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
         Public FLAG_DEPOSIT_DONE As Integer
@@ -1087,6 +1088,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
 
         With SRT_RET
             .DATE_INVOICE = cstVB_DATE_MIN
+            .CODE_SECTION = -1
             .KINGAKU_INVOICE_DETAIL = 0
             .KINGAKU_INVOICE_VAT = 0
             .FLAG_DEPOSIT_DONE = -1
@@ -1142,6 +1144,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
 
         With SRT_RET
             .DATE_INVOICE = CDate(SDR_READER.Item("DATE_INVOICE"))
+            .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
             .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
             .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
             .FLAG_DEPOSIT_DONE = CInt(SDR_READER.Item("FLAG_DEPOSIT_DONE"))
@@ -1214,6 +1217,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_INVOICE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_INVOICE_DETAIL) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_INVOICE_VAT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_DEPOSIT_DONE) & "," & Environment.NewLine)
