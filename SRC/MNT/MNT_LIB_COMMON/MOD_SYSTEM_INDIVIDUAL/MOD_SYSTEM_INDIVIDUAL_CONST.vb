@@ -7,6 +7,11 @@
     Public Const CST_SYSTEM_CODE_OWNER_MAX_VALUE As Integer = 999999
     Public INT_SYSTEM_CODE_OWNER_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_OWNER_MAX_VALUE.ToString.Length)
 
+    '作業担当コード
+    Public Const CST_SYSTEM_CODE_HANDLE_MIN_VALUE As Integer = 1
+    Public Const CST_SYSTEM_CODE_HANDLE_MAX_VALUE As Integer = 99
+    Public INT_SYSTEM_CODE_HANDLE_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_HANDLE_MAX_VALUE.ToString.Length)
+
     '契約番号
     Public Const CST_SYSTEM_NUMBER_CONTRACT_MIN_VALUE As Integer = 1
     Public Const CST_SYSTEM_NUMBER_CONTRACT_MAX_VALUE As Integer = 999999

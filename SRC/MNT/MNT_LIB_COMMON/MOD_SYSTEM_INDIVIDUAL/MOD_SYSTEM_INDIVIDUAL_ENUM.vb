@@ -8,6 +8,7 @@
         KIND_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
         FLAG_OUTPUT_DONE = 16
+        KIND_WORK = 17
         FLAG_DONE = 18 '済み／未済み　汎用
         KIND_SORT_CHECK_DEPOSIT = 19
     End Enum
