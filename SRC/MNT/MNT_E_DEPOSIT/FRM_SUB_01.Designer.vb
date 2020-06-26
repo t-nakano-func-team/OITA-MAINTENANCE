@@ -33,6 +33,9 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
         Me.PNL_DEPOSIT_INPUT_AREA = New System.Windows.Forms.Panel()
+        Me.PNL_KIND_SALE = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_SALE = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_SALE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_SERIAL_DEPOSIT = New System.Windows.Forms.Panel()
         Me.LBL_SERIAL_DEPOSIT = New System.Windows.Forms.Label()
         Me.LBL_SERIAL_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
@@ -101,6 +104,7 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_DEPOSIT_INPUT_AREA.SuspendLayout()
+        Me.PNL_KIND_SALE.SuspendLayout()
         Me.PNL_SERIAL_DEPOSIT.SuspendLayout()
         Me.PNL_KIND_DEPOSIT_SUB.SuspendLayout()
         Me.PNL_NAME_MEMO.SuspendLayout()
@@ -249,6 +253,7 @@ Partial Class FRM_SUB_01
         '
         'PNL_DEPOSIT_INPUT_AREA
         '
+        Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_KIND_SALE)
         Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_SERIAL_DEPOSIT)
         Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_KIND_DEPOSIT_SUB)
         Me.PNL_DEPOSIT_INPUT_AREA.Controls.Add(Me.PNL_NAME_MEMO)
@@ -261,6 +266,38 @@ Partial Class FRM_SUB_01
         Me.PNL_DEPOSIT_INPUT_AREA.Name = "PNL_DEPOSIT_INPUT_AREA"
         Me.PNL_DEPOSIT_INPUT_AREA.Size = New System.Drawing.Size(740, 215)
         Me.PNL_DEPOSIT_INPUT_AREA.TabIndex = 2
+        '
+        'PNL_KIND_SALE
+        '
+        Me.PNL_KIND_SALE.Controls.Add(Me.CMB_KIND_SALE)
+        Me.PNL_KIND_SALE.Controls.Add(Me.LBL_KIND_SALE_GUIDE)
+        Me.PNL_KIND_SALE.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_KIND_SALE.Name = "PNL_KIND_SALE"
+        Me.PNL_KIND_SALE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_SALE.TabIndex = 2
+        '
+        'CMB_KIND_SALE
+        '
+        Me.CMB_KIND_SALE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_SALE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_SALE.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_SALE.Name = "CMB_KIND_SALE"
+        Me.CMB_KIND_SALE.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_SALE.TabIndex = 1
+        Me.CMB_KIND_SALE.Tag = "Clear"
+        '
+        'LBL_KIND_SALE_GUIDE
+        '
+        Me.LBL_KIND_SALE_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_SALE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_SALE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_SALE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_SALE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_SALE_GUIDE.Name = "LBL_KIND_SALE_GUIDE"
+        Me.LBL_KIND_SALE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_SALE_GUIDE.TabIndex = 0
+        Me.LBL_KIND_SALE_GUIDE.Text = "売掛種別"
+        Me.LBL_KIND_SALE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_SERIAL_DEPOSIT
         '
@@ -302,10 +339,10 @@ Partial Class FRM_SUB_01
         '
         Me.PNL_KIND_DEPOSIT_SUB.Controls.Add(Me.CMB_KIND_DEPOSIT_SUB)
         Me.PNL_KIND_DEPOSIT_SUB.Controls.Add(Me.LBL_KIND_DEPOSIT_SUB_GUIDE)
-        Me.PNL_KIND_DEPOSIT_SUB.Location = New System.Drawing.Point(250, 40)
+        Me.PNL_KIND_DEPOSIT_SUB.Location = New System.Drawing.Point(495, 40)
         Me.PNL_KIND_DEPOSIT_SUB.Name = "PNL_KIND_DEPOSIT_SUB"
         Me.PNL_KIND_DEPOSIT_SUB.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_DEPOSIT_SUB.TabIndex = 3
+        Me.PNL_KIND_DEPOSIT_SUB.TabIndex = 4
         '
         'CMB_KIND_DEPOSIT_SUB
         '
@@ -337,7 +374,7 @@ Partial Class FRM_SUB_01
         Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 180)
         Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
         Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_NAME_MEMO.TabIndex = 7
+        Me.PNL_NAME_MEMO.TabIndex = 8
         '
         'TXT_NAME_MEMO
         '
@@ -371,7 +408,7 @@ Partial Class FRM_SUB_01
         Me.PNL_KINGAKU_COST.Location = New System.Drawing.Point(5, 145)
         Me.PNL_KINGAKU_COST.Name = "PNL_KINGAKU_COST"
         Me.PNL_KINGAKU_COST.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_KINGAKU_COST.TabIndex = 6
+        Me.PNL_KINGAKU_COST.TabIndex = 7
         '
         'LBL_KINGAKU_COST_TOTAL
         '
@@ -429,7 +466,7 @@ Partial Class FRM_SUB_01
         Me.PNL_KIND_COST.Location = New System.Drawing.Point(5, 110)
         Me.PNL_KIND_COST.Name = "PNL_KIND_COST"
         Me.PNL_KIND_COST.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_COST.TabIndex = 5
+        Me.PNL_KIND_COST.TabIndex = 6
         '
         'CMB_KIND_COST
         '
@@ -463,7 +500,7 @@ Partial Class FRM_SUB_01
         Me.PNL_KINGAKU_FEE.Location = New System.Drawing.Point(5, 75)
         Me.PNL_KINGAKU_FEE.Name = "PNL_KINGAKU_FEE"
         Me.PNL_KINGAKU_FEE.Size = New System.Drawing.Size(485, 30)
-        Me.PNL_KINGAKU_FEE.TabIndex = 4
+        Me.PNL_KINGAKU_FEE.TabIndex = 5
         '
         'CMB_KINGAKU_FEE_DETAIL
         '
@@ -518,10 +555,10 @@ Partial Class FRM_SUB_01
         '
         Me.PNL_KIND_DEPOSIT.Controls.Add(Me.CMB_KIND_DEPOSIT)
         Me.PNL_KIND_DEPOSIT.Controls.Add(Me.LBL_KIND_DEPOSIT_GUIDE)
-        Me.PNL_KIND_DEPOSIT.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_KIND_DEPOSIT.Location = New System.Drawing.Point(250, 40)
         Me.PNL_KIND_DEPOSIT.Name = "PNL_KIND_DEPOSIT"
         Me.PNL_KIND_DEPOSIT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_DEPOSIT.TabIndex = 2
+        Me.PNL_KIND_DEPOSIT.TabIndex = 3
         '
         'CMB_KIND_DEPOSIT
         '
@@ -1001,6 +1038,7 @@ Partial Class FRM_SUB_01
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
         Me.PNL_DEPOSIT_INPUT_AREA.ResumeLayout(False)
+        Me.PNL_KIND_SALE.ResumeLayout(False)
         Me.PNL_SERIAL_DEPOSIT.ResumeLayout(False)
         Me.PNL_KIND_DEPOSIT_SUB.ResumeLayout(False)
         Me.PNL_NAME_MEMO.ResumeLayout(False)
@@ -1101,4 +1139,7 @@ Partial Class FRM_SUB_01
     Friend WithEvents PNL_SERIAL_DEPOSIT As Panel
     Friend WithEvents LBL_SERIAL_DEPOSIT As Label
     Friend WithEvents LBL_SERIAL_DEPOSIT_GUIDE As Label
+    Friend WithEvents PNL_KIND_SALE As Panel
+    Friend WithEvents CMB_KIND_SALE As ComboBox
+    Friend WithEvents LBL_KIND_SALE_GUIDE As Label
 End Class

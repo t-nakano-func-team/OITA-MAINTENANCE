@@ -1293,6 +1293,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
 
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_T_DEPOSIT_DATA
+        Public KIND_SALE As Integer
         Public KIND_DEPOSIT_SUB As Integer
         Public DATE_ACTIVE As DateTime
         Public SERIAL_DEPOSIT As Integer
@@ -1359,6 +1360,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
     ) As Boolean
 
         With SRT_RET
+            .KIND_SALE = -1
             .KIND_DEPOSIT_SUB = -1
             .DATE_ACTIVE = cstVB_DATE_MIN
             .SERIAL_DEPOSIT = 0
@@ -1406,6 +1408,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         Call SDR_READER.Read()
 
         With SRT_RET
+            .KIND_SALE = CInt(SDR_READER.Item("KIND_SALE"))
             .KIND_DEPOSIT_SUB = CInt(SDR_READER.Item("KIND_DEPOSIT_SUB"))
             .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
             .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
@@ -1470,6 +1473,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_INVOICE) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_SALE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT_SUB) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_DEPOSIT) & "," & Environment.NewLine)
