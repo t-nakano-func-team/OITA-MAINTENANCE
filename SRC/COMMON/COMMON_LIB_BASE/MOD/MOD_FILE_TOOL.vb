@@ -95,7 +95,7 @@
         str_FILE_TOOL_LAST_ERR_STRING = ""
 
         If Not FUNC_FILE_CHECK(strEXE_PATH) Then 'チェックを行う
-            str_FILE_TOOL_LAST_ERR_STRING = strEXE_PATH & Environment.NewLine & "ファイルがありません"
+            str_FILE_TOOL_LAST_ERR_STRING = strEXE_PATH & Environment.NewLine & "ファイルがありません。"
             Return False
         End If
 
