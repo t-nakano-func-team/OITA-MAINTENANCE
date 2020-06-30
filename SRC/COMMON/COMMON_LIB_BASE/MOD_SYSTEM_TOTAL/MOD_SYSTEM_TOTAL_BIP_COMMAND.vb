@@ -46,8 +46,8 @@
         Dim STR_COMMAND_LINE As String
         STR_COMMAND_LINE = ""
         STR_COMMAND_LINE &= """" & strDEFINITION & """"
-        STR_COMMAND_LINE &= " " & "-assetsdir" & " " & strDIR_ASSETS
-        STR_COMMAND_LINE &= " " & "-f" & " " & strPATH_DATA
+        STR_COMMAND_LINE &= " " & "-assetsdir" & " " & FUNC_GET_ABB_PATH(strDIR_ASSETS)
+        STR_COMMAND_LINE &= " " & "-f" & " " & FUNC_GET_ABB_PATH(strPATH_DATA)
         STR_COMMAND_LINE &= " " & "-indatacode" & " " & "SJIS"
 
         If Not FUNC_CALL_EXE_FILE_SHELL(STR_EXE_PATH, STR_COMMAND_LINE) Then
@@ -74,8 +74,8 @@
         Dim STR_COMMAND_LINE As String
         STR_COMMAND_LINE = ""
         STR_COMMAND_LINE &= """" & strDEFINITION & """"
-        STR_COMMAND_LINE &= " " & "-assetsdir" & " " & strDIR_ASSETS
-        STR_COMMAND_LINE &= " " & "-f" & " " & strPATH_DATA
+        STR_COMMAND_LINE &= " " & "-assetsdir" & " " & FUNC_GET_ABB_PATH(strDIR_ASSETS)
+        STR_COMMAND_LINE &= " " & "-f" & " " & FUNC_GET_ABB_PATH(strPATH_DATA)
         STR_COMMAND_LINE &= " " & "-indatacode" & " " & "SJIS"
 
         If Not FUNC_CALL_EXE_FILE_SHELL(STR_EXE_PATH, STR_COMMAND_LINE) Then
