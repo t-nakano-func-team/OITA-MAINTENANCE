@@ -684,7 +684,6 @@
         CTL_ACTIVE = Nothing
 
         Return BLN_RET
-        Return True
     End Function
 #End Region
 

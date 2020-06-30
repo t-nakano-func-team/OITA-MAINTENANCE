@@ -406,6 +406,15 @@
                                 End Select
                             Case Else
                         End Select
+                    Case TypeOf ctlFocusCtrl Is System.Windows.Forms.DateTimePicker 'データタイムピッカー
+                        Dim intASCII As Integer
+                        intASCII = Convert.ToInt32(chrKeyChar)
+                        Select Case intASCII
+                            Case 13
+                                blnHandled = True
+                            Case Else
+                                'スルー
+                        End Select
                 End Select
             End With
         Catch ex As Exception
