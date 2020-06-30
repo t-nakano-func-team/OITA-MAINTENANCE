@@ -272,6 +272,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RESOURCE\Search_16x.png" />
+    <Content Include="WORK\ReadMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
