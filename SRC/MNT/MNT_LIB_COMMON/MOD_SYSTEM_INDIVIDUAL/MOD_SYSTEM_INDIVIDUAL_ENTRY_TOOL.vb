@@ -270,27 +270,27 @@
 
 #Region "入金関連"
     Public Function FUNC_GET_KINGAKU_DEPOSIT_FROM_SECTION(
-    ByVal INT_NUBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
+    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
     ByVal INT_CODE_SECTION As Integer
     ) As Long
         Dim STR_SQL As System.Text.StringBuilder
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             .Append("SELECT" & System.Environment.NewLine)
-            .Append("SUM(KINGAKU_INVOICE) AS KINGAKU_INVOICE" & System.Environment.NewLine)
+            .Append("SUM(KINGAKU_INVOICE_DETAIL+KINGAKU_INVOICE_VAT) AS KINGAKU_INVOICE" & System.Environment.NewLine)
             .Append("FROM" & System.Environment.NewLine)
             .Append("MNT_T_INVOICE AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
             .Append("INNER JOIN" & System.Environment.NewLine)
             .Append("MNT_T_DEPOSIT AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
             .Append("ON" & System.Environment.NewLine)
-            .Append("MAIN.NUBER_CONTRACT=SUB_01.NUBER_CONTRACT" & System.Environment.NewLine)
+            .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
             .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
             .Append("AND MAIN.SERIAL_INVOICE=SUB_01.SERIAL_INVOICE" & System.Environment.NewLine)
             .Append("WHERE" & System.Environment.NewLine)
             .Append("1=1" & System.Environment.NewLine)
-            .Append("AND MAIN.NUBER_CONTRACT=" & "INT_NUBER_CONTRACT" & System.Environment.NewLine)
-            .Append("AND MAIN.SERIAL_CONTRACT=" & "INT_SERIAL_CONTRACT" & System.Environment.NewLine)
-            .Append("AND MAIN.CODE_SECTION=" & "INT_CODE_SECTION" & System.Environment.NewLine)
+            .Append("AND MAIN.NUMBER_CONTRACT=" & INT_NUMBER_CONTRACT & System.Environment.NewLine)
+            .Append("And MAIN.SERIAL_CONTRACT=" & INT_SERIAL_CONTRACT & System.Environment.NewLine)
+            .Append("AND MAIN.CODE_SECTION=" & INT_CODE_SECTION & System.Environment.NewLine)
         End With
 
         Dim LNG_RET As Integer
