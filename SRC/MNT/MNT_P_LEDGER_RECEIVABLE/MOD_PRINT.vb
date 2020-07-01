@@ -109,6 +109,7 @@
                 .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
                 .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
                 .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
+                .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
             End With
         End While
 
