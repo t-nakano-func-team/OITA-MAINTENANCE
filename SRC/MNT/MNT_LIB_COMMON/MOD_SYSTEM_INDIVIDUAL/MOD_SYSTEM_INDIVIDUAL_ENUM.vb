@@ -11,6 +11,7 @@
         KIND_WORK = 17
         FLAG_DONE = 18 '済み／未済み　汎用
         KIND_SORT_CHECK_DEPOSIT = 19
+        KIND_TARGET_RECEIVABLE = 20 '未収金対象
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
@@ -62,5 +63,8 @@
         REGULAR = 2
     End Enum
 
-
+    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_TARGET_RECEIVABLE
+        BALANCE_HAVE = 1
+        BALANCE_NONE = 2
+    End Enum
 End Module
