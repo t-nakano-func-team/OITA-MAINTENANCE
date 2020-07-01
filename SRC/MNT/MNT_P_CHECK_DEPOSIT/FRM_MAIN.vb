@@ -441,16 +441,7 @@
     End Sub
 
     Private Sub FRM_MAIN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-
-
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
 
-    Private Sub DTP_DATE_DEPOSIT_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_DEPOSIT_FROM.ValueChanged
-
-    End Sub
-
-    Private Sub DTP_DATE_DEPOSIT_FROM_KeyPress(sender As Object, e As KeyPressEventArgs) Handles DTP_DATE_DEPOSIT_FROM.KeyPress
-
-    End Sub
 End Class
