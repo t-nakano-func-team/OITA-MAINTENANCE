@@ -106,6 +106,40 @@
     '印刷/プレビュー/ファイル出力
     Private Sub SUB_PRINT(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean)
 
+        If Not FUNC_CHECK_INPUT_KEY() Then
+            Exit Sub
+        End If
+
+        Dim SRT_CONDITIONS As MOD_PRINT.SRT_PRINT_CONDITIONS
+        With SRT_CONDITIONS
+            .DATE_CONTRACT_FROM = DTP_DATE_CONTRACT_FROM.Value
+            .DATE_CONTRACT_TO = DTP_DATE_CONTRACT_TO.Value
+            .CODE_SECTION = FUNC_GET_COMBO_KIND_CODE(CMB_CODE_SECTION)
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
+            .DATE_CALC = DTP_DATE_CALC.Value
+            .KIND_TARGET_RECEIVABLE = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_TARGET)
+        End With
+
+        Dim BLN_PUT As Boolean
+        BLN_PUT = False
+        Dim BLN_CANCEL As Boolean
+        BLN_CANCEL = False
+
+        Dim BLN_RET As Boolean
+        BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, SRT_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
+
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_PRINT.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not BLN_PUT Then
+            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Call SUB_PRINT_DONE(BLN_PREVIEW, BLN_PUT_FILE, BLN_CANCEL)
     End Sub
 
     Private Sub SUB_CLEAR()
@@ -176,6 +210,25 @@
     End Sub
 #End Region
 
+#Region "チェック処理"
+    Private Function FUNC_CHECK_INPUT_KEY() As Boolean
+        Dim CTL_CONTROL As Control
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+
+        'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
+        CTL_CONTROL = Nothing
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_KEY, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
 #Region "キー制御処理"
     '通常のコマンドキー制御(シフトマスク無し)
     Private Sub SUB_KEY_DOWN(ByVal enmKEY_CODE As Windows.Forms.Keys, ByRef blnHandled As Boolean)
@@ -241,6 +294,25 @@
 
         Return BLN_RET
     End Function
+#End Region
+
+#Region "内部処理"
+
+    Private Sub SUB_PRINT_DONE(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean, ByVal BLN_CANCEL As Boolean)
+        If BLN_PREVIEW Then 'プレビューなら
+            Exit Sub '何もしない
+        End If
+
+        If BLN_PUT_FILE And BLN_CANCEL Then 'ファイル出力がキャンセルされた場合
+            Exit Sub '何もしない
+        End If
+
+        If BLN_PUT_FILE Then 'ファイル出力の場合
+            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else '印刷の場合
+            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -331,6 +403,17 @@
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
     End Sub
 #End Region
+
+#Region "イベント-テキストチェンジ"
+    Private Sub TXT_CODE_OWNER_FROM_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_FROM.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+
+    Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+#End Region
+
 
     Private Sub FRM_MAIN_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call SUB_CTRL_VIEW_INIT()
