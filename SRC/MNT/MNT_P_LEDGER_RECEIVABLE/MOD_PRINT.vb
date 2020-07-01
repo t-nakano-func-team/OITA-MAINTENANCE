@@ -28,13 +28,19 @@
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
-        Public CODE_SCETION As Integer
+        Public CODE_SECTION As Integer
         Public CODE_OWNER As Integer
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
         Public NAME_CONTRACT As String
         Public DATE_CONTRACT As DateTime
         Public COUNT_INVOICE As Integer
+        Public KINGAKU_CONTRACT As Long
+
+        Public KINGAKU_INVOICE_PROSPECT_TOTAL As Long
+        Public KINGAKU_INVOICE_TOTAL As Long
+        Public KINGAKU_DEPOSIT_TOTAL As Long
+        Public KINGAKU_RECEIVABLE As Long
 
         Public CODE_SECTION_NAME As String
         Public CODE_OWNER_NAME As String
@@ -71,6 +77,216 @@
         BLN_PUT = False
         BLN_CANCEL = False
 
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL(SRT_CONDITIONS)
+
+        Dim SDR_READER As SqlClient.SqlDataReader
+        SDR_READER = Nothing
+        If Not FUNC_SYSTEM_GET_SQL_DATA_READER(STR_SQL.ToString, SDR_READER) Then
+            STR_FUNC_PRINT_MAIN_ERR_STR = str_SQL_TOOL_LAST_ERR_STRING
+            Return False
+        End If
+
+        If Not SDR_READER.HasRows Then
+            Call SDR_READER.Close()
+            SDR_READER = Nothing
+            Return True 'データなし正常終了
+        End If
+
+        BLN_PUT = True
+
+        Dim SRT_DATA() As SRT_PRINT_DATA
+        ReDim SRT_DATA(0)
+        While SDR_READER.Read
+            Dim INT_INDEX As Integer
+            INT_INDEX = (SRT_DATA.Length)
+            ReDim Preserve SRT_DATA(INT_INDEX)
+            With SRT_DATA(INT_INDEX)
+                .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
+                .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
+                .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
+                .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
+                .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
+                .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
+                .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
+            End With
+        End While
+
+        Call SDR_READER.Close()
+        SDR_READER = Nothing
+
+        For i = 1 To (SRT_DATA.Length - 1)
+            Call SUB_REPLACE_DATA(SRT_DATA(i))
+        Next
+
+        STR_FILE_NAME_PRINT_DATA = CST_PRINT_DEFINITION & CST_PRINT_DATA_FILE_EXTENT
+        If Not FUNC_DIR_MAKE(srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_DATA) Then
+            STR_FUNC_PRINT_MAIN_ERR_STR = str_FILE_TOOL_LAST_ERR_STRING
+            Return False
+        End If
+        STR_PATH_PRINT_DATA = srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_DATA & "\" & STR_FILE_NAME_PRINT_DATA
+
+        Dim STW_CSV_WRITER As System.IO.StreamWriter 'ファイル出力用のIOオブジェクト
+
+        Try
+            STW_CSV_WRITER = New System.IO.StreamWriter(STR_PATH_PRINT_DATA, False, System.Text.Encoding.Default)   'ファイルライターを開く
+        Catch ex As Exception
+            STR_FUNC_PRINT_MAIN_ERR_STR = CST_SYSTEM_TOTAL_LIST_ERR_MSG_8001 & Environment.NewLine & STR_PATH_PRINT_DATA
+            Return False
+        End Try
+
+        Dim STR_ONE_ROW As String
+        For intLOOP_INDEX = 1 To (SRT_DATA.Length - 1)
+            STR_ONE_ROW = FUNC_GET_ONE_ROW(SRT_CONDITIONS, SRT_DATA(intLOOP_INDEX)) '1行分の情報を作成
+            STW_CSV_WRITER.WriteLine(STR_ONE_ROW) 'CSVﾌｧｲﾙ書き込み
+        Next
+
+        Call STW_CSV_WRITER.Close() 'ファイルライターを閉じる
+
+        If Not FUNC_DIR_MAKE(srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_ASSETS) Then
+            STR_FUNC_PRINT_MAIN_ERR_STR = str_FILE_TOOL_LAST_ERR_STRING
+            Return False
+        End If
+        If Not FUNC_COPY_LIST_DEFINITION_BIP(CST_PRINT_DEFINITION, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_ASSETS_SERVER, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_ASSETS) Then
+            STR_FUNC_PRINT_MAIN_ERR_STR = CST_SYSTEM_TOTAL_LIST_ERR_MSG_8002 & Environment.NewLine & CST_PRINT_DEFINITION
+            Return False
+        End If
+
+        If BLN_PREVIEW Then
+            If Not FUNC_SHOW_PREVIEW_BIP(srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_BIP_EXE, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_ASSETS, CST_PRINT_DEFINITION, STR_PATH_PRINT_DATA) Then
+                STR_FUNC_PRINT_MAIN_ERR_STR = CST_SYSTEM_TOTAL_LIST_ERR_MSG_8004 & System.Environment.NewLine & str_FILE_TOOL_LAST_ERR_STRING
+                Return False
+            End If
+        Else
+            If BLN_PUT_FILE Then
+                Dim STR_FILE_PATH As String
+                STR_FILE_PATH = ""
+                If Not FUNC_SHOW_PUT_FILE_DIALOG(STR_FILE_PATH, CST_PRINT_LIST_NAME) Then
+                    BLN_CANCEL = True
+                    Return True 'ファイル出力なし正常終了
+                End If
+                If Not FUNC_PUT_FILE_BIP(srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_BIP_EXE, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_ASSETS, CST_PRINT_DEFINITION, STR_PATH_PRINT_DATA, STR_FILE_PATH) Then
+                    STR_FUNC_PRINT_MAIN_ERR_STR = CST_SYSTEM_TOTAL_LIST_ERR_MSG_8005
+                    Return False
+                End If
+            Else
+                If Not FUNC_PUT_LIST_BIP(srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_BIP_EXE, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LIST.DIR_ASSETS, CST_PRINT_DEFINITION, STR_PATH_PRINT_DATA) Then
+                    STR_FUNC_PRINT_MAIN_ERR_STR = CST_SYSTEM_TOTAL_LIST_ERR_MSG_8003 & System.Environment.NewLine & str_FILE_TOOL_LAST_ERR_STRING
+                    Return False
+                End If
+            End If
+        End If
+
         Return True
+    End Function
+
+    Private Function FUNC_GET_SQL(ByRef SRT_CONDITIONS As SRT_PRINT_CONDITIONS) As String
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            Call .Append("SELECT" & System.Environment.NewLine)
+            Call .Append("MAIN.*" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.CODE_OWNER" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.CODE_HANDLE" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.CODE_WORK" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KIND_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.DATE_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.NAME_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.COUNT_INVOICE" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.NAME_MEMO" & "" & System.Environment.NewLine)
+
+            Call .Append("FROM" & System.Environment.NewLine)
+
+            Call .Append("(" & System.Environment.NewLine)
+            Call .Append("SELECT" & System.Environment.NewLine)
+            Call .Append("CODE_SECTION" & "," & System.Environment.NewLine)
+            Call .Append("NUMBER_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SERIAL_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SUM(KINGAKU_INVOICE_DETAIL + KINGAKU_INVOICE_VAT) AS KINGAKU_INVOICE_TOTAL" & "" & System.Environment.NewLine)
+            Call .Append("FROM" & System.Environment.NewLine)
+            Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("GROUP BY" & System.Environment.NewLine)
+            Call .Append("CODE_SECTION,NUMBER_CONTRACT,SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append(") AS MAIN" & System.Environment.NewLine)
+
+            Call .Append("INNER JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
+
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1 = 1" & System.Environment.NewLine)
+            Dim STR_WHERE As String
+            STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
+            Call .Append(STR_WHERE)
+            Call .Append("ORDER BY" & Environment.NewLine)
+            Call .Append("MAIN.CODE_SECTION,SUB_01.CODE_OWNER,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+        End With
+
+        Return STR_SQL.ToString
+    End Function
+
+    Private Function FUNC_GET_SQL_WHERE(ByRef SRT_CONDITIONS As SRT_PRINT_CONDITIONS)
+        Dim STR_WHERE As String
+        STR_WHERE = ""
+
+        Dim SRT_CONTRACT_PERIOD As SRT_DATE_PERIOD
+        SRT_CONTRACT_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_CONTRACT_FROM
+        SRT_CONTRACT_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_CONTRACT_TO
+
+        With SRT_CONDITIONS
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_CONTRACT_PERIOD, "SUB_01.DATE_CONTRACT")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_FROM, "SUB_01.CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_TO, "SUB_01.CODE_OWNER", "<=")
+            If .CODE_SECTION > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_SECTION, "MAIN.CODE_SECTION", "=")
+            End If
+        End With
+
+        Return STR_WHERE
+    End Function
+
+    '補助情報の取得
+    Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
+        With SRT_DATA
+            .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+
+            .DATE_CONTRACT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_CONTRACT)
+
+            .KINGAKU_RECEIVABLE = .KINGAKU_INVOICE_TOTAL - .KINGAKU_DEPOSIT_TOTAL
+        End With
+    End Sub
+
+    'CSV1行の文字列を取得
+    Private Function FUNC_GET_ONE_ROW(
+    ByRef SRT_CONDITIONS As SRT_PRINT_CONDITIONS,
+    ByRef SRT_DATA As SRT_PRINT_DATA
+    ) As String
+        Dim STR_RET As String
+        Dim STR_ROW() As String
+
+        ReDim STR_ROW(0)
+        With SRT_DATA
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_VEIW))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_CONTRACT_INT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_PROSPECT_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_DEPOSIT_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_RECEIVABLE))
+        End With
+        STR_RET = FUNC_GET_ONE_ROW_LIST_CSV(STR_ROW)
+
+        Return STR_RET
     End Function
 End Module

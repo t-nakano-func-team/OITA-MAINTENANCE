@@ -248,10 +248,18 @@
     <None Include="BIP\MNT_P_CHECK_DEPOSIT.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.bip" />
-    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.ovd" />
-    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.pmd" />
-    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.psf" />
+    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BIP\MNT_P_LIST_INVOICE.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
