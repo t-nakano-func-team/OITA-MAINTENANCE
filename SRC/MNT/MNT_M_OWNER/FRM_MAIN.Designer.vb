@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -40,9 +40,6 @@ Partial Class FRM_MAIN
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
-        Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
-        Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
-        Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_KIND_OWNER = New System.Windows.Forms.Panel()
         Me.CMB_KIND_OWNER = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_OWNER_GUIDE = New System.Windows.Forms.Label()
@@ -80,7 +77,6 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
-        Me.PNL_CODE_SECTION.SuspendLayout()
         Me.PNL_KIND_OWNER.SuspendLayout()
         Me.PNL_KIND_FIXED_DATE.SuspendLayout()
         Me.PNL_NAME_ADDRESS_02.SuspendLayout()
@@ -103,7 +99,7 @@ Partial Class FRM_MAIN
         Me.GRP_HEAD.Location = New System.Drawing.Point(10, 10)
         Me.GRP_HEAD.Name = "GRP_HEAD"
         Me.GRP_HEAD.Size = New System.Drawing.Size(760, 50)
-        Me.GRP_HEAD.TabIndex = 4
+        Me.GRP_HEAD.TabIndex = 0
         Me.GRP_HEAD.TabStop = False
         '
         'PNL_INFO_GUIDE
@@ -200,7 +196,7 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.Location = New System.Drawing.Point(10, 490)
         Me.GRP_FOOT.Name = "GRP_FOOT"
         Me.GRP_FOOT.Size = New System.Drawing.Size(760, 60)
-        Me.GRP_FOOT.TabIndex = 8
+        Me.GRP_FOOT.TabIndex = 2
         Me.GRP_FOOT.TabStop = False
         '
         'pnlFUNCTION_GROUP
@@ -277,7 +273,7 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.Location = New System.Drawing.Point(10, 60)
         Me.GRP_BODY.Name = "GRP_BODY"
         Me.GRP_BODY.Size = New System.Drawing.Size(760, 430)
-        Me.GRP_BODY.TabIndex = 9
+        Me.GRP_BODY.TabIndex = 1
         Me.GRP_BODY.TabStop = False
         '
         'DGV_VIEW_DATA
@@ -290,14 +286,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 205)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -315,7 +311,7 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowEditingIcon = False
         Me.DGV_VIEW_DATA.ShowRowErrors = False
         Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 215)
-        Me.DGV_VIEW_DATA.TabIndex = 3
+        Me.DGV_VIEW_DATA.TabIndex = 2
         Me.DGV_VIEW_DATA.TabStop = False
         '
         'PNL_INPUT_DATA
@@ -324,7 +320,6 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_SECTION)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KIND_OWNER)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KIND_FIXED_DATE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_ADDRESS_02)
@@ -338,43 +333,11 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 130)
         Me.PNL_INPUT_DATA.TabIndex = 1
         '
-        'PNL_CODE_SECTION
-        '
-        Me.PNL_CODE_SECTION.Controls.Add(Me.CMB_CODE_SECTION)
-        Me.PNL_CODE_SECTION.Controls.Add(Me.LBL_CODE_SECTION_GUIDE)
-        Me.PNL_CODE_SECTION.Location = New System.Drawing.Point(5, 35)
-        Me.PNL_CODE_SECTION.Name = "PNL_CODE_SECTION"
-        Me.PNL_CODE_SECTION.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_SECTION.TabIndex = 3
-        '
-        'CMB_CODE_SECTION
-        '
-        Me.CMB_CODE_SECTION.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_CODE_SECTION.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_CODE_SECTION.Name = "CMB_CODE_SECTION"
-        Me.CMB_CODE_SECTION.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_CODE_SECTION.TabIndex = 1
-        Me.CMB_CODE_SECTION.Tag = "Clear"
-        '
-        'LBL_CODE_SECTION_GUIDE
-        '
-        Me.LBL_CODE_SECTION_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_SECTION_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_SECTION_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_SECTION_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_SECTION_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_SECTION_GUIDE.Name = "LBL_CODE_SECTION_GUIDE"
-        Me.LBL_CODE_SECTION_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_SECTION_GUIDE.TabIndex = 0
-        Me.LBL_CODE_SECTION_GUIDE.Text = "担当部署"
-        Me.LBL_CODE_SECTION_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'PNL_KIND_OWNER
         '
         Me.PNL_KIND_OWNER.Controls.Add(Me.CMB_KIND_OWNER)
         Me.PNL_KIND_OWNER.Controls.Add(Me.LBL_KIND_OWNER_GUIDE)
-        Me.PNL_KIND_OWNER.Location = New System.Drawing.Point(255, 35)
+        Me.PNL_KIND_OWNER.Location = New System.Drawing.Point(5, 35)
         Me.PNL_KIND_OWNER.Name = "PNL_KIND_OWNER"
         Me.PNL_KIND_OWNER.Size = New System.Drawing.Size(240, 30)
         Me.PNL_KIND_OWNER.TabIndex = 4
@@ -698,7 +661,6 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
-        Me.PNL_CODE_SECTION.ResumeLayout(False)
         Me.PNL_KIND_OWNER.ResumeLayout(False)
         Me.PNL_KIND_FIXED_DATE.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.ResumeLayout(False)
@@ -762,9 +724,6 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_KIND_FIXED_DATE As Panel
     Friend WithEvents CMB_KIND_FIXED_DATE As ComboBox
     Friend WithEvents LBL_KIND_FIXED_DATE_GUIDE As Label
-    Friend WithEvents PNL_CODE_SECTION As Panel
-    Friend WithEvents CMB_CODE_SECTION As ComboBox
-    Friend WithEvents LBL_CODE_SECTION_GUIDE As Label
     Friend WithEvents PNL_KIND_OWNER As Panel
     Friend WithEvents CMB_KIND_OWNER As ComboBox
     Friend WithEvents LBL_KIND_OWNER_GUIDE As Label

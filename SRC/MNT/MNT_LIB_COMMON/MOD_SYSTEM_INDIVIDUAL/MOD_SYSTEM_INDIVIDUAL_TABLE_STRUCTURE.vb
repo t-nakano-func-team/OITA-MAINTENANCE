@@ -21,7 +21,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
         Public NAME_OWNER As String
         Public NAME_OWNER_SHORT As String
         Public KANA_OWNER As String
-        Public CODE_SECTION As Integer
         Public KIND_OWNER As Integer
         Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
@@ -90,7 +89,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             .NAME_OWNER = ""
             .NAME_OWNER_SHORT = ""
             .KANA_OWNER = ""
-            .CODE_SECTION = -1
             .KIND_OWNER = -1
             .CODE_POST = 0
             .NAME_ADDRESS_01 = ""
@@ -138,7 +136,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
             .NAME_OWNER_SHORT = CStr(SDR_READER.Item("NAME_OWNER_SHORT"))
             .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-            .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
             .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
             .CODE_POST = CInt(SDR_READER.Item("CODE_POST"))
             .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
@@ -201,7 +198,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_OWNER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_OWNER_SHORT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KANA_OWNER) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_OWNER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_POST) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_01) & "," & Environment.NewLine)

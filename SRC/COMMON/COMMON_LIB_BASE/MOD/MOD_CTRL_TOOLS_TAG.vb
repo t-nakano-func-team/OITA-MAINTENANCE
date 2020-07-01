@@ -348,8 +348,8 @@
                         End If
 
                         Select Case True
-                            Case InStr(.Tag, cstTagNumericWord) > 0, _
-                             InStr(.Tag, cstTagYearMonthWord) > 0, _
+                            Case InStr(.Tag, cstTagNumericWord) > 0,
+                             InStr(.Tag, cstTagYearMonthWord) > 0,
                              InStr(.Tag, cstTagNumberWord) > 0
                                 Select Case chrKeyChar
                                     Case "0" To "9"
@@ -382,6 +382,19 @@
 
                             Case Else
                         End Select
+
+                        Dim TXT_CTRL As TextBox
+                        TXT_CTRL = ctlFocusCtrl
+                        If Not TXT_CTRL.Multiline Then
+                            Dim INT_ASCII As Integer
+                            INT_ASCII = Convert.ToInt32(chrKeyChar)
+                            Select Case INT_ASCII
+                                Case 13
+                                    blnHandled = True
+                                Case Else
+                                    'スルー
+                            End Select
+                        End If
                     Case TypeOf ctlFocusCtrl Is System.Windows.Forms.ComboBox 'コンボボックス
                         Select Case True
                             Case InStr(.Tag, cstTagNumericWord) > 0 '数値項目
@@ -407,9 +420,9 @@
                             Case Else
                         End Select
                     Case TypeOf ctlFocusCtrl Is System.Windows.Forms.DateTimePicker 'データタイムピッカー
-                        Dim intASCII As Integer
-                        intASCII = Convert.ToInt32(chrKeyChar)
-                        Select Case intASCII
+                        Dim INT_ASCII As Integer
+                        INT_ASCII = Convert.ToInt32(chrKeyChar)
+                        Select Case INT_ASCII
                             Case 13
                                 blnHandled = True
                             Case Else

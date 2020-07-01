@@ -97,6 +97,9 @@ Partial Class FRM_SUB_01
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
+        Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
+        Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
+        Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -123,6 +126,7 @@ Partial Class FRM_SUB_01
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
+        Me.PNL_CODE_SECTION.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -243,6 +247,7 @@ Partial Class FRM_SUB_01
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_SECTION)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DEPOSIT_INPUT_AREA)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_DEPOSIT_DONE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KINGAKU_INVOICE)
@@ -265,7 +270,7 @@ Partial Class FRM_SUB_01
         Me.PNL_DEPOSIT_INPUT_AREA.Location = New System.Drawing.Point(0, 70)
         Me.PNL_DEPOSIT_INPUT_AREA.Name = "PNL_DEPOSIT_INPUT_AREA"
         Me.PNL_DEPOSIT_INPUT_AREA.Size = New System.Drawing.Size(740, 215)
-        Me.PNL_DEPOSIT_INPUT_AREA.TabIndex = 2
+        Me.PNL_DEPOSIT_INPUT_AREA.TabIndex = 3
         '
         'PNL_KIND_SALE
         '
@@ -622,7 +627,7 @@ Partial Class FRM_SUB_01
         Me.PNL_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(5, 40)
         Me.PNL_FLAG_DEPOSIT_DONE.Name = "PNL_FLAG_DEPOSIT_DONE"
         Me.PNL_FLAG_DEPOSIT_DONE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 1
+        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 2
         '
         'CHK_FLAG_DEPOSIT_DONE
         '
@@ -1015,6 +1020,38 @@ Partial Class FRM_SUB_01
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
+        'PNL_CODE_SECTION
+        '
+        Me.PNL_CODE_SECTION.Controls.Add(Me.CMB_CODE_SECTION)
+        Me.PNL_CODE_SECTION.Controls.Add(Me.LBL_CODE_SECTION_GUIDE)
+        Me.PNL_CODE_SECTION.Location = New System.Drawing.Point(495, 5)
+        Me.PNL_CODE_SECTION.Name = "PNL_CODE_SECTION"
+        Me.PNL_CODE_SECTION.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_SECTION.TabIndex = 1
+        '
+        'CMB_CODE_SECTION
+        '
+        Me.CMB_CODE_SECTION.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_CODE_SECTION.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_CODE_SECTION.Name = "CMB_CODE_SECTION"
+        Me.CMB_CODE_SECTION.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_CODE_SECTION.TabIndex = 1
+        Me.CMB_CODE_SECTION.Tag = "Clear"
+        '
+        'LBL_CODE_SECTION_GUIDE
+        '
+        Me.LBL_CODE_SECTION_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_SECTION_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_SECTION_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_SECTION_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_SECTION_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_SECTION_GUIDE.Name = "LBL_CODE_SECTION_GUIDE"
+        Me.LBL_CODE_SECTION_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_SECTION_GUIDE.TabIndex = 0
+        Me.LBL_CODE_SECTION_GUIDE.Text = "部署"
+        Me.LBL_CODE_SECTION_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FRM_SUB_01
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -1063,6 +1100,7 @@ Partial Class FRM_SUB_01
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
+        Me.PNL_CODE_SECTION.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1142,4 +1180,7 @@ Partial Class FRM_SUB_01
     Friend WithEvents PNL_KIND_SALE As Panel
     Friend WithEvents CMB_KIND_SALE As ComboBox
     Friend WithEvents LBL_KIND_SALE_GUIDE As Label
+    Friend WithEvents PNL_CODE_SECTION As Panel
+    Friend WithEvents CMB_CODE_SECTION As ComboBox
+    Friend WithEvents LBL_CODE_SECTION_GUIDE As Label
 End Class
