@@ -268,6 +268,38 @@
     End Function
 #End Region
 
+#Region "入金関連"
+    Public Function FUNC_GET_KINGAKU_DEPOSIT_FROM_SECTION(
+    ByVal INT_NUBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
+    ByVal INT_CODE_SECTION As Integer
+    ) As Long
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("SELECT" & System.Environment.NewLine)
+            .Append("SUM(KINGAKU_INVOICE) AS KINGAKU_INVOICE" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_INVOICE AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+            .Append("INNER JOIN" & System.Environment.NewLine)
+            .Append("MNT_T_DEPOSIT AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
+            .Append("ON" & System.Environment.NewLine)
+            .Append("MAIN.NUBER_CONTRACT=SUB_01.NUBER_CONTRACT" & System.Environment.NewLine)
+            .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
+            .Append("AND MAIN.SERIAL_INVOICE=SUB_01.SERIAL_INVOICE" & System.Environment.NewLine)
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append("AND MAIN.NUBER_CONTRACT=" & "INT_NUBER_CONTRACT" & System.Environment.NewLine)
+            .Append("AND MAIN.SERIAL_CONTRACT=" & "INT_SERIAL_CONTRACT" & System.Environment.NewLine)
+            .Append("AND MAIN.CODE_SECTION=" & "INT_CODE_SECTION" & System.Environment.NewLine)
+        End With
+
+        Dim LNG_RET As Integer
+        LNG_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL.ToString, 0)
+        Return LNG_RET
+    End Function
+
+#End Region
+
 #Region "オーナー関連"
     Public Function FUNC_GET_CODE_OWNER_FROM_COTRACT(ByVal INT_NUMBER_COTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As Integer
         Dim BLN_CHASH As Boolean
