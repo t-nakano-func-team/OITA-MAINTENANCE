@@ -111,6 +111,7 @@
                 .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
                 .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
                 .KINGAKU_INVOICE_TOTAL = CLng(SDR_READER.Item("KINGAKU_INVOICE_TOTAL"))
+                .KINGAKU_DEPOSIT_TOTAL = CLng(SDR_READER.Item("KINGAKU_DEPOSIT_TOTAL"))
             End With
         End While
 
@@ -205,9 +206,24 @@
             Call .Append("CODE_SECTION" & "," & System.Environment.NewLine)
             Call .Append("NUMBER_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SERIAL_CONTRACT" & "," & System.Environment.NewLine)
-            Call .Append("SUM(KINGAKU_INVOICE_DETAIL + KINGAKU_INVOICE_VAT) AS KINGAKU_INVOICE_TOTAL" & "" & System.Environment.NewLine)
+            Call .Append("SUM(KINGAKU_INVOICE_DETAIL + KINGAKU_INVOICE_VAT) AS KINGAKU_INVOICE_TOTAL" & "," & System.Environment.NewLine)
+            Call .Append("SUM((KINGAKU_INVOICE_DETAIL + KINGAKU_INVOICE_VAT)*RATE_DEPOSIT) AS KINGAKU_DEPOSIT_TOTAL" & "" & System.Environment.NewLine)
             Call .Append("FROM" & System.Environment.NewLine)
-            Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & System.Environment.NewLine)
+
+            Call .Append("(" & System.Environment.NewLine)
+            Call .Append("SELECT" & System.Environment.NewLine)
+            Call .Append("MAIN.*" & "," & System.Environment.NewLine)
+            Call .Append("IIF(SUB_01.NUMBER_CONTRACT Is NULL, 0, 1) As RATE_DEPOSIT" & "" & System.Environment.NewLine)
+            Call .Append("FROM" & System.Environment.NewLine)
+            Call .Append("MNT_T_INVOICE AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("LEFT JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_DEPOSIT AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_INVOICE=SUB_01.SERIAL_INVOICE" & System.Environment.NewLine)
+            Call .Append(") AS MAIN" & System.Environment.NewLine)
+
             Call .Append("GROUP BY" & System.Environment.NewLine)
             Call .Append("CODE_SECTION,NUMBER_CONTRACT,SERIAL_CONTRACT" & System.Environment.NewLine)
             Call .Append(") AS MAIN" & System.Environment.NewLine)
@@ -245,6 +261,14 @@
             If .CODE_SECTION >= 0 Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_SECTION, "MAIN.CODE_SECTION", "=")
             End If
+            Select Case .KIND_TARGET_RECEIVABLE
+                Case ENM_SYSTEM_INDIVIDUAL_KIND_TARGET_RECEIVABLE.BALANCE_HAVE
+                    STR_WHERE &= FUNC_GET_SQL_WHERE_INT(0, "(MAIN.KINGAKU_INVOICE_TOTAL-MAIN.KINGAKU_DEPOSIT_TOTAL)", "<>")
+                Case ENM_SYSTEM_INDIVIDUAL_KIND_TARGET_RECEIVABLE.BALANCE_NONE
+                    STR_WHERE &= FUNC_GET_SQL_WHERE_INT(0, "(MAIN.KINGAKU_INVOICE_TOTAL-MAIN.KINGAKU_DEPOSIT_TOTAL)", "=")
+                Case Else
+                    'スルー
+            End Select
         End With
 
         Return STR_WHERE
@@ -262,7 +286,6 @@
             Dim LNG_KINGA_CONTRACT_TOTAL As Long
             LNG_KINGA_CONTRACT_TOTAL = .KINGAKU_CONTRACT + LNG_KINGAKU_CONTRACT_VAT
             .KINGAKU_INVOICE_PROSPECT_TOTAL = CLng(LNG_KINGA_CONTRACT_TOTAL * .COUNT_INVOICE)
-            .KINGAKU_DEPOSIT_TOTAL = FUNC_GET_KINGAKU_DEPOSIT_FROM_SECTION(.NUMBER_CONTRACT, .SERIAL_CONTRACT, .CODE_SECTION)
             .KINGAKU_RECEIVABLE = .KINGAKU_INVOICE_TOTAL - .KINGAKU_DEPOSIT_TOTAL
         End With
     End Sub

@@ -26,7 +26,7 @@ BANNER      N
 FORMKIND    C
 CMPCTTYPE   NO
 [DATA FORMAT]
-部署コード  
+部署コード  BREAK
 部署名称  
 オーナーコード  
 オーナー名称  
@@ -41,10 +41,13 @@ CMPCTTYPE   NO
 請求総額  
 既入金総額  
 未収金残高  
+未収金残高合計  SUM(未収金残高)
 ページ数  PAGE
 [CONTROL]
 PAGE-HEAD
 DETAIL DE
+COMPUTE  未収金残高合計
+CNTL-FOOT  部署コード  CF1
 PAGE-FOOT
 [DB CONNECT]
 DBTYPE      DATAFILE
