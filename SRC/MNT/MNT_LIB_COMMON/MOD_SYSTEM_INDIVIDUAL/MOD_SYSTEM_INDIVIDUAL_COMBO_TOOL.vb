@@ -1,5 +1,5 @@
 ﻿Public Module MOD_SYSTEM_INDIVIDUAL_COMBO_TOOL
-    'テスト
+    'test a.nakano
 #Region "MNT_M_KIND"
     Public Sub SUB_SYSTEM_COMMBO_MNT_M_KIND(
     ByRef CMB_COMBO_BOX As Object,
