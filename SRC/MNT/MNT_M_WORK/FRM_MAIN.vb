@@ -683,6 +683,42 @@
     End Sub
 #End Region
 
+#Region "イベント-ボタンクリック"
+    Private Sub BTN_ENTER_Click(sender As Object, e As EventArgs) Handles BTN_ENTER.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_ENTER)
+    End Sub
+
+    Private Sub BTN_DELETE_Click(sender As Object, e As EventArgs) Handles BTN_DELETE.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_DELETE)
+    End Sub
+
+    Private Sub BTN_PREVIEW_Click(sender As Object, e As EventArgs)
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PREVIEW)
+    End Sub
+
+    Private Sub BTN_PRINT_Click(sender As Object, e As EventArgs)
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PRINT)
+    End Sub
+
+    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs)
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PUT_FILE)
+    End Sub
+
+    Private Sub BTN_CLEAR_Click(sender As Object, e As EventArgs) Handles BTN_CLEAR.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_CLEAR)
+    End Sub
+
+    Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
+    End Sub
+#End Region
+
+#Region "イベント-グリッドダブルクリック"
+    Private Sub DGV_VIEW_DATA_DoubleClick(sender As Object, e As EventArgs) Handles DGV_VIEW_DATA.DoubleClick
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SELECT_SEQ)
+    End Sub
+#End Region
+
     Private Sub FRM_MAIN_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call SUB_CTRL_VIEW_INIT()
         Call SUB_CTRL_VALUE_INIT()
