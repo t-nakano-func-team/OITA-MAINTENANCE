@@ -23,7 +23,8 @@
         Public CODE_SECTION As Integer
         Public CODE_OWNER_FROM As Integer
         Public CODE_OWNER_TO As Integer
-        Public DATE_CALC As DateTime
+        Public DATE_CALC_FROM As DateTime
+        Public DATE_CALC_TO As DateTime
         Public KIND_TARGET_RECEIVABLE As Integer
     End Structure
 

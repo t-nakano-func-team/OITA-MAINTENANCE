@@ -32,6 +32,15 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_KIND_TARGET = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_TARGET = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_TARGET_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_DATE_CALC = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_CALC_FROM = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_CALC_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
+        Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
+        Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_CODE_OWNER = New System.Windows.Forms.Panel()
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_CODE_OWNER_TO_SEARCH = New System.Windows.Forms.Button()
@@ -52,28 +61,21 @@ Partial Class FRM_MAIN
         Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
-        Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
-        Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_DATE_CALC = New System.Windows.Forms.Panel()
-        Me.DTP_DATE_CALC = New System.Windows.Forms.DateTimePicker()
-        Me.LBL_DATE_CALC_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_KIND_TARGET = New System.Windows.Forms.Panel()
-        Me.CMB_KIND_TARGET = New System.Windows.Forms.ComboBox()
-        Me.LBL_KIND_TARGET_GUIDE = New System.Windows.Forms.Label()
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.DTP_DATE_CALC_TO = New System.Windows.Forms.DateTimePicker()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_KIND_TARGET.SuspendLayout()
+        Me.PNL_DATE_CALC.SuspendLayout()
+        Me.PNL_CODE_SECTION.SuspendLayout()
         Me.PNL_CODE_OWNER.SuspendLayout()
         Me.PNL_DATE__CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_CODE_SECTION.SuspendLayout()
-        Me.PNL_DATE_CALC.SuspendLayout()
-        Me.PNL_KIND_TARGET.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -202,6 +204,103 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 400)
         Me.PNL_INPUT_KEY.TabIndex = 0
+        '
+        'PNL_KIND_TARGET
+        '
+        Me.PNL_KIND_TARGET.Controls.Add(Me.CMB_KIND_TARGET)
+        Me.PNL_KIND_TARGET.Controls.Add(Me.LBL_KIND_TARGET_GUIDE)
+        Me.PNL_KIND_TARGET.Location = New System.Drawing.Point(5, 145)
+        Me.PNL_KIND_TARGET.Name = "PNL_KIND_TARGET"
+        Me.PNL_KIND_TARGET.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_TARGET.TabIndex = 4
+        '
+        'CMB_KIND_TARGET
+        '
+        Me.CMB_KIND_TARGET.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_TARGET.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_TARGET.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_TARGET.Name = "CMB_KIND_TARGET"
+        Me.CMB_KIND_TARGET.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_TARGET.TabIndex = 1
+        Me.CMB_KIND_TARGET.Tag = "Clear"
+        '
+        'LBL_KIND_TARGET_GUIDE
+        '
+        Me.LBL_KIND_TARGET_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_TARGET_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_TARGET_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_TARGET_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_TARGET_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_TARGET_GUIDE.Name = "LBL_KIND_TARGET_GUIDE"
+        Me.LBL_KIND_TARGET_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_TARGET_GUIDE.TabIndex = 0
+        Me.LBL_KIND_TARGET_GUIDE.Text = "対象"
+        Me.LBL_KIND_TARGET_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_DATE_CALC
+        '
+        Me.PNL_DATE_CALC.Controls.Add(Me.DTP_DATE_CALC_TO)
+        Me.PNL_DATE_CALC.Controls.Add(Me.LBL_DATE_CALC_FROM_TO_GUIDE)
+        Me.PNL_DATE_CALC.Controls.Add(Me.DTP_DATE_CALC_FROM)
+        Me.PNL_DATE_CALC.Controls.Add(Me.LBL_DATE_CALC_GUIDE)
+        Me.PNL_DATE_CALC.Location = New System.Drawing.Point(5, 110)
+        Me.PNL_DATE_CALC.Name = "PNL_DATE_CALC"
+        Me.PNL_DATE_CALC.Size = New System.Drawing.Size(420, 30)
+        Me.PNL_DATE_CALC.TabIndex = 3
+        '
+        'DTP_DATE_CALC_FROM
+        '
+        Me.DTP_DATE_CALC_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_CALC_FROM.Location = New System.Drawing.Point(80, 1)
+        Me.DTP_DATE_CALC_FROM.Name = "DTP_DATE_CALC_FROM"
+        Me.DTP_DATE_CALC_FROM.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_CALC_FROM.TabIndex = 1
+        Me.DTP_DATE_CALC_FROM.Tag = "Clear"
+        '
+        'LBL_DATE_CALC_GUIDE
+        '
+        Me.LBL_DATE_CALC_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_CALC_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_CALC_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_CALC_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_CALC_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_CALC_GUIDE.Name = "LBL_DATE_CALC_GUIDE"
+        Me.LBL_DATE_CALC_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_CALC_GUIDE.TabIndex = 0
+        Me.LBL_DATE_CALC_GUIDE.Text = "計算期間"
+        Me.LBL_DATE_CALC_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_CODE_SECTION
+        '
+        Me.PNL_CODE_SECTION.Controls.Add(Me.CMB_CODE_SECTION)
+        Me.PNL_CODE_SECTION.Controls.Add(Me.LBL_CODE_SECTION_GUIDE)
+        Me.PNL_CODE_SECTION.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_CODE_SECTION.Name = "PNL_CODE_SECTION"
+        Me.PNL_CODE_SECTION.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_SECTION.TabIndex = 1
+        '
+        'CMB_CODE_SECTION
+        '
+        Me.CMB_CODE_SECTION.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_CODE_SECTION.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_CODE_SECTION.Name = "CMB_CODE_SECTION"
+        Me.CMB_CODE_SECTION.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_CODE_SECTION.TabIndex = 1
+        Me.CMB_CODE_SECTION.Tag = "Clear"
+        '
+        'LBL_CODE_SECTION_GUIDE
+        '
+        Me.LBL_CODE_SECTION_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_SECTION_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_SECTION_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_SECTION_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_SECTION_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_SECTION_GUIDE.Name = "LBL_CODE_SECTION_GUIDE"
+        Me.LBL_CODE_SECTION_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_SECTION_GUIDE.TabIndex = 0
+        Me.LBL_CODE_SECTION_GUIDE.Text = "部署"
+        Me.LBL_CODE_SECTION_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_CODE_OWNER
         '
@@ -443,100 +542,25 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_CODE_SECTION
+        'LBL_DATE_CALC_FROM_TO_GUIDE
         '
-        Me.PNL_CODE_SECTION.Controls.Add(Me.CMB_CODE_SECTION)
-        Me.PNL_CODE_SECTION.Controls.Add(Me.LBL_CODE_SECTION_GUIDE)
-        Me.PNL_CODE_SECTION.Location = New System.Drawing.Point(5, 40)
-        Me.PNL_CODE_SECTION.Name = "PNL_CODE_SECTION"
-        Me.PNL_CODE_SECTION.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_SECTION.TabIndex = 1
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Name = "LBL_DATE_CALC_FROM_TO_GUIDE"
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.TabIndex = 10
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'CMB_CODE_SECTION
+        'DTP_DATE_CALC_TO
         '
-        Me.CMB_CODE_SECTION.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_CODE_SECTION.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_CODE_SECTION.Name = "CMB_CODE_SECTION"
-        Me.CMB_CODE_SECTION.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_CODE_SECTION.TabIndex = 1
-        Me.CMB_CODE_SECTION.Tag = "Clear"
-        '
-        'LBL_CODE_SECTION_GUIDE
-        '
-        Me.LBL_CODE_SECTION_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_SECTION_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_SECTION_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_SECTION_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_SECTION_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_SECTION_GUIDE.Name = "LBL_CODE_SECTION_GUIDE"
-        Me.LBL_CODE_SECTION_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_SECTION_GUIDE.TabIndex = 0
-        Me.LBL_CODE_SECTION_GUIDE.Text = "部署"
-        Me.LBL_CODE_SECTION_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_DATE_CALC
-        '
-        Me.PNL_DATE_CALC.Controls.Add(Me.DTP_DATE_CALC)
-        Me.PNL_DATE_CALC.Controls.Add(Me.LBL_DATE_CALC_GUIDE)
-        Me.PNL_DATE_CALC.Location = New System.Drawing.Point(5, 110)
-        Me.PNL_DATE_CALC.Name = "PNL_DATE_CALC"
-        Me.PNL_DATE_CALC.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DATE_CALC.TabIndex = 3
-        '
-        'DTP_DATE_CALC
-        '
-        Me.DTP_DATE_CALC.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_CALC.Location = New System.Drawing.Point(80, 1)
-        Me.DTP_DATE_CALC.Name = "DTP_DATE_CALC"
-        Me.DTP_DATE_CALC.Size = New System.Drawing.Size(150, 25)
-        Me.DTP_DATE_CALC.TabIndex = 1
-        Me.DTP_DATE_CALC.Tag = "Clear"
-        '
-        'LBL_DATE_CALC_GUIDE
-        '
-        Me.LBL_DATE_CALC_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_CALC_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_DATE_CALC_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_CALC_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_CALC_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_DATE_CALC_GUIDE.Name = "LBL_DATE_CALC_GUIDE"
-        Me.LBL_DATE_CALC_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_DATE_CALC_GUIDE.TabIndex = 0
-        Me.LBL_DATE_CALC_GUIDE.Text = "計算日付"
-        Me.LBL_DATE_CALC_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_KIND_TARGET
-        '
-        Me.PNL_KIND_TARGET.Controls.Add(Me.CMB_KIND_TARGET)
-        Me.PNL_KIND_TARGET.Controls.Add(Me.LBL_KIND_TARGET_GUIDE)
-        Me.PNL_KIND_TARGET.Location = New System.Drawing.Point(5, 145)
-        Me.PNL_KIND_TARGET.Name = "PNL_KIND_TARGET"
-        Me.PNL_KIND_TARGET.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_TARGET.TabIndex = 4
-        '
-        'CMB_KIND_TARGET
-        '
-        Me.CMB_KIND_TARGET.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_KIND_TARGET.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_KIND_TARGET.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_KIND_TARGET.Name = "CMB_KIND_TARGET"
-        Me.CMB_KIND_TARGET.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_KIND_TARGET.TabIndex = 1
-        Me.CMB_KIND_TARGET.Tag = "Clear"
-        '
-        'LBL_KIND_TARGET_GUIDE
-        '
-        Me.LBL_KIND_TARGET_GUIDE.AutoEllipsis = True
-        Me.LBL_KIND_TARGET_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_KIND_TARGET_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KIND_TARGET_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_KIND_TARGET_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_KIND_TARGET_GUIDE.Name = "LBL_KIND_TARGET_GUIDE"
-        Me.LBL_KIND_TARGET_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_KIND_TARGET_GUIDE.TabIndex = 0
-        Me.LBL_KIND_TARGET_GUIDE.Text = "対象"
-        Me.LBL_KIND_TARGET_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.DTP_DATE_CALC_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_CALC_TO.Location = New System.Drawing.Point(260, 1)
+        Me.DTP_DATE_CALC_TO.Name = "DTP_DATE_CALC_TO"
+        Me.DTP_DATE_CALC_TO.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_CALC_TO.TabIndex = 11
+        Me.DTP_DATE_CALC_TO.Tag = "Clear"
         '
         'FRM_MAIN
         '
@@ -560,15 +584,15 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_KIND_TARGET.ResumeLayout(False)
+        Me.PNL_DATE_CALC.ResumeLayout(False)
+        Me.PNL_CODE_SECTION.ResumeLayout(False)
         Me.PNL_CODE_OWNER.ResumeLayout(False)
         Me.PNL_CODE_OWNER.PerformLayout()
         Me.PNL_DATE__CONTRACT.ResumeLayout(False)
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_CODE_SECTION.ResumeLayout(False)
-        Me.PNL_DATE_CALC.ResumeLayout(False)
-        Me.PNL_KIND_TARGET.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -610,6 +634,8 @@ Partial Class FRM_MAIN
     Friend WithEvents CMB_KIND_TARGET As ComboBox
     Friend WithEvents LBL_KIND_TARGET_GUIDE As Label
     Friend WithEvents PNL_DATE_CALC As Panel
-    Friend WithEvents DTP_DATE_CALC As DateTimePicker
+    Friend WithEvents DTP_DATE_CALC_FROM As DateTimePicker
     Friend WithEvents LBL_DATE_CALC_GUIDE As Label
+    Friend WithEvents DTP_DATE_CALC_TO As DateTimePicker
+    Friend WithEvents LBL_DATE_CALC_FROM_TO_GUIDE As Label
 End Class

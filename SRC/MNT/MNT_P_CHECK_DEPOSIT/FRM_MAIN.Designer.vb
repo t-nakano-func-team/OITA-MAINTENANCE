@@ -60,7 +60,6 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_DEPOSIT_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_DEPOSIT_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
-        Me.BTN_ACCEPT = New System.Windows.Forms.Button()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -178,7 +177,6 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GRP_FOOT.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.GRP_FOOT.Controls.Add(Me.BTN_ACCEPT)
         Me.GRP_FOOT.Controls.Add(Me.pnlFUNCTION_GROUP)
         Me.GRP_FOOT.Location = New System.Drawing.Point(10, 490)
         Me.GRP_FOOT.Name = "GRP_FOOT"
@@ -527,16 +525,6 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金日付"
         Me.LBL_DATE_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'BTN_ACCEPT
-        '
-        Me.BTN_ACCEPT.Location = New System.Drawing.Point(659, 38)
-        Me.BTN_ACCEPT.Name = "BTN_ACCEPT"
-        Me.BTN_ACCEPT.Size = New System.Drawing.Size(12, 11)
-        Me.BTN_ACCEPT.TabIndex = 1
-        Me.BTN_ACCEPT.Text = "Button1"
-        Me.BTN_ACCEPT.UseVisualStyleBackColor = True
-        Me.BTN_ACCEPT.Visible = False
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -609,5 +597,4 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_KIND_SORT As Panel
     Friend WithEvents CMB_KIND_SORT As ComboBox
     Friend WithEvents LBL_KIND_SORT_GUIDE As Label
-    Friend WithEvents BTN_ACCEPT As Button
 End Class
