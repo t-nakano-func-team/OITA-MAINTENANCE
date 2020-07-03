@@ -167,6 +167,7 @@
             SRT_DATA = Nothing
             Call FUNC_SELECT_TABLE_MNG_M_USER(SRT_KEY, SRT_DATA)
             Call SUB_SET_INPUT_DATA(SRT_DATA)
+            Call SUB_SET_INDEX_GRID_FROM_KEY(SRT_KEY)
             ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
         Else
             ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT '新規追加
@@ -426,6 +427,35 @@
             INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_STAFF)
         End With
         Return INT_RET
+    End Function
+
+    Private Sub SUB_SET_INDEX_GRID_FROM_KEY(ByVal SRT_KEY As SRT_TABLE_MNG_M_USER_KEY)
+        Dim INT_INDEX As Integer
+        INT_INDEX = FUNC_GET_INDEX_FROM_GRID(SRT_KEY)
+        If INT_INDEX <= 0 Then
+            Exit Sub
+        End If
+
+        Dim INT_INDEX_GRID As Integer
+        INT_INDEX_GRID = INT_INDEX
+        Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, INT_INDEX_GRID)
+    End Sub
+
+    Private Function FUNC_GET_INDEX_FROM_GRID(ByVal SRT_KEY As SRT_TABLE_MNG_M_USER_KEY)
+
+        If SRT_GRID_DATA_MAIN Is Nothing Then
+            Return 0
+        End If
+
+        For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1)
+            With SRT_GRID_DATA_MAIN(i)
+                If .CODE_STAFF = SRT_KEY.CODE_STAFF Then
+                    Return i
+                End If
+            End With
+        Next
+
+        Return 0
     End Function
 #End Region
 
