@@ -31,7 +31,6 @@
         Public CODE_OWNER As Integer
         Public NAME_OWNER As String
         Public KANA_OWNER As String
-        Public CODE_SECTION As Integer
         Public KIND_OWNER As Integer
 
         Public CODE_SECTION_NAME As String
@@ -291,7 +290,6 @@
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
                 .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-                .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
                 .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
             End With
         End While
@@ -303,7 +301,7 @@
         Call SUB_TIME_MEASUREMEN_START()
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .CODE_SECTION_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, .CODE_SECTION)
+                .CODE_SECTION_NAME = "部門"
             End With
         Next
         Call SUB_TIME_MEASUREMENT_STOP_AND_PUT_LOG(Me.Text & ":" & "補助情報取得")
