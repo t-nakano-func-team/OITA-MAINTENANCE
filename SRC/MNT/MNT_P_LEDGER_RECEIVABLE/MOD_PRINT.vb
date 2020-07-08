@@ -235,6 +235,26 @@
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
 
+            Call .Append("INNER JOIN" & System.Environment.NewLine)
+            Call .Append("(" & System.Environment.NewLine)
+            Call .Append("SELECT" & System.Environment.NewLine)
+            Call .Append("NUMBER_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SERIAL_CONTRACT" & "" & System.Environment.NewLine)
+            Call .Append("FROM" & System.Environment.NewLine)
+            Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Dim SRT_CALC_PERIOD As SRT_DATE_PERIOD
+            SRT_CALC_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_CALC_FROM
+            SRT_CALC_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_CALC_TO
+            Call .Append(FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_CALC_PERIOD, "DATE_INVOICE"))
+            Call .Append("GROUP BY" & System.Environment.NewLine)
+            Call .Append("NUMBER_CONTRACT,SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append(") AS SUB_02" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_02.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_02.SERIAL_CONTRACT" & System.Environment.NewLine)
+
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
             Dim STR_WHERE As String

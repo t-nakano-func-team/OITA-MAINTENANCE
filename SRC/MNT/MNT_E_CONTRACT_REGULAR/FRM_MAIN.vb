@@ -316,6 +316,9 @@
         Dim SRT_INVOICE_ROW() As SRT_TABLE_MNT_T_INVOICE
         SRT_INVOICE_ROW = FUNC_GET_INVOICE_RECORD_ALL(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT)
 
+        Dim SRT_DEPOSIT_ROW() As SRT_TABLE_MNT_T_DEPOSIT
+        SRT_DEPOSIT_ROW = FUNC_GET_DEPOSIT_RECORD_ALL(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT)
+
         If Not FUNC_DELETE_TABLE_MNT_T_CONTRACT(SRT_RECORD.KEY) Then
             Return False
         End If
@@ -326,6 +329,12 @@
 
         For i = 1 To (SRT_INVOICE_ROW.Length - 1)
             If Not FUNC_INSERT_TABLE_MNT_T_INVOICE(SRT_INVOICE_ROW(i)) Then
+                Return False
+            End If
+        Next
+
+        For i = 1 To (SRT_DEPOSIT_ROW.Length - 1)
+            If Not FUNC_INSERT_TABLE_MNT_T_DEPOSIT(SRT_DEPOSIT_ROW(i)) Then
                 Return False
             End If
         Next
