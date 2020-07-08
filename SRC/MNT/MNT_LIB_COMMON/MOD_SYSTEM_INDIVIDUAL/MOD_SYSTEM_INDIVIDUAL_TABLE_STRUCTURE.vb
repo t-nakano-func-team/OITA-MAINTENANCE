@@ -1289,11 +1289,20 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
 
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_T_DEPOSIT_DATA
+        Public DATE_DEPOSIT As DateTime
         Public KIND_SALE As Integer
+        Public KIND_DEPOSIT As Integer
         Public KIND_DEPOSIT_SUB As Integer
-        Public DATE_ACTIVE As DateTime
-        Public SERIAL_DEPOSIT As Integer
+        Public KINGAKU_FEE_DETAIL As Long
+        Public KINGAKU_FEE_VAT As Long
+        Public KIND_COST As Integer
+        Public KINGAKU_COST_DETAIL As Long
+        Public KINGAKU_COST_VAT As Long
         Public NAME_MEMO As String
+        Public SERIAL_DEPOSIT As Integer
+        Public FLAG_OUTPUT_DONE As Integer
+        Public CODE_STAFF As Integer
+        Public DATE_ACTIVE As DateTime
     End Structure
 #End Region
 
@@ -1356,11 +1365,20 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
     ) As Boolean
 
         With SRT_RET
+            .DATE_DEPOSIT = cstVB_DATE_MIN
             .KIND_SALE = -1
+            .KIND_DEPOSIT = -1
             .KIND_DEPOSIT_SUB = -1
-            .DATE_ACTIVE = cstVB_DATE_MIN
-            .SERIAL_DEPOSIT = 0
+            .KINGAKU_FEE_DETAIL = 0
+            .KINGAKU_FEE_VAT = 0
+            .KIND_COST = -1
+            .KINGAKU_COST_DETAIL = 0
+            .KINGAKU_COST_VAT = 0
             .NAME_MEMO = ""
+            .SERIAL_DEPOSIT = 0
+            .FLAG_OUTPUT_DONE = -1
+            .CODE_STAFF = -1
+            .DATE_ACTIVE = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -1404,11 +1422,20 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         Call SDR_READER.Read()
 
         With SRT_RET
+            .DATE_DEPOSIT = CDate(SDR_READER.Item("DATE_DEPOSIT"))
             .KIND_SALE = CInt(SDR_READER.Item("KIND_SALE"))
+            .KIND_DEPOSIT = CInt(SDR_READER.Item("KIND_DEPOSIT"))
             .KIND_DEPOSIT_SUB = CInt(SDR_READER.Item("KIND_DEPOSIT_SUB"))
-            .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
-            .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
+            .KINGAKU_FEE_DETAIL = CLng(SDR_READER.Item("KINGAKU_FEE_DETAIL"))
+            .KINGAKU_FEE_VAT = CLng(SDR_READER.Item("KINGAKU_FEE_VAT"))
+            .KIND_COST = CInt(SDR_READER.Item("KIND_COST"))
+            .KINGAKU_COST_DETAIL = CLng(SDR_READER.Item("KINGAKU_COST_DETAIL"))
+            .KINGAKU_COST_VAT = CLng(SDR_READER.Item("KINGAKU_COST_VAT"))
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
+            .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
+            .FLAG_OUTPUT_DONE = CInt(SDR_READER.Item("FLAG_OUTPUT_DONE"))
+            .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
+            .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
         End With
 
         Call SDR_READER.Close()
@@ -1469,12 +1496,22 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_INVOICE) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_DEPOSIT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_SALE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT_SUB) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_FEE_DETAIL) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_FEE_VAT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_COST) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_COST_DETAIL) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_COST_VAT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_DEPOSIT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_OUTPUT_DONE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "" & Environment.NewLine)
         End With
+
         Call STR_SQL.Append(")" & Environment.NewLine)
 
         If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
