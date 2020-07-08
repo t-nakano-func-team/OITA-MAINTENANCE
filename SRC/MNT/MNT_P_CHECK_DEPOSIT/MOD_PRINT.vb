@@ -210,15 +210,8 @@
         With STR_SQL
             Call .Append("SELECT" & System.Environment.NewLine)
             Call .Append("MAIN.*" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.DATE_DEPOSIT" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KIND_DEPOSIT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.KINGAKU_INVOICE_DETAIL" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KINGAKU_INVOICE_VAT" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KINGAKU_FEE_DETAIL" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KINGAKU_FEE_VAT" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KIND_COST" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KINGAKU_COST_DETAIL" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KINGAKU_COST_VAT" & "" & System.Environment.NewLine)
+            Call .Append("SUB_01.KINGAKU_INVOICE_VAT" & "" & System.Environment.NewLine)
 
             Call .Append("FROM" & System.Environment.NewLine)
             Call .Append("MNT_T_DEPOSIT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
@@ -246,7 +239,7 @@
                 Case ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT.DATE_ACTIVE
                     Call .Append("MAIN.DATE_ACTIVE,MAIN.SERIAL_DEPOSIT," & System.Environment.NewLine)
                 Case ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT.DATE_DEPOSIT
-                    Call .Append("SUB_01.DATE_DEPOSIT,MAIN.DATE_ACTIVE,MAIN.SERIAL_DEPOSIT," & System.Environment.NewLine)
+                    Call .Append("MAIN.DATE_DEPOSIT,MAIN.DATE_ACTIVE,MAIN.SERIAL_DEPOSIT," & System.Environment.NewLine)
             End Select
             Call .Append("MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT,MAIN.SERIAL_INVOICE" & System.Environment.NewLine)
         End With
@@ -267,7 +260,7 @@
         SRT_ACTIVE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_ACTIVE_TO
 
         With SRT_CONDITIONS
-            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_DEPOSIT_PERIOD, "SUB_01.DATE_DEPOSIT")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_DEPOSIT_PERIOD, "MAIN.DATE_DEPOSIT")
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_ACTIVE_PERIOD, "MAIN.DATE_ACTIVE")
             STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_FROM, "SUB_02.CODE_OWNER", ">=")
             STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_TO, "SUB_02.CODE_OWNER", "<=")
