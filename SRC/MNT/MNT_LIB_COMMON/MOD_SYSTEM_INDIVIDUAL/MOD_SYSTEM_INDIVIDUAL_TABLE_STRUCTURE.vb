@@ -1012,15 +1012,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
         Public CODE_SECTION As Integer
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
-        Public FLAG_DEPOSIT_DONE As Integer
-        Public DATE_DEPOSIT As DateTime
-        Public KIND_DEPOSIT As Integer
-        Public KINGAKU_FEE_DETAIL As Long
-        Public KINGAKU_FEE_VAT As Long
-        Public KIND_COST As Integer
-        Public KINGAKU_COST_DETAIL As Long
-        Public KINGAKU_COST_VAT As Long
-        Public FLAG_OUTPUT_DONE As Integer
     End Structure
 #End Region
 
@@ -1087,15 +1078,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
             .CODE_SECTION = -1
             .KINGAKU_INVOICE_DETAIL = 0
             .KINGAKU_INVOICE_VAT = 0
-            .FLAG_DEPOSIT_DONE = -1
-            .DATE_DEPOSIT = cstVB_DATE_MIN
-            .KIND_DEPOSIT = -1
-            .KINGAKU_FEE_DETAIL = 0
-            .KINGAKU_FEE_VAT = 0
-            .KIND_COST = -1
-            .KINGAKU_COST_DETAIL = 0
-            .KINGAKU_COST_VAT = 0
-            .FLAG_OUTPUT_DONE = -1
         End With
 
         If BLN_CASH Then
@@ -1143,15 +1125,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
             .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
             .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
             .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
-            .FLAG_DEPOSIT_DONE = CInt(SDR_READER.Item("FLAG_DEPOSIT_DONE"))
-            .DATE_DEPOSIT = CDate(SDR_READER.Item("DATE_DEPOSIT"))
-            .KIND_DEPOSIT = CInt(SDR_READER.Item("KIND_DEPOSIT"))
-            .KINGAKU_FEE_DETAIL = CLng(SDR_READER.Item("KINGAKU_FEE_DETAIL"))
-            .KINGAKU_FEE_VAT = CLng(SDR_READER.Item("KINGAKU_FEE_VAT"))
-            .KIND_COST = CInt(SDR_READER.Item("KIND_COST"))
-            .KINGAKU_COST_DETAIL = CLng(SDR_READER.Item("KINGAKU_COST_DETAIL"))
-            .KINGAKU_COST_VAT = CLng(SDR_READER.Item("KINGAKU_COST_VAT"))
-            .FLAG_OUTPUT_DONE = CInt(SDR_READER.Item("FLAG_OUTPUT_DONE"))
         End With
 
         Call SDR_READER.Close()
@@ -1215,16 +1188,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_INVOICE
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_INVOICE_DETAIL) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_INVOICE_VAT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_DEPOSIT_DONE) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_DEPOSIT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_FEE_DETAIL) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_FEE_VAT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_COST) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_COST_DETAIL) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_COST_VAT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_OUTPUT_DONE) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_INVOICE_VAT) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 

@@ -326,41 +326,9 @@
             Call SUB_SET_COMBO_KIND_CODE(CMB_CODE_SECTION, .CODE_SECTION)
 
             Dim BLN_FLAG_DEPOSIT_DONE As Boolean
-            'BLN_FLAG_DEPOSIT_DONE = FUNC_CAST_INT_TO_BOOL(.FLAG_DEPOSIT_DONE)
-            Dim SRT_CEHCK As SRT_TABLE_MNT_T_DEPOSIT_KEY
-            With SRT_CEHCK
-                .NUMBER_CONTRACT = SRT_RECORD.KEY.NUMBER_CONTRACT
-                .SERIAL_CONTRACT = SRT_RECORD.KEY.SERIAL_CONTRACT
-                .SERIAL_INVOICE = SRT_RECORD.KEY.SERIAL_INVOICE
-            End With
-            BLN_FLAG_DEPOSIT_DONE = FUNC_CHECK_TABLE_MNT_T_DEPOSIT(SRT_CEHCK)
+            BLN_FLAG_DEPOSIT_DONE = FUNC_GET_FLAG_DEPOSIT_DONE(SRT_RECORD.KEY.NUMBER_CONTRACT, SRT_RECORD.KEY.SERIAL_CONTRACT, SRT_RECORD.KEY.SERIAL_INVOICE)
             CHK_FLAG_DEPOSIT_DONE.Checked = BLN_FLAG_DEPOSIT_DONE
             Call SUB_REFRESH_DEPOSIT_INPUT_AREA()
-            If CHK_FLAG_DEPOSIT_DONE.Checked Then
-                'Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, .DATE_DEPOSIT)
-                'Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT, .KIND_DEPOSIT)
-                'Call SUB_REFRSH_ENABLED_KIND_DEPOSIT_SUB()
-                'CMB_KINGAKU_FEE_DETAIL.Text = Format(.KINGAKU_FEE_DETAIL, "#,##0")
-                'TXT_KINGAKU_FEE_VAT.Text = Format(.KINGAKU_FEE_VAT, "#,##0")
-                'Call SUB_REFRESH_KINGAKU_FEE_TOTAL()
-                'Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_COST, .KIND_COST)
-                'Call SUB_REFRSH_ENABLED_KINGAKU_COST()
-                'TXT_KINGAKU_COST_DETAIL.Text = Format(.KINGAKU_COST_DETAIL, "#,##0")
-                'TXT_KINGAKU_COST_VAT.Text = Format(.KINGAKU_COST_VAT, "#,##0")
-                'Call SUB_REFRESH_KINGAKU_COST_TOTAL()
-            Else
-                'Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, datSYSTEM_TOTAL_DATE_ACTIVE)
-                'Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_DEPOSIT)
-                'Call SUB_REFRSH_ENABLED_KIND_DEPOSIT_SUB()
-                'CMB_KINGAKU_FEE_DETAIL.Text = Format(0, "#,##0")
-                'TXT_KINGAKU_FEE_VAT.Text = Format(0, "#,##0")
-                'Call SUB_REFRESH_KINGAKU_FEE_TOTAL()
-                'Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_COST)
-                'Call SUB_REFRSH_ENABLED_KINGAKU_COST()
-                'TXT_KINGAKU_COST_DETAIL.Text = Format(0, "#,##0")
-                'TXT_KINGAKU_COST_VAT.Text = Format(0, "#,##0")
-                'Call SUB_REFRESH_KINGAKU_COST_TOTAL()
-            End If
         End With
     End Sub
 
@@ -428,28 +396,6 @@
             .KINGAKU_INVOICE_DETAIL = CLng(TXT_KINGAKU_INVOICE_DETAIL.Text)
             .KINGAKU_INVOICE_VAT = CLng(TXT_KINGAKU_INVOICE_VAT.Text)
             .CODE_SECTION = FUNC_GET_COMBO_KIND_CODE(CMB_CODE_SECTION)
-            .FLAG_DEPOSIT_DONE = FUNC_CAST_BOOL_TO_INT(CHK_FLAG_DEPOSIT_DONE.Checked)
-
-            If CHK_FLAG_DEPOSIT_DONE.Checked Then
-                .DATE_DEPOSIT = DTP_DATE_DEPOSIT.Value
-                .KIND_DEPOSIT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_DEPOSIT)
-                .KINGAKU_FEE_DETAIL = CLng(CMB_KINGAKU_FEE_DETAIL.Text)
-                .KINGAKU_FEE_VAT = CLng(TXT_KINGAKU_FEE_VAT.Text)
-                .KIND_COST = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_COST)
-                .KINGAKU_COST_DETAIL = CLng(TXT_KINGAKU_COST_DETAIL.Text)
-                .KINGAKU_COST_VAT = CLng(TXT_KINGAKU_COST_VAT.Text)
-                .FLAG_OUTPUT_DONE = ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.NOT_DONE
-            Else
-                .DATE_DEPOSIT = cstVB_DATE_MAX
-                .KIND_DEPOSIT = 0
-                .KINGAKU_FEE_DETAIL = 0
-                .KINGAKU_FEE_VAT = 0
-                .KIND_COST = 0
-                .KINGAKU_COST_DETAIL = 0
-                .KINGAKU_COST_VAT = 0
-                .FLAG_OUTPUT_DONE = ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.NOT_DONE
-            End If
-
         End With
 
         Return SRT_RET
