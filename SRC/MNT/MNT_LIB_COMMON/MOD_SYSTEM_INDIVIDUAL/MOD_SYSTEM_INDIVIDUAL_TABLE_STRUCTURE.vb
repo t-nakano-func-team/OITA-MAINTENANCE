@@ -487,7 +487,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public KIND_CONTRACT As Integer
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
-        Public CODE_HANDLE As Integer
+        Public CODE_SECTION As Integer
         Public CODE_WORK As Integer
         Public NAME_CONTRACT As String
         Public DATE_WORK_FROM As DateTime
@@ -499,7 +499,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public KINGAKU_CONTRACT As Long
         Public NAME_MEMO As String
         Public CODE_STAFF As Integer
-        Public DATE_INSERT As DateTime
+        Public DATE_ACTIVE As DateTime
     End Structure
 #End Region
 
@@ -564,7 +564,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .KIND_CONTRACT = -1
             .DATE_CONTRACT = cstVB_DATE_MIN
             .CODE_OWNER = -1
-            .CODE_HANDLE = -1
+            .CODE_SECTION = -1
             .CODE_WORK = -1
             .NAME_CONTRACT = ""
             .DATE_WORK_FROM = cstVB_DATE_MIN
@@ -576,7 +576,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .KINGAKU_CONTRACT = 0
             .NAME_MEMO = ""
             .CODE_STAFF = -1
-            .DATE_INSERT = cstVB_DATE_MIN
+            .DATE_ACTIVE = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -621,7 +621,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
             .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
             .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
-            .CODE_HANDLE = CInt(SDR_READER.Item("CODE_HANDLE"))
+            .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
             .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
             .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             .DATE_WORK_FROM = CDate(SDR_READER.Item("DATE_WORK_FROM"))
@@ -633,7 +633,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
             .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
-            .DATE_INSERT = CDate(SDR_READER.Item("DATE_INSERT"))
+            .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
         End With
 
         Call SDR_READER.Close()
@@ -694,7 +694,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_OWNER) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_HANDLE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_WORK) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_FROM) & "," & Environment.NewLine)
@@ -706,7 +706,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_STAFF) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_INSERT) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 

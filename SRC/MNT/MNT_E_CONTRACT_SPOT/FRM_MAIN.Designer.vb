@@ -45,9 +45,8 @@ Partial Class FRM_MAIN
         Me.CMB_KIND_WORK = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_WORK_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_CODE_HANDLE = New System.Windows.Forms.Panel()
-        Me.LBL_CODE_SECTION_NAME = New System.Windows.Forms.Label()
-        Me.CMB_CODE_HANDLE = New System.Windows.Forms.ComboBox()
-        Me.LBL_CODE_HANDLE_GUIDE = New System.Windows.Forms.Label()
+        Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
+        Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_DEPOSIT_DONE = New System.Windows.Forms.Panel()
         Me.LBL_DEPOSIT_DONE = New System.Windows.Forms.Label()
         Me.LBL_DEPOSIT_DONE_GUIDE = New System.Windows.Forms.Label()
@@ -407,50 +406,35 @@ Partial Class FRM_MAIN
         '
         'PNL_CODE_HANDLE
         '
-        Me.PNL_CODE_HANDLE.Controls.Add(Me.LBL_CODE_SECTION_NAME)
-        Me.PNL_CODE_HANDLE.Controls.Add(Me.CMB_CODE_HANDLE)
-        Me.PNL_CODE_HANDLE.Controls.Add(Me.LBL_CODE_HANDLE_GUIDE)
+        Me.PNL_CODE_HANDLE.Controls.Add(Me.CMB_CODE_SECTION)
+        Me.PNL_CODE_HANDLE.Controls.Add(Me.LBL_CODE_SECTION_GUIDE)
         Me.PNL_CODE_HANDLE.Location = New System.Drawing.Point(370, 75)
         Me.PNL_CODE_HANDLE.Name = "PNL_CODE_HANDLE"
-        Me.PNL_CODE_HANDLE.Size = New System.Drawing.Size(365, 30)
+        Me.PNL_CODE_HANDLE.Size = New System.Drawing.Size(240, 30)
         Me.PNL_CODE_HANDLE.TabIndex = 5
         '
-        'LBL_CODE_SECTION_NAME
+        'CMB_CODE_SECTION
         '
-        Me.LBL_CODE_SECTION_NAME.AutoEllipsis = True
-        Me.LBL_CODE_SECTION_NAME.BackColor = System.Drawing.Color.White
-        Me.LBL_CODE_SECTION_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_SECTION_NAME.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_CODE_SECTION_NAME.Location = New System.Drawing.Point(205, 1)
-        Me.LBL_CODE_SECTION_NAME.Name = "LBL_CODE_SECTION_NAME"
-        Me.LBL_CODE_SECTION_NAME.Size = New System.Drawing.Size(150, 25)
-        Me.LBL_CODE_SECTION_NAME.TabIndex = 4
-        Me.LBL_CODE_SECTION_NAME.Tag = "Clear"
-        Me.LBL_CODE_SECTION_NAME.Text = "＊＊＊"
-        Me.LBL_CODE_SECTION_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CMB_CODE_SECTION.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_CODE_SECTION.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_CODE_SECTION.Name = "CMB_CODE_SECTION"
+        Me.CMB_CODE_SECTION.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_CODE_SECTION.TabIndex = 1
+        Me.CMB_CODE_SECTION.Tag = "Clear"
         '
-        'CMB_CODE_HANDLE
+        'LBL_CODE_SECTION_GUIDE
         '
-        Me.CMB_CODE_HANDLE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_CODE_HANDLE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_CODE_HANDLE.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_CODE_HANDLE.Name = "CMB_CODE_HANDLE"
-        Me.CMB_CODE_HANDLE.Size = New System.Drawing.Size(125, 26)
-        Me.CMB_CODE_HANDLE.TabIndex = 1
-        Me.CMB_CODE_HANDLE.Tag = "Clear"
-        '
-        'LBL_CODE_HANDLE_GUIDE
-        '
-        Me.LBL_CODE_HANDLE_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_HANDLE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_HANDLE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_HANDLE_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_HANDLE_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_HANDLE_GUIDE.Name = "LBL_CODE_HANDLE_GUIDE"
-        Me.LBL_CODE_HANDLE_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_HANDLE_GUIDE.TabIndex = 0
-        Me.LBL_CODE_HANDLE_GUIDE.Text = "作業担当"
-        Me.LBL_CODE_HANDLE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_CODE_SECTION_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_SECTION_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_SECTION_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_SECTION_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_SECTION_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_SECTION_GUIDE.Name = "LBL_CODE_SECTION_GUIDE"
+        Me.LBL_CODE_SECTION_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_SECTION_GUIDE.TabIndex = 0
+        Me.LBL_CODE_SECTION_GUIDE.Text = "担当部署"
+        Me.LBL_CODE_SECTION_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_DEPOSIT_DONE
         '
@@ -1156,9 +1140,8 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_INVOICE_DONE_GUIDE As Label
     Friend WithEvents BTN_NUMBER_CONTRACT_SEARCH As Button
     Friend WithEvents PNL_CODE_HANDLE As Panel
-    Friend WithEvents LBL_CODE_SECTION_NAME As Label
-    Friend WithEvents CMB_CODE_HANDLE As ComboBox
-    Friend WithEvents LBL_CODE_HANDLE_GUIDE As Label
+    Friend WithEvents CMB_CODE_SECTION As ComboBox
+    Friend WithEvents LBL_CODE_SECTION_GUIDE As Label
     Friend WithEvents PNL_KIND_WORK As Panel
     Friend WithEvents CMB_KIND_WORK As ComboBox
     Friend WithEvents LBL_KIND_WORK_GUIDE As Label
