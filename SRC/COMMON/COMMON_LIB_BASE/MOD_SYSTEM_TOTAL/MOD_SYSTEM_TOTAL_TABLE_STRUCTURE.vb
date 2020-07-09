@@ -1099,6 +1099,58 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_ACTIVE
     End Function
 #End Region
 
+#Region "DELETE"
+    Public Function FUNC_DELETE_TABLE_MNG_M_ACTIVE(
+    ByRef srtDATA As SRT_TABLE_MNG_M_ACTIVE_KEY
+    ) As Boolean
+        Dim srtSQL As SRT_SQL_TOOL_DELETE
+        Dim strSQL As String
+
+        With srtSQL
+            .TABLE_NAME = strSYSTEM_PUBLIC_MNGDB_PREFIX & CST_TABLE_NAME_DEFAULT
+            ReDim .WHERE(1)
+            .WHERE(1).COL_NAME = "CODE_ACTIVE"
+            .WHERE(1).VALUE = srtDATA.CODE_ACTIVE
+        End With
+
+        strSQL = FUNC_GET_SQL_TOOL_DELETE(srtSQL)
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(strSQL) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
+#Region "INSERT"
+    Public Function FUNC_INSERT_TABLE_MNG_M_ACTIVE(
+    ByRef srtDATA As SRT_TABLE_MNG_M_ACTIVE
+    ) As Boolean
+        Dim strSQL As System.Text.StringBuilder
+
+        strSQL = New System.Text.StringBuilder
+        Call strSQL.Append("INSERT" & Environment.NewLine)
+        Call strSQL.Append("INTO" & Environment.NewLine)
+        Call strSQL.Append(strSYSTEM_PUBLIC_MNGDB_PREFIX & CST_TABLE_NAME_DEFAULT & " " & "WITH(ROWLOCK)" & Environment.NewLine)
+        Call strSQL.Append("VALUES" & Environment.NewLine)
+        Call strSQL.Append("(" & Environment.NewLine)
+        With srtDATA.KEY
+            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_ACTIVE) & "," & Environment.NewLine)
+        End With
+        With srtDATA.DATA
+            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "" & Environment.NewLine)
+        End With
+        Call strSQL.Append(")" & Environment.NewLine)
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(strSQL.ToString) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
 #Region "CHECK"
     Public Function FUNC_CHECK_TABLE_MNG_M_ACTIVE( _
     ByRef srtDATA As SRT_TABLE_MNG_M_ACTIVE_KEY _

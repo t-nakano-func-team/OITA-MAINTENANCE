@@ -15,6 +15,7 @@
         DO_LOG_OFF = 1
         DO_BACK
         DO_SHELL
+        DO_SHOW_SET_ACTIVE
 
         DO_END = 81
         DO_SHOW_SETTING
@@ -118,9 +119,10 @@
                 Call SUB_BACK()
             Case ENM_MY_EXEC_DO.DO_SHELL
                 Call SUB_SHELL(intINDEX)
-
             Case ENM_MY_EXEC_DO.DO_END
                 Call SUB_END()
+            Case ENM_MY_EXEC_DO.DO_SHOW_SET_ACTIVE
+                Call SUB_SHOW_SET_DATE_ACTIVE()
             Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
                 Call SUB_SHOW_SETTING()
             Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
@@ -205,6 +207,39 @@
         Call Application.DoEvents()
         Call Me.Close()
     End Sub
+
+    Private Sub SUB_SHOW_SET_DATE_ACTIVE()
+
+        Dim FRM_SHOW As FRM_SUB_01
+        FRM_SHOW = New FRM_SUB_01
+        With FRM_SHOW
+            .Font = New System.Drawing.Font(FRM_SHOW.Font.Name, Me.Font.Size)
+            .Text = "処理日付設定"
+        End With
+
+        Call FRM_SHOW.ShowDialog()
+        Dim BLN_CANCEL As Boolean
+        BLN_CANCEL = FRM_SHOW.RET_EDIT_CANCEL
+        Call FRM_SHOW.Dispose()
+        FRM_SHOW = Nothing
+
+        If BLN_CANCEL Then
+            Exit Sub
+        End If
+
+        Const CST_CODE_ACTIVE As Integer = 1 '処理日取得用
+        Dim BLN_CHECK As Boolean
+
+        BLN_CHECK = FUNC_CHECK_MNG_M_ACTIVE(CST_CODE_ACTIVE)
+        If BLN_CHECK Then
+            datSYSTEM_TOTAL_DATE_ACTIVE = FUNC_GET_MNG_M_ACTIVE_DATE_ACTIVE(CST_CODE_ACTIVE)
+        Else
+            datSYSTEM_TOTAL_DATE_ACTIVE = System.DateTime.Today 'システム日付
+        End If
+
+        Call SUB_CTRL_VALUE_INIT()
+    End Sub
+
 #End Region
 
 #Region "キー制御処理"
@@ -216,6 +251,8 @@
     '通常のコマンドキー制御(ALT)
     Private Sub SUB_KEY_DOWN_ALT(ByVal enmKEY_CODE As Windows.Forms.Keys, ByRef blnHandled As Boolean)
         Select Case enmKEY_CODE
+            Case Keys.A
+                Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SET_ACTIVE)
             Case Keys.C
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE)
             Case Keys.V
