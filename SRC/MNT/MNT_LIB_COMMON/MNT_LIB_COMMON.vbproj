@@ -248,6 +248,10 @@
     <None Include="BIP\MNT_P_CHECK_DEPOSIT.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.bip" />
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.ovd" />
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.pmd" />
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.psf" />
     <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -272,6 +276,10 @@
     <None Include="BIP\MNT_P_LIST_INVOICE.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_P_PLAN_INVOICE.bip" />
+    <None Include="BIP\MNT_P_PLAN_INVOICE.ovd" />
+    <None Include="BIP\MNT_P_PLAN_INVOICE.pmd" />
+    <None Include="BIP\MNT_P_PLAN_INVOICE.psf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
