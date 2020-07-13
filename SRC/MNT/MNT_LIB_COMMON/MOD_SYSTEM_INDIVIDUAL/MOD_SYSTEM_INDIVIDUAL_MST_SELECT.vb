@@ -770,47 +770,6 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_T_INVOICE
         Return INT_RET
     End Function
 
-    Private SRT_CASH_GET_MNT_T_INVOICE_COUNT_DEPOSIT_DONE() As SRT_CASH_INT_INT_INT
-    Public Function FUNC_GET_MNT_T_INVOICE_COUNT_DEPOSIT_DONE(
-    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
-    Optional ByVal BLN_CASH As Boolean = False
-    ) As Long
-
-        Dim SRT_MY_CASH() As SRT_CASH_INT_INT_INT
-        SRT_MY_CASH = SRT_CASH_GET_MNT_T_INVOICE_COUNT_DEPOSIT_DONE
-        If BLN_CASH Then
-            Dim INT_CASH_INDEX As Integer
-            INT_CASH_INDEX = FUNC_SEARCH_CASH_INT_INT_INT(SRT_MY_CASH, INT_NUMBER_CONTRACT, INT_SERIAL_CONTRACT)
-            If INT_CASH_INDEX <> -1 Then
-                Return SRT_MY_CASH(INT_CASH_INDEX).VALUE
-            End If
-        End If
-
-        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
-        With SRT_SQL
-            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
-            .COL_NAME = "COUNT(*)"
-            ReDim .WHERE(3)
-            .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
-            .WHERE(1).VALUE = INT_NUMBER_CONTRACT
-            .WHERE(2).COL_NAME = "SERIAL_CONTRACT"
-            .WHERE(2).VALUE = INT_SERIAL_CONTRACT
-            .WHERE(3).COL_NAME = "FLAG_DEPOSIT_DONE"
-            .WHERE(3).VALUE = CInt(ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.DONE)
-            .ORDER_KEY = ""
-        End With
-
-        Dim STR_SQL As String
-        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
-
-        Dim INT_RET As Long
-        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
-
-        Call SUB_ADD_CASH_INT_INT_INT(SRT_CASH_GET_MNT_T_INVOICE_COUNT_DEPOSIT_DONE, INT_NUMBER_CONTRACT, INT_SERIAL_CONTRACT, INT_RET)
-
-        Return INT_RET
-    End Function
-
 End Module
 
 #End Region
@@ -841,6 +800,45 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_T_DEPOSIT
 
         Dim INT_RET As Integer
         INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
+
+        Return INT_RET
+    End Function
+
+    Private SRT_CASH_GET_MNT_T_DEPOSIT_COUNT() As SRT_CASH_INT_INT_INT
+    Public Function FUNC_GET_MNT_T_DEPOSIT_COUNT(
+    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
+    Optional ByVal BLN_CASH As Boolean = False
+    ) As Long
+
+        Dim SRT_MY_CASH() As SRT_CASH_INT_INT_INT
+        SRT_MY_CASH = SRT_CASH_GET_MNT_T_DEPOSIT_COUNT
+        If BLN_CASH Then
+            Dim INT_CASH_INDEX As Integer
+            INT_CASH_INDEX = FUNC_SEARCH_CASH_INT_INT_INT(SRT_MY_CASH, INT_NUMBER_CONTRACT, INT_SERIAL_CONTRACT)
+            If INT_CASH_INDEX <> -1 Then
+                Return SRT_MY_CASH(INT_CASH_INDEX).VALUE
+            End If
+        End If
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "COUNT(*)"
+            ReDim .WHERE(2)
+            .WHERE(1).COL_NAME = "NUMBER_CONTRACT"
+            .WHERE(1).VALUE = INT_NUMBER_CONTRACT
+            .WHERE(2).COL_NAME = "SERIAL_CONTRACT"
+            .WHERE(2).VALUE = INT_SERIAL_CONTRACT
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+
+        Dim INT_RET As Long
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
+
+        Call SUB_ADD_CASH_INT_INT_INT(SRT_CASH_GET_MNT_T_DEPOSIT_COUNT, INT_NUMBER_CONTRACT, INT_SERIAL_CONTRACT, INT_RET)
 
         Return INT_RET
     End Function

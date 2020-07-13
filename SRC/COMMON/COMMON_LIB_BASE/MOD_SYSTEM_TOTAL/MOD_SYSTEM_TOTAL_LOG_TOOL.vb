@@ -27,7 +27,7 @@
 
         strLOG_PATH = strLOG_DIR & strLOG_FILE_NAME
 
-        strHEAD = System.DateTime.Today.ToShortDateString & " " & System.DateTime.Today.ToShortTimeString & " " & strEXE_NAME
+        strHEAD = System.DateTime.Today.ToShortDateString & " " & System.DateTime.Now.ToShortTimeString & " " & strEXE_NAME
         If Not FUNC_FILE_APPEND_WRITE(strLOG_PATH, strHEAD) Then
             Exit Sub
         End If
