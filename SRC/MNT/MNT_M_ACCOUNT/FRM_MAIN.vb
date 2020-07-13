@@ -37,7 +37,7 @@
         Public KIND_ACCOUNT As Integer
         Public CODE_KIND As Integer
         Public NAME_ACCOUNT As String
-        Public CODE_ACCOUNT As String
+        Public CODE_ACCOUNT As Integer
 
         Public KIND_ACCOUNT_NAME As String
     End Structure
