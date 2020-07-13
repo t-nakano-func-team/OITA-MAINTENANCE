@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -196,14 +196,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -364,7 +364,7 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_STAFF_GUIDE.Name = "LBL_NAME_STAFF_GUIDE"
         Me.LBL_NAME_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_NAME_STAFF_GUIDE.TabIndex = 0
-        Me.LBL_NAME_STAFF_GUIDE.Text = "社員名"
+        Me.LBL_NAME_STAFF_GUIDE.Text = "社員名称"
         Me.LBL_NAME_STAFF_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_INPUT_KEY

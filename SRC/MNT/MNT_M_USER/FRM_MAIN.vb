@@ -61,7 +61,7 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "社員番号,社員名,ユーザーID,パスワード,権限", "SSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "社員番号,社員名称,ユーザーID,パスワード,権限", "SSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,9,6,6,6", "RLLLL")
 

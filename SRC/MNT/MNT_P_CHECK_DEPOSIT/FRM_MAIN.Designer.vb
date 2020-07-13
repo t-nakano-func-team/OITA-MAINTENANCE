@@ -55,7 +55,7 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_ACTIVE_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_ACTIVE_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_ACTIVE_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_DATE__DEPOSIT = New System.Windows.Forms.Panel()
+        Me.PNL_DATE_DEPOSIT = New System.Windows.Forms.Panel()
         Me.LBL_DATE_DEPOSIT_FROM_TO_GUIDE = New System.Windows.Forms.Label()
         Me.DTP_DATE_DEPOSIT_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_DEPOSIT_FROM = New System.Windows.Forms.DateTimePicker()
@@ -71,7 +71,7 @@ Partial Class FRM_MAIN
         Me.PNL_KIND_SORT.SuspendLayout()
         Me.PNL_CODE_OWNER.SuspendLayout()
         Me.PNL_DATE_ACTIVE.SuspendLayout()
-        Me.PNL_DATE__DEPOSIT.SuspendLayout()
+        Me.PNL_DATE_DEPOSIT.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -268,7 +268,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_SORT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_ACTIVE)
-        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE__DEPOSIT)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_DEPOSIT)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 400)
@@ -472,16 +472,16 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_GUIDE.Text = "処理日付"
         Me.LBL_DATE_ACTIVE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'PNL_DATE__DEPOSIT
+        'PNL_DATE_DEPOSIT
         '
-        Me.PNL_DATE__DEPOSIT.Controls.Add(Me.LBL_DATE_DEPOSIT_FROM_TO_GUIDE)
-        Me.PNL_DATE__DEPOSIT.Controls.Add(Me.DTP_DATE_DEPOSIT_TO)
-        Me.PNL_DATE__DEPOSIT.Controls.Add(Me.DTP_DATE_DEPOSIT_FROM)
-        Me.PNL_DATE__DEPOSIT.Controls.Add(Me.LBL_DATE_DEPOSIT_GUIDE)
-        Me.PNL_DATE__DEPOSIT.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_DATE__DEPOSIT.Name = "PNL_DATE__DEPOSIT"
-        Me.PNL_DATE__DEPOSIT.Size = New System.Drawing.Size(420, 30)
-        Me.PNL_DATE__DEPOSIT.TabIndex = 0
+        Me.PNL_DATE_DEPOSIT.Controls.Add(Me.LBL_DATE_DEPOSIT_FROM_TO_GUIDE)
+        Me.PNL_DATE_DEPOSIT.Controls.Add(Me.DTP_DATE_DEPOSIT_TO)
+        Me.PNL_DATE_DEPOSIT.Controls.Add(Me.DTP_DATE_DEPOSIT_FROM)
+        Me.PNL_DATE_DEPOSIT.Controls.Add(Me.LBL_DATE_DEPOSIT_GUIDE)
+        Me.PNL_DATE_DEPOSIT.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_DATE_DEPOSIT.Name = "PNL_DATE_DEPOSIT"
+        Me.PNL_DATE_DEPOSIT.Size = New System.Drawing.Size(420, 30)
+        Me.PNL_DATE_DEPOSIT.TabIndex = 0
         '
         'LBL_DATE_DEPOSIT_FROM_TO_GUIDE
         '
@@ -554,7 +554,7 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_OWNER.ResumeLayout(False)
         Me.PNL_CODE_OWNER.PerformLayout()
         Me.PNL_DATE_ACTIVE.ResumeLayout(False)
-        Me.PNL_DATE__DEPOSIT.ResumeLayout(False)
+        Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -575,7 +575,7 @@ Partial Class FRM_MAIN
     Friend WithEvents BTN_END As Button
     Friend WithEvents GRP_BODY As GroupBox
     Friend WithEvents PNL_INPUT_KEY As Panel
-    Friend WithEvents PNL_DATE__DEPOSIT As Panel
+    Friend WithEvents PNL_DATE_DEPOSIT As Panel
     Friend WithEvents LBL_DATE_DEPOSIT_FROM_TO_GUIDE As Label
     Friend WithEvents DTP_DATE_DEPOSIT_TO As DateTimePicker
     Friend WithEvents DTP_DATE_DEPOSIT_FROM As DateTimePicker

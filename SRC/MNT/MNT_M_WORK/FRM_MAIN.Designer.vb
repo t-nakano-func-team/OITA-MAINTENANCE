@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -34,22 +34,16 @@ Partial Class FRM_MAIN
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
-        Me.PNL_FLAG_GRANT = New System.Windows.Forms.Panel()
-        Me.CMB_FLAG_GRANT = New System.Windows.Forms.ComboBox()
-        Me.LBL_FLAG_GRANT_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_PASS_WORD = New System.Windows.Forms.Panel()
-        Me.TXT_PASS_WORD = New System.Windows.Forms.TextBox()
-        Me.LBL_PASS_WORD_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_USER_ID = New System.Windows.Forms.Panel()
-        Me.TXT_USER_ID = New System.Windows.Forms.TextBox()
-        Me.LBL_USER_ID_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_NAME_STAFF = New System.Windows.Forms.Panel()
-        Me.TXT_NAME_STAFF = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_STAFF_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_KIND_WORK = New System.Windows.Forms.Panel()
+        Me.CMB_KIND_WORK = New System.Windows.Forms.ComboBox()
+        Me.LBL_KIND_WORK_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_NAME_WORK = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_WORK = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_WORK_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
-        Me.PNL_CODE_STAFF = New System.Windows.Forms.Panel()
-        Me.LBL_CODE_STAFF_GUIDE = New System.Windows.Forms.Label()
-        Me.TXT_CODE_STAFF = New System.Windows.Forms.TextBox()
+        Me.PNL_CODE_WORK = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_WORK_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_CODE_WORK = New System.Windows.Forms.TextBox()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
@@ -63,12 +57,10 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
-        Me.PNL_FLAG_GRANT.SuspendLayout()
-        Me.PNL_PASS_WORD.SuspendLayout()
-        Me.PNL_USER_ID.SuspendLayout()
-        Me.PNL_NAME_STAFF.SuspendLayout()
+        Me.PNL_KIND_WORK.SuspendLayout()
+        Me.PNL_NAME_WORK.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
-        Me.PNL_CODE_STAFF.SuspendLayout()
+        Me.PNL_CODE_WORK.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.SuspendLayout()
@@ -196,16 +188,16 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
+        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 120)
         Me.DGV_VIEW_DATA.MultiSelect = False
         Me.DGV_VIEW_DATA.Name = "DGV_VIEW_DATA"
         Me.DGV_VIEW_DATA.ReadOnly = True
@@ -220,7 +212,7 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowCellToolTips = False
         Me.DGV_VIEW_DATA.ShowEditingIcon = False
         Me.DGV_VIEW_DATA.ShowRowErrors = False
-        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 240)
+        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 300)
         Me.DGV_VIEW_DATA.TabIndex = 4
         Me.DGV_VIEW_DATA.TabStop = False
         '
@@ -230,142 +222,76 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_GRANT)
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_PASS_WORD)
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_USER_ID)
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_STAFF)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_KIND_WORK)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_WORK)
         Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 70)
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
-        Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 100)
+        Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 40)
         Me.PNL_INPUT_DATA.TabIndex = 2
         '
-        'PNL_FLAG_GRANT
+        'PNL_KIND_WORK
         '
-        Me.PNL_FLAG_GRANT.Controls.Add(Me.CMB_FLAG_GRANT)
-        Me.PNL_FLAG_GRANT.Controls.Add(Me.LBL_FLAG_GRANT_GUIDE)
-        Me.PNL_FLAG_GRANT.Location = New System.Drawing.Point(5, 65)
-        Me.PNL_FLAG_GRANT.Name = "PNL_FLAG_GRANT"
-        Me.PNL_FLAG_GRANT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_FLAG_GRANT.TabIndex = 20
+        Me.PNL_KIND_WORK.Controls.Add(Me.CMB_KIND_WORK)
+        Me.PNL_KIND_WORK.Controls.Add(Me.LBL_KIND_WORK_GUIDE)
+        Me.PNL_KIND_WORK.Location = New System.Drawing.Point(250, 5)
+        Me.PNL_KIND_WORK.Name = "PNL_KIND_WORK"
+        Me.PNL_KIND_WORK.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KIND_WORK.TabIndex = 20
         '
-        'CMB_FLAG_GRANT
+        'CMB_KIND_WORK
         '
-        Me.CMB_FLAG_GRANT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_FLAG_GRANT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_FLAG_GRANT.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_FLAG_GRANT.Name = "CMB_FLAG_GRANT"
-        Me.CMB_FLAG_GRANT.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_FLAG_GRANT.TabIndex = 1
-        Me.CMB_FLAG_GRANT.Tag = "Clear"
+        Me.CMB_KIND_WORK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_KIND_WORK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_KIND_WORK.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KIND_WORK.Name = "CMB_KIND_WORK"
+        Me.CMB_KIND_WORK.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_KIND_WORK.TabIndex = 1
+        Me.CMB_KIND_WORK.Tag = "Clear"
         '
-        'LBL_FLAG_GRANT_GUIDE
+        'LBL_KIND_WORK_GUIDE
         '
-        Me.LBL_FLAG_GRANT_GUIDE.AutoEllipsis = True
-        Me.LBL_FLAG_GRANT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_FLAG_GRANT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_GRANT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_FLAG_GRANT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_FLAG_GRANT_GUIDE.Name = "LBL_FLAG_GRANT_GUIDE"
-        Me.LBL_FLAG_GRANT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_FLAG_GRANT_GUIDE.TabIndex = 0
-        Me.LBL_FLAG_GRANT_GUIDE.Text = "権限"
-        Me.LBL_FLAG_GRANT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_KIND_WORK_GUIDE.AutoEllipsis = True
+        Me.LBL_KIND_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KIND_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KIND_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KIND_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KIND_WORK_GUIDE.Name = "LBL_KIND_WORK_GUIDE"
+        Me.LBL_KIND_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KIND_WORK_GUIDE.TabIndex = 0
+        Me.LBL_KIND_WORK_GUIDE.Text = "作業種別"
+        Me.LBL_KIND_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'PNL_PASS_WORD
+        'PNL_NAME_WORK
         '
-        Me.PNL_PASS_WORD.Controls.Add(Me.TXT_PASS_WORD)
-        Me.PNL_PASS_WORD.Controls.Add(Me.LBL_PASS_WORD_GUIDE)
-        Me.PNL_PASS_WORD.Location = New System.Drawing.Point(255, 35)
-        Me.PNL_PASS_WORD.Name = "PNL_PASS_WORD"
-        Me.PNL_PASS_WORD.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_PASS_WORD.TabIndex = 19
+        Me.PNL_NAME_WORK.Controls.Add(Me.TXT_NAME_WORK)
+        Me.PNL_NAME_WORK.Controls.Add(Me.LBL_NAME_WORK_GUIDE)
+        Me.PNL_NAME_WORK.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_NAME_WORK.Name = "PNL_NAME_WORK"
+        Me.PNL_NAME_WORK.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_NAME_WORK.TabIndex = 17
         '
-        'TXT_PASS_WORD
+        'TXT_NAME_WORK
         '
-        Me.TXT_PASS_WORD.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_PASS_WORD.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_PASS_WORD.MaxLength = 10
-        Me.TXT_PASS_WORD.Name = "TXT_PASS_WORD"
-        Me.TXT_PASS_WORD.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_PASS_WORD.TabIndex = 1
-        Me.TXT_PASS_WORD.Tag = "Clear,Check,Char,Ascii,NotNull"
+        Me.TXT_NAME_WORK.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_WORK.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_NAME_WORK.MaxLength = 12
+        Me.TXT_NAME_WORK.Name = "TXT_NAME_WORK"
+        Me.TXT_NAME_WORK.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_NAME_WORK.TabIndex = 1
+        Me.TXT_NAME_WORK.Tag = "Clear,Check,Char,NotNull"
         '
-        'LBL_PASS_WORD_GUIDE
+        'LBL_NAME_WORK_GUIDE
         '
-        Me.LBL_PASS_WORD_GUIDE.AutoEllipsis = True
-        Me.LBL_PASS_WORD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_PASS_WORD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_PASS_WORD_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_PASS_WORD_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_PASS_WORD_GUIDE.Name = "LBL_PASS_WORD_GUIDE"
-        Me.LBL_PASS_WORD_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_PASS_WORD_GUIDE.TabIndex = 0
-        Me.LBL_PASS_WORD_GUIDE.Text = "パスワード"
-        Me.LBL_PASS_WORD_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_USER_ID
-        '
-        Me.PNL_USER_ID.Controls.Add(Me.TXT_USER_ID)
-        Me.PNL_USER_ID.Controls.Add(Me.LBL_USER_ID_GUIDE)
-        Me.PNL_USER_ID.Location = New System.Drawing.Point(5, 35)
-        Me.PNL_USER_ID.Name = "PNL_USER_ID"
-        Me.PNL_USER_ID.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_USER_ID.TabIndex = 18
-        '
-        'TXT_USER_ID
-        '
-        Me.TXT_USER_ID.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_USER_ID.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_USER_ID.MaxLength = 30
-        Me.TXT_USER_ID.Name = "TXT_USER_ID"
-        Me.TXT_USER_ID.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_USER_ID.TabIndex = 1
-        Me.TXT_USER_ID.Tag = "Clear,Check,Char,Ascii,NotNull"
-        '
-        'LBL_USER_ID_GUIDE
-        '
-        Me.LBL_USER_ID_GUIDE.AutoEllipsis = True
-        Me.LBL_USER_ID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_USER_ID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_USER_ID_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_USER_ID_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_USER_ID_GUIDE.Name = "LBL_USER_ID_GUIDE"
-        Me.LBL_USER_ID_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_USER_ID_GUIDE.TabIndex = 0
-        Me.LBL_USER_ID_GUIDE.Text = "ユーザーID"
-        Me.LBL_USER_ID_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'PNL_NAME_STAFF
-        '
-        Me.PNL_NAME_STAFF.Controls.Add(Me.TXT_NAME_STAFF)
-        Me.PNL_NAME_STAFF.Controls.Add(Me.LBL_NAME_STAFF_GUIDE)
-        Me.PNL_NAME_STAFF.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_NAME_STAFF.Name = "PNL_NAME_STAFF"
-        Me.PNL_NAME_STAFF.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_STAFF.TabIndex = 17
-        '
-        'TXT_NAME_STAFF
-        '
-        Me.TXT_NAME_STAFF.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_NAME_STAFF.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_STAFF.MaxLength = 12
-        Me.TXT_NAME_STAFF.Name = "TXT_NAME_STAFF"
-        Me.TXT_NAME_STAFF.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_NAME_STAFF.TabIndex = 1
-        Me.TXT_NAME_STAFF.Tag = "Clear,Check,Char,NotNull"
-        '
-        'LBL_NAME_STAFF_GUIDE
-        '
-        Me.LBL_NAME_STAFF_GUIDE.AutoEllipsis = True
-        Me.LBL_NAME_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_STAFF_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_STAFF_GUIDE.Name = "LBL_NAME_STAFF_GUIDE"
-        Me.LBL_NAME_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_NAME_STAFF_GUIDE.TabIndex = 0
-        Me.LBL_NAME_STAFF_GUIDE.Text = "社員名"
-        Me.LBL_NAME_STAFF_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_NAME_WORK_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_WORK_GUIDE.Name = "LBL_NAME_WORK_GUIDE"
+        Me.LBL_NAME_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_NAME_WORK_GUIDE.TabIndex = 0
+        Me.LBL_NAME_WORK_GUIDE.Text = "作業名称"
+        Me.LBL_NAME_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_INPUT_KEY
         '
@@ -373,44 +299,44 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_STAFF)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_WORK)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 40)
         Me.PNL_INPUT_KEY.TabIndex = 1
         '
-        'PNL_CODE_STAFF
+        'PNL_CODE_WORK
         '
-        Me.PNL_CODE_STAFF.Controls.Add(Me.LBL_CODE_STAFF_GUIDE)
-        Me.PNL_CODE_STAFF.Controls.Add(Me.TXT_CODE_STAFF)
-        Me.PNL_CODE_STAFF.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_CODE_STAFF.Name = "PNL_CODE_STAFF"
-        Me.PNL_CODE_STAFF.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_STAFF.TabIndex = 4
+        Me.PNL_CODE_WORK.Controls.Add(Me.LBL_CODE_WORK_GUIDE)
+        Me.PNL_CODE_WORK.Controls.Add(Me.TXT_CODE_WORK)
+        Me.PNL_CODE_WORK.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_CODE_WORK.Name = "PNL_CODE_WORK"
+        Me.PNL_CODE_WORK.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_WORK.TabIndex = 4
         '
-        'LBL_CODE_STAFF_GUIDE
+        'LBL_CODE_WORK_GUIDE
         '
-        Me.LBL_CODE_STAFF_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_STAFF_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_STAFF_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_STAFF_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_STAFF_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_STAFF_GUIDE.Name = "LBL_CODE_STAFF_GUIDE"
-        Me.LBL_CODE_STAFF_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_STAFF_GUIDE.TabIndex = 3
-        Me.LBL_CODE_STAFF_GUIDE.Text = "社員番号"
-        Me.LBL_CODE_STAFF_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_CODE_WORK_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_WORK_GUIDE.Name = "LBL_CODE_WORK_GUIDE"
+        Me.LBL_CODE_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_WORK_GUIDE.TabIndex = 3
+        Me.LBL_CODE_WORK_GUIDE.Text = "作業コード"
+        Me.LBL_CODE_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TXT_CODE_STAFF
+        'TXT_CODE_WORK
         '
-        Me.TXT_CODE_STAFF.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_CODE_STAFF.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_STAFF.MaxLength = 9
-        Me.TXT_CODE_STAFF.Name = "TXT_CODE_STAFF"
-        Me.TXT_CODE_STAFF.Size = New System.Drawing.Size(80, 25)
-        Me.TXT_CODE_STAFF.TabIndex = 1
-        Me.TXT_CODE_STAFF.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
-        Me.TXT_CODE_STAFF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TXT_CODE_WORK.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_WORK.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_CODE_WORK.MaxLength = 9
+        Me.TXT_CODE_WORK.Name = "TXT_CODE_WORK"
+        Me.TXT_CODE_WORK.Size = New System.Drawing.Size(80, 25)
+        Me.TXT_CODE_WORK.TabIndex = 1
+        Me.TXT_CODE_WORK.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_WORK.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRP_FOOT
         '
@@ -509,16 +435,12 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
-        Me.PNL_FLAG_GRANT.ResumeLayout(False)
-        Me.PNL_PASS_WORD.ResumeLayout(False)
-        Me.PNL_PASS_WORD.PerformLayout()
-        Me.PNL_USER_ID.ResumeLayout(False)
-        Me.PNL_USER_ID.PerformLayout()
-        Me.PNL_NAME_STAFF.ResumeLayout(False)
-        Me.PNL_NAME_STAFF.PerformLayout()
+        Me.PNL_KIND_WORK.ResumeLayout(False)
+        Me.PNL_NAME_WORK.ResumeLayout(False)
+        Me.PNL_NAME_WORK.PerformLayout()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
-        Me.PNL_CODE_STAFF.ResumeLayout(False)
-        Me.PNL_CODE_STAFF.PerformLayout()
+        Me.PNL_CODE_WORK.ResumeLayout(False)
+        Me.PNL_CODE_WORK.PerformLayout()
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
@@ -536,22 +458,16 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_DATE_ACTIVE_HEAD_GUIDE As Label
     Friend WithEvents GRP_BODY As GroupBox
     Friend WithEvents PNL_INPUT_KEY As Panel
-    Friend WithEvents PNL_CODE_STAFF As Panel
-    Friend WithEvents LBL_CODE_STAFF_GUIDE As Label
-    Friend WithEvents TXT_CODE_STAFF As TextBox
+    Friend WithEvents PNL_CODE_WORK As Panel
+    Friend WithEvents LBL_CODE_WORK_GUIDE As Label
+    Friend WithEvents TXT_CODE_WORK As TextBox
     Friend WithEvents PNL_INPUT_DATA As Panel
-    Friend WithEvents PNL_FLAG_GRANT As Panel
-    Friend WithEvents CMB_FLAG_GRANT As ComboBox
-    Friend WithEvents LBL_FLAG_GRANT_GUIDE As Label
-    Friend WithEvents PNL_PASS_WORD As Panel
-    Friend WithEvents TXT_PASS_WORD As TextBox
-    Friend WithEvents LBL_PASS_WORD_GUIDE As Label
-    Friend WithEvents PNL_USER_ID As Panel
-    Friend WithEvents TXT_USER_ID As TextBox
-    Friend WithEvents LBL_USER_ID_GUIDE As Label
-    Friend WithEvents PNL_NAME_STAFF As Panel
-    Friend WithEvents TXT_NAME_STAFF As TextBox
-    Friend WithEvents LBL_NAME_STAFF_GUIDE As Label
+    Friend WithEvents PNL_KIND_WORK As Panel
+    Friend WithEvents CMB_KIND_WORK As ComboBox
+    Friend WithEvents LBL_KIND_WORK_GUIDE As Label
+    Friend WithEvents PNL_NAME_WORK As Panel
+    Friend WithEvents TXT_NAME_WORK As TextBox
+    Friend WithEvents LBL_NAME_WORK_GUIDE As Label
     Friend WithEvents DGV_VIEW_DATA As DataGridView
     Friend WithEvents GRP_FOOT As GroupBox
     Friend WithEvents pnlFUNCTION_GROUP As Panel

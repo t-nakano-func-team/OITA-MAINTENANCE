@@ -24,24 +24,20 @@
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
-        CODE_STAFF
-        NAME_STAFF
-        USER_ID
-        PASS_WORD
-        FLAG_GRANT_NAME
-        UBOUND = FLAG_GRANT_NAME
+        CODE_WORK
+        NAME_WORK
+        KIND_WORK_NAME
+        UBOUND = KIND_WORK_NAME
     End Enum
 #End Region
 
 #Region "画面用・構造体"
     Private Structure SRT_MY_GRID_DATA
-        Public CODE_STAFF As Integer
-        Public NAME_STAFF As String
-        Public USER_ID As String
-        Public PASS_WORD As String
-        Public FLAG_GRANT As Integer
+        Public CODE_WORK As Integer
+        Public NAME_WORK As String
+        Public KIND_WORK As String
 
-        Public FLAG_GRANT_NAME As String
+        Public KIND_WORK_NAME As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
@@ -61,17 +57,17 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "社員番号,社員名,ユーザーID,パスワード,権限", "SSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "作業コード,作業名称,作業種別", "SSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,9,6,6,6", "RLLLL")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,9,9", "RLL")
 
-        Call SUB_SYSTEM_COMMBO_MNG_M_KIND(CMB_FLAG_GRANT, ENM_MNG_M_KIND_CODE_FLAG.FLAG_GRANT)
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_WORK, ENM_MNT_M_KIND_CODE_FLAG.KIND_WORK)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
-        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_GRANT)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_WORK)
 
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS 'グリッド条件
         SRT_CONDITIONS = Nothing '条件の取得（項目がない為、クリア）
@@ -135,8 +131,8 @@
 
         Call SUB_CLEAR()
 
-        TXT_CODE_STAFF.Text = INT_CODE_STAFF
-        Call TXT_CODE_STAFF.Focus()
+        TXT_CODE_WORK.Text = INT_CODE_STAFF
+        Call TXT_CODE_WORK.Focus()
         Call Application.DoEvents()
 
         Call SUB_DATA_EDIT()
@@ -149,17 +145,17 @@
             Exit Sub
         End If
 
-        Dim SRT_KEY As SRT_TABLE_MNG_M_USER_KEY
+        Dim SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY
         SRT_KEY = FUNC_GET_INPUT_KEY()
 
         Dim BLN_CHECK As Boolean
-        BLN_CHECK = FUNC_CHECK_TABLE_MNG_M_USER(SRT_KEY)
+        BLN_CHECK = FUNC_CHECK_TABLE_MNT_M_WORK(SRT_KEY)
 
         Dim ENM_CHANGE_MODE As ENM_MY_WINDOW_MODE
         If BLN_CHECK Then
-            Dim SRT_DATA As SRT_TABLE_MNG_M_USER_DATA
+            Dim SRT_DATA As SRT_TABLE_MNT_M_WORK_DATA
             SRT_DATA = Nothing
-            Call FUNC_SELECT_TABLE_MNG_M_USER(SRT_KEY, SRT_DATA)
+            Call FUNC_SELECT_TABLE_MNT_M_WORK(SRT_KEY, SRT_DATA)
             Call SUB_SET_INPUT_DATA(SRT_DATA)
             ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
         Else
@@ -182,7 +178,7 @@
             Exit Sub
         End If
 
-        Dim SRT_RECORD As SRT_TABLE_MNG_M_USER
+        Dim SRT_RECORD As SRT_TABLE_MNT_M_WORK
         SRT_RECORD.KEY = FUNC_GET_INPUT_KEY()
         SRT_RECORD.DATA = FUNC_GET_INPUT_DATA()
 
@@ -213,7 +209,7 @@
             Exit Sub
         End If
 
-        Dim SRT_KEY As SRT_TABLE_MNG_M_USER_KEY
+        Dim SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY
         SRT_KEY = FUNC_GET_INPUT_KEY()
 
         If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
@@ -222,7 +218,7 @@
         End If
 
         '物理削除
-        If Not FUNC_DELETE_TABLE_MNG_M_USER(SRT_KEY) Then
+        If Not FUNC_DELETE_TABLE_MNT_M_WORK(SRT_KEY) Then
             Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
             Exit Sub
@@ -237,14 +233,14 @@
     End Sub
 
     Private STR_FUNC_EDIT_RECORD_LAST_ERROR As String
-    Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNG_M_USER) As Boolean
+    Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_M_WORK) As Boolean
 
-        If Not FUNC_DELETE_TABLE_MNG_M_USER(SRT_RECORD.KEY) Then
+        If Not FUNC_DELETE_TABLE_MNT_M_WORK(SRT_RECORD.KEY) Then
             STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
             Return False
         End If
 
-        If Not FUNC_INSERT_TABLE_MNG_M_USER(SRT_RECORD) Then
+        If Not FUNC_INSERT_TABLE_MNT_M_WORK(SRT_RECORD) Then
             STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
             Return False
         End If
@@ -294,12 +290,12 @@
             Call .Append("SELECT" & Environment.NewLine)
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append(strSYSTEM_PUBLIC_MNGDB_PREFIX & "MNG_M_USER WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("MNT_M_WORK WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_STAFF" & Environment.NewLine)
+            Call .Append("CODE_WORK" & Environment.NewLine)
         End With
 
         SDR_READER = Nothing
@@ -320,11 +316,9 @@
             INT_INDEX = SRT_GRID_DATA_MAIN.Length
             ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
             With SRT_GRID_DATA_MAIN(INT_INDEX)
-                .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
-                .NAME_STAFF = CStr(SDR_READER.Item("NAME_STAFF"))
-                .FLAG_GRANT = CInt(SDR_READER.Item("FLAG_GRANT"))
-                .USER_ID = CStr(SDR_READER.Item("USER_ID"))
-                .PASS_WORD = CStr(SDR_READER.Item("PASS_WORD"))
+                .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
+                .NAME_WORK = CStr(SDR_READER.Item("NAME_WORK"))
+                .KIND_WORK = CInt(SDR_READER.Item("KIND_WORK"))
             End With
         End While
         Call SDR_READER.Close()
@@ -332,7 +326,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .FLAG_GRANT_NAME = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_GRANT, .FLAG_GRANT)
+                .KIND_WORK_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_WORK, .KIND_WORK)
             End With
         Next
 
@@ -353,11 +347,9 @@
 
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_STAFF) = Format(.CODE_STAFF, New String("0", INT_SYSTEM_CODE_STAFF_MAX_LENGTH))
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_STAFF) = .NAME_STAFF
-                OBJ_TEMP(ENM_MY_GRID_MAIN.USER_ID) = .USER_ID
-                OBJ_TEMP(ENM_MY_GRID_MAIN.PASS_WORD) = .PASS_WORD
-                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_GRANT_NAME) = .FLAG_GRANT_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_WORK) = Format(.CODE_WORK, New String("0", INT_SYSTEM_CODE_WORK_MAX_LENGTH))
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_WORK) = .NAME_WORK
+                OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_WORK_NAME) = .KIND_WORK_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
         Next
@@ -383,7 +375,7 @@
 
         Dim INT_RET As Integer
         With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
-            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_STAFF)
+            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_WORK)
         End With
         Return INT_RET
     End Function
@@ -439,37 +431,32 @@
 #End Region
 
 #Region "画面コントロール←→構造体"
-    Private Function FUNC_GET_INPUT_KEY() As SRT_TABLE_MNG_M_USER_KEY
-        Dim SRT_RET As SRT_TABLE_MNG_M_USER_KEY
+    Private Function FUNC_GET_INPUT_KEY() As SRT_TABLE_MNT_M_WORK_KEY
+        Dim SRT_RET As SRT_TABLE_MNT_M_WORK_KEY
 
         With SRT_RET
-            .CODE_STAFF = CInt(TXT_CODE_STAFF.Text)
+            .CODE_WORK = CInt(TXT_CODE_WORK.Text)
         End With
 
         Return SRT_RET
     End Function
 
-    Private Function FUNC_GET_INPUT_DATA() As SRT_TABLE_MNG_M_USER_DATA
-        Dim SRT_RET As SRT_TABLE_MNG_M_USER_DATA
+    Private Function FUNC_GET_INPUT_DATA() As SRT_TABLE_MNT_M_WORK_DATA
+        Dim SRT_RET As SRT_TABLE_MNT_M_WORK_DATA
 
         With SRT_RET
-            .NAME_STAFF = CStr(TXT_NAME_STAFF.Text)
-            .USER_ID = CStr(TXT_USER_ID.Text)
-            .PASS_WORD = CStr(TXT_PASS_WORD.Text)
-            .FLAG_GRANT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_GRANT)
-            .FLAG_DELETE = 0
+            .NAME_WORK = CStr(TXT_NAME_WORK.Text)
+            .KIND_WORK = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_WORK)
         End With
 
         Return SRT_RET
     End Function
 
 
-    Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNG_M_USER_DATA)
+    Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_M_WORK_DATA)
         With SRT_DATA
-            TXT_NAME_STAFF.Text = .NAME_STAFF
-            TXT_USER_ID.Text = .USER_ID
-            TXT_PASS_WORD.Text = .PASS_WORD
-            Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_GRANT, .FLAG_GRANT)
+            TXT_NAME_WORK.Text = .NAME_WORK
+            Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_WORK, .KIND_WORK)
         End With
     End Sub
 #End Region
@@ -503,19 +490,6 @@
         CTL_CONTROL = Nothing
         If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_DATA, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
             STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
-            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Call CTL_CONTROL.Focus()
-            Return False
-        End If
-
-        'ユーザーID
-        CTL_CONTROL = TXT_USER_ID
-        Dim STR_USER_ID As String
-        STR_USER_ID = CTL_CONTROL.Text
-        Dim INT_CODE_STAFF As Integer
-        INT_CODE_STAFF = CInt(TXT_CODE_STAFF.Text)
-        If FUNC_CHECK_MNG_M_USER_USER_ID(STR_USER_ID, INT_CODE_STAFF) Then
-            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_OVERLAP, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
             Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Call CTL_CONTROL.Focus()
             Return False
@@ -574,7 +548,7 @@
 
         Dim BLN_RET As Boolean
         Select Case True
-            Case (CTL_ACTIVE Is TXT_CODE_STAFF)
+            Case (CTL_ACTIVE Is TXT_CODE_WORK)
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_DATA_EDIT)
                 BLN_RET = False
             Case Else
