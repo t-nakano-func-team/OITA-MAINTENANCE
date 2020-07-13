@@ -260,6 +260,7 @@ Partial Class FRM_MAIN
         '
         'BTN_CODE_OWNER_TO_SEARCH
         '
+        Me.BTN_CODE_OWNER_TO_SEARCH.BackgroundImage = Global.MNT_P_PLAN_INVOICE.My.Resources.Resources.Search_16x
         Me.BTN_CODE_OWNER_TO_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BTN_CODE_OWNER_TO_SEARCH.Location = New System.Drawing.Point(485, 1)
         Me.BTN_CODE_OWNER_TO_SEARCH.Margin = New System.Windows.Forms.Padding(0)
@@ -323,6 +324,7 @@ Partial Class FRM_MAIN
         '
         'BTN_CODE_OWNER_FROM_SEARCH
         '
+        Me.BTN_CODE_OWNER_FROM_SEARCH.BackgroundImage = Global.MNT_P_PLAN_INVOICE.My.Resources.Resources.Search_16x
         Me.BTN_CODE_OWNER_FROM_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BTN_CODE_OWNER_FROM_SEARCH.Location = New System.Drawing.Point(160, 1)
         Me.BTN_CODE_OWNER_FROM_SEARCH.Margin = New System.Windows.Forms.Padding(0)
