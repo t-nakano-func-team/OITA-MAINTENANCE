@@ -111,6 +111,35 @@
             Exit Sub
         End If
 
+        Dim SRT_CONDITIONS As MOD_PRINT.SRT_PRINT_CONDITIONS
+        With SRT_CONDITIONS
+            .DATE_CONTRACT_FROM = DTP_DATE_CONTRACT_FROM.Value
+            .DATE_CONTRACT_TO = DTP_DATE_CONTRACT_TO.Value
+            .DATE_ACTIVE_FROM = DTP_DATE_ACTIVE_FROM.Value
+            .DATE_ACTIVE_TO = DTP_DATE_ACTIVE_TO.Value
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
+        End With
+
+        Dim BLN_PUT As Boolean
+        BLN_PUT = False
+        Dim BLN_CANCEL As Boolean
+        BLN_CANCEL = False
+
+        Dim BLN_RET As Boolean
+        BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, SRT_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
+
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_PRINT.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not BLN_PUT Then
+            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Call SUB_PRINT_DONE(BLN_PREVIEW, BLN_PUT_FILE, BLN_CANCEL)
     End Sub
 
     Private Sub SUB_CLEAR()

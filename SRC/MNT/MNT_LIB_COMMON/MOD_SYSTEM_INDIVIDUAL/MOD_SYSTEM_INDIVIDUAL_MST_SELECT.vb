@@ -472,6 +472,43 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_M_WORK
 
         Return INT_RET
     End Function
+
+    Private SRT_CASH_GET_MNT_M_WORK_NAME_WORK() As SRT_CASH_INT_STR
+    Public Function FUNC_GET_MNT_M_WORK_NAME_WORK(
+    ByVal INT_CODE_WORK As Integer,
+    Optional ByVal BLN_CASH As Boolean = False
+    ) As String
+
+        Dim SRT_MY_CASH() As SRT_CASH_INT_STR
+        SRT_MY_CASH = SRT_CASH_GET_MNT_M_WORK_NAME_WORK
+        If BLN_CASH Then
+            Dim INT_CASH_INDEX As Integer
+            INT_CASH_INDEX = FUNC_SEARCH_CASH_INT_STR(SRT_MY_CASH, INT_CODE_WORK)
+            If INT_CASH_INDEX <> -1 Then
+                Return SRT_MY_CASH(INT_CASH_INDEX).VALUE
+            End If
+        End If
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "NAME_WORK"
+            ReDim .WHERE(1)
+            .WHERE(1).COL_NAME = "CODE_WORK"
+            .WHERE(1).VALUE = INT_CODE_WORK
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+
+        Dim STR_RET As Integer
+        STR_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_STRING(STR_SQL)
+
+        Call SUB_ADD_CASH_INT_STR(SRT_CASH_GET_MNT_M_WORK_NAME_WORK, INT_CODE_WORK, STR_RET)
+
+        Return STR_RET
+    End Function
 End Module
 
 #End Region
