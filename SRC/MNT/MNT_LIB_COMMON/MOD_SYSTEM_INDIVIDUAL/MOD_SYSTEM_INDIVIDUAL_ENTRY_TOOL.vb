@@ -280,18 +280,21 @@
         Return LNG_RET
     End Function
 
-    Public Function FUNC_GET_FLAG_DEPOSIT_DONE(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer, ByVal INT_SERIAL_INVOICE As Integer) As Boolean
+    Public Function FUNC_GET_FLAG_DEPOSIT_DONE(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer, ByVal INT_SERIAL_INVOICE As Integer) As Integer
         Dim SRT_RECORD As SRT_TABLE_MNT_T_DEPOSIT_KEY
         With SRT_RECORD
             .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
             .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
             .SERIAL_INVOICE = INT_SERIAL_INVOICE
         End With
-        Dim BLN_RET As Boolean
 
+        Dim BLN_RET As Boolean
         BLN_RET = FUNC_CHECK_TABLE_MNT_T_DEPOSIT(SRT_RECORD)
 
-        Return BLN_RET
+        Dim INT_RET As Integer
+        INT_RET = FUNC_CAST_BOOL_TO_INT(BLN_RET)
+
+        Return INT_RET
     End Function
 
     Public Function FUNC_GET_DEPOSIT_RECORD_ALL(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As SRT_TABLE_MNT_T_DEPOSIT()

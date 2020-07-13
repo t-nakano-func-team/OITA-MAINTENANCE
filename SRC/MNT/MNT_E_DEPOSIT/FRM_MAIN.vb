@@ -349,7 +349,9 @@
             Call .Append("SUB_01.KIND_CONTRACT" & "," & Environment.NewLine)
             Call .Append("SUB_01.CODE_OWNER" & "," & Environment.NewLine)
             Call .Append("SUB_01.NAME_CONTRACT" & "," & Environment.NewLine)
-            Call .Append("SUB_01.COUNT_INVOICE" & "" & Environment.NewLine)
+            Call .Append("SUB_01.COUNT_INVOICE" & "," & Environment.NewLine)
+            Call .Append("IIF(SUB_02.NUMBER_CONTRACT IS NULL, 0, 1) AS FLAG_DEPOSIT_DONE" & "" & Environment.NewLine)
+
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_INVOICE AS MAIN WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("INNER JOIN" & Environment.NewLine)
@@ -357,6 +359,13 @@
             Call .Append("ON" & Environment.NewLine)
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("LEFT JOIN" & Environment.NewLine)
+            Call .Append("MNT_T_DEPOSIT AS SUB_02 WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("ON" & Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_02.NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_02.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_INVOICE=SUB_02.SERIAL_INVOICE" & Environment.NewLine)
+
             Call .Append(") AS MAIN" & Environment.NewLine)
 
             Call .Append("WHERE" & Environment.NewLine)
@@ -393,7 +402,7 @@
                 .SERIAL_INVOICE = CInt(SDR_READER.Item("SERIAL_INVOICE"))
 
                 .DATE_INVOICE = CDate(SDR_READER.Item("DATE_INVOICE"))
-                '.FLAG_DEPOSIT_DONE = CInt(SDR_READER.Item("FLAG_DEPOSIT_DONE"))
+                .FLAG_DEPOSIT_DONE = CInt(SDR_READER.Item("FLAG_DEPOSIT_DONE"))
                 .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
                 .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
 
@@ -417,7 +426,6 @@
     Private Sub SUB_GET_AUX_DATA_ONE(ByRef SRT_DATA As SRT_MY_GRID_DATA)
         With SRT_DATA
             .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT, True)
-            .FLAG_DEPOSIT_DONE = FUNC_GET_FLAG_DEPOSIT_DONE(.NUMBER_CONTRACT, .SERIAL_CONTRACT, .SERIAL_INVOICE)
             .FLAG_DEPOSIT_DONE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_DEPOSIT_DONE, .FLAG_DEPOSIT_DONE, True)
             Select Case .KIND_CONTRACT
                 Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
