@@ -98,7 +98,7 @@
         With STR_SQL
             Call .Append("SELECT" & Environment.NewLine)
             Call .Append("CODE_KIND AS CODE," & Environment.NewLine)
-            Call .Append("NAME_KIND AS NAME" & Environment.NewLine)
+            Call .Append("NAME_ACCOUNT AS NAME" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_M_ACCOUNT" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)

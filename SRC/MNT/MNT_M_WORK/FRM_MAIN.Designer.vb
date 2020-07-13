@@ -335,7 +335,7 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_WORK.Name = "TXT_CODE_WORK"
         Me.TXT_CODE_WORK.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_WORK.TabIndex = 1
-        Me.TXT_CODE_WORK.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_WORK.Tag = "Clear,Numeric,Format=000,Check,NotNull,NotZero,Plus"
         Me.TXT_CODE_WORK.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRP_FOOT

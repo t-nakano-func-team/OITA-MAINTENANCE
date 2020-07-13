@@ -12,6 +12,16 @@
     Public Const CST_SYSTEM_CODE_WORK_MAX_VALUE As Integer = 999
     Public INT_SYSTEM_CODE_WORK_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_WORK_MAX_VALUE.ToString.Length)
 
+    '科目コード
+    Public Const CST_SYSTEM_CODE_ACCOUNT_MIN_VALUE As Integer = 1
+    Public Const CST_SYSTEM_CODE_ACCOUNT_MAX_VALUE As Integer = 999
+    Public INT_SYSTEM_CODE_ACCOUNT_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_ACCOUNT_MAX_VALUE.ToString.Length)
+
+    '種別コード
+    Public Const CST_SYSTEM_CODE_KIND_MIN_VALUE As Integer = 1
+    Public Const CST_SYSTEM_CODE_KIND_MAX_VALUE As Integer = 99
+    Public INT_SYSTEM_CODE_KIND_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_KIND_MAX_VALUE.ToString.Length)
+
     '作業担当コード
     Public Const CST_SYSTEM_CODE_HANDLE_MIN_VALUE As Integer = 1
     Public Const CST_SYSTEM_CODE_HANDLE_MAX_VALUE As Integer = 99
