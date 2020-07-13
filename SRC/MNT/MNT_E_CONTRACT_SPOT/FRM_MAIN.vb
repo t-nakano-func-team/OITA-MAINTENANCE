@@ -607,6 +607,39 @@
             Return False
         End If
 
+        CTL_CONTROL = TXT_NUMBER_CONTRACT
+        If Not IsNumeric(CTL_CONTROL.Text) Then '契約番号が入力されていない場合は
+            Return True '以後のチェックは全てパスする
+        End If
+        Dim INT_NUMBER_CONTRACT As Integer
+        INT_NUMBER_CONTRACT = CInt(CTL_CONTROL.Text)
+        Dim SRT_KEY As SRT_TABLE_MNT_T_CONTRACT_KEY
+        Dim SRT_DATA As SRT_TABLE_MNT_T_CONTRACT_DATA
+
+
+        With SRT_KEY
+            .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+            .SERIAL_CONTRACT = 1
+        End With
+        If Not FUNC_CHECK_TABLE_MNT_T_CONTRACT(SRT_KEY) Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_NO_DATA, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_KEY, SRT_DATA)
+        If Not (SRT_DATA.KIND_CONTRACT = ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT) Then
+            Dim STR_NAME_KIND As String
+            STR_NAME_KIND = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT)
+            STR_ERR_MSG = ""
+            STR_ERR_MSG &= "入力された" & FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL) & "は"
+            STR_ERR_MSG &= "「" & STR_NAME_KIND & "」" & "の契約ではありません。"
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
         Return True
     End Function
 
