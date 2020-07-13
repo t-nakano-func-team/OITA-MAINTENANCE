@@ -22,6 +22,7 @@
         Public DATE_CONTRACT_TO As DateTime
         Public DATE_ACTIVE_FROM As DateTime
         Public DATE_ACTIVE_TO As DateTime
+        Public KIND_CONTRACT As Integer
         Public CODE_OWNER_FROM As Integer
         Public CODE_OWNER_TO As Integer
 
@@ -31,6 +32,7 @@
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
 
+        Public KIND_CONTRACT As Integer
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
         Public CODE_SECTION As Integer
@@ -45,6 +47,7 @@
         Public KINGAKU_CONTRACT As Long
         Public NAME_MEMO As String
 
+        Public KIND_CONTRACT_NAME As String
         Public DATE_CONTRACT_INT As Integer
         Public CODE_OWNER_NAME As String
         Public CODE_SECTION_NAME As String
@@ -112,6 +115,7 @@
                 .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
                 .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
 
+                .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
                 .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
@@ -204,7 +208,7 @@
             Call .Append("MAIN.*" & "" & System.Environment.NewLine)
 
             Call .Append("FROM" & System.Environment.NewLine)
-            Call .Append("MNT_TCONTRACT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
 
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
@@ -212,7 +216,7 @@
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("MAIN.KIND_CONTRACT DESC,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -232,6 +236,9 @@
         SRT_ACTIVE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_ACTIVE_TO
 
         With SRT_CONDITIONS
+            If .KIND_CONTRACT > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.KIND_CONTRACT, "MAIN.KIND_CONTRACT", "=")
+            End If
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_CONTRACT_PERIOD, "MAIN.DATE_CONTRACT")
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_ACTIVE_PERIOD, "MAIN.DATE_ACTIVE")
             STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_FROM, "MAIN.CODE_OWNER", ">=")
@@ -244,6 +251,7 @@
     '補助情報の取得
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
+            .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT, True)
             .DATE_CONTRACT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_CONTRACT)
             .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .CODE_SECTION_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, .CODE_SECTION, True)
@@ -265,6 +273,8 @@
 
         ReDim STR_ROW(0)
         With SRT_DATA
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_PRINT))

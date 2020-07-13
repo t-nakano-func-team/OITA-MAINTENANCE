@@ -248,10 +248,18 @@
     <None Include="BIP\MNT_P_CHECK_DEPOSIT.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="BIP\MNT_P_DETAIL_CONTRACT.bip" />
-    <None Include="BIP\MNT_P_DETAIL_CONTRACT.ovd" />
-    <None Include="BIP\MNT_P_DETAIL_CONTRACT.pmd" />
-    <None Include="BIP\MNT_P_DETAIL_CONTRACT.psf" />
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_DETAIL_CONTRACT.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BIP\MNT_P_LEDGER_RECEIVABLE.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
