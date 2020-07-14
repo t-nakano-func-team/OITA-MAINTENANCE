@@ -25,7 +25,7 @@
         Public KIND_CONTRACT As Integer
         Public CODE_OWNER_FROM As Integer
         Public CODE_OWNER_TO As Integer
-
+        Public NAME_OWNER As String
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
@@ -209,6 +209,12 @@
 
             Call .Append("FROM" & System.Environment.NewLine)
             Call .Append("MNT_T_CONTRACT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+
+            Call .Append("LEFT JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT_SPOT AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
 
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
