@@ -32,7 +32,7 @@
     Private Sub SUB_CTRL_VIEW_INIT()
 
         Dim DAT_DATE_TO As DateTime
-        DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
+        DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(1))
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
 
@@ -49,9 +49,7 @@
         DAT_FROM = FUNC_GET_DATE_FIRSMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_FROM, DAT_FROM)
 
-        Dim DAT_TO As DateTime
-        DAT_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_TO)
+        Call SUB_REFRESH_DATE_INVOICE_TO()
 
         Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_CONTRACT)
         Call SUB_REFRESH_ENABLED_NAME_OWNER()
@@ -303,6 +301,12 @@
 
         PNL_NAME_OWNER.Enabled = BLN_ENABLED
     End Sub
+
+    Private Sub SUB_REFRESH_DATE_INVOICE_TO()
+        Dim DAT_SET As DateTime
+        DAT_SET = FUNC_GET_DATE_LASTMONTH(DTP_DATE_INVOICE_FROM.Value)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_SET)
+    End Sub
 #End Region
 
 #Region "内部処理"
@@ -322,6 +326,7 @@
             Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 #End Region
 
 #Region "NEW"
@@ -429,6 +434,16 @@
     End Sub
 #End Region
 
+#Region "イベント-バリューチェンジ"
+
+    Private Sub DTP_DATE_INVOICE_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_INVOICE_FROM.ValueChanged
+        If DTP_DATE_INVOICE_TO.Value >= DTP_DATE_INVOICE_FROM.Value Then
+            Exit Sub
+        End If
+        Call SUB_REFRESH_DATE_INVOICE_TO()
+    End Sub
+#End Region
+
     Private Sub FRM_MAIN_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call SUB_CTRL_VIEW_INIT()
         Call SUB_CTRL_VALUE_INIT()
@@ -458,4 +473,5 @@
     Private Sub FRM_MAIN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
+
 End Class

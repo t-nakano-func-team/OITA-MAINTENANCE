@@ -77,6 +77,13 @@
         Public VALUE As Integer
     End Structure
 
+    Public Structure SRT_CASH_INT_INT_INT_DATE
+        Public KEY01 As Integer
+        Public KEY02 As Integer
+        Public KEY03 As Integer
+        Public VALUE As DateTime
+    End Structure
+
     Public Structure SRT_CASH_INT_INT_INT_LONG
         Public KEY01 As Integer
         Public KEY02 As Integer
@@ -794,6 +801,64 @@
 
     Public Function FUNC_SEARCH_CASH_INT_INT_INT_INT(
     ByRef srtSEARCH() As SRT_CASH_INT_INT_INT_INT,
+    ByVal intKEY01 As Integer,
+    ByVal intKEY02 As Integer,
+    ByVal intKEY03 As Integer
+    ) As Integer
+        Dim intLOOP_INDEX As Integer
+        Dim intRET As Integer
+
+        If IsNothing(srtSEARCH) Then
+            Return -1
+        End If
+
+        intRET = -1
+
+        For intLOOP_INDEX = LBound(srtSEARCH) To UBound(srtSEARCH)
+            With srtSEARCH(intLOOP_INDEX)
+                If .KEY01 = intKEY01 _
+                And .KEY02 = intKEY02 _
+                And .KEY03 = intKEY03 Then
+                    intRET = intLOOP_INDEX
+                    Exit For
+                End If
+            End With
+        Next
+
+        Return intRET
+    End Function
+
+#End Region
+
+#Region "INT_INT_INT_DATE"
+    Public Sub SUB_ADD_CASH_INT_INT_INT_DATE(
+    ByRef srtCASH() As SRT_CASH_INT_INT_INT_DATE,
+    ByVal intKEY01 As Integer, ByVal intKEY02 As Integer, ByVal intKEY03 As Integer, ByVal datVALUE As DateTime
+    )
+        Dim intINDEX As Integer
+
+        If FUNC_SEARCH_CASH_INT_INT_INT_DATE(srtCASH, intKEY01, intKEY02, intKEY03) <> -1 Then 'すでに存在するなら
+            Exit Sub '追加しない
+        End If
+
+        If IsNothing(srtCASH) Then
+            intINDEX = 0
+        Else
+            intINDEX = UBound(srtCASH) + 1
+        End If
+
+        ReDim Preserve srtCASH(intINDEX)
+        With srtCASH(intINDEX)
+            .KEY01 = intKEY01
+            .KEY02 = intKEY02
+            .KEY03 = intKEY03
+            .VALUE = datVALUE
+        End With
+
+    End Sub
+
+    Public Function FUNC_SEARCH_CASH_INT_INT_INT_DATE(
+    ByRef srtSEARCH() As SRT_CASH_INT_INT_INT_DATE,
     ByVal intKEY01 As Integer,
     ByVal intKEY02 As Integer,
     ByVal intKEY03 As Integer
