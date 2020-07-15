@@ -11,6 +11,7 @@
         DO_BATCH
         DO_CLEAR
         DO_END = 81
+        DO_SHOW_SUB_WINDOW
         DO_SHOW_SETTING
         DO_SHOW_COMMANDLINE
         DO_SHOW_CONFIG_SETTINGS
@@ -24,6 +25,7 @@
         NAME_OWNER
         NAME_CONTRACT
         COUNT_INVOICE_VIEW
+        CODE_SECTION_NAME
         KINGAKU_CONTRACT
         UBOUND = KINGAKU_CONTRACT
     End Enum
@@ -43,6 +45,7 @@
         Public CODE_OWNER As Integer
         Public NAME_CONTRACT As String
         Public COUNT_INVOICE As Integer
+        Public CODE_SECTION As Integer
         Public KINGAKU_CONTRACT As Long
 
         Public KINGAKU_INVOICE_DETAIL As Long
@@ -50,6 +53,10 @@
         Public SERIAL_INVOICE_MAX As Integer
         Public KIND_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
+        Public CODE_SECTION_INVOICE As Integer
+        Public CODE_SECTION_INVOICE_NAME As String
+
+        Public EDIT_INFO As SRT_EDIT_INVOICE
 
         Public Function FUNC_GET_NUMBER_SERIAL_CONTRACT() As String
             Dim STR_NUMBER_CONTRACT As String
@@ -125,9 +132,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,契約日付,オーナー,契約内容,回数,請求金額", "BSSSSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,契約日付,オーナー,契約内容,回数,担当部署,請求金額", "BSSSSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,5,6,6,2,6", "CLRRLLCR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,4,5,6,6,2,4,4", "CLRRLLCLR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
@@ -147,6 +154,45 @@
     End Sub
 #End Region
 
+#Region "各処理呼出元"
+    Private Sub SUB_EXEC_DO(
+    ByVal enmEXEC_DO As ENM_MY_EXEC_DO
+    )
+        If BLN_PROCESS_DOING Then
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        BLN_PROCESS_DOING = True
+        Call Application.DoEvents()
+
+        Select Case enmEXEC_DO
+            Case ENM_MY_EXEC_DO.DO_SHOW_SEARCH
+                Call SUB_SHOW_SEARCH()
+            Case ENM_MY_EXEC_DO.DO_SEARCH
+                Call SUB_SEARCH()
+            Case ENM_MY_EXEC_DO.DO_BATCH
+                Call SUB_BATCH()
+            Case ENM_MY_EXEC_DO.DO_CLEAR
+                Call SUB_CLEAR()
+            Case ENM_MY_EXEC_DO.DO_END
+                Call SUB_END()
+            Case ENM_MY_EXEC_DO.DO_SHOW_SUB_WINDOW
+                Call SUB_SHOW_SUB_WINDOW()
+            Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
+                Call SUB_SHOW_SETTING()
+            Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
+                Call SUB_SHOW_COMMANDLINE()
+            Case ENM_MY_EXEC_DO.DO_SHOW_CONFIG_SETTINGS
+                Call SUB_SHOW_CONFIG_SETTINGS()
+        End Select
+
+        Call Application.DoEvents()
+        BLN_PROCESS_DOING = False
+        Me.Cursor = Cursors.Default
+    End Sub
+#End Region
+
 #Region "実行処理群"
 
     Private Sub SUB_BATCH()
@@ -156,21 +202,21 @@
 
         Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
         With SRT_CONDITIONS
-            .CONTRACT_ROW = FUNC_GET_GRID_CONTRACT()
+            .RECORD = FUNC_GET_GRID_RECORD_INFO()
             .DATE_INVOICE = DTP_DATE_INVOICE.Value
 
             .DATE_DO_BATCH = DateTime.Now
             .FORM = Me
         End With
 
-        If SRT_CONDITIONS.CONTRACT_ROW.Length <= 1 Then
+        If SRT_CONDITIONS.RECORD.Length <= 1 Then
             Call MessageBox.Show("1件以上選択してください。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
         Dim STR_MSG As String
         STR_MSG = ""
-        STR_MSG &= (SRT_CONDITIONS.CONTRACT_ROW.Length - 1) & "件の" & Environment.NewLine
+        STR_MSG &= (SRT_CONDITIONS.RECORD.Length - 1) & "件の" & Environment.NewLine
         STR_MSG &= Me.Text & "を行います。" & Environment.NewLine & "よろしいですか？"
         Dim RST_MSG As System.Windows.Forms.DialogResult
         RST_MSG = MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -236,6 +282,47 @@
         Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me)
     End Sub
 
+    Private Sub SUB_SHOW_SUB_WINDOW()
+
+        Dim INT_SELECT_ROW_INDEX As Integer
+        INT_SELECT_ROW_INDEX = FUNC_GET_SELECT_ROW_INDEX(DGV_VIEW_DATA)
+
+        If INT_SELECT_ROW_INDEX <= 0 Then
+            Exit Sub
+        End If
+
+        Dim SRT_EDIT As SRT_EDIT_INVOICE
+        Dim INT_SRT_INDEX As Integer
+        INT_SRT_INDEX = INT_SELECT_ROW_INDEX
+        With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
+            Dim FRM_SHOW As FRM_SUB_01
+            FRM_SHOW = New FRM_SUB_01
+            FRM_SHOW.Font = New System.Drawing.Font(FRM_SHOW.Font.Name, Me.Font.Size)
+            FRM_SHOW.Text = Me.Text
+            FRM_SHOW.NUMBER_CONTRACT = .NUMBER_CONTRACT
+            FRM_SHOW.SERIAL_CONTRACT = .SERIAL_CONTRACT
+            FRM_SHOW.DATE_INVOICE = DTP_DATE_INVOICE.Value
+            FRM_SHOW.RET_EDIT_INFO = .EDIT_INFO
+
+            Call FRM_SHOW.ShowDialog()
+
+            Dim BLN_CNACEL As Boolean
+            BLN_CNACEL = FRM_SHOW.RET_EDIT_CANCEL
+
+            SRT_EDIT = FRM_SHOW.RET_EDIT_INFO
+
+            Call FRM_SHOW.Dispose()
+            FRM_SHOW = Nothing
+
+            If BLN_CNACEL Then
+                Exit Sub
+            End If
+        End With
+
+        Call SUB_REFRESH_DATA_ONE(SRT_GRID_DATA_MAIN(INT_SRT_INDEX), SRT_EDIT)
+        Call SUB_REFRESH_GRID_ROW(INT_SRT_INDEX)
+    End Sub
+
     Private Sub SUB_END()
         Call Me.Close()
     End Sub
@@ -279,43 +366,6 @@
             Case Else
                 'スルー
         End Select
-    End Sub
-#End Region
-
-#Region "各処理呼出元"
-    Private Sub SUB_EXEC_DO(
-    ByVal enmEXEC_DO As ENM_MY_EXEC_DO
-    )
-        If BLN_PROCESS_DOING Then
-            Exit Sub
-        End If
-
-        Me.Cursor = Cursors.WaitCursor
-        BLN_PROCESS_DOING = True
-        Call Application.DoEvents()
-
-        Select Case enmEXEC_DO
-            Case ENM_MY_EXEC_DO.DO_SHOW_SEARCH
-                Call SUB_SHOW_SEARCH()
-            Case ENM_MY_EXEC_DO.DO_SEARCH
-                Call SUB_SEARCH()
-            Case ENM_MY_EXEC_DO.DO_BATCH
-                Call SUB_BATCH()
-            Case ENM_MY_EXEC_DO.DO_CLEAR
-                Call SUB_CLEAR()
-            Case ENM_MY_EXEC_DO.DO_END
-                Call SUB_END()
-            Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
-                Call SUB_SHOW_SETTING()
-            Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
-                Call SUB_SHOW_COMMANDLINE()
-            Case ENM_MY_EXEC_DO.DO_SHOW_CONFIG_SETTINGS
-                Call SUB_SHOW_CONFIG_SETTINGS()
-        End Select
-
-        Call Application.DoEvents()
-        BLN_PROCESS_DOING = False
-        Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -468,6 +518,7 @@
                 .KIND_CONTRACT = SRT_RECORD_CONTRACT.DATA.KIND_CONTRACT
                 .CODE_OWNER = SRT_RECORD_CONTRACT.DATA.CODE_OWNER
                 .NAME_CONTRACT = SRT_RECORD_CONTRACT.DATA.NAME_CONTRACT
+                .CODE_SECTION = SRT_RECORD_CONTRACT.DATA.CODE_SECTION
                 .COUNT_INVOICE = SRT_RECORD_CONTRACT.DATA.COUNT_INVOICE
                 .DATE_CONTRACT = SRT_RECORD_CONTRACT.DATA.DATE_CONTRACT
                 .KINGAKU_CONTRACT = SRT_RECORD_CONTRACT.DATA.KINGAKU_CONTRACT
@@ -482,12 +533,28 @@
                     Case Else
                         .CODE_OWNER_NAME = ""
                 End Select
+                .CODE_SECTION_INVOICE = .CODE_SECTION
+                .CODE_SECTION_INVOICE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, .CODE_SECTION)
 
                 .KINGAKU_INVOICE_DETAIL = .KINGAKU_CONTRACT
                 .KINGAKU_INVOICE_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_INVOICE_DETAIL, SRT_CONDITIONS.DATE_INVOICE)
+
+                .EDIT_INFO = FUNC_GET_EDIT_INFO_INIT()
             End With
         Next
     End Sub
+
+    Private Function FUNC_GET_EDIT_INFO_INIT() As SRT_EDIT_INVOICE
+        Dim SRT_RET As SRT_EDIT_INVOICE
+        With SRT_RET
+            .CEHCK_EDIT = False
+            .CODE_SECTION = -1
+            .KINGAKU_INVOICE_DETAIL = 0
+            .KINGAKU_INVOICE_VAT = 0
+        End With
+
+        Return SRT_RET
+    End Function
 
     Private Sub SUB_REFRESH_GRID()
         Dim OBJ_TEMP(ENM_MY_GRID_MAIN.UBOUND) As Object
@@ -510,6 +577,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_INVOICE_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KINGAKU_CONTRACT) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
@@ -621,12 +689,12 @@
         Return True
     End Function
 
-    Private Function FUNC_GET_GRID_CONTRACT() As SRT_NUMBER_SERIAL_CONTRACT()
+    Private Function FUNC_GET_GRID_RECORD_INFO() As SRT_INVOICE_INFO_RECORD()
 
         Dim TBL_DATA_TABLE As DataTable
         TBL_DATA_TABLE = DGV_VIEW_DATA.DataSource
 
-        Dim SRT_RET() As SRT_NUMBER_SERIAL_CONTRACT
+        Dim SRT_RET() As SRT_INVOICE_INFO_RECORD
         ReDim SRT_RET(0)
         If TBL_DATA_TABLE Is Nothing Then
             Return SRT_RET
@@ -659,8 +727,9 @@
                 Dim INT_INDEX As Integer
                 INT_INDEX = SRT_RET.Length
                 ReDim Preserve SRT_RET(INT_INDEX)
-                SRT_RET(INT_INDEX).NUMBER_CONTRACT = SRT_GRID_DATA_MAIN(i).NUMBER_CONTRACT
-                SRT_RET(INT_INDEX).SERIAL_CONTRACT = SRT_GRID_DATA_MAIN(i).SERIAL_CONTRACT
+                SRT_RET(INT_INDEX).KEY.NUMBER_CONTRACT = SRT_GRID_DATA_MAIN(i).NUMBER_CONTRACT
+                SRT_RET(INT_INDEX).KEY.SERIAL_CONTRACT = SRT_GRID_DATA_MAIN(i).SERIAL_CONTRACT
+                SRT_RET(INT_INDEX).EDIT = SRT_GRID_DATA_MAIN(i).EDIT_INFO
             End If
 
             ROW_DATA = Nothing
@@ -748,13 +817,50 @@
         Return STR_WHERE
     End Function
 
-
     Public Sub SUB_PUT_PROGRESS_GUIDE(ByVal STR_PROGRESS As String)
 
         LBL_BATCH_PROGRESS.Text = STR_PROGRESS
         Call LBL_BATCH_PROGRESS.Refresh()
         Call Application.DoEvents()
     End Sub
+
+    Private Sub SUB_REFRESH_DATA_ONE(ByRef SRT_DATA As SRT_MY_GRID_DATA, ByRef SRT_EDIT As SRT_EDIT_INVOICE)
+        With SRT_DATA
+            .EDIT_INFO = SRT_EDIT
+            If SRT_EDIT.CEHCK_EDIT Then
+                .CODE_SECTION_INVOICE = SRT_EDIT.CODE_SECTION
+                .KINGAKU_INVOICE_DETAIL = SRT_EDIT.KINGAKU_INVOICE_DETAIL
+                .KINGAKU_INVOICE_VAT = SRT_EDIT.KINGAKU_INVOICE_VAT
+            Else
+                .CODE_SECTION_INVOICE = .CODE_SECTION
+                .KINGAKU_INVOICE_DETAIL = .KINGAKU_CONTRACT
+                .KINGAKU_INVOICE_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_INVOICE_DETAIL, DTP_DATE_INVOICE.Value)
+            End If
+
+            .CODE_SECTION_INVOICE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, .CODE_SECTION_INVOICE)
+        End With
+    End Sub
+
+    Private Sub SUB_REFRESH_GRID_ROW(ByVal INT_INDEX_SRT As Integer)
+        Dim INT_INDEX_GRID As Integer
+        INT_INDEX_GRID = (INT_INDEX_SRT - 1)
+
+        With SRT_GRID_DATA_MAIN(INT_INDEX_SRT)
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.CHECK) = False
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_CONTRACT.ToLongDateString
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_INVOICE_NAME
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.KINGAKU_CONTRACT) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
+        End With
+
+        Call DGV_VIEW_DATA.Refresh()
+        Call System.Windows.Forms.Application.DoEvents()
+    End Sub
+
 #End Region
 
 #Region "キー制御処理"
@@ -918,6 +1024,12 @@
 
         Me.CHECK_ALL = Not Me.CHECK_ALL
         Call SUB_EDIT_GRID_VIEW_FLAG(Me.CHECK_ALL)
+    End Sub
+#End Region
+
+#Region "イベント-グリッドダブルクリック"
+    Private Sub DGV_VIEW_DATA_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_VIEW_DATA.CellDoubleClick
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SUB_WINDOW)
     End Sub
 #End Region
 
