@@ -24,8 +24,9 @@
         NAME_OWNER
         NAME_CONTRACT
         COUNT_INVOICE_VIEW
-        KINGAKU_CONTRACT
-        UBOUND = KINGAKU_CONTRACT
+        CODE_SECTION_NAME
+        KINGAKU_INVOICE
+        UBOUND = KINGAKU_INVOICE
     End Enum
 
     Private Enum ENM_MY_WINDOW_MODE
@@ -45,12 +46,14 @@
         Public CODE_OWNER As Integer
         Public NAME_CONTRACT As String
         Public COUNT_INVOICE As Integer
+        Public CODE_SECTION As Integer
         Public KINGAKU_CONTRACT As Long
 
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
         Public KIND_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
+        Public CODE_SECTION_NAME As String
 
         Public Function FUNC_GET_NUMBER_SERIAL_CONTRACT() As String
             Dim STR_NUMBER_CONTRACT As String
@@ -128,9 +131,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,請求日付,オーナー,契約内容,回数,請求金額", "BSSSSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,請求日付,オーナー,契約内容,回数,担当部署,請求金額", "BSSSSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,5,6,6,2,6", "CLRRLLCR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,4,5,6,6,2,3,5", "CLRRLLCLR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
@@ -485,6 +488,7 @@
 
             With SRT_GRID_DATA_MAIN(i)
                 .DATE_INVOICE = SRT_RECORD_INVOICE.DATA.DATE_INVOICE
+                .CODE_SECTION = SRT_RECORD_INVOICE.DATA.CODE_SECTION
 
                 .KIND_CONTRACT = SRT_RECORD_CONTRACT.DATA.KIND_CONTRACT
                 .CODE_OWNER = SRT_RECORD_CONTRACT.DATA.CODE_OWNER
@@ -501,6 +505,7 @@
                     Case Else
                         .CODE_OWNER_NAME = ""
                 End Select
+                .CODE_SECTION_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.CODE_SECTION, .CODE_SECTION)
 
                 .KINGAKU_INVOICE_DETAIL = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_DETAIL
                 .KINGAKU_INVOICE_VAT = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_VAT
@@ -529,7 +534,8 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KINGAKU_CONTRACT) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.KINGAKU_INVOICE) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
         Next
