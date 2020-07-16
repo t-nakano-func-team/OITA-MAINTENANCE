@@ -98,6 +98,7 @@ Partial Class FRM_MAIN
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
+        Me.BTN_NUMBER_CONTRACT_SEARCH = New System.Windows.Forms.Button()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -900,6 +901,7 @@ Partial Class FRM_MAIN
         '
         'PNL_NUMBER_CONTRACT
         '
+        Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.BTN_NUMBER_CONTRACT_SEARCH)
         Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.LBL_NUMBER_CONTRACT_GUIDE)
         Me.PNL_NUMBER_CONTRACT.Controls.Add(Me.TXT_NUMBER_CONTRACT)
         Me.PNL_NUMBER_CONTRACT.Location = New System.Drawing.Point(5, 5)
@@ -916,7 +918,7 @@ Partial Class FRM_MAIN
         Me.LBL_NUMBER_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_NUMBER_CONTRACT_GUIDE.Name = "LBL_NUMBER_CONTRACT_GUIDE"
         Me.LBL_NUMBER_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_NUMBER_CONTRACT_GUIDE.TabIndex = 3
+        Me.LBL_NUMBER_CONTRACT_GUIDE.TabIndex = 0
         Me.LBL_NUMBER_CONTRACT_GUIDE.Text = "契約番号"
         Me.LBL_NUMBER_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -926,7 +928,7 @@ Partial Class FRM_MAIN
         Me.TXT_NUMBER_CONTRACT.Location = New System.Drawing.Point(80, 1)
         Me.TXT_NUMBER_CONTRACT.MaxLength = 6
         Me.TXT_NUMBER_CONTRACT.Name = "TXT_NUMBER_CONTRACT"
-        Me.TXT_NUMBER_CONTRACT.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_NUMBER_CONTRACT.Size = New System.Drawing.Size(130, 25)
         Me.TXT_NUMBER_CONTRACT.TabIndex = 1
         Me.TXT_NUMBER_CONTRACT.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
         Me.TXT_NUMBER_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1004,6 +1006,18 @@ Partial Class FRM_MAIN
         Me.BTN_END.TabIndex = 3
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
+        '
+        'BTN_NUMBER_CONTRACT_SEARCH
+        '
+        Me.BTN_NUMBER_CONTRACT_SEARCH.BackgroundImage = Global.MNT_E_CONTRACT_REGULAR.My.Resources.Resources.Search_16x
+        Me.BTN_NUMBER_CONTRACT_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BTN_NUMBER_CONTRACT_SEARCH.Location = New System.Drawing.Point(210, 1)
+        Me.BTN_NUMBER_CONTRACT_SEARCH.Margin = New System.Windows.Forms.Padding(0)
+        Me.BTN_NUMBER_CONTRACT_SEARCH.Name = "BTN_NUMBER_CONTRACT_SEARCH"
+        Me.BTN_NUMBER_CONTRACT_SEARCH.Size = New System.Drawing.Size(25, 25)
+        Me.BTN_NUMBER_CONTRACT_SEARCH.TabIndex = 2
+        Me.BTN_NUMBER_CONTRACT_SEARCH.TabStop = False
+        Me.BTN_NUMBER_CONTRACT_SEARCH.UseVisualStyleBackColor = True
         '
         'FRM_MAIN
         '
@@ -1137,4 +1151,5 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_KIND_WORK As Panel
     Friend WithEvents CMB_KIND_WORK As ComboBox
     Friend WithEvents LBL_KIND_WORK_GUIDE As Label
+    Friend WithEvents BTN_NUMBER_CONTRACT_SEARCH As Button
 End Class
