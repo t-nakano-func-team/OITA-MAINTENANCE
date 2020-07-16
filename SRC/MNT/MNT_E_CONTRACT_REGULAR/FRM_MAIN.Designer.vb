@@ -513,9 +513,9 @@ Partial Class FRM_MAIN
         'DTP_DATE_INVOICE_BASE
         '
         Me.DTP_DATE_INVOICE_BASE.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_INVOICE_BASE.Location = New System.Drawing.Point(90, 1)
+        Me.DTP_DATE_INVOICE_BASE.Location = New System.Drawing.Point(80, 1)
         Me.DTP_DATE_INVOICE_BASE.Name = "DTP_DATE_INVOICE_BASE"
-        Me.DTP_DATE_INVOICE_BASE.Size = New System.Drawing.Size(140, 25)
+        Me.DTP_DATE_INVOICE_BASE.Size = New System.Drawing.Size(150, 25)
         Me.DTP_DATE_INVOICE_BASE.TabIndex = 1
         Me.DTP_DATE_INVOICE_BASE.Tag = "Clear"
         '
@@ -527,9 +527,9 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_INVOICE_BASE_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_INVOICE_BASE_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_INVOICE_BASE_GUIDE.Name = "LBL_DATE_INVOICE_BASE_GUIDE"
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_INVOICE_BASE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_INVOICE_BASE_GUIDE.Text = "請求基準日付"
+        Me.LBL_DATE_INVOICE_BASE_GUIDE.Text = "請求基準日"
         Me.LBL_DATE_INVOICE_BASE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_NAME_CONTRACT
@@ -788,7 +788,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_CONTRACT_GUIDE.Name = "LBL_DATE_CONTRACT_GUIDE"
         Me.LBL_DATE_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_CONTRACT_GUIDE.TabIndex = 0
-        Me.LBL_DATE_CONTRACT_GUIDE.Text = "契約日付"
+        Me.LBL_DATE_CONTRACT_GUIDE.Text = "契約日"
         Me.LBL_DATE_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_CODE_SHINTO_PARENT

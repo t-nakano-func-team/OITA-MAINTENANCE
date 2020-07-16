@@ -36,6 +36,8 @@ Partial Class FRM_MAIN
         Me.CMB_KIND_TARGET = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_TARGET_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_DATE_CALC = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_CALC_TO = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE = New System.Windows.Forms.Label()
         Me.DTP_DATE_CALC_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_CALC_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
@@ -61,8 +63,6 @@ Partial Class FRM_MAIN
         Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE = New System.Windows.Forms.Label()
-        Me.DTP_DATE_CALC_TO = New System.Windows.Forms.DateTimePicker()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -247,6 +247,26 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_CALC.Name = "PNL_DATE_CALC"
         Me.PNL_DATE_CALC.Size = New System.Drawing.Size(420, 30)
         Me.PNL_DATE_CALC.TabIndex = 3
+        '
+        'DTP_DATE_CALC_TO
+        '
+        Me.DTP_DATE_CALC_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_CALC_TO.Location = New System.Drawing.Point(260, 1)
+        Me.DTP_DATE_CALC_TO.Name = "DTP_DATE_CALC_TO"
+        Me.DTP_DATE_CALC_TO.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_CALC_TO.TabIndex = 11
+        Me.DTP_DATE_CALC_TO.Tag = "Clear"
+        '
+        'LBL_DATE_CALC_FROM_TO_GUIDE
+        '
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Name = "LBL_DATE_CALC_FROM_TO_GUIDE"
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.TabIndex = 10
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_DATE_CALC_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'DTP_DATE_CALC_FROM
         '
@@ -465,7 +485,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_CONTRACT_GUIDE.Name = "LBL_DATE_CONTRACT_GUIDE"
         Me.LBL_DATE_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_CONTRACT_GUIDE.TabIndex = 0
-        Me.LBL_DATE_CONTRACT_GUIDE.Text = "契約日付"
+        Me.LBL_DATE_CONTRACT_GUIDE.Text = "契約日"
         Me.LBL_DATE_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'GRP_FOOT
@@ -541,26 +561,6 @@ Partial Class FRM_MAIN
         Me.BTN_END.TabIndex = 4
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
-        '
-        'LBL_DATE_CALC_FROM_TO_GUIDE
-        '
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Name = "LBL_DATE_CALC_FROM_TO_GUIDE"
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.TabIndex = 10
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.Text = "～"
-        Me.LBL_DATE_CALC_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'DTP_DATE_CALC_TO
-        '
-        Me.DTP_DATE_CALC_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_CALC_TO.Location = New System.Drawing.Point(260, 1)
-        Me.DTP_DATE_CALC_TO.Name = "DTP_DATE_CALC_TO"
-        Me.DTP_DATE_CALC_TO.Size = New System.Drawing.Size(150, 25)
-        Me.DTP_DATE_CALC_TO.TabIndex = 11
-        Me.DTP_DATE_CALC_TO.Tag = "Clear"
         '
         'FRM_MAIN
         '

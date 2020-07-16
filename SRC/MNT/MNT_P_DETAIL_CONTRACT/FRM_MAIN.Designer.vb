@@ -432,7 +432,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_GUIDE.Name = "LBL_DATE_ACTIVE_GUIDE"
         Me.LBL_DATE_ACTIVE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_ACTIVE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_ACTIVE_GUIDE.Text = "処理日付"
+        Me.LBL_DATE_ACTIVE_GUIDE.Text = "処理日"
         Me.LBL_DATE_ACTIVE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_DATE_CONTRACT
@@ -485,7 +485,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_CONTRACT_GUIDE.Name = "LBL_DATE_CONTRACT_GUIDE"
         Me.LBL_DATE_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_CONTRACT_GUIDE.TabIndex = 0
-        Me.LBL_DATE_CONTRACT_GUIDE.Text = "契約日付"
+        Me.LBL_DATE_CONTRACT_GUIDE.Text = "契約日"
         Me.LBL_DATE_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'GRP_FOOT
