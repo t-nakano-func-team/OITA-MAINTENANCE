@@ -390,7 +390,7 @@ Partial Class FRM_MAIN
         '
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.AutoEllipsis = True
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Location = New System.Drawing.Point(245, 1)
+        Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Location = New System.Drawing.Point(235, 1)
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Name = "LBL_DATE_INVOICE_FROM_TO_GUIDE"
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
         Me.LBL_DATE_INVOICE_FROM_TO_GUIDE.TabIndex = 9
@@ -400,7 +400,7 @@ Partial Class FRM_MAIN
         'DTP_DATE_INVOICE_TO
         '
         Me.DTP_DATE_INVOICE_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_INVOICE_TO.Location = New System.Drawing.Point(270, 1)
+        Me.DTP_DATE_INVOICE_TO.Location = New System.Drawing.Point(260, 1)
         Me.DTP_DATE_INVOICE_TO.Name = "DTP_DATE_INVOICE_TO"
         Me.DTP_DATE_INVOICE_TO.Size = New System.Drawing.Size(150, 25)
         Me.DTP_DATE_INVOICE_TO.TabIndex = 2
@@ -409,7 +409,7 @@ Partial Class FRM_MAIN
         'DTP_DATE_INVOICE_FROM
         '
         Me.DTP_DATE_INVOICE_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_INVOICE_FROM.Location = New System.Drawing.Point(90, 1)
+        Me.DTP_DATE_INVOICE_FROM.Location = New System.Drawing.Point(80, 1)
         Me.DTP_DATE_INVOICE_FROM.Name = "DTP_DATE_INVOICE_FROM"
         Me.DTP_DATE_INVOICE_FROM.Size = New System.Drawing.Size(150, 25)
         Me.DTP_DATE_INVOICE_FROM.TabIndex = 1
@@ -423,9 +423,9 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_INVOICE_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_DATE_INVOICE_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_DATE_INVOICE_GUIDE.Name = "LBL_DATE_INVOICE_GUIDE"
-        Me.LBL_DATE_INVOICE_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_DATE_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_INVOICE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求予定日付"
+        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求予定日"
         Me.LBL_DATE_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'GRP_FOOT

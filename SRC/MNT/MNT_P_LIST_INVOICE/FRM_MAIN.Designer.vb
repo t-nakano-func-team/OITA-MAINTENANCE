@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -39,6 +39,10 @@ Partial Class FRM_MAIN
         Me.BTN_END = New System.Windows.Forms.Button()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_DATE_INVOICE_BASE = New System.Windows.Forms.Panel()
+        Me.CHK_DATE_PRINT = New System.Windows.Forms.CheckBox()
+        Me.DTP_DATE_PRINT = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_PRINT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_BATCH_PROGRESS = New System.Windows.Forms.Panel()
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
@@ -54,10 +58,6 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_SEARCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_SEARCH = New System.Windows.Forms.Button()
-        Me.PNL_DATE_INVOICE_BASE = New System.Windows.Forms.Panel()
-        Me.DTP_DATE_PRINT = New System.Windows.Forms.DateTimePicker()
-        Me.LBL_DATE_PRINT_GUIDE = New System.Windows.Forms.Label()
-        Me.CHK_DATE_PRINT = New System.Windows.Forms.CheckBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -66,12 +66,12 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_DATE_INVOICE_BASE.SuspendLayout()
         Me.PNL_BATCH_PROGRESS.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_SEARCH.SuspendLayout()
-        Me.PNL_DATE_INVOICE_BASE.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -274,6 +274,48 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 40)
         Me.PNL_INPUT_DATA.TabIndex = 3
         '
+        'PNL_DATE_INVOICE_BASE
+        '
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.CHK_DATE_PRINT)
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.DTP_DATE_PRINT)
+        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.LBL_DATE_PRINT_GUIDE)
+        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_DATE_INVOICE_BASE.Name = "PNL_DATE_INVOICE_BASE"
+        Me.PNL_DATE_INVOICE_BASE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_DATE_INVOICE_BASE.TabIndex = 5
+        '
+        'CHK_DATE_PRINT
+        '
+        Me.CHK_DATE_PRINT.AutoSize = True
+        Me.CHK_DATE_PRINT.Location = New System.Drawing.Point(86, 7)
+        Me.CHK_DATE_PRINT.Name = "CHK_DATE_PRINT"
+        Me.CHK_DATE_PRINT.Size = New System.Drawing.Size(15, 14)
+        Me.CHK_DATE_PRINT.TabIndex = 1
+        Me.CHK_DATE_PRINT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.CHK_DATE_PRINT.UseVisualStyleBackColor = False
+        '
+        'DTP_DATE_PRINT
+        '
+        Me.DTP_DATE_PRINT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_PRINT.Location = New System.Drawing.Point(105, 1)
+        Me.DTP_DATE_PRINT.Name = "DTP_DATE_PRINT"
+        Me.DTP_DATE_PRINT.Size = New System.Drawing.Size(130, 25)
+        Me.DTP_DATE_PRINT.TabIndex = 2
+        Me.DTP_DATE_PRINT.Tag = "Clear"
+        '
+        'LBL_DATE_PRINT_GUIDE
+        '
+        Me.LBL_DATE_PRINT_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_PRINT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_PRINT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_PRINT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_PRINT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_PRINT_GUIDE.Name = "LBL_DATE_PRINT_GUIDE"
+        Me.LBL_DATE_PRINT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_PRINT_GUIDE.TabIndex = 0
+        Me.LBL_DATE_PRINT_GUIDE.Text = "発行日"
+        Me.LBL_DATE_PRINT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_BATCH_PROGRESS
         '
         Me.PNL_BATCH_PROGRESS.Controls.Add(Me.LBL_BATCH_PROGRESS)
@@ -304,14 +346,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 65)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -395,7 +437,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_INVOICE_GUIDE.Name = "LBL_DATE_INVOICE_GUIDE"
         Me.LBL_DATE_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_INVOICE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求日付"
+        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求日"
         Me.LBL_DATE_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_SEARCH
@@ -476,48 +518,6 @@ Partial Class FRM_MAIN
         Me.BTN_SEARCH.Text = "検索"
         Me.BTN_SEARCH.UseVisualStyleBackColor = False
         '
-        'PNL_DATE_INVOICE_BASE
-        '
-        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.CHK_DATE_PRINT)
-        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.DTP_DATE_PRINT)
-        Me.PNL_DATE_INVOICE_BASE.Controls.Add(Me.LBL_DATE_PRINT_GUIDE)
-        Me.PNL_DATE_INVOICE_BASE.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_DATE_INVOICE_BASE.Name = "PNL_DATE_INVOICE_BASE"
-        Me.PNL_DATE_INVOICE_BASE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DATE_INVOICE_BASE.TabIndex = 5
-        '
-        'DTP_DATE_PRINT
-        '
-        Me.DTP_DATE_PRINT.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_PRINT.Location = New System.Drawing.Point(105, 1)
-        Me.DTP_DATE_PRINT.Name = "DTP_DATE_PRINT"
-        Me.DTP_DATE_PRINT.Size = New System.Drawing.Size(130, 25)
-        Me.DTP_DATE_PRINT.TabIndex = 2
-        Me.DTP_DATE_PRINT.Tag = "Clear"
-        '
-        'LBL_DATE_PRINT_GUIDE
-        '
-        Me.LBL_DATE_PRINT_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_PRINT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_DATE_PRINT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_PRINT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_PRINT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_DATE_PRINT_GUIDE.Name = "LBL_DATE_PRINT_GUIDE"
-        Me.LBL_DATE_PRINT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_DATE_PRINT_GUIDE.TabIndex = 0
-        Me.LBL_DATE_PRINT_GUIDE.Text = "発行日付"
-        Me.LBL_DATE_PRINT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'CHK_DATE_PRINT
-        '
-        Me.CHK_DATE_PRINT.AutoSize = True
-        Me.CHK_DATE_PRINT.Location = New System.Drawing.Point(86, 7)
-        Me.CHK_DATE_PRINT.Name = "CHK_DATE_PRINT"
-        Me.CHK_DATE_PRINT.Size = New System.Drawing.Size(15, 14)
-        Me.CHK_DATE_PRINT.TabIndex = 1
-        Me.CHK_DATE_PRINT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.CHK_DATE_PRINT.UseVisualStyleBackColor = False
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -543,6 +543,8 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.PerformLayout()
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_DATE_INVOICE_BASE.ResumeLayout(False)
+        Me.PNL_DATE_INVOICE_BASE.PerformLayout()
         Me.PNL_BATCH_PROGRESS.ResumeLayout(False)
         Me.PNL_BATCH_PROGRESS.PerformLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
@@ -550,8 +552,6 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_SEARCH.ResumeLayout(False)
         Me.PNL_SEARCH.PerformLayout()
-        Me.PNL_DATE_INVOICE_BASE.ResumeLayout(False)
-        Me.PNL_DATE_INVOICE_BASE.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

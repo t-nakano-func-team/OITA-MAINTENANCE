@@ -547,7 +547,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_INVOICE_GUIDE.Name = "LBL_DATE_INVOICE_GUIDE"
         Me.LBL_DATE_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_INVOICE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求日付"
+        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求日"
         Me.LBL_DATE_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_SEARCH

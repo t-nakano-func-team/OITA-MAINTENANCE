@@ -469,7 +469,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_GUIDE.Name = "LBL_DATE_ACTIVE_GUIDE"
         Me.LBL_DATE_ACTIVE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_ACTIVE_GUIDE.TabIndex = 0
-        Me.LBL_DATE_ACTIVE_GUIDE.Text = "処理日付"
+        Me.LBL_DATE_ACTIVE_GUIDE.Text = "処理日"
         Me.LBL_DATE_ACTIVE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_DATE_DEPOSIT
@@ -522,7 +522,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_DEPOSIT_GUIDE.Name = "LBL_DATE_DEPOSIT_GUIDE"
         Me.LBL_DATE_DEPOSIT_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_DATE_DEPOSIT_GUIDE.TabIndex = 0
-        Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金日付"
+        Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金日"
         Me.LBL_DATE_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FRM_MAIN
