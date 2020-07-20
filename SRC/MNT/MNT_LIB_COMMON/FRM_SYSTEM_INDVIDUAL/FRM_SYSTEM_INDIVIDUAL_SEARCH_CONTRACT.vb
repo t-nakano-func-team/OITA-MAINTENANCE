@@ -1,4 +1,4 @@
-﻿Public Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
+﻿Public Class FRM_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT
 
 #Region "画面用・定数"
     Private Const CST_MY_GRID_COUNT_MAX As Integer = 1000
@@ -28,6 +28,9 @@
 
 #Region "画面用・構造体"
     Private Structure SRT_MY_GRID_DATA
+        Public NUMBER_CONTRACT As Integer
+        Public SERIAL_CONTRACT As Integer
+
         Public CODE_OWNER As Integer
         Public NAME_OWNER As String
         Public KANA_OWNER As String
@@ -37,8 +40,6 @@
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
-        Public NAME_OWNER As String
-        Public KANA_OWNER As String
         Public KIND_OWNER As Integer
     End Structure
 #End Region
@@ -52,17 +53,17 @@
 
 #Region "プロパティ用"
     Private BLN_PROPERTY_SEARCH_CANCEL As Boolean 'キャンセルフラグ(True:キャンセル / False:決定)
-    Private INT_PROPERTY_RET_CODE As Integer '返却コード
+    Private SRT_PROPERTY_RET_CODE As SRT_NUMBER_SERIAL_CONTRACT '返却コード
 #End Region
 
 #Region "プロパティ"
     '返却コード
-    Friend Property RET_CODE() As Integer
+    Friend Property RET_CODE() As SRT_NUMBER_SERIAL_CONTRACT
         Get
-            Return INT_PROPERTY_RET_CODE
+            Return SRT_PROPERTY_RET_CODE
         End Get
-        Set(ByVal Value As Integer)
-            INT_PROPERTY_RET_CODE = Value
+        Set(ByVal Value As SRT_NUMBER_SERIAL_CONTRACT)
+            SRT_PROPERTY_RET_CODE = Value
         End Set
     End Property
 
@@ -140,7 +141,7 @@
 
     Private Sub SUB_OK()
         Call SUB_ROW_SELECT()
-        If Me.RET_CODE <= 0 Then '未選択の場合
+        If Me.RET_CODE.NUMBER_CONTRACT <= 0 Then '未選択の場合
             Call MessageBox.Show("対象を選択してください。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
@@ -163,10 +164,10 @@
     End Sub
 
     Private Sub SUB_ROW_SELECT()
-        Dim intRET_CODE As Integer
+        Dim SRT_RET_CODE As SRT_NUMBER_SERIAL_CONTRACT
 
-        intRET_CODE = FUNC_GET_SELECT_RET_CODE()
-        Me.RET_CODE = intRET_CODE
+        SRT_RET_CODE = FUNC_GET_SELECT_RET_CODE()
+        Me.RET_CODE = SRT_RET_CODE
     End Sub
 #End Region
 
@@ -180,8 +181,7 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-
-        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_OWNER, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, True, "全て")
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, True, "全て")
 
         Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称,担当部署", "SSSS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
@@ -193,7 +193,7 @@
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
-        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_OWNER)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_CONTRACT)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -404,32 +404,37 @@
         End If
     End Sub
 
-    Private Function FUNC_GET_SELECT_RET_CODE() As Integer
+    Private Function FUNC_GET_SELECT_RET_CODE() As SRT_NUMBER_SERIAL_CONTRACT
         Dim INT_SELECT_ROW_INDEX As Integer
         INT_SELECT_ROW_INDEX = FUNC_GET_SELECT_ROW_INDEX(DGV_VIEW_DATA)
 
+        Dim SRT_RET As SRT_NUMBER_SERIAL_CONTRACT
+        With SRT_RET
+            .NUMBER_CONTRACT = -1
+            .SERIAL_CONTRACT = -1
+        End With
+
         If INT_SELECT_ROW_INDEX <= 0 Then
-            Return -1
+            Return SRT_RET
         End If
 
         Dim INT_SRT_INDEX As Integer
         INT_SRT_INDEX = INT_SELECT_ROW_INDEX
 
-        Dim INT_RET As Integer
+
         With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
-            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_OWNER)
+            SRT_RET.NUMBER_CONTRACT = FUNC_VALUE_CONVERT_NUMERIC_INT(.NUMBER_CONTRACT)
+            SRT_RET.SERIAL_CONTRACT = FUNC_VALUE_CONVERT_NUMERIC_INT(.SERIAL_CONTRACT)
         End With
 
-        Return INT_RET
+        Return SRT_RET
     End Function
 
     Private Function FUNC_GET_SEARCH_CONDITHIONS() As SRT_SEARCH_CONDITIONS
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS
 
         With SRT_CONDITIONS
-            .NAME_OWNER = TXT_NAME_OWNER.Text
-            .KANA_OWNER = TXT_KANA_OWNER.Text
-            .KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_OWNER)
+            .KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_CONTRACT)
         End With
 
         Return SRT_CONDITIONS
@@ -441,8 +446,6 @@
         STR_WHERE = ""
 
         With SRT_CONDITIONS
-            STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_OWNER, "NAME_OWNER")
-            STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.KANA_OWNER, "KANA_OWNER")
             If .KIND_OWNER >= 0 Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KIND_OWNER, "KIND_OWNER", "=")
             End If
