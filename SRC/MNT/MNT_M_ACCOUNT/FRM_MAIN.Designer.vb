@@ -32,6 +32,10 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD = New System.Windows.Forms.Label()
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
+        Me.PNL_INPUT_GUIDE = New System.Windows.Forms.Panel()
+        Me.PNL_LBL_FLAG_INVALID = New System.Windows.Forms.Panel()
+        Me.LBL_FLAG_INVALID = New System.Windows.Forms.Label()
+        Me.LBL_FLAG_INVALID_GUIDE = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
         Me.PNL_CODE_ACCOUNT = New System.Windows.Forms.Panel()
@@ -49,19 +53,20 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_KIND = New System.Windows.Forms.TextBox()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
+        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
+        Me.BTN_PRINT = New System.Windows.Forms.Button()
+        Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_INPUT_GUIDE = New System.Windows.Forms.Panel()
-        Me.PNL_LBL_FLAG_INVALID = New System.Windows.Forms.Panel()
-        Me.LBL_FLAG_INVALID = New System.Windows.Forms.Label()
-        Me.LBL_FLAG_INVALID_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
+        Me.PNL_INPUT_GUIDE.SuspendLayout()
+        Me.PNL_LBL_FLAG_INVALID.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_CODE_ACCOUNT.SuspendLayout()
@@ -71,8 +76,6 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_KIND.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_INPUT_GUIDE.SuspendLayout()
-        Me.PNL_LBL_FLAG_INVALID.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -188,6 +191,54 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.Size = New System.Drawing.Size(760, 430)
         Me.GRP_BODY.TabIndex = 1
         Me.GRP_BODY.TabStop = False
+        '
+        'PNL_INPUT_GUIDE
+        '
+        Me.PNL_INPUT_GUIDE.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PNL_INPUT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.PNL_INPUT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_GUIDE.Controls.Add(Me.PNL_LBL_FLAG_INVALID)
+        Me.PNL_INPUT_GUIDE.Location = New System.Drawing.Point(505, 20)
+        Me.PNL_INPUT_GUIDE.Name = "PNL_INPUT_GUIDE"
+        Me.PNL_INPUT_GUIDE.Size = New System.Drawing.Size(245, 40)
+        Me.PNL_INPUT_GUIDE.TabIndex = 1
+        '
+        'PNL_LBL_FLAG_INVALID
+        '
+        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID)
+        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID_GUIDE)
+        Me.PNL_LBL_FLAG_INVALID.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_LBL_FLAG_INVALID.Name = "PNL_LBL_FLAG_INVALID"
+        Me.PNL_LBL_FLAG_INVALID.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_LBL_FLAG_INVALID.TabIndex = 0
+        '
+        'LBL_FLAG_INVALID
+        '
+        Me.LBL_FLAG_INVALID.AutoEllipsis = True
+        Me.LBL_FLAG_INVALID.BackColor = System.Drawing.Color.White
+        Me.LBL_FLAG_INVALID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVALID.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_FLAG_INVALID.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_FLAG_INVALID.Name = "LBL_FLAG_INVALID"
+        Me.LBL_FLAG_INVALID.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_FLAG_INVALID.TabIndex = 4
+        Me.LBL_FLAG_INVALID.Tag = "Clear"
+        Me.LBL_FLAG_INVALID.Text = "＊＊＊"
+        Me.LBL_FLAG_INVALID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_FLAG_INVALID_GUIDE
+        '
+        Me.LBL_FLAG_INVALID_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_INVALID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_INVALID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVALID_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_INVALID_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_INVALID_GUIDE.Name = "LBL_FLAG_INVALID_GUIDE"
+        Me.LBL_FLAG_INVALID_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_INVALID_GUIDE.TabIndex = 3
+        Me.LBL_FLAG_INVALID_GUIDE.Text = "状態"
+        Me.LBL_FLAG_INVALID_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'DGV_VIEW_DATA
         '
@@ -399,21 +450,60 @@ Partial Class FRM_MAIN
         '
         Me.pnlFUNCTION_GROUP.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlFUNCTION_GROUP.AutoScroll = True
+        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PUT_FILE)
+        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PRINT)
+        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PREVIEW)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_CLEAR)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_DELETE)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_ENTER)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_END)
-        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(200, 15)
+        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(70, 15)
         Me.pnlFUNCTION_GROUP.MinimumSize = New System.Drawing.Size(190, 40)
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
-        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(355, 40)
+        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(610, 40)
         Me.pnlFUNCTION_GROUP.TabIndex = 1
+        '
+        'BTN_PUT_FILE
+        '
+        Me.BTN_PUT_FILE.AutoSize = True
+        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(350, 5)
+        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
+        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.TabIndex = 4
+        Me.BTN_PUT_FILE.Text = "ファイル"
+        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
+        '
+        'BTN_PRINT
+        '
+        Me.BTN_PRINT.AutoSize = True
+        Me.BTN_PRINT.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PRINT.Location = New System.Drawing.Point(265, 5)
+        Me.BTN_PRINT.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PRINT.Name = "BTN_PRINT"
+        Me.BTN_PRINT.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PRINT.TabIndex = 3
+        Me.BTN_PRINT.Text = "印刷"
+        Me.BTN_PRINT.UseVisualStyleBackColor = False
+        '
+        'BTN_PREVIEW
+        '
+        Me.BTN_PREVIEW.AutoSize = True
+        Me.BTN_PREVIEW.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PREVIEW.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_PREVIEW.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PREVIEW.Name = "BTN_PREVIEW"
+        Me.BTN_PREVIEW.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PREVIEW.TabIndex = 2
+        Me.BTN_PREVIEW.Text = "プレビュー"
+        Me.BTN_PREVIEW.UseVisualStyleBackColor = False
         '
         'BTN_CLEAR
         '
         Me.BTN_CLEAR.AutoSize = True
         Me.BTN_CLEAR.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_CLEAR.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_CLEAR.Location = New System.Drawing.Point(435, 5)
         Me.BTN_CLEAR.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_CLEAR.Name = "BTN_CLEAR"
         Me.BTN_CLEAR.Size = New System.Drawing.Size(80, 30)
@@ -449,61 +539,13 @@ Partial Class FRM_MAIN
         '
         Me.BTN_END.AutoSize = True
         Me.BTN_END.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_END.Location = New System.Drawing.Point(265, 5)
+        Me.BTN_END.Location = New System.Drawing.Point(520, 5)
         Me.BTN_END.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_END.Name = "BTN_END"
         Me.BTN_END.Size = New System.Drawing.Size(80, 30)
         Me.BTN_END.TabIndex = 6
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
-        '
-        'PNL_INPUT_GUIDE
-        '
-        Me.PNL_INPUT_GUIDE.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PNL_INPUT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.PNL_INPUT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_GUIDE.Controls.Add(Me.PNL_LBL_FLAG_INVALID)
-        Me.PNL_INPUT_GUIDE.Location = New System.Drawing.Point(505, 20)
-        Me.PNL_INPUT_GUIDE.Name = "PNL_INPUT_GUIDE"
-        Me.PNL_INPUT_GUIDE.Size = New System.Drawing.Size(245, 40)
-        Me.PNL_INPUT_GUIDE.TabIndex = 1
-        '
-        'PNL_LBL_FLAG_INVALID
-        '
-        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID)
-        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID_GUIDE)
-        Me.PNL_LBL_FLAG_INVALID.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_LBL_FLAG_INVALID.Name = "PNL_LBL_FLAG_INVALID"
-        Me.PNL_LBL_FLAG_INVALID.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_LBL_FLAG_INVALID.TabIndex = 0
-        '
-        'LBL_FLAG_INVALID
-        '
-        Me.LBL_FLAG_INVALID.AutoEllipsis = True
-        Me.LBL_FLAG_INVALID.BackColor = System.Drawing.Color.White
-        Me.LBL_FLAG_INVALID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_INVALID.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_FLAG_INVALID.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_FLAG_INVALID.Name = "LBL_FLAG_INVALID"
-        Me.LBL_FLAG_INVALID.Size = New System.Drawing.Size(150, 25)
-        Me.LBL_FLAG_INVALID.TabIndex = 4
-        Me.LBL_FLAG_INVALID.Tag = "Clear"
-        Me.LBL_FLAG_INVALID.Text = "＊＊＊"
-        Me.LBL_FLAG_INVALID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBL_FLAG_INVALID_GUIDE
-        '
-        Me.LBL_FLAG_INVALID_GUIDE.AutoEllipsis = True
-        Me.LBL_FLAG_INVALID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_FLAG_INVALID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_INVALID_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_FLAG_INVALID_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_FLAG_INVALID_GUIDE.Name = "LBL_FLAG_INVALID_GUIDE"
-        Me.LBL_FLAG_INVALID_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_FLAG_INVALID_GUIDE.TabIndex = 3
-        Me.LBL_FLAG_INVALID_GUIDE.Text = "状態"
-        Me.LBL_FLAG_INVALID_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FRM_MAIN
         '
@@ -526,6 +568,8 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_USER_HEAD.ResumeLayout(False)
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
+        Me.PNL_INPUT_GUIDE.ResumeLayout(False)
+        Me.PNL_LBL_FLAG_INVALID.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
         Me.PNL_CODE_ACCOUNT.ResumeLayout(False)
@@ -539,8 +583,6 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_INPUT_GUIDE.ResumeLayout(False)
-        Me.PNL_LBL_FLAG_INVALID.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -579,4 +621,7 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_LBL_FLAG_INVALID As Panel
     Friend WithEvents LBL_FLAG_INVALID As Label
     Friend WithEvents LBL_FLAG_INVALID_GUIDE As Label
+    Friend WithEvents BTN_PUT_FILE As Button
+    Friend WithEvents BTN_PRINT As Button
+    Friend WithEvents BTN_PREVIEW As Button
 End Class

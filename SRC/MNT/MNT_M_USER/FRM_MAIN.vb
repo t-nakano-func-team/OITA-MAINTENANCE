@@ -478,6 +478,9 @@
 
                 BTN_ENTER.Enabled = False
                 BTN_DELETE.Enabled = False
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT
@@ -486,6 +489,9 @@
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = False
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
@@ -494,6 +500,9 @@
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = True
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
             Case Else

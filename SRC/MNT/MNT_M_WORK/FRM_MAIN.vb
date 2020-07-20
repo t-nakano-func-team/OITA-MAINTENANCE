@@ -401,6 +401,9 @@
 
                 BTN_ENTER.Enabled = False
                 BTN_DELETE.Enabled = False
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT
@@ -409,6 +412,9 @@
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = False
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
@@ -417,6 +423,9 @@
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = True
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
                 BTN_CLEAR.Enabled = True
                 BTN_END.Enabled = True
             Case Else
@@ -666,15 +675,15 @@
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_DELETE)
     End Sub
 
-    Private Sub BTN_PREVIEW_Click(sender As Object, e As EventArgs)
+    Private Sub BTN_PREVIEW_Click_1(sender As Object, e As EventArgs) Handles BTN_PREVIEW.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PREVIEW)
     End Sub
 
-    Private Sub BTN_PRINT_Click(sender As Object, e As EventArgs)
+    Private Sub BTN_PRINT_Click(sender As Object, e As EventArgs) Handles BTN_PRINT.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PRINT)
     End Sub
 
-    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs)
+    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs) Handles BTN_PUT_FILE.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PUT_FILE)
     End Sub
 
