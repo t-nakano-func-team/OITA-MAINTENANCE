@@ -16,8 +16,7 @@
         CODE_OWNER = 0
         NAME_OWNER
         KANA_OWNER
-        CODE_SECTION_NAME
-        UBOUND = CODE_SECTION_NAME
+        UBOUND = KANA_OWNER
     End Enum
 
     Private Enum ENM_MY_WINDOW_MODE
@@ -33,7 +32,6 @@
         Public KANA_OWNER As String
         Public KIND_OWNER As Integer
 
-        Public CODE_SECTION_NAME As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
@@ -183,9 +181,9 @@
 
         Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_OWNER, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, True, "全て")
 
-        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称,担当部署", "SSSS")
+        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称", "SSS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,6,5", "RLLL")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,10,10", "RLL")
 
         Me.RET_SEARCH_CANCEL = True 'プロパティ初期化
     End Sub
@@ -298,7 +296,6 @@
         Call SUB_TIME_MEASUREMEN_START()
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .CODE_SECTION_NAME = "部門"
             End With
         Next
         Call SUB_TIME_MEASUREMENT_STOP_AND_PUT_LOG(Me.Text & ":" & "補助情報取得")
@@ -322,7 +319,6 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_OWNER) = Format(.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH))
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .NAME_OWNER
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KANA_OWNER) = .KANA_OWNER
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_NAME
             End With
             Call glbSubAddRowDataTable(tblGRID_DATA_MAIN, OBJ_TEMP)
         Next

@@ -13,11 +13,12 @@
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
-        CODE_OWNER = 0
-        NAME_OWNER
-        KANA_OWNER
+        NUMBER_CONTRACT_VIEW = 0
+        CODE_OWNER_NAME
         CODE_SECTION_NAME
-        UBOUND = CODE_SECTION_NAME
+        CODE_WORK_NAME
+        NAME_CONTRACT
+        UBOUND = NAME_CONTRACT
     End Enum
 
     Private Enum ENM_MY_WINDOW_MODE
@@ -32,15 +33,38 @@
         Public SERIAL_CONTRACT As Integer
 
         Public CODE_OWNER As Integer
-        Public NAME_OWNER As String
-        Public KANA_OWNER As String
-        Public KIND_OWNER As Integer
+        Public CODE_SECTION As Integer
+        Public CODE_WORK As Integer
+        Public NAME_CONTRACT As String
 
+        Public CODE_OWNER_NAME As String
         Public CODE_SECTION_NAME As String
+        Public CODE_WORK_NAME As String
+
+        Public Function NUMBER_CONTRACT_VIEW() As String
+            Dim STR_NUMBER_CONTRACT As String
+            STR_NUMBER_CONTRACT = Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH))
+
+            Dim STR_SERIAL_CONTRACT As String
+            STR_SERIAL_CONTRACT = Format(Me.SERIAL_CONTRACT, New String("0", INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH))
+
+            Dim STR_RET As String
+            STR_RET = ""
+            STR_RET &= STR_NUMBER_CONTRACT
+            STR_RET &= "-"
+            STR_RET &= STR_SERIAL_CONTRACT
+
+            Return STR_RET
+        End Function
+
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
-        Public KIND_OWNER As Integer
+        Public KIND_CONTRACT As Integer
+        Public DATE_CONTRACT_FROM As DateTime
+        Public DATE_CONTRACT_TO As DateTime
+        Public CODE_OWNER_FROM As Integer
+        Public CODE_OWNER_TO As Integer
     End Structure
 #End Region
 
@@ -181,11 +205,16 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, True, "全て")
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, True, "全て")
 
-        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称,担当部署", "SSSS")
+        Dim DAT_DATE_INPUT_MAX As DateTime
+        DAT_DATE_INPUT_MAX = datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(2)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_CONTRACT_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
+        Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_CONTRACT_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_INPUT_MAX)
+
+        Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "契約番号,オーナー,担当部署,作業,契約名称", "SSSSS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,6,6,5", "RLLL")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,10,5,5,8", "RLLLL")
 
         Me.RET_SEARCH_CANCEL = True 'プロパティ初期化
     End Sub
@@ -200,6 +229,14 @@
 
         LBL_NAME_USER_HEAD.Text = FUNC_GET_MNG_M_USER_NAME_STAFF(srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF)
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
+
+        Dim DAT_DATE_FROM As DateTime
+        DAT_DATE_FROM = datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(-1)
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT_FROM, DAT_DATE_FROM)
+        Dim DAT_DATE_TO As DateTime
+        DAT_DATE_TO = datSYSTEM_TOTAL_DATE_ACTIVE
+        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT_TO, DAT_DATE_TO)
+
     End Sub
 #End Region
 
@@ -251,12 +288,12 @@
             Call .Append("SELECT" & Environment.NewLine)
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_M_OWNER WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_OWNER" & Environment.NewLine)
+            Call .Append("NUMBER_CONTRACT,SERIAL_CONTRACT" & Environment.NewLine)
         End With
 
         Call SUB_TIME_MEASUREMEN_START()
@@ -284,10 +321,12 @@
             End If
             INT_INDEX += 1
             With SRT_GRID_DATA_MAIN(INT_INDEX)
+                .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
+                .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
-                .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
-                .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-                .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
+                .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
+                .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
+                .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             End With
         End While
         ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
@@ -298,7 +337,9 @@
         Call SUB_TIME_MEASUREMEN_START()
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .CODE_SECTION_NAME = "部門"
+                .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+                .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION)
+                .CODE_WORK_NAME = FUNC_GET_MNT_M_WORK_NAME_WORK(.CODE_WORK)
             End With
         Next
         Call SUB_TIME_MEASUREMENT_STOP_AND_PUT_LOG(Me.Text & ":" & "補助情報取得")
@@ -319,10 +360,11 @@
         For intLOOP_INDEX = 1 To INT_MAX_INDEX
             Dim OBJ_TEMP(ENM_MY_GRID_MAIN.UBOUND) As Object
             With SRT_GRID_DATA_MAIN(intLOOP_INDEX)
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_OWNER) = Format(.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH))
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .NAME_OWNER
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KANA_OWNER) = .KANA_OWNER
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .NUMBER_CONTRACT_VIEW
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_OWNER_NAME) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_WORK_NAME) = .CODE_WORK_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
             End With
             Call glbSubAddRowDataTable(tblGRID_DATA_MAIN, OBJ_TEMP)
         Next
@@ -434,7 +476,11 @@
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS
 
         With SRT_CONDITIONS
-            .KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_CONTRACT)
+            .KIND_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_CONTRACT)
+            .DATE_CONTRACT_FROM = DTP_DATE_CONTRACT_FROM.Value
+            .DATE_CONTRACT_TO = DTP_DATE_CONTRACT_TO.Value
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
         End With
 
         Return SRT_CONDITIONS
@@ -446,9 +492,16 @@
         STR_WHERE = ""
 
         With SRT_CONDITIONS
-            If .KIND_OWNER >= 0 Then
-                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KIND_OWNER, "KIND_OWNER", "=")
+            If .KIND_CONTRACT >= 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KIND_CONTRACT, "KIND_CONTRACT", "=")
             End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_FROM, "CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.CODE_OWNER_TO, "CODE_OWNER", "<=")
+
+            Dim SRT_CONTRACT_PERIOD As SRT_DATE_PERIOD
+            SRT_CONTRACT_PERIOD.DATE_FROM = .DATE_CONTRACT_FROM
+            SRT_CONTRACT_PERIOD.DATE_TO = .DATE_CONTRACT_TO
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_CONTRACT_PERIOD, "DATE_CONTRACT")
         End With
         Return STR_WHERE
     End Function

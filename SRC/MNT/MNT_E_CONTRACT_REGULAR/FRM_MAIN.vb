@@ -140,6 +140,8 @@
         Select Case True
             Case (CTL_ACTIVE Is TXT_CODE_OWNER) Or (CTL_ACTIVE Is BTN_CODE_OWNER_SEARCH)
                 CTL_SEARCH = TXT_CODE_OWNER
+            Case (CTL_ACTIVE Is TXT_NUMBER_CONTRACT) Or (CTL_ACTIVE Is BTN_NUMBER_CONTRACT_SEARCH)
+                CTL_SEARCH = TXT_NUMBER_CONTRACT
             Case Else
 
         End Select
@@ -166,7 +168,20 @@
                     Call TXT_SEARCH.Focus()
                     Call TXT_SEARCH.SelectAll()
                 End If
-
+            Case (CTL_SEARCH Is TXT_NUMBER_CONTRACT)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_NS_CONTRT As SRT_NUMBER_SERIAL_CONTRACT
+                With INT_NS_CONTRT
+                    .NUMBER_CONTRACT = -1
+                    .SERIAL_CONTRACT = -1
+                End With
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT(INT_NS_CONTRT, SNG_FONT_SIZE)
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_NS_CONTRT.NUMBER_CONTRACT, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
             Case Else
                 'スルー
         End Select
@@ -895,6 +910,10 @@
     End Sub
 
     Private Sub BTN_CODE_OWNER_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_NUMBER_CONTRACT_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_NUMBER_CONTRACT_SEARCH.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
     End Sub
 #End Region
