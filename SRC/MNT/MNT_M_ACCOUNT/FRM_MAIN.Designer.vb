@@ -321,7 +321,7 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_ACCOUNT.Name = "TXT_CODE_ACCOUNT"
         Me.TXT_CODE_ACCOUNT.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_ACCOUNT.TabIndex = 1
-        Me.TXT_CODE_ACCOUNT.Tag = "Clear,Numeric,Format=000,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_ACCOUNT.Tag = "Clear,Numeric,Format=000,Check,NotNull,Plus"
         Me.TXT_CODE_ACCOUNT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_NAME_ACCOUNT

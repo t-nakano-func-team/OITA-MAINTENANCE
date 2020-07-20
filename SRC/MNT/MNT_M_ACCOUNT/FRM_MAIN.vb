@@ -21,6 +21,7 @@
         INPUT_KEY = 1
         INPUT_DATA_INSERT
         INPUT_DATA_UPDATE
+        INPUT_DATA_DELETE
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
@@ -28,7 +29,8 @@
         CODE_KIND
         NAME_ACCOUNT
         CODE_ACCOUNT
-        UBOUND = CODE_ACCOUNT
+        FLAINVALID_NAME
+        UBOUND = FLAINVALID_NAME
     End Enum
 #End Region
 
@@ -38,8 +40,10 @@
         Public CODE_KIND As Integer
         Public NAME_ACCOUNT As String
         Public CODE_ACCOUNT As Integer
+        Public FLAG_INVALID As Integer
 
         Public KIND_ACCOUNT_NAME As String
+        Public FLAG_INVALID_NAME As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
@@ -59,9 +63,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "科目種別,種別コード,科目名称,科目コード", "SSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "科目種別,種別コード,科目名称,科目コード,削除", "SSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,4,9,4", "LRLR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,4,9,4,2", "LRLRC")
 
         Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_ACCOUNT, ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT)
     End Sub
@@ -166,7 +170,12 @@
             SRT_DATA = Nothing
             Call FUNC_SELECT_TABLE_MNT_M_ACCOUNT(SRT_KEY, SRT_DATA)
             Call SUB_SET_INPUT_DATA(SRT_DATA)
-            ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
+            If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_DELETE '削除待ち
+            Else
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
+            End If
+            Call SUB_SET_INDEX_GRID_FROM_KEY(SRT_KEY)
         Else
             ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT '新規追加
         End If
@@ -226,8 +235,8 @@
             Exit Sub
         End If
 
-        '物理削除
-        If Not FUNC_DELETE_TABLE_MNT_M_ACCOUNT(SRT_KEY) Then
+        '物理・論理削除
+        If Not FUNC_DELETE_RECORD(SRT_KEY) Then
             Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
             Exit Sub
@@ -244,13 +253,68 @@
     Private STR_FUNC_EDIT_RECORD_LAST_ERROR As String
     Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_M_ACCOUNT) As Boolean
 
-        If Not FUNC_DELETE_TABLE_MNT_M_ACCOUNT(SRT_RECORD.KEY) Then
-            STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
-            Return False
+        Dim SRT_DATA As SRT_TABLE_MNT_M_ACCOUNT_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNT_M_ACCOUNT(SRT_RECORD.KEY, SRT_DATA)
+
+        If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
+            If Not FUNC_UPDATE_FLAG_INVALID(SRT_RECORD.KEY, ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+            If Not FUNC_DELETE_TABLE_MNT_M_ACCOUNT(SRT_RECORD.KEY) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+
+            If Not FUNC_INSERT_TABLE_MNT_M_ACCOUNT(SRT_RECORD) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
         End If
 
-        If Not FUNC_INSERT_TABLE_MNT_M_ACCOUNT(SRT_RECORD) Then
-            STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+        Return True
+    End Function
+
+    Private STR_FUNC_DELETE_RECORD As String
+    Private Function FUNC_DELETE_RECORD(ByRef SRT_KEY As SRT_TABLE_MNT_M_ACCOUNT_KEY) As Boolean
+
+        Dim SRT_DATA As SRT_TABLE_MNT_M_ACCOUNT_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNT_M_ACCOUNT(SRT_KEY, SRT_DATA)
+
+        If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
+            If Not FUNC_DELETE_TABLE_MNT_M_ACCOUNT(SRT_KEY) Then '物理削除
+                STR_FUNC_DELETE_RECORD = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+            If Not FUNC_UPDATE_FLAG_INVALID(SRT_KEY, ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE) Then
+                STR_FUNC_DELETE_RECORD = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        End If
+
+        Return True
+    End Function
+
+    Private Function FUNC_UPDATE_FLAG_INVALID(ByRef SRT_KEY As SRT_TABLE_MNT_M_ACCOUNT_KEY, ByVal ENM_FLAG_INVALID As ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID) As Boolean
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+
+        With STR_SQL
+            Call .Append("UPDATE" & System.Environment.NewLine)
+            Call .Append("MNT_M_ACCOUNT WITH(ROWLOCK)" & System.Environment.NewLine)
+            Call .Append("SET" & System.Environment.NewLine)
+            Call .Append("FLAG_INVALID=" & CInt(ENM_FLAG_INVALID) & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append("AND KIND_ACCOUNT=" & SRT_KEY.KIND_ACCOUNT & System.Environment.NewLine)
+            Call .Append("AND CODE_KIND=" & SRT_KEY.CODE_KIND & System.Environment.NewLine)
+        End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
             Return False
         End If
 
@@ -329,6 +393,7 @@
                 .CODE_KIND = CInt(SDR_READER.Item("CODE_KIND"))
                 .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
                 .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
+                .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
             End With
         End While
         Call SDR_READER.Close()
@@ -336,7 +401,8 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .KIND_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT, .KIND_ACCOUNT)
+                .KIND_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT, .KIND_ACCOUNT, True)
+                .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
             End With
         Next
 
@@ -361,6 +427,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_KIND) = Format(.CODE_KIND, New String("0", INT_SYSTEM_CODE_KIND_MAX_LENGTH))
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_ACCOUNT) = .NAME_ACCOUNT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_ACCOUNT) = Format(.CODE_ACCOUNT, New String("0", INT_SYSTEM_CODE_ACCOUNT_MAX_LENGTH))
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAINVALID_NAME) = .FLAG_INVALID_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
         Next
@@ -394,6 +461,37 @@
             SRT_RET.CODE_KIND = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_KIND)
         End With
         Return SRT_RET
+    End Function
+
+
+    Private Sub SUB_SET_INDEX_GRID_FROM_KEY(ByVal SRT_KEY As SRT_TABLE_MNT_M_ACCOUNT_KEY)
+        Dim INT_INDEX As Integer
+        INT_INDEX = FUNC_GET_INDEX_FROM_GRID(SRT_KEY)
+        If INT_INDEX <= 0 Then
+            Exit Sub
+        End If
+
+        Dim INT_INDEX_GRID As Integer
+        INT_INDEX_GRID = INT_INDEX
+        Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, INT_INDEX_GRID)
+    End Sub
+
+    Private Function FUNC_GET_INDEX_FROM_GRID(ByVal SRT_KEY As SRT_TABLE_MNT_M_ACCOUNT_KEY)
+
+        If SRT_GRID_DATA_MAIN Is Nothing Then
+            Return 0
+        End If
+
+        For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1)
+            With SRT_GRID_DATA_MAIN(i)
+                If .KIND_ACCOUNT = SRT_KEY.KIND_ACCOUNT _
+                    And .CODE_KIND = SRT_KEY.CODE_KIND Then
+                    Return i
+                End If
+            End With
+        Next
+
+        Return 0
     End Function
 #End Region
 
@@ -436,6 +534,17 @@
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
                 PNL_INPUT_KEY.Enabled = False
                 PNL_INPUT_DATA.Enabled = True
+
+                BTN_ENTER.Enabled = True
+                BTN_DELETE.Enabled = True
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
+                BTN_CLEAR.Enabled = True
+                BTN_END.Enabled = True
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_DELETE
+                PNL_INPUT_KEY.Enabled = False
+                PNL_INPUT_DATA.Enabled = False
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = True
