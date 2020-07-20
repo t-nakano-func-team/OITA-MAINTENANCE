@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -58,6 +58,7 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_SEARCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_SEARCH = New System.Windows.Forms.Button()
+        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -188,14 +189,15 @@ Partial Class FRM_MAIN
         '
         Me.pnlFUNCTION_GROUP.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlFUNCTION_GROUP.AutoScroll = True
+        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PUT_FILE)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PRINT)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_PREVIEW)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_CLEAR)
         Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_END)
-        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(220, 15)
+        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(180, 15)
         Me.pnlFUNCTION_GROUP.MinimumSize = New System.Drawing.Size(190, 40)
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
-        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(355, 40)
+        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(440, 40)
         Me.pnlFUNCTION_GROUP.TabIndex = 0
         '
         'BTN_PRINT
@@ -226,7 +228,7 @@ Partial Class FRM_MAIN
         '
         Me.BTN_CLEAR.AutoSize = True
         Me.BTN_CLEAR.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_CLEAR.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_CLEAR.Location = New System.Drawing.Point(265, 5)
         Me.BTN_CLEAR.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_CLEAR.Name = "BTN_CLEAR"
         Me.BTN_CLEAR.Size = New System.Drawing.Size(80, 30)
@@ -238,7 +240,7 @@ Partial Class FRM_MAIN
         '
         Me.BTN_END.AutoSize = True
         Me.BTN_END.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_END.Location = New System.Drawing.Point(265, 5)
+        Me.BTN_END.Location = New System.Drawing.Point(350, 5)
         Me.BTN_END.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_END.Name = "BTN_END"
         Me.BTN_END.Size = New System.Drawing.Size(80, 30)
@@ -346,14 +348,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 65)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -518,6 +520,18 @@ Partial Class FRM_MAIN
         Me.BTN_SEARCH.Text = "検索"
         Me.BTN_SEARCH.UseVisualStyleBackColor = False
         '
+        'BTN_PUT_FILE
+        '
+        Me.BTN_PUT_FILE.AutoSize = True
+        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
+        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.TabIndex = 2
+        Me.BTN_PUT_FILE.Text = "ファイル"
+        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -591,4 +605,5 @@ Partial Class FRM_MAIN
     Friend WithEvents DTP_DATE_PRINT As DateTimePicker
     Friend WithEvents LBL_DATE_PRINT_GUIDE As Label
     Friend WithEvents CHK_DATE_PRINT As CheckBox
+    Friend WithEvents BTN_PUT_FILE As Button
 End Class
