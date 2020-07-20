@@ -13,6 +13,8 @@
         KIND_SORT_CHECK_DEPOSIT = 19
         KIND_TARGET_RECEIVABLE = 20 '未収金対象
         KIND_ACCOUNT = 21 '科目種別
+        FLAG_INVALID = 22 '有効無効フラグ
+        FLAG_INVALID_SHORT = 23 '有効無効フラグ（短）
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
@@ -67,5 +69,10 @@
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_TARGET_RECEIVABLE
         BALANCE_HAVE = 1
         BALANCE_NONE = 2
+    End Enum
+
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID
+        NORMAL = 0
+        DELETE = 1
     End Enum
 End Module

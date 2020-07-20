@@ -12,6 +12,11 @@
     Public Const CST_SYSTEM_CODE_WORK_MAX_VALUE As Integer = 999
     Public INT_SYSTEM_CODE_WORK_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_WORK_MAX_VALUE.ToString.Length)
 
+    '部署コード
+    Public Const CST_SYSTEM_CODE_SECTION_MIN_VALUE As Integer = 1
+    Public Const CST_SYSTEM_CODE_SECTIONK_MAX_VALUE As Integer = 99
+    Public INT_SYSTEM_CODE_SECTION_MAX_LENGTH As Integer = (CST_SYSTEM_CODE_SECTIONK_MAX_VALUE.ToString.Length)
+
     '科目コード
     Public Const CST_SYSTEM_CODE_ACCOUNT_MIN_VALUE As Integer = 1
     Public Const CST_SYSTEM_CODE_ACCOUNT_MAX_VALUE As Integer = 999
@@ -41,6 +46,10 @@
 
 #Region "種別特定関連"
     Public Const CST_SYSTEM_ACCOUNT_CODE_KIND_ORDINARY_DEPOSIT As Integer = 1 '普通預金
+#End Region
+
+＃Region "システムコード"
+    Public Const CST_SYSTEM_INDIVIDUAL_SYSTEM_CODE = 1 '基幹業務
 #End Region
 
 End Module

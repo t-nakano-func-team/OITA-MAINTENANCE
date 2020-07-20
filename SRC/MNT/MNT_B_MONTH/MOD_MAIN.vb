@@ -1,5 +1,5 @@
 ﻿Module MOD_MAIN
-    Private Const CST_APPL_NAME As String = "部署マスタメンテナンス"
+    Private Const CST_APPL_NAME As String = "月次更新処理"
     Friend BLN_SHOW_SETTING As Boolean
 
     Public Sub MAIN(ByVal STR_COMMAND_LINE() As String)
@@ -22,14 +22,14 @@
             Dim FRM_MAIN As Form
             FRM_MAIN = New FRM_MAIN
             Call SUB_SYSTEM_TOTAL_INIT_FONT(SNG_FONT_SIZE, FRM_MAIN.Font.Size)
-            Dim srtPARAM As SRT_FORM_SETTING_PARAM
-            With srtPARAM
+            Dim SRT_PARAM As SRT_FORM_SETTING_PARAM
+            With SRT_PARAM
                 .TEXT = CST_APPL_NAME
                 .FONT_SIZE = SNG_FONT_SIZE
                 Erase .BACK_COLOR
                 Call SUB_SET_FORM_SETTING_COLOR(.BACK_COLOR)
             End With
-            Call SUB_INIT_FORM_SETTING(FRM_MAIN, srtPARAM)
+            Call SUB_INIT_FORM_SETTING(FRM_MAIN, SRT_PARAM)
             Call FRM_MAIN.ShowDialog()
             Call FRM_MAIN.Dispose()
             If Not BLN_SHOW_SETTING Then

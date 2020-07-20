@@ -32,10 +32,14 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD = New System.Windows.Forms.Label()
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
+        Me.PNL_INPUT_GUIDE = New System.Windows.Forms.Panel()
+        Me.PNL_LBL_FLAG_INVALID = New System.Windows.Forms.Panel()
+        Me.LBL_FLAG_INVALID = New System.Windows.Forms.Label()
+        Me.LBL_FLAG_INVALID_GUIDE = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
         Me.PNL_NAME_SECTION = New System.Windows.Forms.Panel()
-        Me.TXT_NAME_SECTIOＮ = New System.Windows.Forms.TextBox()
+        Me.TXT_NAME_SECTION = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_SECTION_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
         Me.PNL_CODE_SECTION = New System.Windows.Forms.Panel()
@@ -55,6 +59,8 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
+        Me.PNL_INPUT_GUIDE.SuspendLayout()
+        Me.PNL_LBL_FLAG_INVALID.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_NAME_SECTION.SuspendLayout()
@@ -168,6 +174,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GRP_BODY.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_GUIDE)
         Me.GRP_BODY.Controls.Add(Me.DGV_VIEW_DATA)
         Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_DATA)
         Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_KEY)
@@ -176,6 +183,54 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.Size = New System.Drawing.Size(760, 430)
         Me.GRP_BODY.TabIndex = 7
         Me.GRP_BODY.TabStop = False
+        '
+        'PNL_INPUT_GUIDE
+        '
+        Me.PNL_INPUT_GUIDE.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PNL_INPUT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.PNL_INPUT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_GUIDE.Controls.Add(Me.PNL_LBL_FLAG_INVALID)
+        Me.PNL_INPUT_GUIDE.Location = New System.Drawing.Point(505, 20)
+        Me.PNL_INPUT_GUIDE.Name = "PNL_INPUT_GUIDE"
+        Me.PNL_INPUT_GUIDE.Size = New System.Drawing.Size(245, 40)
+        Me.PNL_INPUT_GUIDE.TabIndex = 1
+        '
+        'PNL_LBL_FLAG_INVALID
+        '
+        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID)
+        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID_GUIDE)
+        Me.PNL_LBL_FLAG_INVALID.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_LBL_FLAG_INVALID.Name = "PNL_LBL_FLAG_INVALID"
+        Me.PNL_LBL_FLAG_INVALID.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_LBL_FLAG_INVALID.TabIndex = 0
+        '
+        'LBL_FLAG_INVALID
+        '
+        Me.LBL_FLAG_INVALID.AutoEllipsis = True
+        Me.LBL_FLAG_INVALID.BackColor = System.Drawing.Color.White
+        Me.LBL_FLAG_INVALID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVALID.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_FLAG_INVALID.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_FLAG_INVALID.Name = "LBL_FLAG_INVALID"
+        Me.LBL_FLAG_INVALID.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_FLAG_INVALID.TabIndex = 4
+        Me.LBL_FLAG_INVALID.Tag = "Clear"
+        Me.LBL_FLAG_INVALID.Text = "＊＊＊"
+        Me.LBL_FLAG_INVALID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_FLAG_INVALID_GUIDE
+        '
+        Me.LBL_FLAG_INVALID_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_INVALID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_INVALID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVALID_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_INVALID_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_INVALID_GUIDE.Name = "LBL_FLAG_INVALID_GUIDE"
+        Me.LBL_FLAG_INVALID_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_INVALID_GUIDE.TabIndex = 3
+        Me.LBL_FLAG_INVALID_GUIDE.Text = "状態"
+        Me.LBL_FLAG_INVALID_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'DGV_VIEW_DATA
         '
@@ -225,26 +280,26 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 70)
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 40)
-        Me.PNL_INPUT_DATA.TabIndex = 1
+        Me.PNL_INPUT_DATA.TabIndex = 2
         '
         'PNL_NAME_SECTION
         '
-        Me.PNL_NAME_SECTION.Controls.Add(Me.TXT_NAME_SECTIOＮ)
+        Me.PNL_NAME_SECTION.Controls.Add(Me.TXT_NAME_SECTION)
         Me.PNL_NAME_SECTION.Controls.Add(Me.LBL_NAME_SECTION_GUIDE)
         Me.PNL_NAME_SECTION.Location = New System.Drawing.Point(5, 5)
         Me.PNL_NAME_SECTION.Name = "PNL_NAME_SECTION"
         Me.PNL_NAME_SECTION.Size = New System.Drawing.Size(240, 30)
         Me.PNL_NAME_SECTION.TabIndex = 17
         '
-        'TXT_NAME_SECTIOＮ
+        'TXT_NAME_SECTION
         '
-        Me.TXT_NAME_SECTIOＮ.ImeMode = System.Windows.Forms.ImeMode.Hiragana
-        Me.TXT_NAME_SECTIOＮ.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_SECTIOＮ.MaxLength = 12
-        Me.TXT_NAME_SECTIOＮ.Name = "TXT_NAME_SECTIOＮ"
-        Me.TXT_NAME_SECTIOＮ.Size = New System.Drawing.Size(150, 25)
-        Me.TXT_NAME_SECTIOＮ.TabIndex = 1
-        Me.TXT_NAME_SECTIOＮ.Tag = "Clear,Check,Char,NotNull"
+        Me.TXT_NAME_SECTION.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_SECTION.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_NAME_SECTION.MaxLength = 12
+        Me.TXT_NAME_SECTION.Name = "TXT_NAME_SECTION"
+        Me.TXT_NAME_SECTION.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_NAME_SECTION.TabIndex = 1
+        Me.TXT_NAME_SECTION.Tag = "Clear,Check,Char,NotNull"
         '
         'LBL_NAME_SECTION_GUIDE
         '
@@ -268,7 +323,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_SECTION)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
-        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 40)
+        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(490, 40)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
         'PNL_CODE_SECTION
@@ -301,7 +356,7 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_SECTION.Name = "TXT_CODE_SECTION"
         Me.TXT_CODE_SECTION.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_SECTION.TabIndex = 1
-        Me.TXT_CODE_SECTION.Tag = "Clear,Numeric,Format=000000000,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_SECTION.Tag = "Clear,Numeric,Format=00,Check,NotNull,NotZero,Plus"
         Me.TXT_CODE_SECTION.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRP_FOOT
@@ -438,6 +493,8 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_USER_HEAD.ResumeLayout(False)
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
+        Me.PNL_INPUT_GUIDE.ResumeLayout(False)
+        Me.PNL_LBL_FLAG_INVALID.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
         Me.PNL_NAME_SECTION.ResumeLayout(False)
@@ -464,7 +521,7 @@ Partial Class FRM_MAIN
     Friend WithEvents DGV_VIEW_DATA As DataGridView
     Friend WithEvents PNL_INPUT_DATA As Panel
     Friend WithEvents PNL_NAME_SECTION As Panel
-    Friend WithEvents TXT_NAME_SECTIOＮ As TextBox
+    Friend WithEvents TXT_NAME_SECTION As TextBox
     Friend WithEvents LBL_NAME_SECTION_GUIDE As Label
     Friend WithEvents PNL_INPUT_KEY As Panel
     Friend WithEvents PNL_CODE_SECTION As Panel
@@ -479,4 +536,8 @@ Partial Class FRM_MAIN
     Friend WithEvents BTN_DELETE As Button
     Friend WithEvents BTN_ENTER As Button
     Friend WithEvents BTN_END As Button
+    Friend WithEvents PNL_INPUT_GUIDE As Panel
+    Friend WithEvents PNL_LBL_FLAG_INVALID As Panel
+    Friend WithEvents LBL_FLAG_INVALID As Label
+    Friend WithEvents LBL_FLAG_INVALID_GUIDE As Label
 End Class

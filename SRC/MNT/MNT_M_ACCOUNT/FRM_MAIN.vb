@@ -473,6 +473,7 @@
         With SRT_RET
             .NAME_ACCOUNT = CStr(TXT_NAME_ACCOUNT.Text)
             .CODE_ACCOUNT = CInt(TXT_CODE_ACCOUNT.Text)
+            .FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL
         End With
 
         Return SRT_RET
@@ -483,6 +484,7 @@
         With SRT_DATA
             TXT_NAME_ACCOUNT.Text = .NAME_ACCOUNT
             TXT_CODE_ACCOUNT.Text = Format(.CODE_ACCOUNT, New String("0", INT_SYSTEM_CODE_ACCOUNT_MAX_LENGTH))
+            LBL_FLAG_INVALID.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID, .FLAG_INVALID)
         End With
     End Sub
 #End Region

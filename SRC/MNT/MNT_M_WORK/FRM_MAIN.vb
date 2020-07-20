@@ -456,6 +456,7 @@
         With SRT_RET
             .NAME_WORK = CStr(TXT_NAME_WORK.Text)
             .KIND_WORK = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_WORK)
+            .FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL
         End With
 
         Return SRT_RET
@@ -466,6 +467,7 @@
         With SRT_DATA
             TXT_NAME_WORK.Text = .NAME_WORK
             Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_WORK, .KIND_WORK)
+            LBL_FLAG_INVALID.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID, .FLAG_INVALID)
         End With
     End Sub
 #End Region

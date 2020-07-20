@@ -26,6 +26,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
         Public NAME_ADDRESS_01 As String
         Public NAME_ADDRESS_02 As String
         Public KIND_FIXED_DATE As Integer
+        Public FLAG_INVALID As Integer
     End Structure
 #End Region
 
@@ -94,6 +95,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             .NAME_ADDRESS_01 = ""
             .NAME_ADDRESS_02 = ""
             .KIND_FIXED_DATE = -1
+            .FLAG_INVALID = -1
         End With
 
         If BLN_CASH Then
@@ -141,6 +143,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
             .NAME_ADDRESS_02 = CStr(SDR_READER.Item("NAME_ADDRESS_02"))
             .KIND_FIXED_DATE = CInt(SDR_READER.Item("KIND_FIXED_DATE"))
+            .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
         End With
 
         Call SDR_READER.Close()
@@ -202,7 +205,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_POST) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_01) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_02) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_FIXED_DATE) & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_FIXED_DATE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
+
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -263,6 +268,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_WORK
     Public Structure SRT_TABLE_MNT_M_WORK_DATA
         Public NAME_WORK As String
         Public KIND_WORK As Integer
+        Public FLAG_INVALID As Integer
     End Structure
 #End Region
 
@@ -325,6 +331,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_WORK
         With SRT_RET
             .NAME_WORK = ""
             .KIND_WORK = -1
+            .FLAG_INVALID = -1
         End With
 
         If BLN_CASH Then
@@ -366,6 +373,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_WORK
         With SRT_RET
             .NAME_WORK = CStr(SDR_READER.Item("NAME_WORK"))
             .KIND_WORK = CInt(SDR_READER.Item("KIND_WORK"))
+            .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
         End With
 
         Call SDR_READER.Close()
@@ -421,7 +429,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_WORK
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_WORK) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_WORK) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_WORK) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -483,6 +492,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
     Public Structure SRT_TABLE_MNT_M_ACCOUNT_DATA
         Public NAME_ACCOUNT As String
         Public CODE_ACCOUNT As Integer
+        Public FLAG_INVALID As Integer
     End Structure
 #End Region
 
@@ -546,6 +556,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         With SRT_RET
             .NAME_ACCOUNT = ""
             .CODE_ACCOUNT = -1
+            .FLAG_INVALID = -1
         End With
 
         If BLN_CASH Then
@@ -589,6 +600,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         With SRT_RET
             .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
             .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
+            .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
         End With
 
         Call SDR_READER.Close()
@@ -647,7 +659,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ACCOUNT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_ACCOUNT) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_ACCOUNT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -709,6 +722,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_M_SECTION_DATA
         Public NAME_SECTION As String
+        Public FLAG_INVALID As Integer
     End Structure
 #End Region
 
@@ -771,6 +785,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
 
         With SRT_RET
             .NAME_SECTION = ""
+            .FLAG_INVALID = -1
         End With
 
         If BLN_CASH Then
@@ -811,6 +826,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
 
         With SRT_RET
             .NAME_SECTION = CStr(SDR_READER.Item("NAME_SECTION"))
+            .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
         End With
 
         Call SDR_READER.Close()
@@ -865,7 +881,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_SECTION) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_SECTION) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
