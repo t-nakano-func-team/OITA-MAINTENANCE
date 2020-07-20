@@ -236,6 +236,10 @@
       <Link>_SystemSettings.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_M_USER.bip" />
+    <None Include="BIP\MNT_M_USER.ovd" />
+    <None Include="BIP\MNT_M_USER.pmd" />
+    <None Include="BIP\MNT_M_USER.psf" />
     <None Include="BIP\MNT_P_CHECK_DEPOSIT.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
