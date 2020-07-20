@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -51,7 +51,10 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_STAFF_GUIDE = New System.Windows.Forms.Label()
         Me.TXT_CODE_STAFF = New System.Windows.Forms.TextBox()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
-        Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
+        Me.PNL_FUNCTION_GROUP = New System.Windows.Forms.Panel()
+        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
+        Me.BTN_PRINT = New System.Windows.Forms.Button()
+        Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
@@ -70,7 +73,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_CODE_STAFF.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
-        Me.pnlFUNCTION_GROUP.SuspendLayout()
+        Me.PNL_FUNCTION_GROUP.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -196,14 +199,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -417,32 +420,71 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GRP_FOOT.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.GRP_FOOT.Controls.Add(Me.pnlFUNCTION_GROUP)
+        Me.GRP_FOOT.Controls.Add(Me.PNL_FUNCTION_GROUP)
         Me.GRP_FOOT.Location = New System.Drawing.Point(10, 490)
         Me.GRP_FOOT.Name = "GRP_FOOT"
         Me.GRP_FOOT.Size = New System.Drawing.Size(760, 60)
         Me.GRP_FOOT.TabIndex = 7
         Me.GRP_FOOT.TabStop = False
         '
-        'pnlFUNCTION_GROUP
+        'PNL_FUNCTION_GROUP
         '
-        Me.pnlFUNCTION_GROUP.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.pnlFUNCTION_GROUP.AutoScroll = True
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_CLEAR)
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_DELETE)
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_ENTER)
-        Me.pnlFUNCTION_GROUP.Controls.Add(Me.BTN_END)
-        Me.pnlFUNCTION_GROUP.Location = New System.Drawing.Point(200, 15)
-        Me.pnlFUNCTION_GROUP.MinimumSize = New System.Drawing.Size(190, 40)
-        Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
-        Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(355, 40)
-        Me.pnlFUNCTION_GROUP.TabIndex = 1
+        Me.PNL_FUNCTION_GROUP.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PNL_FUNCTION_GROUP.AutoScroll = True
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_PUT_FILE)
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_PRINT)
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_PREVIEW)
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_CLEAR)
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_DELETE)
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_ENTER)
+        Me.PNL_FUNCTION_GROUP.Controls.Add(Me.BTN_END)
+        Me.PNL_FUNCTION_GROUP.Location = New System.Drawing.Point(70, 15)
+        Me.PNL_FUNCTION_GROUP.MinimumSize = New System.Drawing.Size(190, 40)
+        Me.PNL_FUNCTION_GROUP.Name = "PNL_FUNCTION_GROUP"
+        Me.PNL_FUNCTION_GROUP.Size = New System.Drawing.Size(610, 40)
+        Me.PNL_FUNCTION_GROUP.TabIndex = 1
+        '
+        'BTN_PUT_FILE
+        '
+        Me.BTN_PUT_FILE.AutoSize = True
+        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(350, 5)
+        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
+        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.TabIndex = 4
+        Me.BTN_PUT_FILE.Text = "ファイル"
+        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
+        '
+        'BTN_PRINT
+        '
+        Me.BTN_PRINT.AutoSize = True
+        Me.BTN_PRINT.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PRINT.Location = New System.Drawing.Point(265, 5)
+        Me.BTN_PRINT.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PRINT.Name = "BTN_PRINT"
+        Me.BTN_PRINT.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PRINT.TabIndex = 3
+        Me.BTN_PRINT.Text = "印刷"
+        Me.BTN_PRINT.UseVisualStyleBackColor = False
+        '
+        'BTN_PREVIEW
+        '
+        Me.BTN_PREVIEW.AutoSize = True
+        Me.BTN_PREVIEW.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PREVIEW.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_PREVIEW.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PREVIEW.Name = "BTN_PREVIEW"
+        Me.BTN_PREVIEW.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PREVIEW.TabIndex = 2
+        Me.BTN_PREVIEW.Text = "プレビュー"
+        Me.BTN_PREVIEW.UseVisualStyleBackColor = False
         '
         'BTN_CLEAR
         '
         Me.BTN_CLEAR.AutoSize = True
         Me.BTN_CLEAR.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_CLEAR.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_CLEAR.Location = New System.Drawing.Point(435, 5)
         Me.BTN_CLEAR.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_CLEAR.Name = "BTN_CLEAR"
         Me.BTN_CLEAR.Size = New System.Drawing.Size(80, 30)
@@ -478,7 +520,7 @@ Partial Class FRM_MAIN
         '
         Me.BTN_END.AutoSize = True
         Me.BTN_END.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_END.Location = New System.Drawing.Point(265, 5)
+        Me.BTN_END.Location = New System.Drawing.Point(520, 5)
         Me.BTN_END.MinimumSize = New System.Drawing.Size(80, 30)
         Me.BTN_END.Name = "BTN_END"
         Me.BTN_END.Size = New System.Drawing.Size(80, 30)
@@ -520,8 +562,8 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_STAFF.ResumeLayout(False)
         Me.PNL_CODE_STAFF.PerformLayout()
         Me.GRP_FOOT.ResumeLayout(False)
-        Me.pnlFUNCTION_GROUP.ResumeLayout(False)
-        Me.pnlFUNCTION_GROUP.PerformLayout()
+        Me.PNL_FUNCTION_GROUP.ResumeLayout(False)
+        Me.PNL_FUNCTION_GROUP.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -554,9 +596,12 @@ Partial Class FRM_MAIN
     Friend WithEvents CMB_FLAG_GRANT As ComboBox
     Friend WithEvents LBL_FLAG_GRANT_GUIDE As Label
     Friend WithEvents DGV_VIEW_DATA As DataGridView
-    Friend WithEvents pnlFUNCTION_GROUP As Panel
+    Friend WithEvents PNL_FUNCTION_GROUP As Panel
     Friend WithEvents BTN_CLEAR As Button
     Friend WithEvents BTN_DELETE As Button
     Friend WithEvents BTN_ENTER As Button
     Friend WithEvents BTN_END As Button
+    Friend WithEvents BTN_PREVIEW As Button
+    Friend WithEvents BTN_PRINT As Button
+    Friend WithEvents BTN_PUT_FILE As Button
 End Class
