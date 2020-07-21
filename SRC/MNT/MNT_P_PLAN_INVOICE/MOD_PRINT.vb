@@ -50,6 +50,7 @@
         Public CODE_SECTION_NAME As String
         Public CODE_WORK_NAME As String
         Public DATE_INVOICE_PLAN_INT As Integer
+        Public NUMBER_BREAK As Integer
 
         Public Function NUMBER_CONTRACT_PRINT() As String
             Dim STR_NUMBER_CONTRACT As String
@@ -153,8 +154,22 @@
 
         BLN_PUT = True
 
+        Dim INT_CODE_SECTION_BEFORE As Integer
+        INT_CODE_SECTION_BEFORE = -1
+        Dim INT_KIND_CONTRACT_BEFORE As Integer
+        INT_KIND_CONTRACT_BEFORE = -1
+
+        Dim INT_NUMBER_BREAK As Integer
+        INT_NUMBER_BREAK = 0
         For i = 1 To (SRT_DATA.Length - 1)
-            Call SUB_REPLACE_DATA(SRT_DATA(i))
+            If (INT_CODE_SECTION_BEFORE <> SRT_DATA(i).CODE_SECTION) _
+                Or (INT_KIND_CONTRACT_BEFORE <> SRT_DATA(i).KIND_CONTRACT) Then
+                INT_NUMBER_BREAK += 1
+            End If
+            Call SUB_REPLACE_DATA(SRT_DATA(i), INT_NUMBER_BREAK)
+
+            INT_CODE_SECTION_BEFORE = SRT_DATA(i).CODE_SECTION
+            INT_KIND_CONTRACT_BEFORE = SRT_DATA(i).KIND_CONTRACT
         Next
 
         Dim STW_CSV_WRITER As System.IO.StreamWriter 'ファイル出力用のIOオブジェクト
@@ -334,8 +349,9 @@
     End Function
 
     '補助情報の取得
-    Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
+    Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA, ByVal INT_NUMBER_BREAK As Integer)
         With SRT_DATA
+            .NUMBER_BREAK = INT_NUMBER_BREAK
             .KINGAKU_INVOICE_DETAIL = .KINGAKU_CONTRACT
             .KINGAKU_INVOICE_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_INVOICE_DETAIL, .DATE_INVOICE_PLAN)
 
@@ -357,19 +373,20 @@
 
         ReDim STR_ROW(0)
         With SRT_DATA
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_BREAK))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_INVOICE_PLAN_INT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_PRINT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER_NAME))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_WORK))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_WORK_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_INVOICE_PLAN_INT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE_PLAN))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_DETAIL))
