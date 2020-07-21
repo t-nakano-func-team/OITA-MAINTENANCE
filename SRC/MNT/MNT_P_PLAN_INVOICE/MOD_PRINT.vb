@@ -187,18 +187,21 @@
         INT_CODE_SECTION_BEFORE = -1
         Dim INT_KIND_CONTRACT_BEFORE As Integer
         INT_KIND_CONTRACT_BEFORE = -1
-
+        Dim DAT_DATE_INVOICE_PLAN_BEFORE As DateTime
+        DAT_DATE_INVOICE_PLAN_BEFORE = cstVB_DATE_MIN
         Dim INT_NUMBER_BREAK As Integer
         INT_NUMBER_BREAK = 0
         For i = 1 To (SRT_DATA.Length - 1)
             If (INT_CODE_SECTION_BEFORE <> SRT_DATA(i).CODE_SECTION) _
-                Or (INT_KIND_CONTRACT_BEFORE <> SRT_DATA(i).KIND_CONTRACT) Then
+                Or (INT_KIND_CONTRACT_BEFORE <> SRT_DATA(i).KIND_CONTRACT) _
+                Or (DAT_DATE_INVOICE_PLAN_BEFORE <> SRT_DATA(i).DATE_INVOICE_PLAN) Then
                 INT_NUMBER_BREAK += 1
             End If
             Call SUB_REPLACE_DATA(SRT_DATA(i), INT_NUMBER_BREAK)
 
             INT_CODE_SECTION_BEFORE = SRT_DATA(i).CODE_SECTION
             INT_KIND_CONTRACT_BEFORE = SRT_DATA(i).KIND_CONTRACT
+            DAT_DATE_INVOICE_PLAN_BEFORE = SRT_DATA(i).DATE_INVOICE_PLAN
         Next
 
         Dim STW_CSV_WRITER As System.IO.StreamWriter 'ファイル出力用のIOオブジェクト
