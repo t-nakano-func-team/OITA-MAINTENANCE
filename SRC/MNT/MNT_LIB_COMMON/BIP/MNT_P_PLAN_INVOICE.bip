@@ -26,19 +26,20 @@ BANNER      N
 FORMKIND    C
 CMPCTTYPE   NO
 [DATA FORMAT]
+ブレイク連番  BREAK
+部署コード  
+部署名称  
 契約形態  
 契約形態名称  
+請求予定日付  
 契約番号  
 契約連番  
 契約番号表示  
 オーナーコード  
 オーナー名称  
-部署コード  
-部署名称  
 作業コード  
 作業名称  
 契約内容  
-請求予定日付  
 請求回数予定  
 請求回数  
 請求予定金額本体  
@@ -48,6 +49,7 @@ CMPCTTYPE   NO
 [CONTROL]
 PAGE-HEAD
 DETAIL DE
+CNTL-FOOT  ブレイク連番  CF1
 PAGE-FOOT
 [DB CONNECT]
 DBTYPE      DATAFILE
