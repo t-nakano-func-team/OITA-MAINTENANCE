@@ -73,6 +73,28 @@
             LNG_RET = Me.KINGAKU_INVOICE_DETAIL + Me.KINGAKU_INVOICE_VAT
             Return LNG_RET
         End Function
+
+        Public Function SORT_INDEX() As Long
+            Dim LNG_RET As Long
+            LNG_RET = 0
+
+            Const CST_KIND_CONTRACT_MAX_LENGTH As Integer = 2
+            Const CST_DATE_MAX_LENGTH As Integer = 8
+            LNG_RET += Me.CODE_SECTION * (10 ^ CST_KIND_CONTRACT_MAX_LENGTH) * (10 ^ CST_DATE_MAX_LENGTH) * (10 ^ INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH) * (10 ^ INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH)
+            Dim INT_KIND_CONTRACT_SORT As Integer
+            INT_KIND_CONTRACT_SORT = FUNC_GET_KIND_CONTRACT_SORT_ID(Me.KIND_CONTRACT)
+            LNG_RET += INT_KIND_CONTRACT_SORT * (10 ^ CST_DATE_MAX_LENGTH) * (10 ^ INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH) * (10 ^ INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH)
+
+            Dim INT_DATE_INVOICE_PLAN As Integer
+            INT_DATE_INVOICE_PLAN = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(Me.DATE_INVOICE_PLAN)
+            LNG_RET += INT_DATE_INVOICE_PLAN * (10 ^ INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH) * (10 ^ INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH)
+
+            LNG_RET += Me.NUMBER_CONTRACT * (10 ^ INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH)
+            LNG_RET += Me.SERIAL_CONTRACT
+
+            Return LNG_RET
+        End Function
+
     End Structure
 
 #End Region
@@ -135,19 +157,26 @@
             Call SUB_GET_PLAN(SRT_TEMP(i))
         Next
 
-        Dim SRT_DATA() As SRT_PRINT_DATA
-        ReDim SRT_DATA(0)
+        Dim SRT_SORT() As SRT_PRINT_DATA
+        ReDim SRT_SORT(0)
         For i = 1 To (SRT_TEMP.Length - 1)
             If Not (SRT_TEMP(i).DATE_INVOICE_PLAN >= SRT_CONDITIONS.DATE_INVOICE_FROM And SRT_TEMP(i).DATE_INVOICE_PLAN <= SRT_CONDITIONS.DATE_INVOICE_TO) Then
                 Continue For
             End If
 
             Dim INT_INDEX As Integer
-            INT_INDEX = (SRT_DATA.Length)
-            ReDim Preserve SRT_DATA(INT_INDEX)
-            SRT_DATA(INT_INDEX) = SRT_TEMP(i)
+            INT_INDEX = (SRT_SORT.Length)
+            ReDim Preserve SRT_SORT(INT_INDEX)
+            SRT_SORT(INT_INDEX) = SRT_TEMP(i)
         Next
 
+        Dim SRT_DATA() As SRT_PRINT_DATA
+        ReDim SRT_DATA(SRT_SORT.Length - 1)
+        For i = 1 To (SRT_SORT.Length - 1)
+            Dim INT_INDEX As Integer
+            INT_INDEX = FUNC_GET_INDEX(SRT_SORT, SRT_SORT(i).SORT_INDEX)
+            SRT_DATA(INT_INDEX) = SRT_SORT(i)
+        Next
         If (SRT_DATA.Length - 1) <= 0 Then
             Return True 'データなし正常終了
         End If
@@ -255,7 +284,7 @@
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("MAIN.KIND_CONTRACT DESC,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("MAIN.CODE_SECTION,MAIN.KIND_CONTRACT DESC,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -346,6 +375,17 @@
             Return DAT_RET
         End With
 
+    End Function
+
+    Private Function FUNC_GET_INDEX(ByRef SRT_DATA() As SRT_PRINT_DATA, ByVal LNG_SORT_INDEX As Long) As Integer
+        Dim INT_RET As Integer = 0
+        For i = 1 To (SRT_DATA.Length - 1)
+            If SRT_DATA(i).SORT_INDEX <= LNG_SORT_INDEX Then
+                INT_RET += 1
+            End If
+        Next
+
+        Return INT_RET
     End Function
 
     '補助情報の取得

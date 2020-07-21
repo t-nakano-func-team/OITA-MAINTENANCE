@@ -39,6 +39,21 @@
 
         Return INT_RET
     End Function
+
+    Public Function FUNC_GET_KIND_CONTRACT_SORT_ID(ByVal INT_KIND_CONTRACT As Integer) As Integer
+        Dim INT_RET As Integer
+
+        Select Case INT_KIND_CONTRACT
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
+                INT_RET = 2
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
+                INT_RET = 1
+            Case Else
+                INT_RET = 0
+        End Select
+
+        Return INT_RET
+    End Function
 #End Region
 
 #Region "請求関連"
