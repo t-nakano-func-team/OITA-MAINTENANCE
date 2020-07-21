@@ -293,10 +293,18 @@
     <None Include="BIP\MNT_M_USER.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="BIP\MNT_M_WORK.bip" />
-    <None Include="BIP\MNT_M_WORK.ovd" />
-    <None Include="BIP\MNT_M_WORK.pmd" />
-    <None Include="BIP\MNT_M_WORK.psf" />
+    <None Include="BIP\MNT_M_WORK.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_WORK.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_WORK.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_WORK.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BIP\MNT_P_CHECK_DEPOSIT.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

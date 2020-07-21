@@ -282,16 +282,27 @@
             Exit Sub
         End If
 
-        If Not BLN_PREVIEW Then
-            If BLN_PUT_FILE Then
-                If Not BLN_CANCEL Then
-                    Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-            Else
-                Call MessageBox.Show("印刷を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
+        Call SUB_PRINT_DONE(BLN_PREVIEW, BLN_PUT_FILE, BLN_CANCEL)
+    End Sub
+
+#Region "印刷関係内部処理"
+    Private Sub SUB_PRINT_DONE(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean, ByVal BLN_CANCEL As Boolean)
+        If BLN_PREVIEW Then 'プレビューなら
+            Exit Sub '何もしない
+        End If
+
+        If BLN_PUT_FILE And BLN_CANCEL Then 'ファイル出力がキャンセルされた場合
+            Exit Sub '何もしない
+        End If
+
+        If BLN_PUT_FILE Then 'ファイル出力の場合
+            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else '印刷の場合
+            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+#End Region
 
     Private Sub SUB_CLEAR()
         Call SUB_CONTROL_CLEAR_FORM(Me)
