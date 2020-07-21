@@ -26,8 +26,11 @@ BANNER      N
 FORMKIND    C
 CMPCTTYPE   NO
 [DATA FORMAT]
-部署コード  BREAK
+ブレイク連番  BREAK
+部署コード  
 部署名称  
+契約形態  
+契約形態名称  
 オーナーコード  
 オーナー名称  
 契約番号  
@@ -47,7 +50,7 @@ CMPCTTYPE   NO
 PAGE-HEAD
 DETAIL DE
 COMPUTE  未収金残高合計
-CNTL-FOOT  部署コード  CF1
+CNTL-FOOT  ブレイク連番  CF1
 PAGE-FOOT
 [DB CONNECT]
 DBTYPE      DATAFILE
