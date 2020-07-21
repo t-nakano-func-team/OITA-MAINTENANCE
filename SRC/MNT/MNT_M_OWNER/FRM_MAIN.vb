@@ -119,6 +119,12 @@
                 Call SUB_ENTER()
             Case ENM_MY_EXEC_DO.DO_DELETE
                 Call SUB_DELETE()
+            Case ENM_MY_EXEC_DO.DO_PREVIEW
+                Call SUB_PRINT(True, False)
+            Case ENM_MY_EXEC_DO.DO_PRINT
+                Call SUB_PRINT(False, False)
+            Case ENM_MY_EXEC_DO.DO_PUT_FILE
+                Call SUB_PRINT(False, True)
             Case ENM_MY_EXEC_DO.DO_CLEAR
                 Call SUB_CLEAR()
             Case ENM_MY_EXEC_DO.DO_END
@@ -326,6 +332,51 @@
 
         Return True
     End Function
+#End Region
+
+    '印刷/プレビュー/ファイル出力
+    Private Sub SUB_PRINT(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean)
+        Dim STR_CONDITIONS As MOD_PRINT.SRT_PRINT_CONDITIONS
+        Dim BLN_RET As Boolean
+        Dim BLN_PUT As Boolean
+        Dim BLN_CANCEL As Boolean
+
+        With STR_CONDITIONS
+            '条件なし
+        End With
+
+        BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, STR_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
+
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_PRINT.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not BLN_PUT Then
+            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Call SUB_PRINT_DONE(BLN_PREVIEW, BLN_PUT_FILE, BLN_CANCEL)
+    End Sub
+
+#Region "印刷関係内部処理"
+    Private Sub SUB_PRINT_DONE(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean, ByVal BLN_CANCEL As Boolean)
+        If BLN_PREVIEW Then 'プレビューなら
+            Exit Sub '何もしない
+        End If
+
+        If BLN_PUT_FILE And BLN_CANCEL Then 'ファイル出力がキャンセルされた場合
+            Exit Sub '何もしない
+        End If
+
+        If BLN_PUT_FILE Then 'ファイル出力の場合
+            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else '印刷の場合
+            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
 #End Region
 
     Private Sub SUB_CLEAR()
