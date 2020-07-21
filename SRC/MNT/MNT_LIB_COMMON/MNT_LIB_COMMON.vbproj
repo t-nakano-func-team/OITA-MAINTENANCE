@@ -245,6 +245,42 @@
       <Link>_SystemSettings.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_M_ACCOUNT.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_ACCOUNT.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_ACCOUNT.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_ACCOUNT.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_OWNER.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_OWNER.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_OWNER.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_OWNER.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_SECTION.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_SECTION.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_SECTION.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_SECTION.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BIP\MNT_M_USER.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -257,6 +293,10 @@
     <None Include="BIP\MNT_M_USER.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_M_WORK.bip" />
+    <None Include="BIP\MNT_M_WORK.ovd" />
+    <None Include="BIP\MNT_M_WORK.pmd" />
+    <None Include="BIP\MNT_M_WORK.psf" />
     <None Include="BIP\MNT_P_CHECK_DEPOSIT.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
