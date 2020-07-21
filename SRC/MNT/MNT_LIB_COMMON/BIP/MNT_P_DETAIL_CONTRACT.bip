@@ -26,8 +26,8 @@ BANNER      N
 FORMKIND    C
 CMPCTTYPE   NO
 [DATA FORMAT]
+ブレイク連番  BREAK
 契約形態  
-契約形態名称  
 契約番号  
 契約連番  
 契約番号表示  
@@ -48,9 +48,11 @@ CMPCTTYPE   NO
 契約金額  
 備考  
 ページ数  PAGE
+契約形態名称  
 [CONTROL]
 PAGE-HEAD
 DETAIL DE
+CNTL-FOOT  ブレイク連番  CF1
 PAGE-FOOT
 [DB CONNECT]
 DBTYPE      DATAFILE
