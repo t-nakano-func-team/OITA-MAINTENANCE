@@ -26,14 +26,14 @@ BANNER      N
 FORMKIND    C
 CMPCTTYPE   NO
 [DATA FORMAT]
-種別コード  
-勘定科目名称  
 科目種別  
 科目種別名称  
+種別コード  
+勘定科目名称  
+勘定科目コード  
 削除フラグ  
 削除フラグ名称  
 ページ数  PAGE
-勘定科目コード  
 [CONTROL]
 PAGE-HEAD
 DETAIL DE

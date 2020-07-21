@@ -28,6 +28,7 @@
         Public CODE_ACCOUNT As Integer
         Public FLAG_INVALID As Integer
 
+        Public KIND_ACCOUNT_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 #End Region
@@ -77,6 +78,7 @@
                 .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
+                .KIND_ACCOUNT_NAME = ""
                 .FLAG_INVALID_NAME = ""
             End With
         End While
@@ -170,6 +172,7 @@
     '補助情報の取得
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
+            .KIND_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT, .KIND_ACCOUNT, True)
             .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
         End With
     End Sub
@@ -185,6 +188,7 @@
         ReDim STR_ROW(0)
         With SRT_DATA
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_ACCOUNT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_ACCOUNT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_KIND))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ACCOUNT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_ACCOUNT))
