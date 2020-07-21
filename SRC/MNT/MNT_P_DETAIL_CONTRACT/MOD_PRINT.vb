@@ -56,6 +56,8 @@
         Public DATE_WORK_TO_INT As Integer
         Public DATE_INVOICE_BASE_INT As Integer
 
+        Public NUMBER_BREAK As Integer
+
         Public Function NUMBER_CONTRACT_PRINT() As String
             Dim STR_NUMBER_CONTRACT As String
             STR_NUMBER_CONTRACT = Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH))
@@ -135,8 +137,17 @@
         Call SDR_READER.Close()
         SDR_READER = Nothing
 
+        Dim INT_KIND_CONTRACT_BEFORE As Integer
+        INT_KIND_CONTRACT_BEFORE = -1
+
+        Dim INT_NUMBER_BREAK As Integer
+        INT_NUMBER_BREAK = 0
         For i = 1 To (SRT_DATA.Length - 1)
-            Call SUB_REPLACE_DATA(SRT_DATA(i))
+            If INT_KIND_CONTRACT_BEFORE <> SRT_DATA(i).KIND_CONTRACT Then
+                INT_NUMBER_BREAK += 1
+            End If
+            Call SUB_REPLACE_DATA(SRT_DATA(i), INT_NUMBER_BREAK)
+            INT_KIND_CONTRACT_BEFORE = SRT_DATA(i).KIND_CONTRACT
         Next
 
         Dim STW_CSV_WRITER As System.IO.StreamWriter 'ファイル出力用のIOオブジェクト
@@ -255,8 +266,10 @@
     End Function
 
     '補助情報の取得
-    Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
+    Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA, ByVal INT_NUMBER_BREAK As Integer)
         With SRT_DATA
+            .NUMBER_BREAK = INT_NUMBER_BREAK
+
             .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT, True)
             .DATE_CONTRACT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_CONTRACT)
             .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
@@ -279,6 +292,7 @@
 
         ReDim STR_ROW(0)
         With SRT_DATA
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_BREAK))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
