@@ -3,7 +3,6 @@
     Public Enum ENM_MNT_M_KIND_CODE_FLAG
         KIND_FIXED_DATE = 10 '請求締日付
         KIND_OWNER = 11 '形式
-        CODE_SECTION = 12 '部署
         KIND_RATE_VAT = 13 '消費税
         KIND_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
