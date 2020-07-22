@@ -45,10 +45,17 @@ CMPCTTYPE   NO
 請求予定金額本体  
 請求予定金額消費税  
 請求予定金額税込  
+備考  
+請求予定金額本体合計  SUM(請求予定金額本体)
+請求予定金額消費税合計  SUM(請求予定金額消費税)
+請求予定金額税込合計  SUM(請求予定金額税込)
 ページ数  PAGE
 [CONTROL]
 PAGE-HEAD
 DETAIL DE
+COMPUTE  請求予定金額本体合計
+COMPUTE  請求予定金額消費税合計
+COMPUTE  請求予定金額税込合計
 CNTL-FOOT  ブレイク連番  CF1
 PAGE-FOOT
 [DB CONNECT]

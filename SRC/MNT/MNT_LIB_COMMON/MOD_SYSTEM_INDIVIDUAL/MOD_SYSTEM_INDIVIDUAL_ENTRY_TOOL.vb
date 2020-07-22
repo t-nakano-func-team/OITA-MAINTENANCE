@@ -281,6 +281,33 @@
 
         Return SRT_RET
     End Function
+
+    Public Function FUNC_GET_KINGAKU_INVOICE_FROM_DATE_FROM_TO(
+    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
+    ByVal DAT_DATE_CALC_FROM As DateTime, ByVal DAT_DATE_CALC_TO As DateTime
+    ) As Long
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("SELECT" & System.Environment.NewLine)
+            .Append("SUM(KINGAKU_INVOICE_DETAIL+KINGAKU_INVOICE_VAT)" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_INVOICE WITH(NOLOCK)" & System.Environment.NewLine)
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append(FUNC_GET_SQL_WHERE_INT(INT_NUMBER_CONTRACT, "NUMBER_CONTRACT", "="))
+            .Append(FUNC_GET_SQL_WHERE_INT(INT_SERIAL_CONTRACT, "SERIAL_CONTRACT", "="))
+            Dim SRT_CALC_PERIOD As SRT_DATE_PERIOD
+            SRT_CALC_PERIOD.DATE_FROM = DAT_DATE_CALC_FROM
+            SRT_CALC_PERIOD.DATE_TO = DAT_DATE_CALC_TO
+            .Append(FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_CALC_PERIOD, "DATE_INVOICE"))
+        End With
+
+        Dim LNG_RET As Integer
+        LNG_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL.ToString, 0)
+
+        Return LNG_RET
+    End Function
 #End Region
 
 #Region "入金関連"

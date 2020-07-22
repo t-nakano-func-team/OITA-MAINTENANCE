@@ -39,6 +39,7 @@
         Public SPAN_INVOICE As Integer
         Public COUNT_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
+        Public NAME_MEMO As String
 
         Public COUNT_INVOICE_PLAN As Integer
         Public DATE_INVOICE_PLAN As DateTime
@@ -147,6 +148,7 @@
                 .SPAN_INVOICE = CInt(SDR_READER.Item("SPAN_INVOICE"))
                 .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
                 .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
+                .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
             End With
         End While
 
@@ -435,6 +437,7 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_DETAIL))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_VAT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_INVOICE_TOTAL))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_MEMO))
         End With
         STR_RET = FUNC_GET_ONE_ROW_LIST_CSV(STR_ROW)
 
