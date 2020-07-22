@@ -353,6 +353,18 @@
     <None Include="BIP\MNT_P_LIST_INVOICE.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_P_LIST_INVOICE_02.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_LIST_INVOICE_02.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_LIST_INVOICE_02.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_P_LIST_INVOICE_02.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BIP\MNT_P_PLAN_INVOICE.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
