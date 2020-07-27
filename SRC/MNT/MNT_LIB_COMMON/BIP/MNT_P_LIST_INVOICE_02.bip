@@ -65,7 +65,13 @@ CMPCTTYPE   NO
 税込金額合計  CAL(税込金額１ +  税込金額２ + 税込金額３ + 税込金額４ + 税込金額５ + 税込金額６)
 当月お買上額  SET(税込金額合計)
 今回ご請求額  CAL(前回ご請求額 +  当月お買上額 - 当月ご入金額)
+印刷日付年副  SET(印刷日付年)
+印刷日付月副  SET(印刷日付月)
+印刷日付日副  SET(印刷日付日)
 郵便番号副  SET(郵便番号)
+住所１副  SET(住所１)
+住所２副  SET(住所２)
+オーナー名称副  SET(オーナー名称)
 [CONTROL]
 PAGE-HEAD
 COMPUTE 税込金額１
@@ -79,7 +85,8 @@ COMPUTE 消費税合計
 COMPUTE 税込金額合計
 COMPUTE 当月お買上額
 COMPUTE 今回ご請求額
-COMPUTE 郵便番号副
+COMPUTE 印刷日付年副 印刷日付月副 印刷日付日副
+COMPUTE 郵便番号副 住所１副 住所２副 オーナー名称副
 DETAIL DE
 CNTL-FOOT  ブレイク連番  CF1
 [DB CONNECT]
