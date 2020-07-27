@@ -247,6 +247,8 @@
             Exit Sub
         End If
 
+        Call SUB_PUT_PROGRESS_GUIDE("")
+
         If Not BLN_PUT Then
             Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
