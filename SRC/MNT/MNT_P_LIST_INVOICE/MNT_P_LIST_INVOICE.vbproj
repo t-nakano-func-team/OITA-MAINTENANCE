@@ -88,8 +88,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MOD_MAIN.vb" />
+    <Compile Include="MOD_PRINT_99.vb" />
     <Compile Include="MOD_PRINT.vb" />
-    <Compile Include="MOD_PRINT_02.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -220,7 +220,7 @@
             Exit Sub
         End If
 
-        Dim SRT_CONDITIONS As MOD_PRINT_02.SRT_PRINT_CONDITIONS
+        Dim SRT_CONDITIONS As MOD_PRINT.SRT_PRINT_CONDITIONS
         With SRT_CONDITIONS
             .PRINT_DATA = FUNC_GET_GRID_INVOICE()
 
@@ -240,10 +240,10 @@
         Dim BLN_RET As Boolean
         Dim BLN_PUT As Boolean
         Dim BLN_CANCEL As Boolean
-        BLN_RET = MOD_PRINT_02.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, SRT_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
+        BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, SRT_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
 
         If Not BLN_RET Then
-            Call MessageBox.Show(MOD_PRINT.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Call MessageBox.Show(MOD_PRINT_99.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
@@ -581,9 +581,9 @@
         Return True
     End Function
 
-    Private Function FUNC_GET_GRID_INVOICE() As MOD_PRINT_02.SRT_PTINT_INVOICE_KEY()
+    Private Function FUNC_GET_GRID_INVOICE() As MOD_PRINT.SRT_PTINT_INVOICE_KEY()
 
-        Dim SRT_RET() As MOD_PRINT_02.SRT_PTINT_INVOICE_KEY
+        Dim SRT_RET() As MOD_PRINT.SRT_PTINT_INVOICE_KEY
         ReDim SRT_RET(0)
 
         Dim INT_MAX_INDEX As Integer

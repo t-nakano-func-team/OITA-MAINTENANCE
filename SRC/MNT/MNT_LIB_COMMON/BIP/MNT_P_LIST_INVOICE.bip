@@ -8,8 +8,8 @@ OUTPUT-FILE 0
 OUTPUT-EMAIL 0
 OUTPUT-APL  0
 FIELDTYPE   VARIABLE
-FORMSIZE    B5
-PRTFORM     LA
+FORMSIZE    B4
+PRTFORM     PO
 OVL         Y
 PAGING      CF
 CONDITION   ONCE
@@ -27,29 +27,106 @@ FORMKIND    C
 CMPCTTYPE   NO
 [DATA FORMAT]
 ƒuƒŒƒCƒN˜A”Ô  BREAK
-ƒuƒŒƒCƒNs”Ô†  
+ˆóü“ú•t”N  
+ˆóü“ú•tŒŽ  
+ˆóü“ú•t“ú  
 —X•Ö”Ô†  
 ZŠ‚P  
 ZŠ‚Q  
 ƒI[ƒi[–¼Ì  
-“–ŒŽ‚¨”ƒãŠz  
-¡‰ñ‚²¿‹Šz  
-Žd—l  
-Å”²‹àŠz  
-Á”ïÅ‹àŠz  
-Åž‹àŠz  
-ˆóü“ú•t”N  
-ˆóü“ú•tŒŽ  
-ˆóü“ú•t“ú  
-Å”²‹àŠz¬Œv  SUM(Å”²‹àŠz)
-Á”ïÅ‹àŠz¬Œv  SUM(Á”ïÅ‹àŠz)
-Åž‹àŠz¬Œv  SUM(Åž‹àŠz)
+‘O‰ñ‚²¿‹Šz  
+“–ŒŽ‚²“ü‹àŠz  
+Œ_–ñ“à—e‚P  
+‹àŠz‚P  
+Á”ïÅ‚P  
+Œ_–ñ“à—e‚Q  
+‹àŠz‚Q  
+Á”ïÅ‚Q  
+Œ_–ñ“à—e‚R  
+‹àŠz‚R  
+Á”ïÅ‚R  
+Œ_–ñ“à—e‚S  
+‹àŠz‚S  
+Á”ïÅ‚S  
+Œ_–ñ“à—e‚T  
+‹àŠz‚T  
+Á”ïÅ‚T  
+Œ_–ñ“à—e‚U  
+‹àŠz‚U  
+Á”ïÅ‚U  
+Åž‹àŠz‚P  CAL(‹àŠz‚P +  Á”ïÅ‚P)
+Åž‹àŠz‚Q  CAL(‹àŠz‚Q +  Á”ïÅ‚Q)
+Åž‹àŠz‚R  CAL(‹àŠz‚R +  Á”ïÅ‚R)
+Åž‹àŠz‚S  CAL(‹àŠz‚S +  Á”ïÅ‚S)
+Åž‹àŠz‚T  CAL(‹àŠz‚T +  Á”ïÅ‚T)
+Åž‹àŠz‚U  CAL(‹àŠz‚U +  Á”ïÅ‚U)
+‹àŠz‡Œv  CAL(‹àŠz‚P +  ‹àŠz‚Q + ‹àŠz‚R + ‹àŠz‚S + ‹àŠz‚T + ‹àŠz‚U)
+Á”ïÅ‡Œv  CAL(Á”ïÅ‚P +  Á”ïÅ‚Q + Á”ïÅ‚R + Á”ïÅ‚S + Á”ïÅ‚T + Á”ïÅ‚U)
+Åž‹àŠz‡Œv  CAL(Åž‹àŠz‚P +  Åž‹àŠz‚Q + Åž‹àŠz‚R + Åž‹àŠz‚S + Åž‹àŠz‚T + Åž‹àŠz‚U)
+“–ŒŽ‚¨”ƒãŠz  SET(Åž‹àŠz‡Œv)
+¡‰ñ‚²¿‹Šz  CAL(‘O‰ñ‚²¿‹Šz +  “–ŒŽ‚¨”ƒãŠz - “–ŒŽ‚²“ü‹àŠz)
+ˆóü“ú•t”N•›  SET(ˆóü“ú•t”N)
+ˆóü“ú•tŒŽ•›  SET(ˆóü“ú•tŒŽ)
+ˆóü“ú•t“ú•›  SET(ˆóü“ú•t“ú)
+—X•Ö”Ô†•›  SET(—X•Ö”Ô†)
+ZŠ‚P•›  SET(ZŠ‚P)
+ZŠ‚Q•›  SET(ZŠ‚Q)
+ƒI[ƒi[–¼Ì•›  SET(ƒI[ƒi[–¼Ì)
+‘O‰ñ‚²¿‹Šz•›  SET(‘O‰ñ‚²¿‹Šz)
+“–ŒŽ‚¨”ƒãŠz•›  SET(“–ŒŽ‚¨”ƒãŠz)
+“–ŒŽ‚²“ü‹àŠz•›  SET(“–ŒŽ‚²“ü‹àŠz)
+¡‰ñ‚²¿‹Šz•›  SET(¡‰ñ‚²¿‹Šz)
+Œ_–ñ“à—e‚P•›  SET(Œ_–ñ“à—e‚P)
+‹àŠz‚P•›  SET(‹àŠz‚P)
+Á”ïÅ‚P•›  SET(Á”ïÅ‚P)
+Åž‹àŠz‚P•›  SET(Åž‹àŠz‚P)
+Œ_–ñ“à—e‚Q•›  SET(Œ_–ñ“à—e‚Q)
+‹àŠz‚Q•›  SET(‹àŠz‚Q)
+Á”ïÅ‚Q•›  SET(Á”ïÅ‚Q)
+Åž‹àŠz‚Q•›  SET(Åž‹àŠz‚Q)
+Œ_–ñ“à—e‚R•›  SET(Œ_–ñ“à—e‚R)
+‹àŠz‚R•›  SET(‹àŠz‚R)
+Á”ïÅ‚R•›  SET(Á”ïÅ‚R)
+Åž‹àŠz‚R•›  SET(Åž‹àŠz‚R)
+Œ_–ñ“à—e‚S•›  SET(Œ_–ñ“à—e‚S)
+‹àŠz‚S•›  SET(‹àŠz‚S)
+Á”ïÅ‚S•›  SET(Á”ïÅ‚S)
+Åž‹àŠz‚S•›  SET(Åž‹àŠz‚S)
+Œ_–ñ“à—e‚T•›  SET(Œ_–ñ“à—e‚T)
+‹àŠz‚T•›  SET(‹àŠz‚T)
+Á”ïÅ‚T•›  SET(Á”ïÅ‚T)
+Åž‹àŠz‚T•›  SET(Åž‹àŠz‚T)
+Œ_–ñ“à—e‚U•›  SET(Œ_–ñ“à—e‚U)
+‹àŠz‚U•›  SET(‹àŠz‚U)
+Á”ïÅ‚U•›  SET(Á”ïÅ‚U)
+Åž‹àŠz‚U•›  SET(Åž‹àŠz‚U)
+‹àŠz‡Œv•›  SET(‹àŠz‡Œv)
+Á”ïÅ‡Œv•›  SET(Á”ïÅ‡Œv)
+Åž‹àŠz‡Œv•›  SET(Åž‹àŠz‡Œv)
 [CONTROL]
 PAGE-HEAD
+COMPUTE Åž‹àŠz‚P
+COMPUTE Åž‹àŠz‚Q
+COMPUTE Åž‹àŠz‚R
+COMPUTE Åž‹àŠz‚S
+COMPUTE Åž‹àŠz‚T
+COMPUTE Åž‹àŠz‚U
+COMPUTE ‹àŠz‡Œv
+COMPUTE Á”ïÅ‡Œv
+COMPUTE Åž‹àŠz‡Œv
+COMPUTE “–ŒŽ‚¨”ƒãŠz
+COMPUTE ¡‰ñ‚²¿‹Šz
+COMPUTE ˆóü“ú•t”N•› ˆóü“ú•tŒŽ•› ˆóü“ú•t“ú•›
+COMPUTE —X•Ö”Ô†•› ZŠ‚P•› ZŠ‚Q•› ƒI[ƒi[–¼Ì•›
+COMPUTE ‘O‰ñ‚²¿‹Šz•› “–ŒŽ‚¨”ƒãŠz•› “–ŒŽ‚²“ü‹àŠz•› ¡‰ñ‚²¿‹Šz•›
+COMPUTE Œ_–ñ“à—e‚P•› ‹àŠz‚P•› Á”ïÅ‚P•› Åž‹àŠz‚P•›
+COMPUTE Œ_–ñ“à—e‚Q•› ‹àŠz‚Q•› Á”ïÅ‚Q•› Åž‹àŠz‚Q•›
+COMPUTE Œ_–ñ“à—e‚R•› ‹àŠz‚R•› Á”ïÅ‚R•› Åž‹àŠz‚R•›
+COMPUTE Œ_–ñ“à—e‚S•› ‹àŠz‚S•› Á”ïÅ‚S•› Åž‹àŠz‚S•›
+COMPUTE Œ_–ñ“à—e‚T•› ‹àŠz‚T•› Á”ïÅ‚T•› Åž‹àŠz‚T•›
+COMPUTE Œ_–ñ“à—e‚U•› ‹àŠz‚U•› Á”ïÅ‚U•› Åž‹àŠz‚U•›
+COMPUTE ‹àŠz‡Œv•› Á”ïÅ‡Œv•› Åž‹àŠz‡Œv•›
 DETAIL DE
-COMPUTE  Å”²‹àŠz¬Œv
-COMPUTE  Á”ïÅ‹àŠz¬Œv
-COMPUTE  Åž‹àŠz¬Œv
 CNTL-FOOT  ƒuƒŒƒCƒN˜A”Ô  CF1
 [DB CONNECT]
 DBTYPE      DATAFILE
@@ -119,7 +196,7 @@ APL-JOB-SAVETIMEFLAG=0
 APL-JOB-HRESUMETIME=0000
 APL-JOB-PCODESTRFLAG=0
 APL-JOB-STARTMSGFLAG=0
-TMPDATAFILE=C:\BIP2\Assets\MNT_P_LIST_INVOICE.dat
+TMPDATAFILE=C:\BIP2\Assets\MNT_P_LIST_INVOICE_02.dat
 LFFLAG=N
 GROUP-BREAK-COM=0
 LW-PCHANGEFLAG=0
