@@ -7,7 +7,7 @@
 #End Region
 
 #Region "帳票用・定数"
-    Private Const CST_PRINT_DEFINITION As String = "MNT_M_WORK" '定義体名称
+    Private Const CST_PRINT_DEFINITION As String = "MNT_M_MAINTENANCE" '定義体名称
     Private Const CST_PRINT_LIST_NAME As String = "作業マスタリスト"
     Private Const CST_PRINT_DATA_FILE_EXTENT As String = ".dat"
 #End Region
@@ -156,7 +156,7 @@
             Call .Append("SELECT" & System.Environment.NewLine)
             Call .Append("*" & System.Environment.NewLine)
             Call .Append("FROM" & System.Environment.NewLine)
-            Call .Append("MNT_M_WORK WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("MNT_M_MAINTENANCE WITH(NOLOCK)" & System.Environment.NewLine)
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)

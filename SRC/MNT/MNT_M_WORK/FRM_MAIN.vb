@@ -155,17 +155,17 @@
             Exit Sub
         End If
 
-        Dim SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY
+        Dim SRT_KEY As SRT_TABLE_MNT_M_MAINTENANCE_KEY
         SRT_KEY = FUNC_GET_INPUT_KEY()
 
         Dim BLN_CHECK As Boolean
-        BLN_CHECK = FUNC_CHECK_TABLE_MNT_M_WORK(SRT_KEY)
+        BLN_CHECK = FUNC_CHECK_TABLE_MNT_M_MAINTENANCE(SRT_KEY)
 
         Dim ENM_CHANGE_MODE As ENM_MY_WINDOW_MODE
         If BLN_CHECK Then
-            Dim SRT_DATA As SRT_TABLE_MNT_M_WORK_DATA
+            Dim SRT_DATA As SRT_TABLE_MNT_M_MAINTENANCE_DATA
             SRT_DATA = Nothing
-            Call FUNC_SELECT_TABLE_MNT_M_WORK(SRT_KEY, SRT_DATA)
+            Call FUNC_SELECT_TABLE_MNT_M_MAINTENANCE(SRT_KEY, SRT_DATA)
             Call SUB_SET_INPUT_DATA(SRT_DATA)
             If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
                 ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_DELETE '削除
@@ -193,7 +193,7 @@
             Exit Sub
         End If
 
-        Dim SRT_RECORD As SRT_TABLE_MNT_M_WORK
+        Dim SRT_RECORD As SRT_TABLE_MNT_M_MAINTENANCE
         SRT_RECORD.KEY = FUNC_GET_INPUT_KEY()
         SRT_RECORD.DATA = FUNC_GET_INPUT_DATA()
 
@@ -224,7 +224,7 @@
             Exit Sub
         End If
 
-        Dim SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY
+        Dim SRT_KEY As SRT_TABLE_MNT_M_MAINTENANCE_KEY
         SRT_KEY = FUNC_GET_INPUT_KEY()
 
         If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
@@ -249,11 +249,11 @@
 
 #Region "登録等・内部処理"
     Private STR_FUNC_EDIT_RECORD_LAST_ERROR As String
-    Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_M_WORK) As Boolean
+    Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNT_M_MAINTENANCE) As Boolean
 
-        Dim SRT_DATA As SRT_TABLE_MNT_M_WORK_DATA
+        Dim SRT_DATA As SRT_TABLE_MNT_M_MAINTENANCE_DATA
         SRT_DATA = Nothing
-        Call FUNC_SELECT_TABLE_MNT_M_WORK(SRT_RECORD.KEY, SRT_DATA)
+        Call FUNC_SELECT_TABLE_MNT_M_MAINTENANCE(SRT_RECORD.KEY, SRT_DATA)
 
         If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
             If Not FUNC_UPDATE_FLAG_INVALID(SRT_RECORD.KEY, ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL) Then
@@ -261,12 +261,12 @@
                 Return False
             End If
         Else
-            If Not FUNC_DELETE_TABLE_MNT_M_WORK(SRT_RECORD.KEY) Then
+            If Not FUNC_DELETE_TABLE_MNT_M_MAINTENANCE(SRT_RECORD.KEY) Then
                 STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
                 Return False
             End If
 
-            If Not FUNC_INSERT_TABLE_MNT_M_WORK(SRT_RECORD) Then
+            If Not FUNC_INSERT_TABLE_MNT_M_MAINTENANCE(SRT_RECORD) Then
                 STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
                 Return False
             End If
@@ -277,14 +277,14 @@
 
 
     Private STR_FUNC_DELETE_RECORD_LAST_ERROR As String
-    Private Function FUNC_DELETE_RECORD(ByRef SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY) As Boolean
+    Private Function FUNC_DELETE_RECORD(ByRef SRT_KEY As SRT_TABLE_MNT_M_MAINTENANCE_KEY) As Boolean
 
-        Dim SRT_DATA As SRT_TABLE_MNT_M_WORK_DATA
+        Dim SRT_DATA As SRT_TABLE_MNT_M_MAINTENANCE_DATA
         SRT_DATA = Nothing
-        Call FUNC_SELECT_TABLE_MNT_M_WORK(SRT_KEY, SRT_DATA)
+        Call FUNC_SELECT_TABLE_MNT_M_MAINTENANCE(SRT_KEY, SRT_DATA)
 
         If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
-            If Not FUNC_DELETE_TABLE_MNT_M_WORK(SRT_KEY) Then '物理削除
+            If Not FUNC_DELETE_TABLE_MNT_M_MAINTENANCE(SRT_KEY) Then '物理削除
                 STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
                 Return False
             End If
@@ -298,13 +298,13 @@
         Return True
     End Function
 
-    Private Function FUNC_UPDATE_FLAG_INVALID(ByRef SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY, ByVal ENM_FLAG_INVALID As ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID) As Boolean
+    Private Function FUNC_UPDATE_FLAG_INVALID(ByRef SRT_KEY As SRT_TABLE_MNT_M_MAINTENANCE_KEY, ByVal ENM_FLAG_INVALID As ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID) As Boolean
         Dim STR_SQL As System.Text.StringBuilder
         STR_SQL = New System.Text.StringBuilder
 
         With STR_SQL
             Call .Append("UPDATE" & System.Environment.NewLine)
-            Call .Append("MNT_M_WORK WITH(ROWLOCK)" & System.Environment.NewLine)
+            Call .Append("MNT_M_MAINTENANCE WITH(ROWLOCK)" & System.Environment.NewLine)
             Call .Append("SET" & System.Environment.NewLine)
             Call .Append("FLAG_INVALID=" & CInt(ENM_FLAG_INVALID) & System.Environment.NewLine)
             Call .Append("WHERE" & System.Environment.NewLine)
@@ -408,7 +408,7 @@
             Call .Append("SELECT" & Environment.NewLine)
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_M_WORK WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("MNT_M_MAINTENANCE WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
@@ -501,7 +501,7 @@
         Return INT_RET
     End Function
 
-    Private Sub SUB_SET_INDEX_GRID_FROM_KEY(ByVal SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY)
+    Private Sub SUB_SET_INDEX_GRID_FROM_KEY(ByVal SRT_KEY As SRT_TABLE_MNT_M_MAINTENANCE_KEY)
         Dim INT_INDEX As Integer
         INT_INDEX = FUNC_GET_INDEX_FROM_GRID(SRT_KEY)
         If INT_INDEX <= 0 Then
@@ -513,7 +513,7 @@
         Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, INT_INDEX_GRID)
     End Sub
 
-    Private Function FUNC_GET_INDEX_FROM_GRID(ByVal SRT_KEY As SRT_TABLE_MNT_M_WORK_KEY)
+    Private Function FUNC_GET_INDEX_FROM_GRID(ByVal SRT_KEY As SRT_TABLE_MNT_M_MAINTENANCE_KEY)
 
         If SRT_GRID_DATA_MAIN Is Nothing Then
             Return 0
@@ -601,8 +601,8 @@
 #End Region
 
 #Region "画面コントロール←→構造体"
-    Private Function FUNC_GET_INPUT_KEY() As SRT_TABLE_MNT_M_WORK_KEY
-        Dim SRT_RET As SRT_TABLE_MNT_M_WORK_KEY
+    Private Function FUNC_GET_INPUT_KEY() As SRT_TABLE_MNT_M_MAINTENANCE_KEY
+        Dim SRT_RET As SRT_TABLE_MNT_M_MAINTENANCE_KEY
 
         With SRT_RET
             .CODE_WORK = CInt(TXT_CODE_WORK.Text)
@@ -611,8 +611,8 @@
         Return SRT_RET
     End Function
 
-    Private Function FUNC_GET_INPUT_DATA() As SRT_TABLE_MNT_M_WORK_DATA
-        Dim SRT_RET As SRT_TABLE_MNT_M_WORK_DATA
+    Private Function FUNC_GET_INPUT_DATA() As SRT_TABLE_MNT_M_MAINTENANCE_DATA
+        Dim SRT_RET As SRT_TABLE_MNT_M_MAINTENANCE_DATA
 
         With SRT_RET
             .NAME_WORK = CStr(TXT_NAME_WORK.Text)
@@ -624,7 +624,7 @@
     End Function
 
 
-    Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_M_WORK_DATA)
+    Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_M_MAINTENANCE_DATA)
         With SRT_DATA
             TXT_NAME_WORK.Text = .NAME_WORK
             Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_WORK, .KIND_WORK)

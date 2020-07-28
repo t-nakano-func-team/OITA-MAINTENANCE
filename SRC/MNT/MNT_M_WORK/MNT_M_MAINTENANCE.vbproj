@@ -7,8 +7,8 @@
     <ProjectGuid>{1F3FB3EC-7A4C-4FCA-B1EB-9548BF7D09F2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <StartupObject>Sub Main</StartupObject>
-    <RootNamespace>MNT_M_WORK</RootNamespace>
-    <AssemblyName>MNT_M_WORK</AssemblyName>
+    <RootNamespace>MNT_M_MAINTENANCE</RootNamespace>
+    <AssemblyName>MNT_M_MAINTENANCE</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>

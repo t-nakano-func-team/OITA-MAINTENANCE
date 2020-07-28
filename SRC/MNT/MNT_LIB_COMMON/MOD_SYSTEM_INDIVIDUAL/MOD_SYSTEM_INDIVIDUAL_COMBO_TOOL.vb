@@ -238,8 +238,8 @@
     End Sub
 #End Region
 
-#Region "MNT_M_WORK"
-    Public Sub SUB_SYSTEM_COMMBO_MNT_M_WORK(
+#Region "MNT_M_MAINTENANCE"
+    Public Sub SUB_SYSTEM_COMMBO_MNT_M_MAINTENANCE(
     ByRef CMB_COMBO_BOX As Object,
     ByVal ENM_KIND_WORK As ENM_SYSTEM_INDIVIDUAL_KIND_WORK,
     Optional ByVal BLN_VIEW_NULL As Boolean = False,
@@ -255,7 +255,7 @@
             Call .Append("CODE_WORK AS CODE," & Environment.NewLine)
             Call .Append("NAME_WORK AS NAME" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_M_WORK" & Environment.NewLine)
+            Call .Append("MNT_M_MAINTENANCE" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("KIND_WORK=" & ENM_KIND_WORK & Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)

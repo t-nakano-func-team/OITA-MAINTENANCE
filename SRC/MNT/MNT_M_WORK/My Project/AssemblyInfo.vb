@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' アセンブリ属性の値を確認します
 
-<Assembly: AssemblyTitle("MNT_M_WORK")>
+<Assembly: AssemblyTitle("MNT_M_MAINTENANCE")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("MNT_M_WORK")>
+<Assembly: AssemblyProduct("MNT_M_MAINTENANCE")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("")>
 
