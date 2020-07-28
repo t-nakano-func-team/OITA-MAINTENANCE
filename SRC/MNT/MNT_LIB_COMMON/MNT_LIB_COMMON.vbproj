@@ -257,6 +257,18 @@
     <None Include="BIP\MNT_M_ACCOUNT.psf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="BIP\MNT_M_MAINTENANCE.bip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_MAINTENANCE.ovd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_MAINTENANCE.pmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="BIP\MNT_M_MAINTENANCE.psf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BIP\MNT_M_OWNER.bip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
