@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -250,14 +250,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 120)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -308,15 +308,15 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.ForeColor = System.Drawing.Color.Black
         Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Location = New System.Drawing.Point(1, 1)
         Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Name = "LBL_CODE_ACCOUNT_CONNECT_GUIDE"
-        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Size = New System.Drawing.Size(99, 25)
         Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.TabIndex = 3
-        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Text = "科目コード"
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Text = "連携科目コード"
         Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TXT_CODE_ACCOUNT_CONNECT
         '
         Me.TXT_CODE_ACCOUNT_CONNECT.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_CODE_ACCOUNT_CONNECT.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_CODE_ACCOUNT_CONNECT.Location = New System.Drawing.Point(100, 1)
         Me.TXT_CODE_ACCOUNT_CONNECT.MaxLength = 3
         Me.TXT_CODE_ACCOUNT_CONNECT.Name = "TXT_CODE_ACCOUNT_CONNECT"
         Me.TXT_CODE_ACCOUNT_CONNECT.Size = New System.Drawing.Size(80, 25)
