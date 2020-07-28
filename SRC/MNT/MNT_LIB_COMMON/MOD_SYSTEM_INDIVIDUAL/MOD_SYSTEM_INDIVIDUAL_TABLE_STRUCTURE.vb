@@ -272,6 +272,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
         Public NAME_MAINTENANCE As String
         Public FLAG_WORK As Integer
         Public FLAG_INVALID As Integer
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -335,6 +337,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
             .NAME_MAINTENANCE = ""
             .FLAG_WORK = -1
             .FLAG_INVALID = -1
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -377,6 +381,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
             .NAME_MAINTENANCE = CStr(SDR_READER.Item("NAME_MAINTENANCE"))
             .FLAG_WORK = CInt(SDR_READER.Item("FLAG_WORK"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
+            .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
         End With
 
         Call SDR_READER.Close()
@@ -433,7 +439,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MAINTENANCE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_WORK) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -496,6 +504,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         Public NAME_ACCOUNT As String
         Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -560,6 +570,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
             .NAME_ACCOUNT = ""
             .CODE_ACCOUNT_CONNECT = -1
             .FLAG_INVALID = -1
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -604,6 +616,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
             .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
             .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
+            .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
         End With
 
         Call SDR_READER.Close()
@@ -663,7 +677,10 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ACCOUNT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_ACCOUNT_CONNECT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
+
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -726,6 +743,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
     Public Structure SRT_TABLE_MNT_M_SECTION_DATA
         Public NAME_SECTION As String
         Public FLAG_INVALID As Integer
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -789,6 +808,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
         With SRT_RET
             .NAME_SECTION = ""
             .FLAG_INVALID = -1
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -830,6 +851,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
         With SRT_RET
             .NAME_SECTION = CStr(SDR_READER.Item("NAME_SECTION"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
+            .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
         End With
 
         Call SDR_READER.Close()
@@ -885,7 +908,10 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_SECTION
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_SECTION) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
+
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 

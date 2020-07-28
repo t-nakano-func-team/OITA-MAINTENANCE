@@ -636,6 +636,8 @@
             .NAME_ACCOUNT = CStr(TXT_NAME_ACCOUNT.Text)
             .CODE_ACCOUNT_CONNECT = CInt(TXT_CODE_ACCOUNT_CONNECT.Text)
             .FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
         End With
 
         Return SRT_RET

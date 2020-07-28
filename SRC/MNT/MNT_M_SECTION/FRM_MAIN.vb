@@ -606,6 +606,8 @@
 
         With SRT_RET
             .NAME_SECTION = CStr(TXT_NAME_SECTION.Text)
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
         End With
 
         Return SRT_RET
