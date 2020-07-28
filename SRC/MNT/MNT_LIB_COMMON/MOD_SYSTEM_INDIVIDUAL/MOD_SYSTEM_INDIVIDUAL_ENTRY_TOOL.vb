@@ -462,8 +462,9 @@
                 .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
                 .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
                 .FLAG_OUTPUT_DONE = CInt(SDR_READER.Item("FLAG_OUTPUT_DONE"))
-                .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
                 .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
+                .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+                .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
             End With
         End While
 

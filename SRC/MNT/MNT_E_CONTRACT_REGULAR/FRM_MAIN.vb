@@ -447,8 +447,9 @@
             .NUMBER_LIST_INVOICE = CInt(TXT_NUMBER_LIST_INVOICE.Text)
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
             .NAME_MEMO = TXT_NAME_MEMO.Text
-            .CODE_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
-            .DATE_ACTIVE = System.DateTime.Today
+            .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
         End With
 
         Return SRT_RET
@@ -503,6 +504,9 @@
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT
                 PNL_INPUT_KEY.Enabled = False
                 PNL_INPUT_DATA.Enabled = True
+
+                PNL_KINGAKU_CONTRACT.Enabled = True
+                PNL_DATE_INVOICE_BASE.Enabled = True
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = False

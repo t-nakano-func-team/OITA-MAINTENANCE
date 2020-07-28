@@ -444,8 +444,9 @@
             .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = CLng(TXT_KINGAKU_CONTRACT.Text)
             .NAME_MEMO = TXT_NAME_MEMO.Text
-            .CODE_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
-            .DATE_ACTIVE = System.DateTime.Today
+            .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
         End With
 
         Return SRT_RET

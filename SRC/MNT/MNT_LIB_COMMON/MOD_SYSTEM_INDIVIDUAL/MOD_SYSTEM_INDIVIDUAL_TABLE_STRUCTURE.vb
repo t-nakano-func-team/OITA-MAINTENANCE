@@ -1207,8 +1207,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public NUMBER_LIST_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
         Public NAME_MEMO As String
-        Public CODE_STAFF As Integer
         Public DATE_ACTIVE As DateTime
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -1284,8 +1285,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = 0
             .NAME_MEMO = ""
-            .CODE_STAFF = -1
             .DATE_ACTIVE = cstVB_DATE_MIN
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -1341,8 +1343,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .NUMBER_LIST_INVOICE = CInt(SDR_READER.Item("NUMBER_LIST_INVOICE"))
             .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
-            .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
             .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
+            .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
         End With
 
         Call SDR_READER.Close()
@@ -1414,8 +1417,10 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NUMBER_LIST_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_STAFF) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
+
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
@@ -1974,8 +1979,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         Public NAME_MEMO As String
         Public SERIAL_DEPOSIT As Integer
         Public FLAG_OUTPUT_DONE As Integer
-        Public CODE_STAFF As Integer
         Public DATE_ACTIVE As DateTime
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -2050,8 +2056,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             .NAME_MEMO = ""
             .SERIAL_DEPOSIT = 0
             .FLAG_OUTPUT_DONE = -1
-            .CODE_STAFF = -1
             .DATE_ACTIVE = cstVB_DATE_MIN
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -2107,8 +2114,9 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
             .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
             .FLAG_OUTPUT_DONE = CInt(SDR_READER.Item("FLAG_OUTPUT_DONE"))
-            .CODE_STAFF = CInt(SDR_READER.Item("CODE_STAFF"))
             .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
+            .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
         End With
 
         Call SDR_READER.Close()
@@ -2181,8 +2189,10 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_DEPOSIT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_OUTPUT_DONE) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_STAFF) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "" & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
+
         End With
 
         Call STR_SQL.Append(")" & Environment.NewLine)

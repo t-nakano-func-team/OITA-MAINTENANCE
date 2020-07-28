@@ -427,6 +427,8 @@
                 .SERIAL_DEPOSIT = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(.DATE_ACTIVE) + 1
             End If
 
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
         End With
 
         Return SRT_RET
