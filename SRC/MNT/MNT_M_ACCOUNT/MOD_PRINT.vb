@@ -23,7 +23,7 @@
 
     Public Structure SRT_PRINT_DATA '印刷データ
         Public FLAG_ACCOUNT As Integer
-        Public CODE_KIND As Integer
+        Public CODE_ACCOUNT As Integer
         Public NAME_ACCOUNT As String
         Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
@@ -73,7 +73,7 @@
             ReDim Preserve SRT_DATA(INT_INDEX)
             With SRT_DATA(INT_INDEX)
                 .FLAG_ACCOUNT = CInt(SDR_READER.Item("FLAG_ACCOUNT"))
-                .CODE_KIND = CInt(SDR_READER.Item("CODE_KIND"))
+                .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
                 .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
                 .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
@@ -163,7 +163,7 @@
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("FLAG_ACCOUNT,CODE_KIND" & System.Environment.NewLine)
+            Call .Append("FLAG_ACCOUNT,CODE_ACCOUNT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -189,7 +189,7 @@
         With SRT_DATA
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_ACCOUNT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_ACCOUNT_NAME))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_KIND))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_ACCOUNT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ACCOUNT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_ACCOUNT_CONNECT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID))
