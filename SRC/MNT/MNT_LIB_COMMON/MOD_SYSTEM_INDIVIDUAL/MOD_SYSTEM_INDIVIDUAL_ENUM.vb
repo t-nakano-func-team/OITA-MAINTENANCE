@@ -6,7 +6,7 @@
         KIND_RATE_VAT = 13 '消費税
         KIND_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
-        FLAG_OUTPUT_DONE = 16
+        FLAG_OUTPUT = 16
         FLAG_WORK = 17
         FLAG_DONE = 18 '済み／未済み　汎用
         KIND_SORT_CHECK_DEPOSIT = 19
@@ -38,15 +38,15 @@
         DONE = 1
     End Enum
 
-    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT_DONE
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT
         NOT_DONE = 0
         DONE = 1
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_ACCOUNT
-        KIND_SALE = 1
-        KIND_DEPOSIT = 2
-        KIND_COST = 3
+        FLAG_SALE = 1
+        FLAG_DEPOSIT = 2
+        FLAG_COST = 3
         KIND_PAYEE = 4
     End Enum
 

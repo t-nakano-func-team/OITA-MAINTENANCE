@@ -1968,17 +1968,17 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_T_DEPOSIT_DATA
         Public DATE_DEPOSIT As DateTime
-        Public KIND_SALE As Integer
-        Public KIND_DEPOSIT As Integer
-        Public KIND_DEPOSIT_SUB As Integer
+        Public FLAG_SALE As Integer
+        Public FLAG_DEPOSIT As Integer
+        Public FLAG_DEPOSIT_SUB As Integer
         Public KINGAKU_FEE_DETAIL As Long
         Public KINGAKU_FEE_VAT As Long
-        Public KIND_COST As Integer
+        Public FLAG_COST As Integer
         Public KINGAKU_COST_DETAIL As Long
         Public KINGAKU_COST_VAT As Long
         Public NAME_MEMO As String
         Public SERIAL_DEPOSIT As Integer
-        Public FLAG_OUTPUT_DONE As Integer
+        Public FLAG_OUTPUT As Integer
         Public DATE_ACTIVE As DateTime
         Public CODE_EDIT_STAFF As Integer
         Public DATE_EDIT As DateTime
@@ -2045,17 +2045,17 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
 
         With SRT_RET
             .DATE_DEPOSIT = cstVB_DATE_MIN
-            .KIND_SALE = -1
-            .KIND_DEPOSIT = -1
-            .KIND_DEPOSIT_SUB = -1
+            .FLAG_SALE = -1
+            .FLAG_DEPOSIT = -1
+            .FLAG_DEPOSIT_SUB = -1
             .KINGAKU_FEE_DETAIL = 0
             .KINGAKU_FEE_VAT = 0
-            .KIND_COST = -1
+            .FLAG_COST = -1
             .KINGAKU_COST_DETAIL = 0
             .KINGAKU_COST_VAT = 0
             .NAME_MEMO = ""
             .SERIAL_DEPOSIT = 0
-            .FLAG_OUTPUT_DONE = -1
+            .FLAG_OUTPUT = -1
             .DATE_ACTIVE = cstVB_DATE_MIN
             .CODE_EDIT_STAFF = -1
             .DATE_EDIT = cstVB_DATE_MIN
@@ -2103,17 +2103,17 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
 
         With SRT_RET
             .DATE_DEPOSIT = CDate(SDR_READER.Item("DATE_DEPOSIT"))
-            .KIND_SALE = CInt(SDR_READER.Item("KIND_SALE"))
-            .KIND_DEPOSIT = CInt(SDR_READER.Item("KIND_DEPOSIT"))
-            .KIND_DEPOSIT_SUB = CInt(SDR_READER.Item("KIND_DEPOSIT_SUB"))
+            .FLAG_SALE = CInt(SDR_READER.Item("FLAG_SALE"))
+            .FLAG_DEPOSIT = CInt(SDR_READER.Item("FLAG_DEPOSIT"))
+            .FLAG_DEPOSIT_SUB = CInt(SDR_READER.Item("FLAG_DEPOSIT_SUB"))
             .KINGAKU_FEE_DETAIL = CLng(SDR_READER.Item("KINGAKU_FEE_DETAIL"))
             .KINGAKU_FEE_VAT = CLng(SDR_READER.Item("KINGAKU_FEE_VAT"))
-            .KIND_COST = CInt(SDR_READER.Item("KIND_COST"))
+            .FLAG_COST = CInt(SDR_READER.Item("FLAG_COST"))
             .KINGAKU_COST_DETAIL = CLng(SDR_READER.Item("KINGAKU_COST_DETAIL"))
             .KINGAKU_COST_VAT = CLng(SDR_READER.Item("KINGAKU_COST_VAT"))
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
             .SERIAL_DEPOSIT = CInt(SDR_READER.Item("SERIAL_DEPOSIT"))
-            .FLAG_OUTPUT_DONE = CInt(SDR_READER.Item("FLAG_OUTPUT_DONE"))
+            .FLAG_OUTPUT = CInt(SDR_READER.Item("FLAG_OUTPUT"))
             .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
             .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
             .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
@@ -2178,17 +2178,17 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_DEPOSIT
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_DEPOSIT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_SALE) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_DEPOSIT_SUB) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_SALE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_DEPOSIT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_DEPOSIT_SUB) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_FEE_DETAIL) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_FEE_VAT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_COST) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_COST) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_COST_DETAIL) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_COST_VAT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_DEPOSIT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_OUTPUT_DONE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_OUTPUT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
