@@ -14,6 +14,7 @@
         FLAG_ACCOUNT = 21 '科目種別
         FLAG_INVALID = 22 '有効無効フラグ
         FLAG_INVALID_SHORT = 23 '有効無効フラグ（短）
+        FLAG_CONTINUE = 24 '自動継続
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_DAY_FIX_INVOICE
@@ -73,5 +74,10 @@
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID
         NORMAL = 0
         DELETE = 1
+    End Enum
+
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE
+        NO_CONTINUE = 0 '継続しない
+        AUTO_CONTINUE = 1 '自動継続
     End Enum
 End Module

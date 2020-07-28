@@ -976,14 +976,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public CODE_SECTION As Integer
         Public CODE_MAINTENANCE As Integer
         Public NAME_CONTRACT As String
-        Public DATE_WORK_FROM As DateTime
-        Public DATE_WORK_TO As DateTime
+        Public DATE_MAINTENANCE_START As DateTime
+        Public DATE_MAINTENANCE_END As DateTime
         Public DATE_INVOICE_BASE As DateTime
         Public SPAN_INVOICE As Integer
         Public COUNT_INVOICE As Integer
         Public NUMBER_LIST_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
         Public NAME_MEMO As String
+        Public FLAG_CONTINUE As Integer
         Public DATE_ACTIVE As DateTime
         Public CODE_EDIT_STAFF As Integer
         Public DATE_EDIT As DateTime
@@ -1054,14 +1055,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .CODE_SECTION = -1
             .CODE_MAINTENANCE = -1
             .NAME_CONTRACT = ""
-            .DATE_WORK_FROM = cstVB_DATE_MIN
-            .DATE_WORK_TO = cstVB_DATE_MIN
+            .DATE_MAINTENANCE_START = cstVB_DATE_MIN
+            .DATE_MAINTENANCE_END = cstVB_DATE_MIN
             .DATE_INVOICE_BASE = cstVB_DATE_MIN
             .SPAN_INVOICE = 0
             .COUNT_INVOICE = 0
             .NUMBER_LIST_INVOICE = 0
             .KINGAKU_CONTRACT = 0
             .NAME_MEMO = ""
+            .FLAG_CONTINUE = -1
             .DATE_ACTIVE = cstVB_DATE_MIN
             .CODE_EDIT_STAFF = -1
             .DATE_EDIT = cstVB_DATE_MIN
@@ -1112,14 +1114,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
             .CODE_MAINTENANCE = CInt(SDR_READER.Item("CODE_MAINTENANCE"))
             .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
-            .DATE_WORK_FROM = CDate(SDR_READER.Item("DATE_WORK_FROM"))
-            .DATE_WORK_TO = CDate(SDR_READER.Item("DATE_WORK_TO"))
+            .DATE_MAINTENANCE_START = CDate(SDR_READER.Item("DATE_MAINTENANCE_START"))
+            .DATE_MAINTENANCE_END = CDate(SDR_READER.Item("DATE_MAINTENANCE_END"))
             .DATE_INVOICE_BASE = CDate(SDR_READER.Item("DATE_INVOICE_BASE"))
             .SPAN_INVOICE = CInt(SDR_READER.Item("SPAN_INVOICE"))
             .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
             .NUMBER_LIST_INVOICE = CInt(SDR_READER.Item("NUMBER_LIST_INVOICE"))
             .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
             .NAME_MEMO = CStr(SDR_READER.Item("NAME_MEMO"))
+            .FLAG_CONTINUE = CInt(SDR_READER.Item("FLAG_CONTINUE"))
             .DATE_ACTIVE = CDate(SDR_READER.Item("DATE_ACTIVE"))
             .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
             .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
@@ -1186,14 +1189,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_MAINTENANCE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_CONTRACT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_FROM) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_TO) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_MAINTENANCE_START) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_MAINTENANCE_END) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_INVOICE_BASE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SPAN_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.COUNT_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NUMBER_LIST_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KINGAKU_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MEMO) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_CONTINUE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)

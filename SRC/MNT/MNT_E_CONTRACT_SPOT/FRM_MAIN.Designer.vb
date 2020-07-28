@@ -63,9 +63,9 @@ Partial Class FRM_MAIN
         Me.TXT_NAME_CONTRACT = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_DATE_WORK = New System.Windows.Forms.Panel()
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE = New System.Windows.Forms.Label()
-        Me.DTP_DATE_WORK_TO = New System.Windows.Forms.DateTimePicker()
-        Me.DTP_DATE_WORK_FROM = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.DTP_DATE_MAINTENANCE_END = New System.Windows.Forms.DateTimePicker()
+        Me.DTP_DATE_MAINTENANCE_START = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_WORK_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_EXT_SPOT = New System.Windows.Forms.Panel()
         Me.PNL_NAME_ADDRESS_02 = New System.Windows.Forms.Panel()
@@ -606,43 +606,43 @@ Partial Class FRM_MAIN
         '
         'PNL_DATE_WORK
         '
-        Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_FROM_TO_GUIDE)
-        Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_TO)
-        Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_WORK_FROM)
+        Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE)
+        Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_MAINTENANCE_END)
+        Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_MAINTENANCE_START)
         Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_GUIDE)
         Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 240)
         Me.PNL_DATE_WORK.Name = "PNL_DATE_WORK"
         Me.PNL_DATE_WORK.Size = New System.Drawing.Size(485, 30)
         Me.PNL_DATE_WORK.TabIndex = 10
         '
-        'LBL_DATE_WORK_FROM_TO_GUIDE
+        'LBL_DATE_MAINTENANCE_START_TO_GUIDE
         '
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Location = New System.Drawing.Point(240, 1)
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Name = "LBL_DATE_WORK_FROM_TO_GUIDE"
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.TabIndex = 8
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.Text = "～"
-        Me.LBL_DATE_WORK_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.Location = New System.Drawing.Point(240, 1)
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.Name = "LBL_DATE_MAINTENANCE_START_TO_GUIDE"
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.TabIndex = 8
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.Text = "～"
+        Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'DTP_DATE_WORK_TO
+        'DTP_DATE_MAINTENANCE_END
         '
-        Me.DTP_DATE_WORK_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_WORK_TO.Location = New System.Drawing.Point(270, 1)
-        Me.DTP_DATE_WORK_TO.Name = "DTP_DATE_WORK_TO"
-        Me.DTP_DATE_WORK_TO.Size = New System.Drawing.Size(150, 25)
-        Me.DTP_DATE_WORK_TO.TabIndex = 7
-        Me.DTP_DATE_WORK_TO.Tag = "Clear"
+        Me.DTP_DATE_MAINTENANCE_END.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_MAINTENANCE_END.Location = New System.Drawing.Point(270, 1)
+        Me.DTP_DATE_MAINTENANCE_END.Name = "DTP_DATE_MAINTENANCE_END"
+        Me.DTP_DATE_MAINTENANCE_END.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_MAINTENANCE_END.TabIndex = 7
+        Me.DTP_DATE_MAINTENANCE_END.Tag = "Clear"
         '
-        'DTP_DATE_WORK_FROM
+        'DTP_DATE_MAINTENANCE_START
         '
-        Me.DTP_DATE_WORK_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.DTP_DATE_WORK_FROM.Location = New System.Drawing.Point(80, 1)
-        Me.DTP_DATE_WORK_FROM.Name = "DTP_DATE_WORK_FROM"
-        Me.DTP_DATE_WORK_FROM.Size = New System.Drawing.Size(150, 25)
-        Me.DTP_DATE_WORK_FROM.TabIndex = 1
-        Me.DTP_DATE_WORK_FROM.Tag = "Clear"
+        Me.DTP_DATE_MAINTENANCE_START.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_MAINTENANCE_START.Location = New System.Drawing.Point(80, 1)
+        Me.DTP_DATE_MAINTENANCE_START.Name = "DTP_DATE_MAINTENANCE_START"
+        Me.DTP_DATE_MAINTENANCE_START.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_MAINTENANCE_START.TabIndex = 1
+        Me.DTP_DATE_MAINTENANCE_START.Tag = "Clear"
         '
         'LBL_DATE_WORK_GUIDE
         '
@@ -1119,10 +1119,10 @@ Partial Class FRM_MAIN
     Friend WithEvents TXT_NAME_ADDRESS_01 As TextBox
     Friend WithEvents LBL_NAME_ADDRESS_01 As Label
     Friend WithEvents PNL_DATE_WORK As Panel
-    Friend WithEvents DTP_DATE_WORK_FROM As DateTimePicker
+    Friend WithEvents DTP_DATE_MAINTENANCE_START As DateTimePicker
     Friend WithEvents LBL_DATE_WORK_GUIDE As Label
-    Friend WithEvents LBL_DATE_WORK_FROM_TO_GUIDE As Label
-    Friend WithEvents DTP_DATE_WORK_TO As DateTimePicker
+    Friend WithEvents LBL_DATE_MAINTENANCE_START_TO_GUIDE As Label
+    Friend WithEvents DTP_DATE_MAINTENANCE_END As DateTimePicker
     Friend WithEvents PNL_NAME_CONTRACT As Panel
     Friend WithEvents TXT_NAME_CONTRACT As TextBox
     Friend WithEvents LBL_NAME_CONTRACT_GUIDE As Label
