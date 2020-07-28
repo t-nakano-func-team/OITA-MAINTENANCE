@@ -97,14 +97,14 @@
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("CODE_KIND AS CODE," & Environment.NewLine)
+            Call .Append("CODE_ACCOUNT AS CODE," & Environment.NewLine)
             Call .Append("NAME_ACCOUNT AS NAME" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_M_ACCOUNT" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("FLAG_ACCOUNT=" & ENM_FLAG_ACCOUNT & Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("FLAG_ACCOUNT,CODE_KIND" & Environment.NewLine)
+            Call .Append("FLAG_ACCOUNT,CODE_ACCOUNT" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader 'データリーダー
