@@ -33,7 +33,7 @@
         Public KIND_CONTRACT As Integer
         Public CODE_OWNER As Integer
         Public CODE_SECTION As Integer
-        Public CODE_WORK As Integer
+        Public CODE_MAINTENANCE As Integer
         Public NAME_CONTRACT As String
         Public DATE_INVOICE_BASE As DateTime
         Public SPAN_INVOICE As Integer
@@ -49,7 +49,7 @@
         Public KIND_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
         Public CODE_SECTION_NAME As String
-        Public CODE_WORK_NAME As String
+        Public CODE_MAINTENANCE_NAME As String
         Public DATE_INVOICE_PLAN_INT As Integer
         Public NUMBER_BREAK As Integer
 
@@ -142,7 +142,7 @@
                 .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
-                .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
+                .CODE_MAINTENANCE = CInt(SDR_READER.Item("CODE_MAINTENANCE"))
                 .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
                 .DATE_INVOICE_BASE = CDate(SDR_READER.Item("DATE_INVOICE_BASE"))
                 .SPAN_INVOICE = CInt(SDR_READER.Item("SPAN_INVOICE"))
@@ -380,7 +380,7 @@
             .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT, True)
             .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION, True)
-            .CODE_WORK_NAME = FUNC_GET_MNT_M_MAINTENANCE_NAME_WORK(.CODE_WORK, True)
+            .CODE_MAINTENANCE_NAME = FUNC_GET_MNT_M_MAINTENANCE_NAME_MAINTENANCE(.CODE_MAINTENANCE, True)
             .DATE_INVOICE_PLAN_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_INVOICE_PLAN)
         End With
     End Sub
@@ -406,8 +406,8 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_PRINT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER_NAME))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_WORK))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_WORK_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_MAINTENANCE))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_MAINTENANCE_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE_PLAN))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE))

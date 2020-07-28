@@ -263,14 +263,14 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
 
 #Region "KEY"
     Public Structure SRT_TABLE_MNT_M_MAINTENANCE_KEY
-        Public CODE_WORK As Integer
+        Public CODE_MAINTENANCE As Integer
     End Structure
 #End Region
 
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_M_MAINTENANCE_DATA
-        Public NAME_WORK As String
-        Public KIND_WORK As Integer
+        Public NAME_MAINTENANCE As String
+        Public FLAG_WORK As Integer
         Public FLAG_INVALID As Integer
     End Structure
 #End Region
@@ -294,7 +294,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
 
         For i = LBound(SRT_CASH) To UBound(SRT_CASH)
             With SRT_CASH(i)
-                If .KEY.CODE_WORK = SRT_KEY.CODE_WORK Then
+                If .KEY.CODE_MAINTENANCE = SRT_KEY.CODE_MAINTENANCE Then
                     Return i
                 End If
             End With
@@ -332,8 +332,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
     ) As Boolean
 
         With SRT_RET
-            .NAME_WORK = ""
-            .KIND_WORK = -1
+            .NAME_MAINTENANCE = ""
+            .FLAG_WORK = -1
             .FLAG_INVALID = -1
         End With
 
@@ -351,8 +351,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             .COL_NAME = "*"
             ReDim .WHERE(1)
-            .WHERE(1).COL_NAME = "CODE_WORK"
-            .WHERE(1).VALUE = SRT_DATA.CODE_WORK
+            .WHERE(1).COL_NAME = "CODE_MAINTENANCE"
+            .WHERE(1).VALUE = SRT_DATA.CODE_MAINTENANCE
             .ORDER_KEY = ""
         End With
 
@@ -374,8 +374,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
         Call SDR_READER.Read()
 
         With SRT_RET
-            .NAME_WORK = CStr(SDR_READER.Item("NAME_WORK"))
-            .KIND_WORK = CInt(SDR_READER.Item("KIND_WORK"))
+            .NAME_MAINTENANCE = CStr(SDR_READER.Item("NAME_MAINTENANCE"))
+            .FLAG_WORK = CInt(SDR_READER.Item("FLAG_WORK"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
         End With
 
@@ -400,8 +400,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
         With SRT_SQL
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             ReDim .WHERE(1)
-            .WHERE(1).COL_NAME = "CODE_WORK"
-            .WHERE(1).VALUE = SRT_DATA.CODE_WORK
+            .WHERE(1).COL_NAME = "CODE_MAINTENANCE"
+            .WHERE(1).VALUE = SRT_DATA.CODE_MAINTENANCE
         End With
 
         Dim STR_SQL As String
@@ -428,11 +428,11 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
         Call STR_SQL.Append("VALUES" & Environment.NewLine)
         Call STR_SQL.Append("(" & Environment.NewLine)
         With SRT_DATA.KEY
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_WORK) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_MAINTENANCE) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_WORK) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_WORK) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_MAINTENANCE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_WORK) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
@@ -455,8 +455,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_MAINTENANCE
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             .COL_NAME = "COUNT(*)"
             ReDim .WHERE(1)
-            .WHERE(1).COL_NAME = "CODE_WORK"
-            .WHERE(1).VALUE = SRT_DATA.CODE_WORK
+            .WHERE(1).COL_NAME = "CODE_MAINTENANCE"
+            .WHERE(1).VALUE = SRT_DATA.CODE_MAINTENANCE
             .ORDER_KEY = ""
         End With
 
@@ -945,7 +945,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_HANDLE_WORK
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_M_HANDLE_WORK_DATA
         Public NAME_HANDLE As String
-        Public KIND_WORK As Integer
+        Public FLAG_WORK As Integer
         Public CODE_SECTION As Integer
     End Structure
 #End Region
@@ -1008,7 +1008,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_HANDLE_WORK
 
         With SRT_RET
             .NAME_HANDLE = ""
-            .KIND_WORK = -1
+            .FLAG_WORK = -1
             .CODE_SECTION = -1
         End With
 
@@ -1050,7 +1050,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_HANDLE_WORK
 
         With SRT_RET
             .NAME_HANDLE = CStr(SDR_READER.Item("NAME_HANDLE"))
-            .KIND_WORK = CInt(SDR_READER.Item("KIND_WORK"))
+            .FLAG_WORK = CInt(SDR_READER.Item("FLAG_WORK"))
             .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
         End With
 
@@ -1107,7 +1107,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_HANDLE_WORK
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_HANDLE) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_WORK) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_WORK) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
@@ -1171,7 +1171,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
         Public CODE_SECTION As Integer
-        Public CODE_WORK As Integer
+        Public CODE_MAINTENANCE As Integer
         Public NAME_CONTRACT As String
         Public DATE_WORK_FROM As DateTime
         Public DATE_WORK_TO As DateTime
@@ -1248,7 +1248,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .DATE_CONTRACT = cstVB_DATE_MIN
             .CODE_OWNER = -1
             .CODE_SECTION = -1
-            .CODE_WORK = -1
+            .CODE_MAINTENANCE = -1
             .NAME_CONTRACT = ""
             .DATE_WORK_FROM = cstVB_DATE_MIN
             .DATE_WORK_TO = cstVB_DATE_MIN
@@ -1305,7 +1305,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
             .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
             .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
-            .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
+            .CODE_MAINTENANCE = CInt(SDR_READER.Item("CODE_MAINTENANCE"))
             .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             .DATE_WORK_FROM = CDate(SDR_READER.Item("DATE_WORK_FROM"))
             .DATE_WORK_TO = CDate(SDR_READER.Item("DATE_WORK_TO"))
@@ -1378,7 +1378,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_OWNER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_WORK) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_MAINTENANCE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_FROM) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_WORK_TO) & "," & Environment.NewLine)

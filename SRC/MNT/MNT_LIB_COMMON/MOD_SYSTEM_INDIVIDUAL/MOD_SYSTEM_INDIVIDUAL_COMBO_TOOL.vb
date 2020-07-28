@@ -241,7 +241,7 @@
 #Region "MNT_M_MAINTENANCE"
     Public Sub SUB_SYSTEM_COMMBO_MNT_M_MAINTENANCE(
     ByRef CMB_COMBO_BOX As Object,
-    ByVal ENM_KIND_WORK As ENM_SYSTEM_INDIVIDUAL_KIND_WORK,
+    ByVal ENM_FLAG_WORK As ENM_SYSTEM_INDIVIDUAL_FLAG_WORK,
     Optional ByVal BLN_VIEW_NULL As Boolean = False,
     Optional ByVal STR_NAME_ALL As String = ""
     )
@@ -252,14 +252,14 @@
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("CODE_WORK AS CODE," & Environment.NewLine)
-            Call .Append("NAME_WORK AS NAME" & Environment.NewLine)
+            Call .Append("CODE_MAINTENANCE AS CODE," & Environment.NewLine)
+            Call .Append("NAME_MAINTENANCE AS NAME" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_M_MAINTENANCE" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("KIND_WORK=" & ENM_KIND_WORK & Environment.NewLine)
+            Call .Append("FLAG_WORK=" & ENM_FLAG_WORK & Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_WORK" & Environment.NewLine)
+            Call .Append("CODE_MAINTENANCE" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader 'データリーダー

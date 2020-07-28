@@ -22,12 +22,12 @@
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
-        Public CODE_WORK As Integer
-        Public NAME_WORK As String
-        Public KIND_WORK As Integer
+        Public CODE_MAINTENANCE As Integer
+        Public NAME_MAINTENANCE As String
+        Public FLAG_WORK As Integer
         Public FLAG_INVALID As Integer
 
-        Public KIND_WORK_NAME As String
+        Public FLAG_WORK_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 #End Region
@@ -70,12 +70,12 @@
             INT_INDEX = (SRT_DATA.Length)
             ReDim Preserve SRT_DATA(INT_INDEX)
             With SRT_DATA(INT_INDEX)
-                .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
-                .NAME_WORK = CStr(SDR_READER.Item("NAME_WORK"))
-                .KIND_WORK = CInt(SDR_READER.Item("KIND_WORK"))
+                .CODE_MAINTENANCE = CInt(SDR_READER.Item("CODE_MAINTENANCE"))
+                .NAME_MAINTENANCE = CStr(SDR_READER.Item("NAME_MAINTENANCE"))
+                .FLAG_WORK = CInt(SDR_READER.Item("FLAG_WORK"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
-                .KIND_WORK_NAME = ""
+                .FLAG_WORK_NAME = ""
                 .FLAG_INVALID_NAME = ""
             End With
         End While
@@ -160,7 +160,7 @@
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_WORK" & System.Environment.NewLine)
+            Call .Append("CODE_MAINTENANCE" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -169,7 +169,7 @@
     '補助情報の取得
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
-            .KIND_WORK_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_WORK, .KIND_WORK, True)
+            .FLAG_WORK_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_WORK, .FLAG_WORK, True)
             .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
         End With
     End Sub
@@ -184,10 +184,10 @@
 
         ReDim STR_ROW(0)
         With SRT_DATA
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_WORK))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_WORK))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_WORK))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_WORK_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_MAINTENANCE))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_MAINTENANCE))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_WORK))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_WORK_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID_NAME))
         End With

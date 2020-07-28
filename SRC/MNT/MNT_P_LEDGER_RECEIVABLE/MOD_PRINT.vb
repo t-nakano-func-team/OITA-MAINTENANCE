@@ -211,7 +211,7 @@
             Call .Append("SELECT" & System.Environment.NewLine)
             Call .Append("MAIN.*" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.CODE_OWNER" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.CODE_WORK" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.CODE_MAINTENANCE" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.KIND_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.DATE_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.NAME_CONTRACT" & "," & System.Environment.NewLine)

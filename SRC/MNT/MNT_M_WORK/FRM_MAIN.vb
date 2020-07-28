@@ -25,9 +25,9 @@
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
-        CODE_WORK
-        NAME_WORK
-        KIND_WORK_NAME
+        CODE_MAINTENANCE
+        NAME_MAINTENANCE
+        FLAG_WORK_NAME
         FLAG_INVALID_NAME
         UBOUND = FLAG_INVALID_NAME
     End Enum
@@ -35,12 +35,12 @@
 
 #Region "画面用・構造体"
     Private Structure SRT_MY_GRID_DATA
-        Public CODE_WORK As Integer
-        Public NAME_WORK As String
-        Public KIND_WORK As String
+        Public CODE_MAINTENANCE As Integer
+        Public NAME_MAINTENANCE As String
+        Public FLAG_WORK As String
         Public FLAG_INVALID As Integer
 
-        Public KIND_WORK_NAME As String
+        Public FLAG_WORK_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 
@@ -65,13 +65,13 @@
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,9,9,2", "RLLC")
 
-        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_WORK, ENM_MNT_M_KIND_CODE_FLAG.KIND_WORK)
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_WORK, ENM_MNT_M_KIND_CODE_FLAG.FLAG_WORK)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
-        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_WORK)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_WORK)
 
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS 'グリッド条件
         SRT_CONDITIONS = Nothing '条件の取得（項目がない為、クリア）
@@ -141,8 +141,8 @@
 
         Call SUB_CLEAR()
 
-        TXT_CODE_WORK.Text = INT_CODE_STAFF
-        Call TXT_CODE_WORK.Focus()
+        TXT_CODE_MAINTENANCE.Text = INT_CODE_STAFF
+        Call TXT_CODE_MAINTENANCE.Focus()
         Call Application.DoEvents()
 
         Call SUB_DATA_EDIT()
@@ -309,7 +309,7 @@
             Call .Append("FLAG_INVALID=" & CInt(ENM_FLAG_INVALID) & System.Environment.NewLine)
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1=1" & System.Environment.NewLine)
-            Call .Append("AND CODE_WORK=" & SRT_KEY.CODE_WORK & System.Environment.NewLine)
+            Call .Append("AND CODE_MAINTENANCE=" & SRT_KEY.CODE_MAINTENANCE & System.Environment.NewLine)
         End With
 
         If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
@@ -413,7 +413,7 @@
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_WORK" & Environment.NewLine)
+            Call .Append("CODE_MAINTENANCE" & Environment.NewLine)
         End With
 
         SDR_READER = Nothing
@@ -434,9 +434,9 @@
             INT_INDEX = SRT_GRID_DATA_MAIN.Length
             ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
             With SRT_GRID_DATA_MAIN(INT_INDEX)
-                .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
-                .NAME_WORK = CStr(SDR_READER.Item("NAME_WORK"))
-                .KIND_WORK = CInt(SDR_READER.Item("KIND_WORK"))
+                .CODE_MAINTENANCE = CInt(SDR_READER.Item("CODE_MAINTENANCE"))
+                .NAME_MAINTENANCE = CStr(SDR_READER.Item("NAME_MAINTENANCE"))
+                .FLAG_WORK = CInt(SDR_READER.Item("FLAG_WORK"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
             End With
         End While
@@ -445,7 +445,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .KIND_WORK_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_WORK, .KIND_WORK, True)
+                .FLAG_WORK_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_WORK, .FLAG_WORK, True)
                 .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
             End With
         Next
@@ -467,9 +467,9 @@
 
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_WORK) = Format(.CODE_WORK, New String("0", INT_SYSTEM_CODE_WORK_MAX_LENGTH))
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_WORK) = .NAME_WORK
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_WORK_NAME) = .KIND_WORK_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_MAINTENANCE) = Format(.CODE_MAINTENANCE, New String("0", INT_SYSTEM_CODE_MAINTENANCE_MAX_LENGTH))
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_MAINTENANCE) = .NAME_MAINTENANCE
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_WORK_NAME) = .FLAG_WORK_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_INVALID_NAME) = .FLAG_INVALID_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
@@ -496,7 +496,7 @@
 
         Dim INT_RET As Integer
         With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
-            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_WORK)
+            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_MAINTENANCE)
         End With
         Return INT_RET
     End Function
@@ -521,7 +521,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1)
             With SRT_GRID_DATA_MAIN(i)
-                If .CODE_WORK = SRT_KEY.CODE_WORK Then
+                If .CODE_MAINTENANCE = SRT_KEY.CODE_MAINTENANCE Then
                     Return i
                 End If
             End With
@@ -605,7 +605,7 @@
         Dim SRT_RET As SRT_TABLE_MNT_M_MAINTENANCE_KEY
 
         With SRT_RET
-            .CODE_WORK = CInt(TXT_CODE_WORK.Text)
+            .CODE_MAINTENANCE = CInt(TXT_CODE_MAINTENANCE.Text)
         End With
 
         Return SRT_RET
@@ -615,8 +615,8 @@
         Dim SRT_RET As SRT_TABLE_MNT_M_MAINTENANCE_DATA
 
         With SRT_RET
-            .NAME_WORK = CStr(TXT_NAME_WORK.Text)
-            .KIND_WORK = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_WORK)
+            .NAME_MAINTENANCE = CStr(TXT_NAME_MAINTENANCE.Text)
+            .FLAG_WORK = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_WORK)
             .FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL
         End With
 
@@ -626,8 +626,8 @@
 
     Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_M_MAINTENANCE_DATA)
         With SRT_DATA
-            TXT_NAME_WORK.Text = .NAME_WORK
-            Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_WORK, .KIND_WORK)
+            TXT_NAME_MAINTENANCE.Text = .NAME_MAINTENANCE
+            Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_WORK, .FLAG_WORK)
             LBL_FLAG_INVALID.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID, .FLAG_INVALID)
         End With
     End Sub
@@ -720,7 +720,7 @@
 
         Dim BLN_RET As Boolean
         Select Case True
-            Case (CTL_ACTIVE Is TXT_CODE_WORK)
+            Case (CTL_ACTIVE Is TXT_CODE_MAINTENANCE)
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_DATA_EDIT)
                 BLN_RET = False
             Case Else

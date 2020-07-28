@@ -16,7 +16,7 @@
         NUMBER_CONTRACT_VIEW = 0
         CODE_OWNER_NAME
         CODE_SECTION_NAME
-        CODE_WORK_NAME
+        CODE_MAINTENANCE_NAME
         NAME_CONTRACT
         UBOUND = NAME_CONTRACT
     End Enum
@@ -34,12 +34,12 @@
 
         Public CODE_OWNER As Integer
         Public CODE_SECTION As Integer
-        Public CODE_WORK As Integer
+        Public CODE_MAINTENANCE As Integer
         Public NAME_CONTRACT As String
 
         Public CODE_OWNER_NAME As String
         Public CODE_SECTION_NAME As String
-        Public CODE_WORK_NAME As String
+        Public CODE_MAINTENANCE_NAME As String
 
         Public Function NUMBER_CONTRACT_VIEW() As String
             Dim STR_NUMBER_CONTRACT As String
@@ -325,7 +325,7 @@
                 .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
-                .CODE_WORK = CInt(SDR_READER.Item("CODE_WORK"))
+                .CODE_MAINTENANCE = CInt(SDR_READER.Item("CODE_MAINTENANCE"))
                 .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             End With
         End While
@@ -339,7 +339,7 @@
             With SRT_GRID_DATA_MAIN(i)
                 .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
                 .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION)
-                .CODE_WORK_NAME = FUNC_GET_MNT_M_MAINTENANCE_NAME_WORK(.CODE_WORK)
+                .CODE_MAINTENANCE_NAME = FUNC_GET_MNT_M_MAINTENANCE_NAME_MAINTENANCE(.CODE_MAINTENANCE)
             End With
         Next
         Call SUB_TIME_MEASUREMENT_STOP_AND_PUT_LOG(Me.Text & ":" & "補助情報取得")
@@ -363,7 +363,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .NUMBER_CONTRACT_VIEW
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_OWNER_NAME) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_NAME
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_WORK_NAME) = .CODE_WORK_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_MAINTENANCE_NAME) = .CODE_MAINTENANCE_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
             End With
             Call glbSubAddRowDataTable(tblGRID_DATA_MAIN, OBJ_TEMP)

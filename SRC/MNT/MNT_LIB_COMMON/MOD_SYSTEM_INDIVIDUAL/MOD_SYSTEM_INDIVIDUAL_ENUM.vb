@@ -7,7 +7,7 @@
         KIND_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
         FLAG_OUTPUT_DONE = 16
-        KIND_WORK = 17
+        FLAG_WORK = 17
         FLAG_DONE = 18 '済み／未済み　汎用
         KIND_SORT_CHECK_DEPOSIT = 19
         KIND_TARGET_RECEIVABLE = 20 '未収金対象
@@ -60,7 +60,7 @@
         DATE_DEPOSIT = 2
     End Enum
 
-    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_WORK
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_WORK
         ALWAYS = 1
         REGULAR = 2
     End Enum
