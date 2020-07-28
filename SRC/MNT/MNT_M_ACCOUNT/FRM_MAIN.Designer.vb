@@ -38,9 +38,9 @@ Partial Class FRM_MAIN
         Me.LBL_FLAG_INVALID_GUIDE = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
-        Me.PNL_CODE_ACCOUNT = New System.Windows.Forms.Panel()
-        Me.LBL_CODE_ACCOUNT_GUIDE = New System.Windows.Forms.Label()
-        Me.TXT_CODE_ACCOUNT = New System.Windows.Forms.TextBox()
+        Me.PNL_CODE_ACCOUNT_CONNECT = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_CODE_ACCOUNT_CONNECT = New System.Windows.Forms.TextBox()
         Me.PNL_NAME_ACCOUNT = New System.Windows.Forms.Panel()
         Me.TXT_NAME_ACCOUNT = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_ACCOUNT_GUIDE = New System.Windows.Forms.Label()
@@ -69,7 +69,7 @@ Partial Class FRM_MAIN
         Me.PNL_LBL_FLAG_INVALID.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
-        Me.PNL_CODE_ACCOUNT.SuspendLayout()
+        Me.PNL_CODE_ACCOUNT_CONNECT.SuspendLayout()
         Me.PNL_NAME_ACCOUNT.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_KIND_ACCOUNT.SuspendLayout()
@@ -284,45 +284,45 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_ACCOUNT)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_ACCOUNT_CONNECT)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_ACCOUNT)
         Me.PNL_INPUT_DATA.Location = New System.Drawing.Point(10, 70)
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 40)
         Me.PNL_INPUT_DATA.TabIndex = 2
         '
-        'PNL_CODE_ACCOUNT
+        'PNL_CODE_ACCOUNT_CONNECT
         '
-        Me.PNL_CODE_ACCOUNT.Controls.Add(Me.LBL_CODE_ACCOUNT_GUIDE)
-        Me.PNL_CODE_ACCOUNT.Controls.Add(Me.TXT_CODE_ACCOUNT)
-        Me.PNL_CODE_ACCOUNT.Location = New System.Drawing.Point(250, 5)
-        Me.PNL_CODE_ACCOUNT.Name = "PNL_CODE_ACCOUNT"
-        Me.PNL_CODE_ACCOUNT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_ACCOUNT.TabIndex = 18
+        Me.PNL_CODE_ACCOUNT_CONNECT.Controls.Add(Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE)
+        Me.PNL_CODE_ACCOUNT_CONNECT.Controls.Add(Me.TXT_CODE_ACCOUNT_CONNECT)
+        Me.PNL_CODE_ACCOUNT_CONNECT.Location = New System.Drawing.Point(250, 5)
+        Me.PNL_CODE_ACCOUNT_CONNECT.Name = "PNL_CODE_ACCOUNT_CONNECT"
+        Me.PNL_CODE_ACCOUNT_CONNECT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_ACCOUNT_CONNECT.TabIndex = 18
         '
-        'LBL_CODE_ACCOUNT_GUIDE
+        'LBL_CODE_ACCOUNT_CONNECT_GUIDE
         '
-        Me.LBL_CODE_ACCOUNT_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_ACCOUNT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_ACCOUNT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_ACCOUNT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_ACCOUNT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_ACCOUNT_GUIDE.Name = "LBL_CODE_ACCOUNT_GUIDE"
-        Me.LBL_CODE_ACCOUNT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_ACCOUNT_GUIDE.TabIndex = 3
-        Me.LBL_CODE_ACCOUNT_GUIDE.Text = "科目コード"
-        Me.LBL_CODE_ACCOUNT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Name = "LBL_CODE_ACCOUNT_CONNECT_GUIDE"
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.TabIndex = 3
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.Text = "科目コード"
+        Me.LBL_CODE_ACCOUNT_CONNECT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TXT_CODE_ACCOUNT
+        'TXT_CODE_ACCOUNT_CONNECT
         '
-        Me.TXT_CODE_ACCOUNT.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_CODE_ACCOUNT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_ACCOUNT.MaxLength = 3
-        Me.TXT_CODE_ACCOUNT.Name = "TXT_CODE_ACCOUNT"
-        Me.TXT_CODE_ACCOUNT.Size = New System.Drawing.Size(80, 25)
-        Me.TXT_CODE_ACCOUNT.TabIndex = 1
-        Me.TXT_CODE_ACCOUNT.Tag = "Clear,Numeric,Format=000,Check,NotNull,Plus"
-        Me.TXT_CODE_ACCOUNT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TXT_CODE_ACCOUNT_CONNECT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_ACCOUNT_CONNECT.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_CODE_ACCOUNT_CONNECT.MaxLength = 3
+        Me.TXT_CODE_ACCOUNT_CONNECT.Name = "TXT_CODE_ACCOUNT_CONNECT"
+        Me.TXT_CODE_ACCOUNT_CONNECT.Size = New System.Drawing.Size(80, 25)
+        Me.TXT_CODE_ACCOUNT_CONNECT.TabIndex = 1
+        Me.TXT_CODE_ACCOUNT_CONNECT.Tag = "Clear,Numeric,Format=000,Check,NotNull,Plus"
+        Me.TXT_CODE_ACCOUNT_CONNECT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_NAME_ACCOUNT
         '
@@ -572,8 +572,8 @@ Partial Class FRM_MAIN
         Me.PNL_LBL_FLAG_INVALID.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
-        Me.PNL_CODE_ACCOUNT.ResumeLayout(False)
-        Me.PNL_CODE_ACCOUNT.PerformLayout()
+        Me.PNL_CODE_ACCOUNT_CONNECT.ResumeLayout(False)
+        Me.PNL_CODE_ACCOUNT_CONNECT.PerformLayout()
         Me.PNL_NAME_ACCOUNT.ResumeLayout(False)
         Me.PNL_NAME_ACCOUNT.PerformLayout()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
@@ -614,9 +614,9 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_KIND_ACCOUNT As Panel
     Friend WithEvents CMB_KIND_ACCOUNT As ComboBox
     Friend WithEvents LBL_KIND_ACCOUNT_GUIDE As Label
-    Friend WithEvents PNL_CODE_ACCOUNT As Panel
-    Friend WithEvents LBL_CODE_ACCOUNT_GUIDE As Label
-    Friend WithEvents TXT_CODE_ACCOUNT As TextBox
+    Friend WithEvents PNL_CODE_ACCOUNT_CONNECT As Panel
+    Friend WithEvents LBL_CODE_ACCOUNT_CONNECT_GUIDE As Label
+    Friend WithEvents TXT_CODE_ACCOUNT_CONNECT As TextBox
     Friend WithEvents PNL_INPUT_GUIDE As Panel
     Friend WithEvents PNL_LBL_FLAG_INVALID As Panel
     Friend WithEvents LBL_FLAG_INVALID As Label

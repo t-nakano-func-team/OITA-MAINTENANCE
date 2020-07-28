@@ -25,7 +25,7 @@
         Public KIND_ACCOUNT As Integer
         Public CODE_KIND As Integer
         Public NAME_ACCOUNT As String
-        Public CODE_ACCOUNT As Integer
+        Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
 
         Public KIND_ACCOUNT_NAME As String
@@ -75,7 +75,7 @@
                 .KIND_ACCOUNT = CInt(SDR_READER.Item("KIND_ACCOUNT"))
                 .CODE_KIND = CInt(SDR_READER.Item("CODE_KIND"))
                 .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
-                .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
+                .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
                 .KIND_ACCOUNT_NAME = ""
@@ -191,7 +191,7 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_ACCOUNT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_KIND))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ACCOUNT))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_ACCOUNT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_ACCOUNT_CONNECT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID_NAME))
         End With

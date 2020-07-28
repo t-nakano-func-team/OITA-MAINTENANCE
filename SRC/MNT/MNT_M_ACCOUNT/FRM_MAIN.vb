@@ -28,7 +28,7 @@
         KIND_ACCOUNT_NAME
         CODE_KIND
         NAME_ACCOUNT
-        CODE_ACCOUNT
+        CODE_ACCOUNT_CONNECT
         FLAINVALID_NAME
         UBOUND = FLAINVALID_NAME
     End Enum
@@ -39,7 +39,7 @@
         Public KIND_ACCOUNT As Integer
         Public CODE_KIND As Integer
         Public NAME_ACCOUNT As String
-        Public CODE_ACCOUNT As Integer
+        Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
 
         Public KIND_ACCOUNT_NAME As String
@@ -445,7 +445,7 @@
                 .KIND_ACCOUNT = CInt(SDR_READER.Item("KIND_ACCOUNT"))
                 .CODE_KIND = CInt(SDR_READER.Item("CODE_KIND"))
                 .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
-                .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
+                .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
             End With
         End While
@@ -479,7 +479,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_ACCOUNT_NAME) = .KIND_ACCOUNT_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_KIND) = Format(.CODE_KIND, New String("0", INT_SYSTEM_CODE_KIND_MAX_LENGTH))
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_ACCOUNT) = .NAME_ACCOUNT
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_ACCOUNT) = Format(.CODE_ACCOUNT, New String("0", INT_SYSTEM_CODE_ACCOUNT_MAX_LENGTH))
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_ACCOUNT_CONNECT) = Format(.CODE_ACCOUNT_CONNECT, New String("0", INT_SYSTEM_CODE_ACCOUNT_CONNECT_MAX_LENGTH))
                 OBJ_TEMP(ENM_MY_GRID_MAIN.FLAINVALID_NAME) = .FLAG_INVALID_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
@@ -634,7 +634,7 @@
 
         With SRT_RET
             .NAME_ACCOUNT = CStr(TXT_NAME_ACCOUNT.Text)
-            .CODE_ACCOUNT = CInt(TXT_CODE_ACCOUNT.Text)
+            .CODE_ACCOUNT_CONNECT = CInt(TXT_CODE_ACCOUNT_CONNECT.Text)
             .FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL
         End With
 
@@ -645,7 +645,7 @@
     Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_M_ACCOUNT_DATA)
         With SRT_DATA
             TXT_NAME_ACCOUNT.Text = .NAME_ACCOUNT
-            TXT_CODE_ACCOUNT.Text = Format(.CODE_ACCOUNT, New String("0", INT_SYSTEM_CODE_ACCOUNT_MAX_LENGTH))
+            TXT_CODE_ACCOUNT_CONNECT.Text = Format(.CODE_ACCOUNT_CONNECT, New String("0", INT_SYSTEM_CODE_ACCOUNT_CONNECT_MAX_LENGTH))
             LBL_FLAG_INVALID.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID, .FLAG_INVALID)
         End With
     End Sub

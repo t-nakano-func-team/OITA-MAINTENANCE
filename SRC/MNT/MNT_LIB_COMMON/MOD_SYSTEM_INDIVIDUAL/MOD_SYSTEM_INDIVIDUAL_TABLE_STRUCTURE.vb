@@ -494,7 +494,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_M_ACCOUNT_DATA
         Public NAME_ACCOUNT As String
-        Public CODE_ACCOUNT As Integer
+        Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
     End Structure
 #End Region
@@ -558,7 +558,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
 
         With SRT_RET
             .NAME_ACCOUNT = ""
-            .CODE_ACCOUNT = -1
+            .CODE_ACCOUNT_CONNECT = -1
             .FLAG_INVALID = -1
         End With
 
@@ -602,7 +602,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
 
         With SRT_RET
             .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
-            .CODE_ACCOUNT = CInt(SDR_READER.Item("CODE_ACCOUNT"))
+            .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
         End With
 
@@ -662,7 +662,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ACCOUNT) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_ACCOUNT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_ACCOUNT_CONNECT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
