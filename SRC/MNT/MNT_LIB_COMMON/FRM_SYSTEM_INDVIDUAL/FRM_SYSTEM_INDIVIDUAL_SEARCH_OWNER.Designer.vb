@@ -39,9 +39,9 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
-        Me.PNL_KIND_OWNER = New System.Windows.Forms.Panel()
-        Me.CMB_KIND_OWNER = New System.Windows.Forms.ComboBox()
-        Me.LBL_KIND_OWNER_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_FLAG_OWNER = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_OWNER = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_OWNER_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_SEARCH = New System.Windows.Forms.Panel()
         Me.LBL_COUNT_SEARCH_MAX = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_UNIT = New System.Windows.Forms.Label()
@@ -63,7 +63,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
-        Me.PNL_KIND_OWNER.SuspendLayout()
+        Me.PNL_FLAG_OWNER.SuspendLayout()
         Me.PNL_SEARCH.SuspendLayout()
         Me.PNL_KANA_OWNER.SuspendLayout()
         Me.PNL_NAME_OWNER.SuspendLayout()
@@ -285,7 +285,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_OWNER)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_SEARCH)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KANA_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_NAME_OWNER)
@@ -294,37 +294,37 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 75)
         Me.PNL_INPUT_KEY.TabIndex = 1
         '
-        'PNL_KIND_OWNER
+        'PNL_FLAG_OWNER
         '
-        Me.PNL_KIND_OWNER.Controls.Add(Me.CMB_KIND_OWNER)
-        Me.PNL_KIND_OWNER.Controls.Add(Me.LBL_KIND_OWNER_GUIDE)
-        Me.PNL_KIND_OWNER.Location = New System.Drawing.Point(5, 40)
-        Me.PNL_KIND_OWNER.Name = "PNL_KIND_OWNER"
-        Me.PNL_KIND_OWNER.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_OWNER.TabIndex = 3
+        Me.PNL_FLAG_OWNER.Controls.Add(Me.CMB_FLAG_OWNER)
+        Me.PNL_FLAG_OWNER.Controls.Add(Me.LBL_FLAG_OWNER_GUIDE)
+        Me.PNL_FLAG_OWNER.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_FLAG_OWNER.Name = "PNL_FLAG_OWNER"
+        Me.PNL_FLAG_OWNER.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_OWNER.TabIndex = 3
         '
-        'CMB_KIND_OWNER
+        'CMB_FLAG_OWNER
         '
-        Me.CMB_KIND_OWNER.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_KIND_OWNER.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_KIND_OWNER.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_KIND_OWNER.Name = "CMB_KIND_OWNER"
-        Me.CMB_KIND_OWNER.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_KIND_OWNER.TabIndex = 1
-        Me.CMB_KIND_OWNER.Tag = "Clear"
+        Me.CMB_FLAG_OWNER.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_OWNER.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_OWNER.Location = New System.Drawing.Point(90, 1)
+        Me.CMB_FLAG_OWNER.Name = "CMB_FLAG_OWNER"
+        Me.CMB_FLAG_OWNER.Size = New System.Drawing.Size(140, 26)
+        Me.CMB_FLAG_OWNER.TabIndex = 1
+        Me.CMB_FLAG_OWNER.Tag = "Clear"
         '
-        'LBL_KIND_OWNER_GUIDE
+        'LBL_FLAG_OWNER_GUIDE
         '
-        Me.LBL_KIND_OWNER_GUIDE.AutoEllipsis = True
-        Me.LBL_KIND_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_KIND_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KIND_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_KIND_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_KIND_OWNER_GUIDE.Name = "LBL_KIND_OWNER_GUIDE"
-        Me.LBL_KIND_OWNER_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_KIND_OWNER_GUIDE.TabIndex = 0
-        Me.LBL_KIND_OWNER_GUIDE.Text = "形式"
-        Me.LBL_KIND_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_FLAG_OWNER_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_OWNER_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_OWNER_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_OWNER_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_OWNER_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_OWNER_GUIDE.Name = "LBL_FLAG_OWNER_GUIDE"
+        Me.LBL_FLAG_OWNER_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_FLAG_OWNER_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_OWNER_GUIDE.Text = "オーナー区分"
+        Me.LBL_FLAG_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_SEARCH
         '
@@ -493,7 +493,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         Me.GRP_BODY.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
-        Me.PNL_KIND_OWNER.ResumeLayout(False)
+        Me.PNL_FLAG_OWNER.ResumeLayout(False)
         Me.PNL_SEARCH.ResumeLayout(False)
         Me.PNL_SEARCH.PerformLayout()
         Me.PNL_KANA_OWNER.ResumeLayout(False)
@@ -532,7 +532,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
     Friend WithEvents LBL_COUNT_SEARCH As Windows.Forms.Label
     Friend WithEvents LBL_COUNT_SEARCH_GUIDE As Windows.Forms.Label
     Friend WithEvents BTN_SEARCH As Windows.Forms.Button
-    Friend WithEvents PNL_KIND_OWNER As Panel
-    Friend WithEvents CMB_KIND_OWNER As ComboBox
-    Friend WithEvents LBL_KIND_OWNER_GUIDE As Label
+    Friend WithEvents PNL_FLAG_OWNER As Panel
+    Friend WithEvents CMB_FLAG_OWNER As ComboBox
+    Friend WithEvents LBL_FLAG_OWNER_GUIDE As Label
 End Class

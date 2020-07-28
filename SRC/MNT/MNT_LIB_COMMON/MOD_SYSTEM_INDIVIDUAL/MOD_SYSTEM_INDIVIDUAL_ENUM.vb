@@ -1,8 +1,8 @@
 ﻿Public Module MOD_SYSTEM_INDIVIDUAL_ENUM
     'テーブルMNT_M_KINDのCODE_FLAG
     Public Enum ENM_MNT_M_KIND_CODE_FLAG
-        KIND_FIXED_DATE = 10 '請求締日付
-        KIND_OWNER = 11 '形式
+        DAY_FIX_INVOICE = 10 '請求締日付
+        FLAG_OWNER = 11 '形式
         KIND_RATE_VAT = 13 '消費税
         KIND_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
@@ -16,14 +16,14 @@
         FLAG_INVALID_SHORT = 23 '有効無効フラグ（短）
     End Enum
 
-    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_FIXED_DATE
+    Public Enum ENM_SYSTEM_INDIVIDUAL_DAY_FIX_INVOICE
         FIX_10 = 10
         FIX_20 = 20
         FIX_25 = 25
         FIX_LAST = 99
     End Enum
 
-    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_OWNER
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_OWNER
         NORMAL = 1
         SPOT = 2
     End Enum

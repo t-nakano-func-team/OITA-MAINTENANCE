@@ -19,14 +19,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_M_OWNER_DATA
         Public NAME_OWNER As String
-        Public NAME_OWNER_SHORT As String
         Public KANA_OWNER As String
-        Public KIND_OWNER As Integer
+        Public FLAG_OWNER As Integer
         Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
         Public NAME_ADDRESS_02 As String
-        Public KIND_FIXED_DATE As Integer
+        Public DAY_FIX_INVOICE As Integer
         Public FLAG_INVALID As Integer
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -88,14 +89,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
 
         With SRT_RET
             .NAME_OWNER = ""
-            .NAME_OWNER_SHORT = ""
             .KANA_OWNER = ""
-            .KIND_OWNER = -1
+            .FLAG_OWNER = -1
             .CODE_POST = 0
             .NAME_ADDRESS_01 = ""
             .NAME_ADDRESS_02 = ""
-            .KIND_FIXED_DATE = -1
+            .DAY_FIX_INVOICE = -1
             .FLAG_INVALID = -1
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If BLN_CASH Then
@@ -136,14 +138,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
 
         With SRT_RET
             .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
-            .NAME_OWNER_SHORT = CStr(SDR_READER.Item("NAME_OWNER_SHORT"))
             .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-            .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
+            .FLAG_OWNER = CInt(SDR_READER.Item("FLAG_OWNER"))
             .CODE_POST = CInt(SDR_READER.Item("CODE_POST"))
             .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
             .NAME_ADDRESS_02 = CStr(SDR_READER.Item("NAME_ADDRESS_02"))
-            .KIND_FIXED_DATE = CInt(SDR_READER.Item("KIND_FIXED_DATE"))
+            .DAY_FIX_INVOICE = CInt(SDR_READER.Item("DAY_FIX_INVOICE"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
+            .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
         End With
 
         Call SDR_READER.Close()
@@ -199,15 +202,15 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
         End With
         With SRT_DATA.DATA
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_OWNER) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_OWNER_SHORT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KANA_OWNER) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_OWNER) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_OWNER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_POST) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_01) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_02) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_FIXED_DATE) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "" & Environment.NewLine)
-
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DAY_FIX_INVOICE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 

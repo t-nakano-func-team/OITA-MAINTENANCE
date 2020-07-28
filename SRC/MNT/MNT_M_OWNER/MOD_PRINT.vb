@@ -24,17 +24,16 @@
     Public Structure SRT_PRINT_DATA '印刷データ
         Public CODE_OWNER As Integer
         Public NAME_OWNER As String
-        Public NAME_OWNER_SHORT As String
         Public KANA_OWNER As String
-        Public KIND_OWNER As Integer
+        Public FLAG_OWNER As Integer
         Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
         Public NAME_ADDRESS_02 As String
-        Public KIND_FIXED_DATE As Integer
+        Public DAY_FIX_INVOICE As Integer
         Public FLAG_INVALID As Integer
 
-        Public KIND_OWNER_NAME As String
-        Public KIND_FIXED_DATE_NAME As String
+        Public FLAG_OWNER_NAME As String
+        Public DAY_FIX_INVOICE_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 #End Region
@@ -79,17 +78,16 @@
             With SRT_DATA(INT_INDEX)
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
-                .NAME_OWNER_SHORT = CStr(SDR_READER.Item("NAME_OWNER_SHORT"))
                 .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-                .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
+                .FLAG_OWNER = CInt(SDR_READER.Item("FLAG_OWNER"))
                 .CODE_POST = CInt(SDR_READER.Item("CODE_POST"))
                 .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
                 .NAME_ADDRESS_02 = CStr(SDR_READER.Item("NAME_ADDRESS_02"))
-                .KIND_FIXED_DATE = CInt(SDR_READER.Item("KIND_FIXED_DATE"))
+                .DAY_FIX_INVOICE = CInt(SDR_READER.Item("DAY_FIX_INVOICE"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
-                .KIND_OWNER_NAME = ""
-                .KIND_FIXED_DATE_NAME = ""
+                .FLAG_OWNER_NAME = ""
+                .DAY_FIX_INVOICE_NAME = ""
                 .FLAG_INVALID_NAME = ""
             End With
         End While
@@ -183,8 +181,8 @@
     '補助情報の取得
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
-            .KIND_OWNER_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, .KIND_OWNER, True)
-            .KIND_FIXED_DATE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_FIXED_DATE, .KIND_FIXED_DATE, True)
+            .FLAG_OWNER_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_OWNER, .FLAG_OWNER, True)
+            .DAY_FIX_INVOICE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.DAY_FIX_INVOICE, .DAY_FIX_INVOICE, True)
             .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
         End With
     End Sub
@@ -201,15 +199,14 @@
         With SRT_DATA
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_OWNER))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_OWNER_SHORT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KANA_OWNER))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_OWNER))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_OWNER_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_OWNER))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_OWNER_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_POST))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_01))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_02))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_FIXED_DATE))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_FIXED_DATE_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DAY_FIX_INVOICE))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DAY_FIX_INVOICE_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID_NAME))
         End With
