@@ -22,13 +22,13 @@
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
-        Public KIND_ACCOUNT As Integer
+        Public FLAG_ACCOUNT As Integer
         Public CODE_KIND As Integer
         Public NAME_ACCOUNT As String
         Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
 
-        Public KIND_ACCOUNT_NAME As String
+        Public FLAG_ACCOUNT_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 #End Region
@@ -72,13 +72,13 @@
             INT_INDEX = (SRT_DATA.Length)
             ReDim Preserve SRT_DATA(INT_INDEX)
             With SRT_DATA(INT_INDEX)
-                .KIND_ACCOUNT = CInt(SDR_READER.Item("KIND_ACCOUNT"))
+                .FLAG_ACCOUNT = CInt(SDR_READER.Item("FLAG_ACCOUNT"))
                 .CODE_KIND = CInt(SDR_READER.Item("CODE_KIND"))
                 .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
                 .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
-                .KIND_ACCOUNT_NAME = ""
+                .FLAG_ACCOUNT_NAME = ""
                 .FLAG_INVALID_NAME = ""
             End With
         End While
@@ -163,7 +163,7 @@
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("KIND_ACCOUNT,CODE_KIND" & System.Environment.NewLine)
+            Call .Append("FLAG_ACCOUNT,CODE_KIND" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -172,7 +172,7 @@
     '補助情報の取得
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
-            .KIND_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT, .KIND_ACCOUNT, True)
+            .FLAG_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_ACCOUNT, .FLAG_ACCOUNT, True)
             .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
         End With
     End Sub
@@ -187,8 +187,8 @@
 
         ReDim STR_ROW(0)
         With SRT_DATA
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_ACCOUNT))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_ACCOUNT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_ACCOUNT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_ACCOUNT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_KIND))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ACCOUNT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_ACCOUNT_CONNECT))

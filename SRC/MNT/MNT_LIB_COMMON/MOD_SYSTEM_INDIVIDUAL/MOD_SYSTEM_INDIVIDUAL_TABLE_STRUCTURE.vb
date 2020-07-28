@@ -486,7 +486,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
 
 #Region "KEY"
     Public Structure SRT_TABLE_MNT_M_ACCOUNT_KEY
-        Public KIND_ACCOUNT As Integer
+        Public FLAG_ACCOUNT As Integer
         Public CODE_KIND As Integer
     End Structure
 #End Region
@@ -518,7 +518,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
 
         For i = LBound(SRT_CASH) To UBound(SRT_CASH)
             With SRT_CASH(i)
-                If .KEY.KIND_ACCOUNT = SRT_KEY.KIND_ACCOUNT _
+                If .KEY.FLAG_ACCOUNT = SRT_KEY.FLAG_ACCOUNT _
                     And .KEY.CODE_KIND = SRT_KEY.CODE_KIND Then
                     Return i
                 End If
@@ -576,8 +576,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             .COL_NAME = "*"
             ReDim .WHERE(2)
-            .WHERE(1).COL_NAME = "KIND_ACCOUNT"
-            .WHERE(1).VALUE = SRT_DATA.KIND_ACCOUNT
+            .WHERE(1).COL_NAME = "FLAG_ACCOUNT"
+            .WHERE(1).VALUE = SRT_DATA.FLAG_ACCOUNT
             .WHERE(2).COL_NAME = "CODE_KIND"
             .WHERE(2).VALUE = SRT_DATA.CODE_KIND
             .ORDER_KEY = ""
@@ -627,8 +627,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         With SRT_SQL
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             ReDim .WHERE(2)
-            .WHERE(1).COL_NAME = "KIND_ACCOUNT"
-            .WHERE(1).VALUE = SRT_DATA.KIND_ACCOUNT
+            .WHERE(1).COL_NAME = "FLAG_ACCOUNT"
+            .WHERE(1).VALUE = SRT_DATA.FLAG_ACCOUNT
             .WHERE(2).COL_NAME = "CODE_KIND"
             .WHERE(2).VALUE = SRT_DATA.CODE_KIND
         End With
@@ -657,7 +657,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
         Call STR_SQL.Append("VALUES" & Environment.NewLine)
         Call STR_SQL.Append("(" & Environment.NewLine)
         With SRT_DATA.KEY
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_ACCOUNT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_ACCOUNT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_KIND) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
@@ -685,8 +685,8 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_ACCOUNT
             .TABLE_NAME = CST_TABLE_NAME_DEFAULT
             .COL_NAME = "COUNT(*)"
             ReDim .WHERE(2)
-            .WHERE(1).COL_NAME = "KIND_ACCOUNT"
-            .WHERE(1).VALUE = SRT_DATA.KIND_ACCOUNT
+            .WHERE(1).COL_NAME = "FLAG_ACCOUNT"
+            .WHERE(1).VALUE = SRT_DATA.FLAG_ACCOUNT
             .WHERE(2).COL_NAME = "CODE_KIND"
             .WHERE(2).VALUE = SRT_DATA.CODE_KIND
             .ORDER_KEY = ""

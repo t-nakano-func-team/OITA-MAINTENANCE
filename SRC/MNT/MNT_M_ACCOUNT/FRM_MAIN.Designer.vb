@@ -45,9 +45,9 @@ Partial Class FRM_MAIN
         Me.TXT_NAME_ACCOUNT = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_ACCOUNT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
-        Me.PNL_KIND_ACCOUNT = New System.Windows.Forms.Panel()
-        Me.CMB_KIND_ACCOUNT = New System.Windows.Forms.ComboBox()
-        Me.LBL_KIND_ACCOUNT_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_FLAG_ACCOUNT = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_ACCOUNT = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_ACCOUNT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_CODE_KIND = New System.Windows.Forms.Panel()
         Me.LBL_CODE_KIND_GUIDE = New System.Windows.Forms.Label()
         Me.TXT_CODE_KIND = New System.Windows.Forms.TextBox()
@@ -72,7 +72,7 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_ACCOUNT_CONNECT.SuspendLayout()
         Me.PNL_NAME_ACCOUNT.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
-        Me.PNL_KIND_ACCOUNT.SuspendLayout()
+        Me.PNL_FLAG_ACCOUNT.SuspendLayout()
         Me.PNL_CODE_KIND.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
@@ -362,44 +362,44 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_ACCOUNT)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_ACCOUNT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_KIND)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(490, 40)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
-        'PNL_KIND_ACCOUNT
+        'PNL_FLAG_ACCOUNT
         '
-        Me.PNL_KIND_ACCOUNT.Controls.Add(Me.CMB_KIND_ACCOUNT)
-        Me.PNL_KIND_ACCOUNT.Controls.Add(Me.LBL_KIND_ACCOUNT_GUIDE)
-        Me.PNL_KIND_ACCOUNT.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_KIND_ACCOUNT.Name = "PNL_KIND_ACCOUNT"
-        Me.PNL_KIND_ACCOUNT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_ACCOUNT.TabIndex = 0
+        Me.PNL_FLAG_ACCOUNT.Controls.Add(Me.CMB_FLAG_ACCOUNT)
+        Me.PNL_FLAG_ACCOUNT.Controls.Add(Me.LBL_FLAG_ACCOUNT_GUIDE)
+        Me.PNL_FLAG_ACCOUNT.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_FLAG_ACCOUNT.Name = "PNL_FLAG_ACCOUNT"
+        Me.PNL_FLAG_ACCOUNT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_ACCOUNT.TabIndex = 0
         '
-        'CMB_KIND_ACCOUNT
+        'CMB_FLAG_ACCOUNT
         '
-        Me.CMB_KIND_ACCOUNT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_KIND_ACCOUNT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_KIND_ACCOUNT.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_KIND_ACCOUNT.Name = "CMB_KIND_ACCOUNT"
-        Me.CMB_KIND_ACCOUNT.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_KIND_ACCOUNT.TabIndex = 1
-        Me.CMB_KIND_ACCOUNT.Tag = "Clear"
+        Me.CMB_FLAG_ACCOUNT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_ACCOUNT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_ACCOUNT.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_ACCOUNT.Name = "CMB_FLAG_ACCOUNT"
+        Me.CMB_FLAG_ACCOUNT.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_ACCOUNT.TabIndex = 1
+        Me.CMB_FLAG_ACCOUNT.Tag = "Clear"
         '
-        'LBL_KIND_ACCOUNT_GUIDE
+        'LBL_FLAG_ACCOUNT_GUIDE
         '
-        Me.LBL_KIND_ACCOUNT_GUIDE.AutoEllipsis = True
-        Me.LBL_KIND_ACCOUNT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_KIND_ACCOUNT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KIND_ACCOUNT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_KIND_ACCOUNT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_KIND_ACCOUNT_GUIDE.Name = "LBL_KIND_ACCOUNT_GUIDE"
-        Me.LBL_KIND_ACCOUNT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_KIND_ACCOUNT_GUIDE.TabIndex = 0
-        Me.LBL_KIND_ACCOUNT_GUIDE.Text = "科目種別"
-        Me.LBL_KIND_ACCOUNT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_FLAG_ACCOUNT_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_ACCOUNT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_ACCOUNT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_ACCOUNT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_ACCOUNT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_ACCOUNT_GUIDE.Name = "LBL_FLAG_ACCOUNT_GUIDE"
+        Me.LBL_FLAG_ACCOUNT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_ACCOUNT_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_ACCOUNT_GUIDE.Text = "科目種別"
+        Me.LBL_FLAG_ACCOUNT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_CODE_KIND
         '
@@ -577,7 +577,7 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_ACCOUNT.ResumeLayout(False)
         Me.PNL_NAME_ACCOUNT.PerformLayout()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
-        Me.PNL_KIND_ACCOUNT.ResumeLayout(False)
+        Me.PNL_FLAG_ACCOUNT.ResumeLayout(False)
         Me.PNL_CODE_KIND.ResumeLayout(False)
         Me.PNL_CODE_KIND.PerformLayout()
         Me.GRP_FOOT.ResumeLayout(False)
@@ -611,9 +611,9 @@ Partial Class FRM_MAIN
     Friend WithEvents BTN_DELETE As Button
     Friend WithEvents BTN_ENTER As Button
     Friend WithEvents BTN_END As Button
-    Friend WithEvents PNL_KIND_ACCOUNT As Panel
-    Friend WithEvents CMB_KIND_ACCOUNT As ComboBox
-    Friend WithEvents LBL_KIND_ACCOUNT_GUIDE As Label
+    Friend WithEvents PNL_FLAG_ACCOUNT As Panel
+    Friend WithEvents CMB_FLAG_ACCOUNT As ComboBox
+    Friend WithEvents LBL_FLAG_ACCOUNT_GUIDE As Label
     Friend WithEvents PNL_CODE_ACCOUNT_CONNECT As Panel
     Friend WithEvents LBL_CODE_ACCOUNT_CONNECT_GUIDE As Label
     Friend WithEvents TXT_CODE_ACCOUNT_CONNECT As TextBox

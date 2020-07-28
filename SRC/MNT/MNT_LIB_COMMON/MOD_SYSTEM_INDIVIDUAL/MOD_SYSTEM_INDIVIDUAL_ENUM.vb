@@ -11,7 +11,7 @@
         FLAG_DONE = 18 '済み／未済み　汎用
         KIND_SORT_CHECK_DEPOSIT = 19
         KIND_TARGET_RECEIVABLE = 20 '未収金対象
-        KIND_ACCOUNT = 21 '科目種別
+        FLAG_ACCOUNT = 21 '科目種別
         FLAG_INVALID = 22 '有効無効フラグ
         FLAG_INVALID_SHORT = 23 '有効無効フラグ（短）
     End Enum
@@ -43,7 +43,7 @@
         DONE = 1
     End Enum
 
-    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_ACCOUNT
         KIND_SALE = 1
         KIND_DEPOSIT = 2
         KIND_COST = 3

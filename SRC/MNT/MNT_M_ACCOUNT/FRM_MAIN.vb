@@ -25,7 +25,7 @@
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
-        KIND_ACCOUNT_NAME
+        FLAG_ACCOUNT_NAME
         CODE_KIND
         NAME_ACCOUNT
         CODE_ACCOUNT_CONNECT
@@ -36,13 +36,13 @@
 
 #Region "画面用・構造体"
     Private Structure SRT_MY_GRID_DATA
-        Public KIND_ACCOUNT As Integer
+        Public FLAG_ACCOUNT As Integer
         Public CODE_KIND As Integer
         Public NAME_ACCOUNT As String
         Public CODE_ACCOUNT_CONNECT As Integer
         Public FLAG_INVALID As Integer
 
-        Public KIND_ACCOUNT_NAME As String
+        Public FLAG_ACCOUNT_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 
@@ -67,13 +67,13 @@
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,4,9,4,2", "LRLRC")
 
-        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_ACCOUNT, ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT)
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_ACCOUNT, ENM_MNT_M_KIND_CODE_FLAG.FLAG_ACCOUNT)
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
-        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_ACCOUNT)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_ACCOUNT)
 
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS 'グリッド条件
         SRT_CONDITIONS = Nothing '条件の取得（項目がない為、クリア）
@@ -137,7 +137,7 @@
 
         Dim SRT_KEY As SRT_TABLE_MNT_M_ACCOUNT_KEY
         SRT_KEY = FUNC_GET_SELECT_RET_CODE()
-        If SRT_KEY.KIND_ACCOUNT <= 0 Then
+        If SRT_KEY.FLAG_ACCOUNT <= 0 Then
             Exit Sub
         End If
         If SRT_KEY.CODE_KIND <= 0 Then
@@ -147,7 +147,7 @@
         Call SUB_CLEAR()
 
         With SRT_KEY
-            Call SUB_SET_COMBO_KIND_CODE(CMB_KIND_ACCOUNT, .KIND_ACCOUNT)
+            Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_ACCOUNT, .FLAG_ACCOUNT)
             TXT_CODE_KIND.Text = .CODE_KIND
         End With
 
@@ -317,7 +317,7 @@
             Call .Append("FLAG_INVALID=" & CInt(ENM_FLAG_INVALID) & System.Environment.NewLine)
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1=1" & System.Environment.NewLine)
-            Call .Append("AND KIND_ACCOUNT=" & SRT_KEY.KIND_ACCOUNT & System.Environment.NewLine)
+            Call .Append("AND FLAG_ACCOUNT=" & SRT_KEY.FLAG_ACCOUNT & System.Environment.NewLine)
             Call .Append("AND CODE_KIND=" & SRT_KEY.CODE_KIND & System.Environment.NewLine)
         End With
 
@@ -421,7 +421,7 @@
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("KIND_ACCOUNT,CODE_KIND" & Environment.NewLine)
+            Call .Append("FLAG_ACCOUNT,CODE_KIND" & Environment.NewLine)
         End With
 
         SDR_READER = Nothing
@@ -442,7 +442,7 @@
             INT_INDEX = SRT_GRID_DATA_MAIN.Length
             ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
             With SRT_GRID_DATA_MAIN(INT_INDEX)
-                .KIND_ACCOUNT = CInt(SDR_READER.Item("KIND_ACCOUNT"))
+                .FLAG_ACCOUNT = CInt(SDR_READER.Item("FLAG_ACCOUNT"))
                 .CODE_KIND = CInt(SDR_READER.Item("CODE_KIND"))
                 .NAME_ACCOUNT = CStr(SDR_READER.Item("NAME_ACCOUNT"))
                 .CODE_ACCOUNT_CONNECT = CInt(SDR_READER.Item("CODE_ACCOUNT_CONNECT"))
@@ -454,7 +454,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-                .KIND_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_ACCOUNT, .KIND_ACCOUNT, True)
+                .FLAG_ACCOUNT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_ACCOUNT, .FLAG_ACCOUNT, True)
                 .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
             End With
         Next
@@ -476,7 +476,7 @@
 
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_ACCOUNT_NAME) = .KIND_ACCOUNT_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_ACCOUNT_NAME) = .FLAG_ACCOUNT_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_KIND) = Format(.CODE_KIND, New String("0", INT_SYSTEM_CODE_KIND_MAX_LENGTH))
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_ACCOUNT) = .NAME_ACCOUNT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_ACCOUNT_CONNECT) = Format(.CODE_ACCOUNT_CONNECT, New String("0", INT_SYSTEM_CODE_ACCOUNT_CONNECT_MAX_LENGTH))
@@ -498,7 +498,7 @@
 
         Dim SRT_RET As SRT_TABLE_MNT_M_ACCOUNT_KEY
         With SRT_RET
-            .KIND_ACCOUNT = -1
+            .FLAG_ACCOUNT = -1
             .CODE_KIND = -1
         End With
 
@@ -510,7 +510,7 @@
 
         INT_SRT_INDEX = INT_SELECT_ROW_INDEX
         With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
-            SRT_RET.KIND_ACCOUNT = FUNC_VALUE_CONVERT_NUMERIC_INT(.KIND_ACCOUNT)
+            SRT_RET.FLAG_ACCOUNT = FUNC_VALUE_CONVERT_NUMERIC_INT(.FLAG_ACCOUNT)
             SRT_RET.CODE_KIND = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_KIND)
         End With
         Return SRT_RET
@@ -537,7 +537,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1)
             With SRT_GRID_DATA_MAIN(i)
-                If .KIND_ACCOUNT = SRT_KEY.KIND_ACCOUNT _
+                If .FLAG_ACCOUNT = SRT_KEY.FLAG_ACCOUNT _
                     And .CODE_KIND = SRT_KEY.CODE_KIND Then
                     Return i
                 End If
@@ -622,7 +622,7 @@
         Dim SRT_RET As SRT_TABLE_MNT_M_ACCOUNT_KEY
 
         With SRT_RET
-            .KIND_ACCOUNT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_ACCOUNT)
+            .FLAG_ACCOUNT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_ACCOUNT)
             .CODE_KIND = CInt(TXT_CODE_KIND.Text)
         End With
 

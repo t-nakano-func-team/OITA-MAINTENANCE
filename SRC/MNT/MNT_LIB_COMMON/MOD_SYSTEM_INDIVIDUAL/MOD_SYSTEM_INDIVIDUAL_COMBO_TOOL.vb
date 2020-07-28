@@ -86,7 +86,7 @@
 #Region "MNT_M_ACCOUNT"
     Public Sub SUB_SYSTEM_COMMBO_MNT_M_ACCOUNT(
     ByRef CMB_COMBO_BOX As Object,
-    ByVal ENM_KIND_ACCOUNT As ENM_SYSTEM_INDIVIDUAL_KIND_ACCOUNT,
+    ByVal ENM_FLAG_ACCOUNT As ENM_SYSTEM_INDIVIDUAL_FLAG_ACCOUNT,
     Optional ByVal BLN_VIEW_NULL As Boolean = False,
     Optional ByVal STR_NAME_ALL As String = ""
     )
@@ -102,9 +102,9 @@
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_M_ACCOUNT" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("KIND_ACCOUNT=" & ENM_KIND_ACCOUNT & Environment.NewLine)
+            Call .Append("FLAG_ACCOUNT=" & ENM_FLAG_ACCOUNT & Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("KIND_ACCOUNT,CODE_KIND" & Environment.NewLine)
+            Call .Append("FLAG_ACCOUNT,CODE_KIND" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader 'データリーダー
