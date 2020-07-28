@@ -438,7 +438,7 @@
             Call .Append(STR_WHERE_SPOT) 'WHERE条件
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("KIND_CONTRACT DESC,NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("KIND_CONTRACT,NUMBER_CONTRACT" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader

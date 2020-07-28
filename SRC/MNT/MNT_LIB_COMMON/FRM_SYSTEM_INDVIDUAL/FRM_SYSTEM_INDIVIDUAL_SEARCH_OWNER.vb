@@ -30,14 +30,14 @@
         Public CODE_OWNER As Integer
         Public NAME_OWNER As String
         Public KANA_OWNER As String
-        Public KIND_OWNER As Integer
+        Public FLAG_OWNER As Integer
 
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
         Public NAME_OWNER As String
         Public KANA_OWNER As String
-        Public KIND_OWNER As Integer
+        Public FLAG_OWNER As Integer
     End Structure
 #End Region
 
@@ -179,7 +179,7 @@
 
     Private Sub SUB_CTRL_VIEW_INIT()
 
-        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_KIND_OWNER, ENM_MNT_M_KIND_CODE_FLAG.KIND_OWNER, True, "全て")
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_OWNER, ENM_MNT_M_KIND_CODE_FLAG.FLAG_OWNER, True, "全て")
 
         Call glbSubMakeDataTable(tblGRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称", "SSS")
         DGV_VIEW_DATA.DataSource = tblGRID_DATA_MAIN
@@ -191,7 +191,7 @@
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
-        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_OWNER)
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_OWNER)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -285,7 +285,7 @@
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
                 .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-                .KIND_OWNER = CInt(SDR_READER.Item("KIND_OWNER"))
+                .FLAG_OWNER = CInt(SDR_READER.Item("FLAG_OWNER"))
             End With
         End While
         ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
@@ -425,7 +425,7 @@
         With SRT_CONDITIONS
             .NAME_OWNER = TXT_NAME_OWNER.Text
             .KANA_OWNER = TXT_KANA_OWNER.Text
-            .KIND_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_OWNER)
+            .FLAG_OWNER = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_OWNER)
         End With
 
         Return SRT_CONDITIONS
@@ -439,8 +439,8 @@
         With SRT_CONDITIONS
             STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_OWNER, "NAME_OWNER")
             STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.KANA_OWNER, "KANA_OWNER")
-            If .KIND_OWNER >= 0 Then
-                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KIND_OWNER, "KIND_OWNER", "=")
+            If .FLAG_OWNER >= 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.FLAG_OWNER, "FLAG_OWNER", "=")
             End If
         End With
         Return STR_WHERE

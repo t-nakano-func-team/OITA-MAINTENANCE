@@ -398,7 +398,7 @@
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("SUB_01.KIND_CONTRACT DESC,MAIN.DATE_INVOICE,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("SUB_01.KIND_CONTRACT,MAIN.DATE_INVOICE,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader

@@ -44,10 +44,10 @@
         Dim INT_RET As Integer
 
         Select Case INT_KIND_CONTRACT
-            Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
-                INT_RET = 2
             Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
                 INT_RET = 1
+            Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
+                INT_RET = 2
             Case Else
                 INT_RET = 0
         End Select
@@ -307,6 +307,56 @@
         LNG_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL.ToString, 0)
 
         Return LNG_RET
+    End Function
+
+    '(次回)請求予定日の取得
+    Public Function FUNC_GET_DATE_INVOICE_PLAN(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As DateTime
+        Dim SRT_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
+        With SRT_CONTRACT.KEY
+            .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+            .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
+        End With
+        SRT_CONTRACT.DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_CONTRACT.KEY, SRT_CONTRACT.DATA)
+
+        Dim INT_SERIAL_INVOICE_MAX As Integer
+        INT_SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(INT_NUMBER_CONTRACT, INT_SERIAL_CONTRACT)
+        If INT_SERIAL_INVOICE_MAX <= 0 Then '一度も請求されていないなら
+            Return SRT_CONTRACT.DATA.DATE_INVOICE_BASE '請求基準日
+        End If
+
+        If SRT_CONTRACT.DATA.COUNT_INVOICE <= INT_SERIAL_INVOICE_MAX Then 'すべての請求が完了している場合は
+            Return cstVB_DATE_MAX '最大（到達できない）日付
+        End If
+
+        '請求途中の場合
+        Dim DAT_DATE_INVOICE_LAST As DateTime
+        DAT_DATE_INVOICE_LAST = FUNC_GET_MNT_T_INVOICE_DATE_INVOICE(INT_NUMBER_CONTRACT, INT_SERIAL_CONTRACT, INT_SERIAL_INVOICE_MAX) '最終請求日を取得
+
+        Dim INT_YYYYMM_INVOICE_LAST As Integer
+        INT_YYYYMM_INVOICE_LAST = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_INVOICE_LAST) '年月に変換
+
+        Dim INT_YYYYMM_INVOICE_PLAN As Integer
+        INT_YYYYMM_INVOICE_PLAN = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM_INVOICE_LAST, SRT_CONTRACT.DATA.SPAN_INVOICE) '請求スパンを+
+
+        Dim INT_YEAR As Integer
+        INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN) '年をパース
+        Dim INT_MONTH As Integer
+        INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN) '月をパース
+
+        Dim INT_DAY As Integer
+        INT_DAY = SRT_CONTRACT.DATA.DATE_INVOICE_BASE.Day
+
+        Dim DAT_RET As DateTime
+        If INT_DAY >= 28 Then '28日以降が基準なら
+            Dim DAT_CALC As DateTime
+            DAT_CALC = New DateTime(INT_YEAR, INT_MONTH, 1)
+            DAT_RET = FUNC_GET_DATE_LASTMONTH(DAT_CALC) '月末を算出
+        Else
+            DAT_RET = New DateTime(INT_YEAR, INT_MONTH, INT_DAY)
+        End If
+
+        Return DAT_RET
     End Function
 #End Region
 
