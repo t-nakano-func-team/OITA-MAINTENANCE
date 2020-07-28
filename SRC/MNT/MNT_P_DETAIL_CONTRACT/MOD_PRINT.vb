@@ -233,7 +233,7 @@
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("MAIN.KIND_CONTRACT DESC,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("MAIN.KIND_CONTRACT,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString

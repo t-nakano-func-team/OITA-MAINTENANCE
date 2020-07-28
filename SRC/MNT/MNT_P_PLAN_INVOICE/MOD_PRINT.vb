@@ -289,7 +289,7 @@
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("MAIN.CODE_SECTION,MAIN.KIND_CONTRACT DESC,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("MAIN.CODE_SECTION,MAIN.KIND_CONTRACT,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -315,31 +315,8 @@
             Dim INT_SERIAL_INVOICE_MAX As Integer
             INT_SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .COUNT_INVOICE_PLAN = (INT_SERIAL_INVOICE_MAX + 1)
+            '.DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(SRT_DATA)
             .DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(SRT_DATA)
-
-            'If INT_SERIAL_INVOICE_MAX <= 0 Then
-            '    .DATE_INVOICE_PLAN = .DATE_INVOICE_BASE
-            'Else
-            '    Dim DAT_DATE_INVOICE_LAST As DateTime
-            '    DAT_DATE_INVOICE_LAST = FUNC_GET_MNT_T_INVOICE_DATE_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT, INT_SERIAL_INVOICE_MAX)
-            '    Dim INT_YYYYMM_INVOICE_LAST As Integer
-            '    INT_YYYYMM_INVOICE_LAST = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_INVOICE_LAST)
-            '    Dim INT_YYYYMM_INVOICE_PLAN As Integer
-            '    INT_YYYYMM_INVOICE_PLAN = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM_INVOICE_LAST, .SPAN_INVOICE)
-            '    Dim INT_YEAR As Integer
-            '    INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN)
-            '    Dim INT_MONTH As Integer
-            '    INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN)
-            '    Dim INT_DAY As Integer
-            '    INT_DAY = .DATE_INVOICE_BASE.Day
-            '    If INT_DAY >= 28 Then
-            '        Dim DAT_CALC As DateTime
-            '        DAT_CALC = New DateTime(INT_YEAR, INT_MONTH, 1)
-            '        .DATE_INVOICE_PLAN = FUNC_GET_DATE_LASTMONTH(DAT_CALC)
-            '    Else
-            '        .DATE_INVOICE_PLAN = New DateTime(INT_YEAR, INT_MONTH, INT_DAY)
-            '    End If
-            'End If
 
         End With
     End Sub

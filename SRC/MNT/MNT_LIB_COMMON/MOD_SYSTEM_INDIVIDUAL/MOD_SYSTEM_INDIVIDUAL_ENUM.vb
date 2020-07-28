@@ -29,8 +29,8 @@
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT
-        SPOT = 1
-        REGULAR = 2
+        REGULAR = 1
+        SPOT = 2
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE
