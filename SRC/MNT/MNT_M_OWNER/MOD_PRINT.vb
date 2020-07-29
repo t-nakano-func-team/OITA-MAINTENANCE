@@ -33,6 +33,7 @@
         Public FLAG_INVALID As Integer
 
         Public FLAG_OWNER_NAME As String
+        Public CODE_POST_VIEW As String
         Public DAY_FIX_INVOICE_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
@@ -184,6 +185,12 @@
             .FLAG_OWNER_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_OWNER, .FLAG_OWNER, True)
             .DAY_FIX_INVOICE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.DAY_FIX_INVOICE, .DAY_FIX_INVOICE, True)
             .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
+
+            If .CODE_POST <= 0 Then
+                .CODE_POST_VIEW = ""
+            Else
+                .CODE_POST_VIEW = CStr(.CODE_POST)
+            End If
         End With
     End Sub
 
@@ -202,7 +209,7 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KANA_OWNER))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_OWNER))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_OWNER_NAME))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_POST))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_POST_VIEW))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_01))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_02))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DAY_FIX_INVOICE))
