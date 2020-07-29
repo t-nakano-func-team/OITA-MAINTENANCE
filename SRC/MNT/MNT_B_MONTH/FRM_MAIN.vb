@@ -90,7 +90,54 @@
 #Region "実行処理群"
 
     Private Sub SUB_BATCH()
+        If Not FUNC_CHECK_INPUT_DATA() Then
+            Exit Sub
+        End If
 
+        Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
+        With SRT_CONDITIONS
+            .YYYYMM_B_MONTH = FUNC_CONVERT_YYYYMM_FROM_STR(LBL_CODE_YYYYMM_AFTER.Text)
+
+            .DATE_DO_BATCH = DateTime.Now
+            .FORM = Me
+        End With
+
+        Dim STR_MSG As String
+        STR_MSG = ""
+        STR_MSG &= LBL_CODE_YYYYMM_AFTER.Text & "の" & Environment.NewLine
+        STR_MSG &= Me.Text & "を行います。" & Environment.NewLine & "よろしいですか？"
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Call SUB_PUT_PROGRESS_GUIDE(Me.Text & "を行っています")
+        Dim BLN_RET As Boolean
+        Dim BLN_PUT As Boolean
+        BLN_RET = MOD_BATCH.FUNC_BACTH_MAIN(BLN_PUT, SRT_CONDITIONS)
+        Call SUB_PUT_PROGRESS_GUIDE("")
+
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_BATCH.STR_FUNC_BATCH_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not BLN_PUT Then
+            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Call MessageBox.Show(Me.Text & "を完了しました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Call SUB_CLEAR()
+    End Sub
+
+    Private Sub SUB_CLEAR()
+        Call SUB_CONTROL_CLEAR_FORM(Me)
+        Call SUB_CTRL_VALUE_INIT() '値を初期化
+        Call SUB_WINDOW_MODE_CHANGE(ENM_MY_WINDOW_MODE.INPUT_KEY)
+        Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me)
     End Sub
 
     Private Sub SUB_END()
@@ -173,6 +220,26 @@
     End Sub
 #End Region
 
+#Region "チェック処理"
+
+    Private Function FUNC_CHECK_INPUT_DATA() As Boolean
+        Dim CTL_CONTROL As Control
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+
+        'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
+        CTL_CONTROL = Nothing
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_DATA, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
 #Region "キー制御処理"
     '通常のコマンドキー制御(シフトマスク無し)
     Private Sub SUB_KEY_DOWN(ByVal enmKEY_CODE As Windows.Forms.Keys, ByRef blnHandled As Boolean)
@@ -233,6 +300,16 @@
 
         Return True
     End Function
+#End Region
+
+#Region "内部処理"
+
+    Public Sub SUB_PUT_PROGRESS_GUIDE(ByVal STR_PROGRESS As String)
+
+        LBL_BATCH_PROGRESS.Text = STR_PROGRESS
+        Call LBL_BATCH_PROGRESS.Refresh()
+        Call Application.DoEvents()
+    End Sub
 #End Region
 
 #Region "NEW"

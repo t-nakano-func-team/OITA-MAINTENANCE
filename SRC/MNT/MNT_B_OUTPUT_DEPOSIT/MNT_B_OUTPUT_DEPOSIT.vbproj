@@ -86,6 +86,7 @@
     <Compile Include="FRM_MAIN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MOD_BATCH.vb" />
     <Compile Include="MOD_MAIN.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

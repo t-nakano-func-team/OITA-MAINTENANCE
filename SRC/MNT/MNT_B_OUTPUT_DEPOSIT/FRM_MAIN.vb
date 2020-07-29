@@ -176,6 +176,26 @@
     End Sub
 #End Region
 
+#Region "チェック処理"
+
+    Private Function FUNC_CHECK_INPUT_DATA() As Boolean
+        Dim CTL_CONTROL As Control
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+
+        'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
+        CTL_CONTROL = Nothing
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_DATA, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
 #Region "内部処理"
     Private Function FUNC_GET_DATE_INVOICE_MAX() As DateTime
         Dim STR_SQL As System.Text.StringBuilder

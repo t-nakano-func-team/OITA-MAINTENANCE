@@ -4,7 +4,6 @@
     Friend STR_FUNC_BATCH_MAIN_ERR_STR As String '最終エラー文字列
 #End Region
 
-
 #Region "バッチ用・構造体"
     Public Structure SRT_INVOICE_INFO_RECORD
         Public KEY As SRT_NUMBER_SERIAL_CONTRACT

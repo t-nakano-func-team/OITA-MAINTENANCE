@@ -332,7 +332,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_MAINTENANCE.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_MAINTENANCE.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_MAINTENANCE.MaxLength = 12
+        Me.TXT_NAME_MAINTENANCE.MaxLength = 20
         Me.TXT_NAME_MAINTENANCE.Name = "TXT_NAME_MAINTENANCE"
         Me.TXT_NAME_MAINTENANCE.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_MAINTENANCE.TabIndex = 1

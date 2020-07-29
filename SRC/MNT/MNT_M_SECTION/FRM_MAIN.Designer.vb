@@ -295,7 +295,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_SECTION.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_SECTION.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_SECTION.MaxLength = 12
+        Me.TXT_NAME_SECTION.MaxLength = 20
         Me.TXT_NAME_SECTION.Name = "TXT_NAME_SECTION"
         Me.TXT_NAME_SECTION.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_SECTION.TabIndex = 1

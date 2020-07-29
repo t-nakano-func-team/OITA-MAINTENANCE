@@ -173,6 +173,26 @@
     End Sub
 #End Region
 
+#Region "チェック処理"
+
+    Private Function FUNC_CHECK_INPUT_DATA() As Boolean
+        Dim CTL_CONTROL As Control
+        Dim ENM_ERR_CODE As CONTROL_CHECK_ERR_CODE
+        Dim STR_ERR_MSG As String
+
+        'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
+        CTL_CONTROL = Nothing
+        If Not FUNC_CONTROL_CHECK_INPUT_FORM_CONTROLS(PNL_INPUT_DATA, CTL_CONTROL, ENM_ERR_CODE, "Check") Then
+            STR_ERR_MSG = FUNC_GET_MESSAGE_CTRL_CHECK(ENM_ERR_CODE, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+#End Region
+
 #Region "キー制御処理"
     '通常のコマンドキー制御(シフトマスク無し)
     Private Sub SUB_KEY_DOWN(ByVal enmKEY_CODE As Windows.Forms.Keys, ByRef blnHandled As Boolean)
