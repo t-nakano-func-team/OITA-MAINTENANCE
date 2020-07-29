@@ -358,6 +358,27 @@
 
         Return DAT_RET
     End Function
+
+    '該当契約の全ての請求情報を削除する。（入金も同時削除）
+    Public Function FUNC_DELETE_INVOICE_CONTRACT(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As Boolean
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            Call .Append("DELETE" & System.Environment.NewLine)
+            Call .Append("FROM" & System.Environment.NewLine)
+            Call .Append("MNT_T_INVOICE WITH(ROWLOCK)" & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append("AND NUMBER_CONTRACT=" & INT_NUMBER_CONTRACT & System.Environment.NewLine)
+            Call .Append("AND SERIAL_CONTRACT=" & INT_SERIAL_CONTRACT & System.Environment.NewLine)
+        End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
+            Return False
+        End If
+
+        Return True
+    End Function
 #End Region
 
 #Region "入金関連"
@@ -472,6 +493,44 @@
         SDR_READER = Nothing
 
         Return SRT_RET
+    End Function
+
+    Public Function FUNC_MAKE_NEW_DEPOSIT(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer, ByVal INT_SERIAL_INVOICE As Integer, ByVal DAT_DETE_DEPOSIT As DateTime) As Boolean
+        Dim SRT_RECORD As SRT_TABLE_MNT_T_DEPOSIT
+
+        With SRT_RECORD.KEY
+            .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+            .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
+            .SERIAL_INVOICE = INT_SERIAL_INVOICE
+        End With
+
+        If Not FUNC_DELETE_TABLE_MNT_T_DEPOSIT(SRT_RECORD.KEY) Then
+            Return False
+        End If
+
+        With SRT_RECORD.DATA
+            .DATE_DEPOSIT = DAT_DETE_DEPOSIT
+            .FLAG_SALE = 1 '未収
+            .FLAG_DEPOSIT = 1 '普通預金
+            .FLAG_DEPOSIT_SUB = 1 '大分銀行東支店
+            .KINGAKU_FEE_DETAIL = 0
+            .KINGAKU_FEE_VAT = 0
+            .FLAG_COST = 0
+            .KINGAKU_COST_DETAIL = 0
+            .KINGAKU_COST_VAT = 0
+            .FLAG_OUTPUT = ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.DONE '完了扱い
+            .NAME_MEMO = "自動生成"
+            .DATE_ACTIVE = .DATE_DEPOSIT '入金同日に処理したものとする
+            .SERIAL_DEPOSIT = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(.DATE_ACTIVE) + 1
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
+        End With
+
+        If Not FUNC_INSERT_TABLE_MNT_T_DEPOSIT(SRT_RECORD) Then
+            Return False
+        End If
+
+        Return True
     End Function
 
 #End Region

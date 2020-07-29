@@ -316,48 +316,47 @@
             INT_SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .COUNT_INVOICE_PLAN = (INT_SERIAL_INVOICE_MAX + 1)
             '.DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(SRT_DATA)
-            .DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(SRT_DATA)
-
+            .DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
         End With
     End Sub
 
-    Private Function FUNC_GET_DATE_INVOICE_PLAN(ByRef SRT_DATA As SRT_PRINT_DATA)
-        With SRT_DATA
-            Dim INT_SERIAL_INVOICE_MAX As Integer
-            INT_SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
-            If INT_SERIAL_INVOICE_MAX <= 0 Then '一度も請求されていないなら
-                Return .DATE_INVOICE_BASE '請求基準日
-            End If
+    'Private Function FUNC_GET_DATE_INVOICE_PLAN(ByRef SRT_DATA As SRT_PRINT_DATA) As DateTime
+    '    With SRT_DATA
+    '        Dim INT_SERIAL_INVOICE_MAX As Integer
+    '        INT_SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+    '        If INT_SERIAL_INVOICE_MAX <= 0 Then '一度も請求されていないなら
+    '            Return .DATE_INVOICE_BASE '請求基準日
+    '        End If
 
-            If SRT_DATA.COUNT_INVOICE <= INT_SERIAL_INVOICE_MAX Then 'すべての請求が完了している場合は
-                Return cstVB_DATE_MAX '最大（到達できない）日付
-            End If
+    '        If SRT_DATA.COUNT_INVOICE <= INT_SERIAL_INVOICE_MAX Then 'すべての請求が完了している場合は
+    '            Return cstVB_DATE_MAX '最大（到達できない）日付
+    '        End If
 
-            Dim DAT_DATE_INVOICE_LAST As DateTime
-            DAT_DATE_INVOICE_LAST = FUNC_GET_MNT_T_INVOICE_DATE_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT, INT_SERIAL_INVOICE_MAX, True)
-            Dim INT_YYYYMM_INVOICE_LAST As Integer
-            INT_YYYYMM_INVOICE_LAST = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_INVOICE_LAST)
-            Dim INT_YYYYMM_INVOICE_PLAN As Integer
-            INT_YYYYMM_INVOICE_PLAN = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM_INVOICE_LAST, .SPAN_INVOICE)
-            Dim INT_YEAR As Integer
-            INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN)
-            Dim INT_MONTH As Integer
-            INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN)
-            Dim INT_DAY As Integer
-            INT_DAY = .DATE_INVOICE_BASE.Day
-            Dim DAT_RET As DateTime
-            If INT_DAY >= 28 Then
-                Dim DAT_CALC As DateTime
-                DAT_CALC = New DateTime(INT_YEAR, INT_MONTH, 1)
-                DAT_RET = FUNC_GET_DATE_LASTMONTH(DAT_CALC)
-            Else
-                DAT_RET = New DateTime(INT_YEAR, INT_MONTH, INT_DAY)
-            End If
+    '        Dim DAT_DATE_INVOICE_LAST As DateTime
+    '        DAT_DATE_INVOICE_LAST = FUNC_GET_MNT_T_INVOICE_DATE_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT, INT_SERIAL_INVOICE_MAX, True)
+    '        Dim INT_YYYYMM_INVOICE_LAST As Integer
+    '        INT_YYYYMM_INVOICE_LAST = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_INVOICE_LAST)
+    '        Dim INT_YYYYMM_INVOICE_PLAN As Integer
+    '        INT_YYYYMM_INVOICE_PLAN = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM_INVOICE_LAST, .SPAN_INVOICE)
+    '        Dim INT_YEAR As Integer
+    '        INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN)
+    '        Dim INT_MONTH As Integer
+    '        INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_INVOICE_PLAN)
+    '        Dim INT_DAY As Integer
+    '        INT_DAY = .DATE_INVOICE_BASE.Day
+    '        Dim DAT_RET As DateTime
+    '        If INT_DAY >= 28 Then
+    '            Dim DAT_CALC As DateTime
+    '            DAT_CALC = New DateTime(INT_YEAR, INT_MONTH, 1)
+    '            DAT_RET = FUNC_GET_DATE_LASTMONTH(DAT_CALC)
+    '        Else
+    '            DAT_RET = New DateTime(INT_YEAR, INT_MONTH, INT_DAY)
+    '        End If
 
-            Return DAT_RET
-        End With
+    '        Return DAT_RET
+    '    End With
 
-    End Function
+    'End Function
 
     Private Function FUNC_GET_INDEX(ByRef SRT_DATA() As SRT_PRINT_DATA, ByVal DEC_SORT_INDEX As Decimal) As Integer
         Dim INT_RET As Integer = 0

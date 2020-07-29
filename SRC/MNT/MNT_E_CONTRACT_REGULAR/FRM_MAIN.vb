@@ -9,6 +9,7 @@
         DO_DELETE
         DO_CLEAR
         DO_END = 81
+        DO_SHOW_INVOICE_DONE
         DO_SHOW_SETTING
         DO_SHOW_COMMANDLINE
         DO_SHOW_CONFIG_SETTINGS
@@ -116,6 +117,8 @@
                 Call SUB_CLEAR()
             Case ENM_MY_EXEC_DO.DO_END
                 Call SUB_END()
+            Case ENM_MY_EXEC_DO.DO_SHOW_INVOICE_DONE
+                Call SUB_SHOW_INVOICE_DOONE()
             Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
                 Call SUB_SHOW_SETTING()
             Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
@@ -403,6 +406,42 @@
         Call Me.Close()
     End Sub
 
+    Private Sub SUB_SHOW_INVOICE_DOONE()
+
+        Dim BLN_SHOW As Boolean
+        Select Case ENM_WINDOW_MODE_CURRENT
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL
+                BLN_SHOW = True
+            Case Else
+                BLN_SHOW = False
+        End Select
+
+        If Not BLN_SHOW Then
+            Exit Sub
+        End If
+
+        Dim FRM_SHOW As FRM_SUB_01
+        FRM_SHOW = New FRM_SUB_01
+        FRM_SHOW.Font = New System.Drawing.Font(FRM_SHOW.Font.Name, Me.Font.Size)
+        FRM_SHOW.Text = Me.Text & " " & "請求確定処理"
+        FRM_SHOW.NUMBER_CONTRACT = CInt(TXT_NUMBER_CONTRACT.Text)
+        FRM_SHOW.SERIAL_CONTRACT = CInt(TXT_SERIAL_CONTRACT.Text)
+
+        Call FRM_SHOW.ShowDialog()
+
+        Dim BLN_CNACEL As Boolean
+        BLN_CNACEL = FRM_SHOW.RET_EDIT_CANCEL
+
+        Call FRM_SHOW.Dispose()
+        FRM_SHOW = Nothing
+
+        If BLN_CNACEL Then
+            Exit Sub
+        End If
+
+        Call SUB_CLEAR()
+    End Sub
+
     Private Sub SUB_SHOW_SETTING()
         BLN_SHOW_SETTING = True
         Call Me.Close()
@@ -674,6 +713,8 @@
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_CONFIG_SETTINGS)
             Case Keys.S
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SETTING)
+            Case Keys.I
+                Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_INVOICE_DONE)
             Case Else
                 'スルー
         End Select
