@@ -48,6 +48,7 @@
         Public CODE_SECTION As Integer
         Public KINGAKU_CONTRACT As Long
 
+        Public DATE_INVOICE_PLAN As DateTime
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
         Public SERIAL_INVOICE_MAX As Integer
@@ -132,7 +133,7 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,契約日付,オーナー,契約内容,回数,担当部署,請求金額", "BSSSSSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,請求予定日,オーナー,契約内容,回数,担当部署,請求金額", "BSSSSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
         Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,4,5,6,6,2,4,4", "CLRRLLCLR")
 
@@ -515,6 +516,8 @@
             Call FUNC_SELECT_TABLE_MNT_T_CONTRACT_SPOT(SRT_RECORD_CONTRACT_SPOT.KEY, SRT_RECORD_CONTRACT_SPOT.DATA, True)
 
             With SRT_GRID_DATA_MAIN(i)
+                .DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
+
                 .KIND_CONTRACT = SRT_RECORD_CONTRACT.DATA.KIND_CONTRACT
                 .CODE_OWNER = SRT_RECORD_CONTRACT.DATA.CODE_OWNER
                 .NAME_CONTRACT = SRT_RECORD_CONTRACT.DATA.NAME_CONTRACT
@@ -573,7 +576,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CHECK) = False
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
-                OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_CONTRACT.ToLongDateString
+                OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_INVOICE_PLAN.ToLongDateString
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
@@ -737,6 +740,38 @@
 
         Return SRT_RET
     End Function
+
+    Private Function FUNC_GET_CHECK_ROW(ByVal INT_INDEX As Integer) As Boolean
+
+        Dim TBL_DATA_TABLE As DataTable
+        TBL_DATA_TABLE = DGV_VIEW_DATA.DataSource
+
+        If TBL_DATA_TABLE Is Nothing Then
+            Return False
+        End If
+
+        Dim INT_TABLE_INDEX As Integer
+        INT_TABLE_INDEX = (INT_INDEX - 1)
+
+        Dim ROW_DATA As DataRow
+        Try
+            ROW_DATA = TBL_DATA_TABLE.Rows(INT_TABLE_INDEX)
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Dim OBJ_TEMP As Object
+        Try
+            OBJ_TEMP = ROW_DATA.Item(ENM_MY_GRID_MAIN.CHECK)
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Dim BLN_RET As Boolean
+        BLN_RET = CBool(OBJ_TEMP)
+
+        Return BLN_RET
+    End Function
 #End Region
 
 #Region "チェック処理"
@@ -770,6 +805,34 @@
             Call CTL_CONTROL.Focus()
             Return False
         End If
+
+        Dim BLN_ERROR_DATE_INVOICE_PLAN As Boolean
+        BLN_ERROR_DATE_INVOICE_PLAN = False
+        Dim INT_MAX_INDEX As Integer
+        INT_MAX_INDEX = (SRT_GRID_DATA_MAIN.Length - 1)
+        For i = 1 To INT_MAX_INDEX '構造体のLength分のデータがありきとする
+            Dim BLN_CHECK As Boolean
+            BLN_CHECK = FUNC_GET_CHECK_ROW(i)
+            If BLN_CHECK Then
+                If SRT_GRID_DATA_MAIN(i).DATE_INVOICE_PLAN <> DTP_DATE_INVOICE.Value Then
+                    BLN_ERROR_DATE_INVOICE_PLAN = True
+                    Exit For
+                End If
+            End If
+        Next
+
+        If BLN_ERROR_DATE_INVOICE_PLAN Then
+            STR_ERR_MSG = ""
+            STR_ERR_MSG &= LBL_DATE_INVOICE_GUIDE.Text & "と" & "請求予定日が合致しない契約がチェックされています。" & System.Environment.NewLine
+            STR_ERR_MSG &= "このまま" & Me.Text & "を行いますか？" & System.Environment.NewLine
+            Dim RST_MSG As System.Windows.Forms.DialogResult
+            RST_MSG = MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            If RST_MSG = Windows.Forms.DialogResult.No Then
+                DGV_VIEW_DATA.Focus()
+                Return False
+            End If
+        End If
+
 
         Return True
     End Function
