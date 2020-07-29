@@ -111,7 +111,7 @@
 
         Dim STR_MSG As String
         STR_MSG = ""
-        STR_MSG &= LBL_CODE_YYYYMM_AFTER.Text & "の" & Environment.NewLine
+        STR_MSG &= LBL_CODE_YYYYMM_BEFORE.Text & "の" & Environment.NewLine
         STR_MSG &= Me.Text & "を行います。" & Environment.NewLine & "よろしいですか？"
         Dim RST_MSG As System.Windows.Forms.DialogResult
         RST_MSG = MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)

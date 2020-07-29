@@ -30,11 +30,11 @@
             Return False
         End If
 
-        If Not SDR_READER.HasRows Then
-            Call SDR_READER.Close()
-            SDR_READER = Nothing
-            Return True 'データなし正常終了
-        End If
+        'If Not SDR_READER.HasRows Then
+        '    Call SDR_READER.Close()
+        '    SDR_READER = Nothing
+        '    Return True 'データなし正常終了
+        'End If
 
         Dim SRT_CONTRACT_ALL() As SRT_TABLE_MNT_T_CONTRACT '対象の契約すべて（定期かつ自動更新かつ契約連番が最大）
         ReDim SRT_CONTRACT_ALL(0)
