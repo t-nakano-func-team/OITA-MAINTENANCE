@@ -63,9 +63,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "科目種別,種別コード,科目名称,科目コード,削除", "SSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "科目種別,科目コード,科目名称,連携科目コード,削除", "SSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,4,9,4,2", "LRLRC")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,4,9,6,2", "LRLRC")
 
         Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_ACCOUNT, ENM_MNT_M_KIND_CODE_FLAG.FLAG_ACCOUNT)
     End Sub
