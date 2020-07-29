@@ -970,7 +970,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
 
 #Region "DATA"
     Public Structure SRT_TABLE_MNT_T_CONTRACT_DATA
-        Public KIND_CONTRACT As Integer
+        Public FLAG_CONTRACT As Integer
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
         Public CODE_SECTION As Integer
@@ -1049,7 +1049,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
     ) As Boolean
 
         With SRT_RET
-            .KIND_CONTRACT = -1
+            .FLAG_CONTRACT = -1
             .DATE_CONTRACT = cstVB_DATE_MIN
             .CODE_OWNER = -1
             .CODE_SECTION = -1
@@ -1108,7 +1108,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Call SDR_READER.Read()
 
         With SRT_RET
-            .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
+            .FLAG_CONTRACT = CInt(SDR_READER.Item("FLAG_CONTRACT"))
             .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
             .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
             .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
@@ -1183,7 +1183,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SERIAL_CONTRACT) & "," & Environment.NewLine)
         End With
         With SRT_DATA.DATA
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.KIND_CONTRACT) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_OWNER) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_SECTION) & "," & Environment.NewLine)

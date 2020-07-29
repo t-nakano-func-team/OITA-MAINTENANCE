@@ -4,7 +4,7 @@
         DAY_FIX_INVOICE = 10 '請求締日付
         FLAG_OWNER = 11 '形式
         KIND_RATE_VAT = 13 '消費税
-        KIND_CONTRACT = 14 '契約形態
+        FLAG_CONTRACT = 14 '契約形態
         FLAG_DEPOSIT_DONE = 15
         FLAG_OUTPUT = 16
         FLAG_WORK = 17
@@ -29,7 +29,7 @@
         SPOT = 2
     End Enum
 
-    Public Enum ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT
+    Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT
         REGULAR = 1
         SPOT = 2
     End Enum

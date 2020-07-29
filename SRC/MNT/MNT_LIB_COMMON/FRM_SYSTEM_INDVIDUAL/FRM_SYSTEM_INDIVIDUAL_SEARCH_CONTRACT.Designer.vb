@@ -34,9 +34,9 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
-        Me.PNL_KIND_CONTRACT = New System.Windows.Forms.Panel()
-        Me.CMB_KIND_CONTRACT = New System.Windows.Forms.ComboBox()
-        Me.LBL_KIND_CONTRACT_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_FLAG_CONTRACT = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_CONTRACT = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_SEARCH = New System.Windows.Forms.Panel()
         Me.LBL_COUNT_SEARCH_MAX = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_UNIT = New System.Windows.Forms.Label()
@@ -69,7 +69,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT
         Me.GRP_BODY.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
-        Me.PNL_KIND_CONTRACT.SuspendLayout()
+        Me.PNL_FLAG_CONTRACT.SuspendLayout()
         Me.PNL_SEARCH.SuspendLayout()
         Me.grpFOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
@@ -235,44 +235,44 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_CONTRACT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_OWNER)
-        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_CONTRACT)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_CONTRACT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_SEARCH)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 110)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
-        'PNL_KIND_CONTRACT
+        'PNL_FLAG_CONTRACT
         '
-        Me.PNL_KIND_CONTRACT.Controls.Add(Me.CMB_KIND_CONTRACT)
-        Me.PNL_KIND_CONTRACT.Controls.Add(Me.LBL_KIND_CONTRACT_GUIDE)
-        Me.PNL_KIND_CONTRACT.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_KIND_CONTRACT.Name = "PNL_KIND_CONTRACT"
-        Me.PNL_KIND_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_CONTRACT.TabIndex = 0
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.CMB_FLAG_CONTRACT)
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.LBL_FLAG_CONTRACT_GUIDE)
+        Me.PNL_FLAG_CONTRACT.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_FLAG_CONTRACT.Name = "PNL_FLAG_CONTRACT"
+        Me.PNL_FLAG_CONTRACT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_CONTRACT.TabIndex = 0
         '
-        'CMB_KIND_CONTRACT
+        'CMB_FLAG_CONTRACT
         '
-        Me.CMB_KIND_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_KIND_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_KIND_CONTRACT.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_KIND_CONTRACT.Name = "CMB_KIND_CONTRACT"
-        Me.CMB_KIND_CONTRACT.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_KIND_CONTRACT.TabIndex = 1
-        Me.CMB_KIND_CONTRACT.Tag = "Clear"
+        Me.CMB_FLAG_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_CONTRACT.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_CONTRACT.Name = "CMB_FLAG_CONTRACT"
+        Me.CMB_FLAG_CONTRACT.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_CONTRACT.TabIndex = 1
+        Me.CMB_FLAG_CONTRACT.Tag = "Clear"
         '
-        'LBL_KIND_CONTRACT_GUIDE
+        'LBL_FLAG_CONTRACT_GUIDE
         '
-        Me.LBL_KIND_CONTRACT_GUIDE.AutoEllipsis = True
-        Me.LBL_KIND_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_KIND_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KIND_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_KIND_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_KIND_CONTRACT_GUIDE.Name = "LBL_KIND_CONTRACT_GUIDE"
-        Me.LBL_KIND_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_KIND_CONTRACT_GUIDE.TabIndex = 0
-        Me.LBL_KIND_CONTRACT_GUIDE.Text = "契約形態"
-        Me.LBL_KIND_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_FLAG_CONTRACT_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_CONTRACT_GUIDE.Name = "LBL_FLAG_CONTRACT_GUIDE"
+        Me.LBL_FLAG_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_CONTRACT_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_CONTRACT_GUIDE.Text = "契約形態"
+        Me.LBL_FLAG_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_SEARCH
         '
@@ -601,7 +601,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT
         Me.GRP_BODY.ResumeLayout(False)
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
-        Me.PNL_KIND_CONTRACT.ResumeLayout(False)
+        Me.PNL_FLAG_CONTRACT.ResumeLayout(False)
         Me.PNL_SEARCH.ResumeLayout(False)
         Me.PNL_SEARCH.PerformLayout()
         Me.grpFOOT.ResumeLayout(False)
@@ -625,9 +625,9 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT
     Friend WithEvents GRP_BODY As GroupBox
     Friend WithEvents DGV_VIEW_DATA As DataGridView
     Friend WithEvents PNL_INPUT_KEY As Panel
-    Friend WithEvents PNL_KIND_CONTRACT As Panel
-    Friend WithEvents CMB_KIND_CONTRACT As ComboBox
-    Friend WithEvents LBL_KIND_CONTRACT_GUIDE As Label
+    Friend WithEvents PNL_FLAG_CONTRACT As Panel
+    Friend WithEvents CMB_FLAG_CONTRACT As ComboBox
+    Friend WithEvents LBL_FLAG_CONTRACT_GUIDE As Label
     Friend WithEvents PNL_SEARCH As Panel
     Friend WithEvents LBL_COUNT_SEARCH_MAX As Label
     Friend WithEvents LBL_COUNT_SEARCH_UNIT As Label

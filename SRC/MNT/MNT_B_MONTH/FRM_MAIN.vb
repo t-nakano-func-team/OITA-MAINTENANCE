@@ -96,10 +96,16 @@
 
         Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
         With SRT_CONDITIONS
-            .YYYYMM_B_MONTH = FUNC_CONVERT_YYYYMM_FROM_STR(LBL_CODE_YYYYMM_AFTER.Text)
+            Dim STR_TEMP As String
+            STR_TEMP = LBL_CODE_YYYYMM_AFTER.Text
+            STR_TEMP = STR_TEMP.Replace("年", "/")
+            STR_TEMP = STR_TEMP.Replace("月", "")
+            .YYYYMM_B_MONTH = FUNC_CONVERT_YYYYMM_FROM_STR(STR_TEMP)
 
             .DATE_DO_BATCH = DateTime.Now
             .FORM = Me
+
+            .RET_MAKE_CONTENT_COUNT = 0
         End With
 
         Dim STR_MSG As String
@@ -128,7 +134,10 @@
             Exit Sub
         End If
 
-        Call MessageBox.Show(Me.Text & "を完了しました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        STR_MSG = ""
+        STR_MSG &= Me.Text & "を完了しました。" & Environment.NewLine
+        STR_MSG &= SRT_CONDITIONS.RET_MAKE_CONTENT_COUNT & "件の継続契約を作成しました。" & Environment.NewLine
+        Call MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Call SUB_CLEAR()
     End Sub

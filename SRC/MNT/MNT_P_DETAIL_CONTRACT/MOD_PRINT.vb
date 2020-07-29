@@ -22,7 +22,7 @@
         Public DATE_CONTRACT_TO As DateTime
         Public DATE_ACTIVE_FROM As DateTime
         Public DATE_ACTIVE_TO As DateTime
-        Public KIND_CONTRACT As Integer
+        Public FLAG_CONTRACT As Integer
         Public CODE_OWNER_FROM As Integer
         Public CODE_OWNER_TO As Integer
         Public NAME_OWNER As String
@@ -32,7 +32,7 @@
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
 
-        Public KIND_CONTRACT As Integer
+        Public FLAG_CONTRACT As Integer
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
         Public CODE_SECTION As Integer
@@ -47,7 +47,7 @@
         Public KINGAKU_CONTRACT As Long
         Public NAME_MEMO As String
 
-        Public KIND_CONTRACT_NAME As String
+        Public FLAG_CONTRACT_NAME As String
         Public DATE_CONTRACT_INT As Integer
         Public CODE_OWNER_NAME As String
         Public CODE_SECTION_NAME As String
@@ -117,7 +117,7 @@
                 .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
                 .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
 
-                .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
+                .FLAG_CONTRACT = CInt(SDR_READER.Item("FLAG_CONTRACT"))
                 .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
@@ -137,17 +137,17 @@
         Call SDR_READER.Close()
         SDR_READER = Nothing
 
-        Dim INT_KIND_CONTRACT_BEFORE As Integer
-        INT_KIND_CONTRACT_BEFORE = -1
+        Dim INT_FLAG_CONTRACT_BEFORE As Integer
+        INT_FLAG_CONTRACT_BEFORE = -1
 
         Dim INT_NUMBER_BREAK As Integer
         INT_NUMBER_BREAK = 0
         For i = 1 To (SRT_DATA.Length - 1)
-            If INT_KIND_CONTRACT_BEFORE <> SRT_DATA(i).KIND_CONTRACT Then
+            If INT_FLAG_CONTRACT_BEFORE <> SRT_DATA(i).FLAG_CONTRACT Then
                 INT_NUMBER_BREAK += 1
             End If
             Call SUB_REPLACE_DATA(SRT_DATA(i), INT_NUMBER_BREAK)
-            INT_KIND_CONTRACT_BEFORE = SRT_DATA(i).KIND_CONTRACT
+            INT_FLAG_CONTRACT_BEFORE = SRT_DATA(i).FLAG_CONTRACT
         Next
 
         Dim STW_CSV_WRITER As System.IO.StreamWriter 'ファイル出力用のIOオブジェクト
@@ -233,7 +233,7 @@
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("MAIN.KIND_CONTRACT,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("MAIN.FLAG_CONTRACT,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -253,8 +253,8 @@
         SRT_ACTIVE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_ACTIVE_TO
 
         With SRT_CONDITIONS
-            If .KIND_CONTRACT > 0 Then
-                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.KIND_CONTRACT, "MAIN.KIND_CONTRACT", "=")
+            If .FLAG_CONTRACT > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.FLAG_CONTRACT, "MAIN.FLAG_CONTRACT", "=")
             End If
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_CONTRACT_PERIOD, "MAIN.DATE_CONTRACT")
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_ACTIVE_PERIOD, "MAIN.DATE_ACTIVE")
@@ -270,7 +270,7 @@
         With SRT_DATA
             .NUMBER_BREAK = INT_NUMBER_BREAK
 
-            .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT, True)
+            .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT, True)
             .DATE_CONTRACT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_CONTRACT)
             .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION, True)
@@ -293,8 +293,8 @@
         ReDim STR_ROW(0)
         With SRT_DATA
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_BREAK))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_CONTRACT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_PRINT))

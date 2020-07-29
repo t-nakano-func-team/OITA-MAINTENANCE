@@ -35,9 +35,9 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_OWNER = New System.Windows.Forms.Panel()
         Me.TXT_NAME_OWNER = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_OWNER_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_KIND_CONTRACT = New System.Windows.Forms.Panel()
-        Me.CMB_KIND_CONTRACT = New System.Windows.Forms.ComboBox()
-        Me.LBL_KIND_CONTRACT_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_FLAG_CONTRACT = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_CONTRACT = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_CODE_OWNER = New System.Windows.Forms.Panel()
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_CODE_OWNER_TO_SEARCH = New System.Windows.Forms.Button()
@@ -66,7 +66,7 @@ Partial Class FRM_MAIN
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_NAME_OWNER.SuspendLayout()
-        Me.PNL_KIND_CONTRACT.SuspendLayout()
+        Me.PNL_FLAG_CONTRACT.SuspendLayout()
         Me.PNL_CODE_OWNER.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
@@ -191,7 +191,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_NAME_OWNER)
-        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_CONTRACT)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_CONTRACT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_INVOICE)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
@@ -231,37 +231,37 @@ Partial Class FRM_MAIN
         Me.LBL_NAME_OWNER_GUIDE.Text = "オーナー名称"
         Me.LBL_NAME_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'PNL_KIND_CONTRACT
+        'PNL_FLAG_CONTRACT
         '
-        Me.PNL_KIND_CONTRACT.Controls.Add(Me.CMB_KIND_CONTRACT)
-        Me.PNL_KIND_CONTRACT.Controls.Add(Me.LBL_KIND_CONTRACT_GUIDE)
-        Me.PNL_KIND_CONTRACT.Location = New System.Drawing.Point(5, 40)
-        Me.PNL_KIND_CONTRACT.Name = "PNL_KIND_CONTRACT"
-        Me.PNL_KIND_CONTRACT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_CONTRACT.TabIndex = 1
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.CMB_FLAG_CONTRACT)
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.LBL_FLAG_CONTRACT_GUIDE)
+        Me.PNL_FLAG_CONTRACT.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_FLAG_CONTRACT.Name = "PNL_FLAG_CONTRACT"
+        Me.PNL_FLAG_CONTRACT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_CONTRACT.TabIndex = 1
         '
-        'CMB_KIND_CONTRACT
+        'CMB_FLAG_CONTRACT
         '
-        Me.CMB_KIND_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_KIND_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_KIND_CONTRACT.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_KIND_CONTRACT.Name = "CMB_KIND_CONTRACT"
-        Me.CMB_KIND_CONTRACT.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_KIND_CONTRACT.TabIndex = 1
-        Me.CMB_KIND_CONTRACT.Tag = "Clear"
+        Me.CMB_FLAG_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_CONTRACT.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_CONTRACT.Name = "CMB_FLAG_CONTRACT"
+        Me.CMB_FLAG_CONTRACT.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_CONTRACT.TabIndex = 1
+        Me.CMB_FLAG_CONTRACT.Tag = "Clear"
         '
-        'LBL_KIND_CONTRACT_GUIDE
+        'LBL_FLAG_CONTRACT_GUIDE
         '
-        Me.LBL_KIND_CONTRACT_GUIDE.AutoEllipsis = True
-        Me.LBL_KIND_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_KIND_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_KIND_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_KIND_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_KIND_CONTRACT_GUIDE.Name = "LBL_KIND_CONTRACT_GUIDE"
-        Me.LBL_KIND_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_KIND_CONTRACT_GUIDE.TabIndex = 0
-        Me.LBL_KIND_CONTRACT_GUIDE.Text = "契約種別"
-        Me.LBL_KIND_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_FLAG_CONTRACT_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_CONTRACT_GUIDE.Name = "LBL_FLAG_CONTRACT_GUIDE"
+        Me.LBL_FLAG_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_CONTRACT_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_CONTRACT_GUIDE.Text = "契約種別"
+        Me.LBL_FLAG_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_CODE_OWNER
         '
@@ -540,7 +540,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.ResumeLayout(False)
         Me.PNL_NAME_OWNER.ResumeLayout(False)
         Me.PNL_NAME_OWNER.PerformLayout()
-        Me.PNL_KIND_CONTRACT.ResumeLayout(False)
+        Me.PNL_FLAG_CONTRACT.ResumeLayout(False)
         Me.PNL_CODE_OWNER.ResumeLayout(False)
         Me.PNL_CODE_OWNER.PerformLayout()
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
@@ -581,9 +581,9 @@ Partial Class FRM_MAIN
     Friend WithEvents BTN_PREVIEW As Button
     Friend WithEvents BTN_CLEAR As Button
     Friend WithEvents BTN_END As Button
-    Friend WithEvents PNL_KIND_CONTRACT As Panel
-    Friend WithEvents CMB_KIND_CONTRACT As ComboBox
-    Friend WithEvents LBL_KIND_CONTRACT_GUIDE As Label
+    Friend WithEvents PNL_FLAG_CONTRACT As Panel
+    Friend WithEvents CMB_FLAG_CONTRACT As ComboBox
+    Friend WithEvents LBL_FLAG_CONTRACT_GUIDE As Label
     Friend WithEvents PNL_NAME_OWNER As Panel
     Friend WithEvents TXT_NAME_OWNER As TextBox
     Friend WithEvents LBL_NAME_OWNER_GUIDE As Label

@@ -40,13 +40,13 @@
         Return INT_RET
     End Function
 
-    Public Function FUNC_GET_KIND_CONTRACT_SORT_ID(ByVal INT_KIND_CONTRACT As Integer) As Integer
+    Public Function FUNC_GET_FLAG_CONTRACT_SORT_ID(ByVal INT_FLAG_CONTRACT As Integer) As Integer
         Dim INT_RET As Integer
 
-        Select Case INT_KIND_CONTRACT
-            Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
+        Select Case INT_FLAG_CONTRACT
+            Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
                 INT_RET = 1
-            Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
+            Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT
                 INT_RET = 2
             Case Else
                 INT_RET = 0
@@ -575,7 +575,7 @@
         Dim STR_RET As String
 
         With SRT_CONTRACT.DATA
-            If .KIND_CONTRACT = ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR Then
+            If .FLAG_CONTRACT = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR Then
                 STR_RET = FUNC_GET_MNT_M_OWNER_NAME_OWNER(.CODE_OWNER, BLN_CHASH)
                 Return STR_RET
             End If

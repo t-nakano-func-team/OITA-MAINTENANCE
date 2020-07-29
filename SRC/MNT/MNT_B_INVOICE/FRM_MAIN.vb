@@ -19,7 +19,7 @@
 
     Private Enum ENM_MY_GRID_MAIN
         CHECK = 0
-        KIND_CONTRACT_NAME
+        FLAG_CONTRACT_NAME
         NUMBER_CONTRACT_VIEW
         DATE_CONTRACT
         NAME_OWNER
@@ -40,7 +40,7 @@
     Private Structure SRT_MY_GRID_DATA
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
-        Public KIND_CONTRACT As Integer
+        Public FLAG_CONTRACT As Integer
         Public DATE_CONTRACT As DateTime
         Public CODE_OWNER As Integer
         Public NAME_CONTRACT As String
@@ -52,7 +52,7 @@
         Public KINGAKU_INVOICE_DETAIL As Long
         Public KINGAKU_INVOICE_VAT As Long
         Public SERIAL_INVOICE_MAX As Integer
-        Public KIND_CONTRACT_NAME As String
+        Public FLAG_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
         Public CODE_SECTION_INVOICE As Integer
         Public CODE_SECTION_INVOICE_NAME As String
@@ -426,7 +426,7 @@
             Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
-            Call .Append("AND KIND_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR & Environment.NewLine)
+            Call .Append("AND FLAG_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("UNION ALL" & Environment.NewLine)
             Call .Append("SELECT" & Environment.NewLine)
@@ -435,11 +435,11 @@
             Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
-            Call .Append("AND KIND_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT & Environment.NewLine)
+            Call .Append("AND FLAG_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT & Environment.NewLine)
             Call .Append(STR_WHERE_SPOT) 'WHERE条件
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("KIND_CONTRACT,NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("FLAG_CONTRACT,NUMBER_CONTRACT" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader
@@ -518,7 +518,7 @@
             With SRT_GRID_DATA_MAIN(i)
                 .DATE_INVOICE_PLAN = FUNC_GET_DATE_INVOICE_PLAN(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
 
-                .KIND_CONTRACT = SRT_RECORD_CONTRACT.DATA.KIND_CONTRACT
+                .FLAG_CONTRACT = SRT_RECORD_CONTRACT.DATA.FLAG_CONTRACT
                 .CODE_OWNER = SRT_RECORD_CONTRACT.DATA.CODE_OWNER
                 .NAME_CONTRACT = SRT_RECORD_CONTRACT.DATA.NAME_CONTRACT
                 .CODE_SECTION = SRT_RECORD_CONTRACT.DATA.CODE_SECTION
@@ -527,11 +527,11 @@
                 .KINGAKU_CONTRACT = SRT_RECORD_CONTRACT.DATA.KINGAKU_CONTRACT
 
                 .SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
-                .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT)
-                Select Case .KIND_CONTRACT
-                    Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR
+                .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT)
+                Select Case .FLAG_CONTRACT
+                    Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
                         .CODE_OWNER_NAME = FUNC_GET_MNT_M_OWNER_NAME_OWNER(.CODE_OWNER, True)
-                    Case ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.SPOT
+                    Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT
                         .CODE_OWNER_NAME = SRT_RECORD_CONTRACT_SPOT.DATA.NAME_OWNER
                     Case Else
                         .CODE_OWNER_NAME = ""
@@ -574,7 +574,7 @@
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CHECK) = False
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_CONTRACT_NAME) = .FLAG_CONTRACT_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_INVOICE_PLAN.ToLongDateString
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
@@ -910,7 +910,7 @@
 
         With SRT_GRID_DATA_MAIN(INT_INDEX_SRT)
             TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.CHECK) = False
-            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.KIND_CONTRACT_NAME) = .KIND_CONTRACT_NAME
+            TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.FLAG_CONTRACT_NAME) = .FLAG_CONTRACT_NAME
             TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
             TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_CONTRACT.ToLongDateString
             TBL_GRID_DATA_MAIN.Rows(INT_INDEX_GRID).Item(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME

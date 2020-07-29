@@ -91,6 +91,63 @@
 
     Private Sub SUB_BATCH()
 
+        If Not FUNC_CHECK_INPUT_DATA() Then
+            Exit Sub
+        End If
+
+        Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
+        With SRT_CONDITIONS
+            Dim STR_TEMP As String
+            STR_TEMP = LBL_CODE_YYYYMM_AFTER.Text
+            STR_TEMP = STR_TEMP.Replace("年", "/")
+            STR_TEMP = STR_TEMP.Replace("月", "")
+            .YYYYMM_B_MONTH = FUNC_CONVERT_YYYYMM_FROM_STR(STR_TEMP)
+
+            .DATE_DO_BATCH = DateTime.Now
+            .FORM = Me
+
+            .RET_DELETE_CONTENT_COUNT = 0
+        End With
+
+        Dim STR_MSG As String
+        STR_MSG = ""
+        STR_MSG &= LBL_CODE_YYYYMM_AFTER.Text & "の" & Environment.NewLine
+        STR_MSG &= Me.Text & "を行います。" & Environment.NewLine & "よろしいですか？"
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Call SUB_PUT_PROGRESS_GUIDE(Me.Text & "を行っています")
+        Dim BLN_RET As Boolean
+        Dim BLN_PUT As Boolean
+        BLN_RET = MOD_BATCH.FUNC_BACTH_MAIN(BLN_PUT, SRT_CONDITIONS)
+        Call SUB_PUT_PROGRESS_GUIDE("")
+
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_BATCH.STR_FUNC_BATCH_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not BLN_PUT Then
+            Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        STR_MSG = ""
+        STR_MSG &= Me.Text & "を完了しました。" & Environment.NewLine
+        STR_MSG &= SRT_CONDITIONS.RET_DELETE_CONTENT_COUNT & "件の継続契約を削除しました。" & Environment.NewLine
+        Call MessageBox.Show(STR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Call SUB_CLEAR()
+    End Sub
+
+    Private Sub SUB_CLEAR()
+        Call SUB_CONTROL_CLEAR_FORM(Me)
+        Call SUB_CTRL_VALUE_INIT() '値を初期化
+        Call SUB_WINDOW_MODE_CHANGE(ENM_MY_WINDOW_MODE.INPUT_KEY)
+        Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me)
     End Sub
 
     Private Sub SUB_END()
@@ -253,6 +310,15 @@
 
         Return True
     End Function
+#End Region
+
+#Region "内部処理"
+    Public Sub SUB_PUT_PROGRESS_GUIDE(ByVal STR_PROGRESS As String)
+
+        LBL_BATCH_PROGRESS.Text = STR_PROGRESS
+        Call LBL_BATCH_PROGRESS.Refresh()
+        Call Application.DoEvents()
+    End Sub
 #End Region
 
 #Region "NEW"

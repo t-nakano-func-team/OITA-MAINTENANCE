@@ -30,7 +30,7 @@
 
     Public Structure SRT_PRINT_DATA '印刷データ
         Public CODE_SECTION As Integer
-        Public KIND_CONTRACT As Integer
+        Public FLAG_CONTRACT As Integer
         Public CODE_OWNER As Integer
         Public NUMBER_CONTRACT As Integer
         Public SERIAL_CONTRACT As Integer
@@ -47,7 +47,7 @@
         Public KINGAKU_RECEIVABLE As Long
 
         Public CODE_SECTION_NAME As String
-        Public KIND_CONTRACT_NAME As String
+        Public FLAG_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
         Public DATE_CONTRACT_INT As Integer
         Public NUMBER_BREAK As Integer
@@ -109,7 +109,7 @@
             ReDim Preserve SRT_DATA(INT_INDEX)
             With SRT_DATA(INT_INDEX)
                 .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
-                .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
+                .FLAG_CONTRACT = CInt(SDR_READER.Item("FLAG_CONTRACT"))
                 .NUMBER_CONTRACT = CInt(SDR_READER.Item("NUMBER_CONTRACT"))
                 .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
@@ -127,20 +127,20 @@
 
         Dim INT_CODE_SECTION_BEFORE As Integer
         INT_CODE_SECTION_BEFORE = -1
-        Dim INT_KIND_CONTRACT_BEFORE As Integer
-        INT_KIND_CONTRACT_BEFORE = -1
+        Dim INT_FLAG_CONTRACT_BEFORE As Integer
+        INT_FLAG_CONTRACT_BEFORE = -1
 
         Dim INT_NUMBER_BREAK As Integer
         INT_NUMBER_BREAK = 0
         For i = 1 To (SRT_DATA.Length - 1)
             If (INT_CODE_SECTION_BEFORE <> SRT_DATA(i).CODE_SECTION) _
-                Or (INT_KIND_CONTRACT_BEFORE <> SRT_DATA(i).KIND_CONTRACT) Then
+                Or (INT_FLAG_CONTRACT_BEFORE <> SRT_DATA(i).FLAG_CONTRACT) Then
                 INT_NUMBER_BREAK += 1
             End If
             Call SUB_REPLACE_DATA(SRT_CONDITIONS, SRT_DATA(i), INT_NUMBER_BREAK)
 
             INT_CODE_SECTION_BEFORE = SRT_DATA(i).CODE_SECTION
-            INT_KIND_CONTRACT_BEFORE = SRT_DATA(i).KIND_CONTRACT
+            INT_FLAG_CONTRACT_BEFORE = SRT_DATA(i).FLAG_CONTRACT
         Next
 
         STR_FILE_NAME_PRINT_DATA = CST_PRINT_DEFINITION & CST_PRINT_DATA_FILE_EXTENT
@@ -212,7 +212,7 @@
             Call .Append("MAIN.*" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.CODE_OWNER" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.CODE_MAINTENANCE" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.KIND_CONTRACT" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.FLAG_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.DATE_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.NAME_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.COUNT_INVOICE" & "," & System.Environment.NewLine)
@@ -280,7 +280,7 @@
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("MAIN.CODE_SECTION,SUB_01.KIND_CONTRACT,SUB_01.CODE_OWNER,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
+            Call .Append("MAIN.CODE_SECTION,SUB_01.FLAG_CONTRACT,SUB_01.CODE_OWNER,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -320,7 +320,7 @@
             .NUMBER_BREAK = INT_NUMBER_BREAK
 
             .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION)
-            .KIND_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.KIND_CONTRACT, .KIND_CONTRACT)
+            .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT)
             .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .DATE_CONTRACT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_CONTRACT)
 
@@ -362,8 +362,8 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_BREAK))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_SECTION_NAME))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KIND_CONTRACT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_CONTRACT))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_CONTRACT_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_OWNER_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))

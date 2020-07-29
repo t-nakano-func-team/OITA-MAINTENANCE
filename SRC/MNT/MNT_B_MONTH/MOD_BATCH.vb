@@ -49,7 +49,7 @@
                 .SERIAL_CONTRACT = CInt(SDR_READER.Item("SERIAL_CONTRACT"))
             End With
             With SRT_CONTRACT_ALL(INT_INDEX).DATA
-                .KIND_CONTRACT = CInt(SDR_READER.Item("KIND_CONTRACT"))
+                .FLAG_CONTRACT = CInt(SDR_READER.Item("FLAG_CONTRACT"))
                 .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
@@ -129,6 +129,10 @@
         Next
 
         '月次年月更新
+        If Not FUNC_UPDATE_MNG_M_MONTH_CODE_YYYYMM(CST_SYSTEM_INDIVIDUAL_SYSTEM_CODE, SRT_CONDITIONS.YYYYMM_B_MONTH) Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = str_SQL_TOOL_LAST_ERR_STRING
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+        End If
 
         If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
             STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
@@ -155,7 +159,7 @@
             Call .Append("MAX(SERIAL_CONTRACT) AS SERIAL_CONTRACT" & System.Environment.NewLine)
             Call .Append("FROM" & System.Environment.NewLine)
             Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & System.Environment.NewLine)
-            Call .Append("GROUP BY," & System.Environment.NewLine)
+            Call .Append("GROUP BY" & System.Environment.NewLine)
             Call .Append("NUMBER_CONTRACT" & System.Environment.NewLine)
             Call .Append(") AS SUB_01" & System.Environment.NewLine)
             Call .Append("ON" & System.Environment.NewLine)
@@ -164,7 +168,7 @@
 
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
-            Call .Append("AND FLAG_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_KIND_CONTRACT.REGULAR & System.Environment.NewLine) '定期
+            Call .Append("AND FLAG_CONTRACT=" & ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR & System.Environment.NewLine) '定期
             Call .Append("AND FLAG_CONTINUE=" & ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE.AUTO_CONTINUE & System.Environment.NewLine) '自動継続
 
             Call .Append("ORDER BY" & Environment.NewLine)
@@ -183,7 +187,7 @@
         End With
 
         With SRT_RET.DATA
-            .KIND_CONTRACT = SRT_DATA.DATA.KIND_CONTRACT
+            .FLAG_CONTRACT = SRT_DATA.DATA.FLAG_CONTRACT
             .DATE_CONTRACT = SRT_DATA.DATA.DATE_CONTRACT
             .CODE_OWNER = SRT_DATA.DATA.CODE_OWNER
             .CODE_SECTION = SRT_DATA.DATA.CODE_SECTION
