@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -50,13 +50,13 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_MAINTENANCE = New System.Windows.Forms.TextBox()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
+        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
+        Me.BTN_PRINT = New System.Windows.Forms.Button()
+        Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
-        Me.BTN_PRINT = New System.Windows.Forms.Button()
-        Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -246,14 +246,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 120)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -389,7 +389,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_CODE_MAINTENANCE.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_CODE_MAINTENANCE.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_MAINTENANCE.MaxLength = 9
+        Me.TXT_CODE_MAINTENANCE.MaxLength = 3
         Me.TXT_CODE_MAINTENANCE.Name = "TXT_CODE_MAINTENANCE"
         Me.TXT_CODE_MAINTENANCE.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_MAINTENANCE.TabIndex = 1
@@ -424,6 +424,42 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
         Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(610, 40)
         Me.pnlFUNCTION_GROUP.TabIndex = 1
+        '
+        'BTN_PUT_FILE
+        '
+        Me.BTN_PUT_FILE.AutoSize = True
+        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(350, 5)
+        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
+        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.TabIndex = 4
+        Me.BTN_PUT_FILE.Text = "ファイル"
+        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
+        '
+        'BTN_PRINT
+        '
+        Me.BTN_PRINT.AutoSize = True
+        Me.BTN_PRINT.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PRINT.Location = New System.Drawing.Point(265, 5)
+        Me.BTN_PRINT.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PRINT.Name = "BTN_PRINT"
+        Me.BTN_PRINT.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PRINT.TabIndex = 3
+        Me.BTN_PRINT.Text = "印刷"
+        Me.BTN_PRINT.UseVisualStyleBackColor = False
+        '
+        'BTN_PREVIEW
+        '
+        Me.BTN_PREVIEW.AutoSize = True
+        Me.BTN_PREVIEW.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PREVIEW.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_PREVIEW.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PREVIEW.Name = "BTN_PREVIEW"
+        Me.BTN_PREVIEW.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PREVIEW.TabIndex = 2
+        Me.BTN_PREVIEW.Text = "プレビュー"
+        Me.BTN_PREVIEW.UseVisualStyleBackColor = False
         '
         'BTN_CLEAR
         '
@@ -472,42 +508,6 @@ Partial Class FRM_MAIN
         Me.BTN_END.TabIndex = 6
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
-        '
-        'BTN_PUT_FILE
-        '
-        Me.BTN_PUT_FILE.AutoSize = True
-        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(350, 5)
-        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
-        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.TabIndex = 4
-        Me.BTN_PUT_FILE.Text = "ファイル"
-        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
-        '
-        'BTN_PRINT
-        '
-        Me.BTN_PRINT.AutoSize = True
-        Me.BTN_PRINT.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PRINT.Location = New System.Drawing.Point(265, 5)
-        Me.BTN_PRINT.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PRINT.Name = "BTN_PRINT"
-        Me.BTN_PRINT.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PRINT.TabIndex = 3
-        Me.BTN_PRINT.Text = "印刷"
-        Me.BTN_PRINT.UseVisualStyleBackColor = False
-        '
-        'BTN_PREVIEW
-        '
-        Me.BTN_PREVIEW.AutoSize = True
-        Me.BTN_PREVIEW.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PREVIEW.Location = New System.Drawing.Point(180, 5)
-        Me.BTN_PREVIEW.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PREVIEW.Name = "BTN_PREVIEW"
-        Me.BTN_PREVIEW.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PREVIEW.TabIndex = 2
-        Me.BTN_PREVIEW.Text = "プレビュー"
-        Me.BTN_PREVIEW.UseVisualStyleBackColor = False
         '
         'FRM_MAIN
         '
