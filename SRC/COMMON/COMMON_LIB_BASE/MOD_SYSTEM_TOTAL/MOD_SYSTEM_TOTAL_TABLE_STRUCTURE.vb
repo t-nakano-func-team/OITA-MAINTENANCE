@@ -28,6 +28,8 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
         Public PASS_WORD As String
         Public NAME_STAFF As String
         Public FLAG_INVALID As Integer
+        Public CODE_EDIT_STAFF As Integer
+        Public DATE_EDIT As DateTime
     End Structure
 #End Region
 
@@ -99,6 +101,8 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
             .PASS_WORD = ""
             .NAME_STAFF = ""
             .FLAG_INVALID = 0
+            .CODE_EDIT_STAFF = -1
+            .DATE_EDIT = cstVB_DATE_MIN
         End With
 
         If blnCASH Then
@@ -139,6 +143,8 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
             .PASS_WORD = CStr(sdrREADER.Item("PASS_WORD"))
             .NAME_STAFF = CStr(sdrREADER.Item("NAME_STAFF"))
             .FLAG_INVALID = CInt(sdrREADER.Item("FLAG_INVALID"))
+            .CODE_EDIT_STAFF = CInt(sdrREADER.Item("CODE_EDIT_STAFF"))
+            .DATE_EDIT = CDate(sdrREADER.Item("DATE_EDIT"))
         End With
 
         Call sdrREADER.Close()
@@ -197,7 +203,9 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
             Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.USER_ID) & "," & Environment.NewLine)
             Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.PASS_WORD) & "," & Environment.NewLine)
             Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_STAFF) & "," & Environment.NewLine)
-            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & Environment.NewLine)
+            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "," & Environment.NewLine)
+            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
+            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
         End With
         Call strSQL.Append(")" & Environment.NewLine)
 

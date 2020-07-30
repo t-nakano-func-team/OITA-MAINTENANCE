@@ -21,6 +21,7 @@
         INPUT_KEY = 1
         INPUT_DATA_INSERT
         INPUT_DATA_UPDATE
+        INPUT_DATA_DELETE
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
@@ -29,7 +30,8 @@
         USER_ID
         PASS_WORD
         FLAG_GRANT_NAME
-        UBOUND = FLAG_GRANT_NAME
+        FLAG_INVALID_NAME
+        UBOUND = FLAG_INVALID_NAME
     End Enum
 #End Region
 
@@ -40,8 +42,10 @@
         Public USER_ID As String
         Public PASS_WORD As String
         Public FLAG_GRANT As Integer
+        Public FLAG_INVALID As Integer
 
         Public FLAG_GRANT_NAME As String
+        Public FLAG_INVALID_NAME As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
@@ -61,9 +65,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "社員番号,社員名称,ユーザーID,パスワード,権限", "SSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "社員番号,社員名称,ユーザーID,パスワード,権限,削除", "SSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,9,6,6,6", "RLLLL")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "4,9,6,6,6,2", "RLLLLC")
 
         Call SUB_SYSTEM_COMMBO_MNG_M_KIND(CMB_FLAG_GRANT, ENM_MNG_M_KIND_CODE_FLAG.FLAG_GRANT)
     End Sub
@@ -168,7 +172,11 @@
             Call FUNC_SELECT_TABLE_MNG_M_USER(SRT_KEY, SRT_DATA)
             Call SUB_SET_INPUT_DATA(SRT_DATA)
             Call SUB_SET_INDEX_GRID_FROM_KEY(SRT_KEY)
-            ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
+            If SRT_DATA.FLAG_INVALID = 1 Then
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_DELETE '削除
+            Else
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
+            End If
         Else
             ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT '新規追加
         End If
@@ -228,9 +236,8 @@
             Exit Sub
         End If
 
-        '物理削除
-        If Not FUNC_DELETE_TABLE_MNG_M_USER(SRT_KEY) Then
-            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If Not FUNC_DELETE_RECORD(SRT_KEY) Then
+            Call MessageBox.Show(STR_FUNC_DELETE_RECORD_LAST_ERROR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
             Exit Sub
         End If
@@ -243,21 +250,80 @@
         Call SUB_CLEAR()
     End Sub
 
+#Region "登録等・内部処理"
     Private STR_FUNC_EDIT_RECORD_LAST_ERROR As String
     Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_MNG_M_USER) As Boolean
 
-        If Not FUNC_DELETE_TABLE_MNG_M_USER(SRT_RECORD.KEY) Then
-            STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
-            Return False
+        Dim SRT_DATA As SRT_TABLE_MNG_M_USER_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNG_M_USER(SRT_RECORD.KEY, SRT_DATA)
+
+        If SRT_DATA.FLAG_INVALID = 1 Then
+            If Not FUNC_UPDATE_FLAG_INVALID(SRT_RECORD.KEY, 0) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+            If Not FUNC_DELETE_TABLE_MNG_M_USER(SRT_RECORD.KEY) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+
+            If Not FUNC_INSERT_TABLE_MNG_M_USER(SRT_RECORD) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
         End If
 
-        If Not FUNC_INSERT_TABLE_MNG_M_USER(SRT_RECORD) Then
-            STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+        Return True
+    End Function
+
+
+    Private STR_FUNC_DELETE_RECORD_LAST_ERROR As String
+    Private Function FUNC_DELETE_RECORD(ByRef SRT_KEY As SRT_TABLE_MNG_M_USER_KEY) As Boolean
+
+        Dim SRT_DATA As SRT_TABLE_MNG_M_USER_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_MNG_M_USER(SRT_KEY, SRT_DATA)
+
+        If SRT_DATA.FLAG_INVALID = 1 Then
+            If Not FUNC_DELETE_TABLE_MNG_M_USER(SRT_KEY) Then '物理削除
+                STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+            If Not FUNC_UPDATE_FLAG_INVALID(SRT_KEY, 1) Then
+                STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        End If
+
+        Return True
+    End Function
+
+
+    Private Function FUNC_UPDATE_FLAG_INVALID(ByRef SRT_KEY As SRT_TABLE_MNG_M_USER_KEY, ByVal ENM_FLAG_INVALID As Integer) As Boolean
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+
+        With STR_SQL
+            Call .Append("UPDATE" & System.Environment.NewLine)
+            Call .Append(strSYSTEM_PUBLIC_MNGDB_PREFIX & "MNG_M_USER WITH(ROWLOCK)" & System.Environment.NewLine)
+            Call .Append("SET" & System.Environment.NewLine)
+            Call .Append("FLAG_INVALID=" & CInt(ENM_FLAG_INVALID) & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append("AND CODE_STAFF=" & SRT_KEY.CODE_STAFF & System.Environment.NewLine)
+        End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
             Return False
         End If
 
         Return True
     End Function
+
+#End Region
 
     '印刷/プレビュー/ファイル出力
     Private Sub SUB_PRINT(ByVal BLN_PREVIEW As Boolean, ByVal BLN_PUT_FILE As Boolean)
@@ -377,6 +443,7 @@
                 .FLAG_GRANT = CInt(SDR_READER.Item("FLAG_GRANT"))
                 .USER_ID = CStr(SDR_READER.Item("USER_ID"))
                 .PASS_WORD = CStr(SDR_READER.Item("PASS_WORD"))
+                .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
             End With
         End While
         Call SDR_READER.Close()
@@ -385,6 +452,7 @@
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
                 .FLAG_GRANT_NAME = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_GRANT, .FLAG_GRANT)
+                .FLAG_INVALID_NAME = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID)
             End With
         Next
 
@@ -410,6 +478,7 @@
                 OBJ_TEMP(ENM_MY_GRID_MAIN.USER_ID) = .USER_ID
                 OBJ_TEMP(ENM_MY_GRID_MAIN.PASS_WORD) = .PASS_WORD
                 OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_GRANT_NAME) = .FLAG_GRANT_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_INVALID_NAME) = .FLAG_INVALID_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
         Next
@@ -508,6 +577,18 @@
             Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE
                 PNL_INPUT_KEY.Enabled = False
                 PNL_INPUT_DATA.Enabled = True
+
+                BTN_ENTER.Enabled = True
+                BTN_DELETE.Enabled = True
+                BTN_PREVIEW.Enabled = True
+                BTN_PRINT.Enabled = True
+                BTN_PUT_FILE.Enabled = True
+                BTN_CLEAR.Enabled = True
+                BTN_END.Enabled = True
+
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_DELETE
+                PNL_INPUT_KEY.Enabled = False
+                PNL_INPUT_DATA.Enabled = False
 
                 BTN_ENTER.Enabled = True
                 BTN_DELETE.Enabled = True
@@ -662,7 +743,9 @@
             .USER_ID = CStr(TXT_USER_ID.Text)
             .PASS_WORD = CStr(TXT_PASS_WORD.Text)
             .FLAG_GRANT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_GRANT)
-            .FLAG_DELETE = 0
+            .FLAG_INVALID = 0
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = System.DateTime.Today
         End With
 
         Return SRT_RET
@@ -675,6 +758,8 @@
             TXT_USER_ID.Text = .USER_ID
             TXT_PASS_WORD.Text = .PASS_WORD
             Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_GRANT, .FLAG_GRANT)
+
+            LBL_FLAG_INVALID.Text = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_INVALID, .FLAG_INVALID)
         End With
     End Sub
 #End Region

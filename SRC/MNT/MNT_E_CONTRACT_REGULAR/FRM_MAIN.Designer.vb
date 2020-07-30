@@ -32,6 +32,10 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
+        Me.PNL_FLAG_CONTINUE = New System.Windows.Forms.Panel()
+        Me.CHK_FLAG_CONTINUE = New System.Windows.Forms.CheckBox()
+        Me.LBL_FLAG_CONTINUE_GUIDE = New System.Windows.Forms.Label()
+        Me.LBL_FLAG_CONTINUE_BACK = New System.Windows.Forms.Label()
         Me.PNL_CODE_MAINTENANCE = New System.Windows.Forms.Panel()
         Me.CMB_CODE_MAINTENANCE = New System.Windows.Forms.ComboBox()
         Me.LBL_CODE_MAINTENANCE_GUIDE = New System.Windows.Forms.Label()
@@ -99,16 +103,13 @@ Partial Class FRM_MAIN
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_FLAG_CONTINUE = New System.Windows.Forms.Panel()
-        Me.CHK_FLAG_CONTINUE = New System.Windows.Forms.CheckBox()
-        Me.LBL_FLAG_CONTINUE_GUIDE = New System.Windows.Forms.Label()
-        Me.LBL_FLAG_CONTINUE_BACK = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
+        Me.PNL_FLAG_CONTINUE.SuspendLayout()
         Me.PNL_CODE_MAINTENANCE.SuspendLayout()
         Me.PNL_FLAG_WORK.SuspendLayout()
         Me.PNL_CODE_SECTION.SuspendLayout()
@@ -129,7 +130,6 @@ Partial Class FRM_MAIN
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_FLAG_CONTINUE.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -270,6 +270,48 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Name = "PNL_INPUT_DATA"
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
+        '
+        'PNL_FLAG_CONTINUE
+        '
+        Me.PNL_FLAG_CONTINUE.Controls.Add(Me.CHK_FLAG_CONTINUE)
+        Me.PNL_FLAG_CONTINUE.Controls.Add(Me.LBL_FLAG_CONTINUE_GUIDE)
+        Me.PNL_FLAG_CONTINUE.Controls.Add(Me.LBL_FLAG_CONTINUE_BACK)
+        Me.PNL_FLAG_CONTINUE.Location = New System.Drawing.Point(495, 285)
+        Me.PNL_FLAG_CONTINUE.Name = "PNL_FLAG_CONTINUE"
+        Me.PNL_FLAG_CONTINUE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_CONTINUE.TabIndex = 15
+        '
+        'CHK_FLAG_CONTINUE
+        '
+        Me.CHK_FLAG_CONTINUE.AutoSize = True
+        Me.CHK_FLAG_CONTINUE.Location = New System.Drawing.Point(86, 7)
+        Me.CHK_FLAG_CONTINUE.Name = "CHK_FLAG_CONTINUE"
+        Me.CHK_FLAG_CONTINUE.Size = New System.Drawing.Size(15, 14)
+        Me.CHK_FLAG_CONTINUE.TabIndex = 11
+        Me.CHK_FLAG_CONTINUE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.CHK_FLAG_CONTINUE.UseVisualStyleBackColor = False
+        '
+        'LBL_FLAG_CONTINUE_GUIDE
+        '
+        Me.LBL_FLAG_CONTINUE_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_CONTINUE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_CONTINUE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_CONTINUE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_CONTINUE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_CONTINUE_GUIDE.Name = "LBL_FLAG_CONTINUE_GUIDE"
+        Me.LBL_FLAG_CONTINUE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_CONTINUE_GUIDE.TabIndex = 3
+        Me.LBL_FLAG_CONTINUE_GUIDE.Text = "自動継続"
+        Me.LBL_FLAG_CONTINUE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'LBL_FLAG_CONTINUE_BACK
+        '
+        Me.LBL_FLAG_CONTINUE_BACK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(215, Byte), Integer))
+        Me.LBL_FLAG_CONTINUE_BACK.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_FLAG_CONTINUE_BACK.Name = "LBL_FLAG_CONTINUE_BACK"
+        Me.LBL_FLAG_CONTINUE_BACK.Size = New System.Drawing.Size(24, 24)
+        Me.LBL_FLAG_CONTINUE_BACK.TabIndex = 12
+        Me.LBL_FLAG_CONTINUE_BACK.Visible = False
         '
         'PNL_CODE_MAINTENANCE
         '
@@ -715,7 +757,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_MEMO.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_MEMO.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_MEMO.MaxLength = 20
+        Me.TXT_NAME_MEMO.MaxLength = 40
         Me.TXT_NAME_MEMO.Name = "TXT_NAME_MEMO"
         Me.TXT_NAME_MEMO.Size = New System.Drawing.Size(395, 25)
         Me.TXT_NAME_MEMO.TabIndex = 1
@@ -1025,48 +1067,6 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_FLAG_CONTINUE
-        '
-        Me.PNL_FLAG_CONTINUE.Controls.Add(Me.CHK_FLAG_CONTINUE)
-        Me.PNL_FLAG_CONTINUE.Controls.Add(Me.LBL_FLAG_CONTINUE_GUIDE)
-        Me.PNL_FLAG_CONTINUE.Controls.Add(Me.LBL_FLAG_CONTINUE_BACK)
-        Me.PNL_FLAG_CONTINUE.Location = New System.Drawing.Point(495, 285)
-        Me.PNL_FLAG_CONTINUE.Name = "PNL_FLAG_CONTINUE"
-        Me.PNL_FLAG_CONTINUE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_FLAG_CONTINUE.TabIndex = 15
-        '
-        'CHK_FLAG_CONTINUE
-        '
-        Me.CHK_FLAG_CONTINUE.AutoSize = True
-        Me.CHK_FLAG_CONTINUE.Location = New System.Drawing.Point(86, 7)
-        Me.CHK_FLAG_CONTINUE.Name = "CHK_FLAG_CONTINUE"
-        Me.CHK_FLAG_CONTINUE.Size = New System.Drawing.Size(15, 14)
-        Me.CHK_FLAG_CONTINUE.TabIndex = 11
-        Me.CHK_FLAG_CONTINUE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.CHK_FLAG_CONTINUE.UseVisualStyleBackColor = False
-        '
-        'LBL_FLAG_CONTINUE_GUIDE
-        '
-        Me.LBL_FLAG_CONTINUE_GUIDE.AutoEllipsis = True
-        Me.LBL_FLAG_CONTINUE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_FLAG_CONTINUE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_CONTINUE_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_FLAG_CONTINUE_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_FLAG_CONTINUE_GUIDE.Name = "LBL_FLAG_CONTINUE_GUIDE"
-        Me.LBL_FLAG_CONTINUE_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_FLAG_CONTINUE_GUIDE.TabIndex = 3
-        Me.LBL_FLAG_CONTINUE_GUIDE.Text = "自動継続"
-        Me.LBL_FLAG_CONTINUE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'LBL_FLAG_CONTINUE_BACK
-        '
-        Me.LBL_FLAG_CONTINUE_BACK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(215, Byte), Integer))
-        Me.LBL_FLAG_CONTINUE_BACK.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_FLAG_CONTINUE_BACK.Name = "LBL_FLAG_CONTINUE_BACK"
-        Me.LBL_FLAG_CONTINUE_BACK.Size = New System.Drawing.Size(24, 24)
-        Me.LBL_FLAG_CONTINUE_BACK.TabIndex = 12
-        Me.LBL_FLAG_CONTINUE_BACK.Visible = False
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -1089,6 +1089,8 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
+        Me.PNL_FLAG_CONTINUE.ResumeLayout(False)
+        Me.PNL_FLAG_CONTINUE.PerformLayout()
         Me.PNL_CODE_MAINTENANCE.ResumeLayout(False)
         Me.PNL_FLAG_WORK.ResumeLayout(False)
         Me.PNL_CODE_SECTION.ResumeLayout(False)
@@ -1119,8 +1121,6 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_FLAG_CONTINUE.ResumeLayout(False)
-        Me.PNL_FLAG_CONTINUE.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

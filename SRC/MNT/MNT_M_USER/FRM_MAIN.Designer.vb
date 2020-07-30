@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -59,6 +59,10 @@ Partial Class FRM_MAIN
         Me.BTN_DELETE = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
+        Me.PNL_INPUT_GUIDE = New System.Windows.Forms.Panel()
+        Me.PNL_LBL_FLAG_INVALID = New System.Windows.Forms.Panel()
+        Me.LBL_FLAG_INVALID = New System.Windows.Forms.Label()
+        Me.LBL_FLAG_INVALID_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -74,6 +78,8 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_STAFF.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.PNL_FUNCTION_GROUP.SuspendLayout()
+        Me.PNL_INPUT_GUIDE.SuspendLayout()
+        Me.PNL_LBL_FLAG_INVALID.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -180,6 +186,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GRP_BODY.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_GUIDE)
         Me.GRP_BODY.Controls.Add(Me.DGV_VIEW_DATA)
         Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_DATA)
         Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_KEY)
@@ -199,14 +206,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("メイリオ", 9.0!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 180)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -287,7 +294,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_PASS_WORD.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_PASS_WORD.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_PASS_WORD.MaxLength = 20
+        Me.TXT_PASS_WORD.MaxLength = 30
         Me.TXT_PASS_WORD.Name = "TXT_PASS_WORD"
         Me.TXT_PASS_WORD.Size = New System.Drawing.Size(150, 25)
         Me.TXT_PASS_WORD.TabIndex = 1
@@ -379,7 +386,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_STAFF)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
-        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 40)
+        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(490, 40)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
         'PNL_CODE_STAFF
@@ -528,6 +535,54 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
+        'PNL_INPUT_GUIDE
+        '
+        Me.PNL_INPUT_GUIDE.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PNL_INPUT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.PNL_INPUT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_GUIDE.Controls.Add(Me.PNL_LBL_FLAG_INVALID)
+        Me.PNL_INPUT_GUIDE.Location = New System.Drawing.Point(505, 20)
+        Me.PNL_INPUT_GUIDE.Name = "PNL_INPUT_GUIDE"
+        Me.PNL_INPUT_GUIDE.Size = New System.Drawing.Size(245, 40)
+        Me.PNL_INPUT_GUIDE.TabIndex = 4
+        '
+        'PNL_LBL_FLAG_INVALID
+        '
+        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID)
+        Me.PNL_LBL_FLAG_INVALID.Controls.Add(Me.LBL_FLAG_INVALID_GUIDE)
+        Me.PNL_LBL_FLAG_INVALID.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_LBL_FLAG_INVALID.Name = "PNL_LBL_FLAG_INVALID"
+        Me.PNL_LBL_FLAG_INVALID.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_LBL_FLAG_INVALID.TabIndex = 0
+        '
+        'LBL_FLAG_INVALID
+        '
+        Me.LBL_FLAG_INVALID.AutoEllipsis = True
+        Me.LBL_FLAG_INVALID.BackColor = System.Drawing.Color.White
+        Me.LBL_FLAG_INVALID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVALID.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_FLAG_INVALID.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_FLAG_INVALID.Name = "LBL_FLAG_INVALID"
+        Me.LBL_FLAG_INVALID.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_FLAG_INVALID.TabIndex = 4
+        Me.LBL_FLAG_INVALID.Tag = "Clear"
+        Me.LBL_FLAG_INVALID.Text = "＊＊＊"
+        Me.LBL_FLAG_INVALID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_FLAG_INVALID_GUIDE
+        '
+        Me.LBL_FLAG_INVALID_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_INVALID_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_INVALID_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVALID_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_INVALID_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_INVALID_GUIDE.Name = "LBL_FLAG_INVALID_GUIDE"
+        Me.LBL_FLAG_INVALID_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_INVALID_GUIDE.TabIndex = 3
+        Me.LBL_FLAG_INVALID_GUIDE.Text = "状態"
+        Me.LBL_FLAG_INVALID_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -564,6 +619,8 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.ResumeLayout(False)
         Me.PNL_FUNCTION_GROUP.ResumeLayout(False)
         Me.PNL_FUNCTION_GROUP.PerformLayout()
+        Me.PNL_INPUT_GUIDE.ResumeLayout(False)
+        Me.PNL_LBL_FLAG_INVALID.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -604,4 +661,8 @@ Partial Class FRM_MAIN
     Friend WithEvents BTN_PREVIEW As Button
     Friend WithEvents BTN_PRINT As Button
     Friend WithEvents BTN_PUT_FILE As Button
+    Friend WithEvents PNL_INPUT_GUIDE As Panel
+    Friend WithEvents PNL_LBL_FLAG_INVALID As Panel
+    Friend WithEvents LBL_FLAG_INVALID As Label
+    Friend WithEvents LBL_FLAG_INVALID_GUIDE As Label
 End Class
