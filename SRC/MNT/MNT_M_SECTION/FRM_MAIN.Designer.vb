@@ -352,11 +352,11 @@ Partial Class FRM_MAIN
         '
         Me.TXT_CODE_SECTION.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_CODE_SECTION.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_SECTION.MaxLength = 2
+        Me.TXT_CODE_SECTION.MaxLength = 3
         Me.TXT_CODE_SECTION.Name = "TXT_CODE_SECTION"
         Me.TXT_CODE_SECTION.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_SECTION.TabIndex = 1
-        Me.TXT_CODE_SECTION.Tag = "Clear,Numeric,Format=00,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_SECTION.Tag = "Clear,Numeric,Format=000,Check,NotNull,NotZero,Plus"
         Me.TXT_CODE_SECTION.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRP_FOOT
