@@ -354,6 +354,7 @@
                 Else
                     LBL_SERIAL_DEPOSIT.Text = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(datSYSTEM_TOTAL_DATE_ACTIVE) + 1
                 End If
+                LBL_FLAG_OUTPUT.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_OUTPUT, .FLAG_OUTPUT)
             Else
                 Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, datSYSTEM_TOTAL_DATE_ACTIVE)
                 Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_SALE)
@@ -369,6 +370,7 @@
                 Call SUB_REFRESH_KINGAKU_COST_TOTAL()
                 TXT_NAME_MEMO.Text = ""
                 LBL_SERIAL_DEPOSIT.Text = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(datSYSTEM_TOTAL_DATE_ACTIVE) + 1
+                LBL_FLAG_OUTPUT.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_OUTPUT, ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT.NOT_DONE)
             End If
         End With
     End Sub
@@ -484,6 +486,20 @@
             Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Call CTL_CONTROL.Focus()
             Return False
+        End If
+
+        If SRT_RECORD_DEPOSIT.DATA.FLAG_OUTPUT = ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT.DONE Then
+            STR_ERR_MSG = ""
+            STR_ERR_MSG &= "対象の入金は既に" & LBL_FLAG_OUTPUT_GUIDE.Text & "が行われています。" & System.Environment.NewLine
+            STR_ERR_MSG &= "科目や金額を修正するとパッケージ側での作業が必要になる場合があります。" & System.Environment.NewLine
+            STR_ERR_MSG &= "よろしいですか？" & System.Environment.NewLine
+
+            Dim RST_MSG As System.Windows.Forms.DialogResult
+            RST_MSG = MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            If RST_MSG = Windows.Forms.DialogResult.No Then
+                BTN_ENTER.Focus()
+                Return False
+            End If
         End If
 
         Return True

@@ -285,7 +285,7 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_YYYYMM_BEFORE_GUIDE.Name = "LBL_CODE_YYYYMM_BEFORE_GUIDE"
         Me.LBL_CODE_YYYYMM_BEFORE_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_CODE_YYYYMM_BEFORE_GUIDE.TabIndex = 0
-        Me.LBL_CODE_YYYYMM_BEFORE_GUIDE.Text = "現在月次"
+        Me.LBL_CODE_YYYYMM_BEFORE_GUIDE.Text = "確定月次"
         Me.LBL_CODE_YYYYMM_BEFORE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'GRP_FOOT

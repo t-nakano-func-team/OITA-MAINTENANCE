@@ -35,6 +35,9 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS = New System.Windows.Forms.Panel()
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_CODE_YYYYMM = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_YYYYMM = New System.Windows.Forms.Label()
+        Me.LBL_CODE_YYYYMM_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_DATE_DEPOSIT = New System.Windows.Forms.Panel()
         Me.LBL_DATE_DEPOSIT = New System.Windows.Forms.Label()
         Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
@@ -45,9 +48,6 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
         Me.BTN_BATCH = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_CODE_YYYYMM = New System.Windows.Forms.Panel()
-        Me.LBL_CODE_YYYYMM = New System.Windows.Forms.Label()
-        Me.LBL_CODE_YYYYMM_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -56,11 +56,11 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_BATCH_PROGRESS.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_CODE_YYYYMM.SuspendLayout()
         Me.PNL_DATE_DEPOSIT.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_CODE_YYYYMM.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -221,6 +221,42 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
+        'PNL_CODE_YYYYMM
+        '
+        Me.PNL_CODE_YYYYMM.Controls.Add(Me.LBL_CODE_YYYYMM)
+        Me.PNL_CODE_YYYYMM.Controls.Add(Me.LBL_CODE_YYYYMM_GUIDE)
+        Me.PNL_CODE_YYYYMM.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_CODE_YYYYMM.Name = "PNL_CODE_YYYYMM"
+        Me.PNL_CODE_YYYYMM.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_CODE_YYYYMM.TabIndex = 0
+        '
+        'LBL_CODE_YYYYMM
+        '
+        Me.LBL_CODE_YYYYMM.AutoEllipsis = True
+        Me.LBL_CODE_YYYYMM.BackColor = System.Drawing.Color.White
+        Me.LBL_CODE_YYYYMM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_YYYYMM.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_CODE_YYYYMM.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_CODE_YYYYMM.Name = "LBL_CODE_YYYYMM"
+        Me.LBL_CODE_YYYYMM.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_CODE_YYYYMM.TabIndex = 5
+        Me.LBL_CODE_YYYYMM.Tag = "Clear"
+        Me.LBL_CODE_YYYYMM.Text = "＊＊＊"
+        Me.LBL_CODE_YYYYMM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_CODE_YYYYMM_GUIDE
+        '
+        Me.LBL_CODE_YYYYMM_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_YYYYMM_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_YYYYMM_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_YYYYMM_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_YYYYMM_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_YYYYMM_GUIDE.Name = "LBL_CODE_YYYYMM_GUIDE"
+        Me.LBL_CODE_YYYYMM_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_YYYYMM_GUIDE.TabIndex = 0
+        Me.LBL_CODE_YYYYMM_GUIDE.Text = "確定月次"
+        Me.LBL_CODE_YYYYMM_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_DATE_DEPOSIT
         '
         Me.PNL_DATE_DEPOSIT.Controls.Add(Me.LBL_DATE_DEPOSIT)
@@ -341,42 +377,6 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_CODE_YYYYMM
-        '
-        Me.PNL_CODE_YYYYMM.Controls.Add(Me.LBL_CODE_YYYYMM)
-        Me.PNL_CODE_YYYYMM.Controls.Add(Me.LBL_CODE_YYYYMM_GUIDE)
-        Me.PNL_CODE_YYYYMM.Location = New System.Drawing.Point(5, 5)
-        Me.PNL_CODE_YYYYMM.Name = "PNL_CODE_YYYYMM"
-        Me.PNL_CODE_YYYYMM.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_CODE_YYYYMM.TabIndex = 0
-        '
-        'LBL_CODE_YYYYMM
-        '
-        Me.LBL_CODE_YYYYMM.AutoEllipsis = True
-        Me.LBL_CODE_YYYYMM.BackColor = System.Drawing.Color.White
-        Me.LBL_CODE_YYYYMM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_YYYYMM.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_CODE_YYYYMM.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_CODE_YYYYMM.Name = "LBL_CODE_YYYYMM"
-        Me.LBL_CODE_YYYYMM.Size = New System.Drawing.Size(150, 25)
-        Me.LBL_CODE_YYYYMM.TabIndex = 5
-        Me.LBL_CODE_YYYYMM.Tag = "Clear"
-        Me.LBL_CODE_YYYYMM.Text = "＊＊＊"
-        Me.LBL_CODE_YYYYMM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBL_CODE_YYYYMM_GUIDE
-        '
-        Me.LBL_CODE_YYYYMM_GUIDE.AutoEllipsis = True
-        Me.LBL_CODE_YYYYMM_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_CODE_YYYYMM_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_CODE_YYYYMM_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_YYYYMM_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_CODE_YYYYMM_GUIDE.Name = "LBL_CODE_YYYYMM_GUIDE"
-        Me.LBL_CODE_YYYYMM_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_CODE_YYYYMM_GUIDE.TabIndex = 0
-        Me.LBL_CODE_YYYYMM_GUIDE.Text = "現在月次"
-        Me.LBL_CODE_YYYYMM_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -402,12 +402,12 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.ResumeLayout(False)
         Me.PNL_BATCH_PROGRESS.PerformLayout()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_CODE_YYYYMM.ResumeLayout(False)
         Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_CODE_YYYYMM.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

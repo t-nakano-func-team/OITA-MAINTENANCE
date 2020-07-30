@@ -533,6 +533,31 @@
         Return True
     End Function
 
+    '出力フラグ更新
+    Public Function FUNC_UPDATE_DEPOSIT_FLAG_OUTPUT(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer, ByVal INT_SERIAL_INVOICE As Integer, ByVal ENM_FLAG_OUTPUT As ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT) As Boolean
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+
+        With STR_SQL
+            Call .Append("UPDATE" & System.Environment.NewLine)
+            Call .Append("MNT_T_DEPOSIT WITH(ROWLOCK)" & System.Environment.NewLine)
+            Call .Append("SET" & System.Environment.NewLine)
+            Call .Append("FLAG_OUTPUT=" & CInt(ENM_FLAG_OUTPUT) & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append("AND NUMBER_CONTRACT=" & INT_NUMBER_CONTRACT & System.Environment.NewLine)
+            Call .Append("AND SERIAL_CONTRACT=" & INT_SERIAL_CONTRACT & System.Environment.NewLine)
+            Call .Append("AND SERIAL_INVOICE=" & INT_SERIAL_INVOICE & System.Environment.NewLine)
+
+        End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
 #End Region
 
 #Region "オーナー関連"
@@ -593,6 +618,41 @@
 
         STR_RET = SRT_CONTRACT_SPOT.DATA.NAME_OWNER
         Return STR_RET
+    End Function
+#End Region
+
+#Region "日付関連"
+    Public Function FUNC_SYSTEM_INDVIDUAL_ADD_MONTH(ByVal DAT_BASE As DateTime, ByVal INT_ADD As Integer) As DateTime
+
+        Dim INT_YYYYMM As Integer
+        INT_YYYYMM = FUNC_GET_YYYYMM_FROM_DATE(DAT_BASE)
+
+        Dim INT_YYYYMM_ADD As Integer
+        INT_YYYYMM_ADD = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM, INT_ADD)
+
+        Dim INT_YEAR As Integer
+        INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_ADD)
+
+        Dim INT_MONTH As Integer
+        INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_ADD)
+
+        Dim INT_DAY_TEMP As Integer
+        INT_DAY_TEMP = DAT_BASE.Day
+
+        Dim INT_DAY As Integer
+        If INT_DAY_TEMP >= 28 Then
+            Dim DAT_TEMP As DateTime
+            DAT_TEMP = New DateTime(INT_YEAR, INT_MONTH, INT_DAY_TEMP) '対象の1日を取得
+            DAT_TEMP = FUNC_GET_DATE_LASTMONTH(DAT_TEMP) '月末へ変換
+            INT_DAY = DAT_TEMP.Day
+        Else
+            INT_DAY = INT_DAY_TEMP
+        End If
+
+        Dim DAT_RET As DateTime
+        DAT_RET = New DateTime(INT_YEAR, INT_MONTH, INT_DAY)
+
+        Return DAT_RET
     End Function
 #End Region
 
