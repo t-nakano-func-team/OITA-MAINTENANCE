@@ -24,7 +24,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
         Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
         Public NAME_ADDRESS_02 As String
-        Public DAY_FIX_INVOICE As Integer
+        Public FLAG_INVOICE_FIXDAY As Integer
         Public FLAG_INVALID As Integer
         Public CODE_EDIT_STAFF As Integer
         Public DATE_EDIT As DateTime
@@ -94,7 +94,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             .CODE_POST = 0
             .NAME_ADDRESS_01 = ""
             .NAME_ADDRESS_02 = ""
-            .DAY_FIX_INVOICE = -1
+            .FLAG_INVOICE_FIXDAY = -1
             .FLAG_INVALID = -1
             .CODE_EDIT_STAFF = -1
             .DATE_EDIT = cstVB_DATE_MIN
@@ -143,7 +143,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             .CODE_POST = CInt(SDR_READER.Item("CODE_POST"))
             .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
             .NAME_ADDRESS_02 = CStr(SDR_READER.Item("NAME_ADDRESS_02"))
-            .DAY_FIX_INVOICE = CInt(SDR_READER.Item("DAY_FIX_INVOICE"))
+            .FLAG_INVOICE_FIXDAY = CInt(SDR_READER.Item("FLAG_INVOICE_FIXDAY"))
             .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
             .CODE_EDIT_STAFF = CInt(SDR_READER.Item("CODE_EDIT_STAFF"))
             .DATE_EDIT = CDate(SDR_READER.Item("DATE_EDIT"))
@@ -207,7 +207,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_M_OWNER
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_POST) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_01) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_ADDRESS_02) & "," & Environment.NewLine)
-            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DAY_FIX_INVOICE) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVOICE_FIXDAY) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)

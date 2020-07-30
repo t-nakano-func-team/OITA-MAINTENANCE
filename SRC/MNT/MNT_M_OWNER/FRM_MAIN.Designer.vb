@@ -50,9 +50,9 @@ Partial Class FRM_MAIN
         Me.PNL_FLAG_OWNER = New System.Windows.Forms.Panel()
         Me.CMB_FLAG_OWNER = New System.Windows.Forms.ComboBox()
         Me.LBL_FLAG_OWNER_GUIDE = New System.Windows.Forms.Label()
-        Me.PNL_DAY_FIX_INVOICE = New System.Windows.Forms.Panel()
-        Me.CMB_DAY_FIX_INVOICE = New System.Windows.Forms.ComboBox()
-        Me.LBL_DAY_FIX_INVOICE_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_FLAG_INVOICE_FIXDAY = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_INVOICE_FIXDAY = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_NAME_ADDRESS_02 = New System.Windows.Forms.Panel()
         Me.TXT_NAME_ADDRESS_02 = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_ADDRESS_02_GUIDE = New System.Windows.Forms.Label()
@@ -84,7 +84,7 @@ Partial Class FRM_MAIN
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_FLAG_OWNER.SuspendLayout()
-        Me.PNL_DAY_FIX_INVOICE.SuspendLayout()
+        Me.PNL_FLAG_INVOICE_FIXDAY.SuspendLayout()
         Me.PNL_NAME_ADDRESS_02.SuspendLayout()
         Me.PNL_NAME_ADDRESS_01.SuspendLayout()
         Me.PNL_CODE_POST.SuspendLayout()
@@ -414,7 +414,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_OWNER)
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_DAY_FIX_INVOICE)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_INVOICE_FIXDAY)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_ADDRESS_02)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_NAME_ADDRESS_01)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_POST)
@@ -457,37 +457,37 @@ Partial Class FRM_MAIN
         Me.LBL_FLAG_OWNER_GUIDE.Text = "オーナー区分"
         Me.LBL_FLAG_OWNER_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'PNL_DAY_FIX_INVOICE
+        'PNL_FLAG_INVOICE_FIXDAY
         '
-        Me.PNL_DAY_FIX_INVOICE.Controls.Add(Me.CMB_DAY_FIX_INVOICE)
-        Me.PNL_DAY_FIX_INVOICE.Controls.Add(Me.LBL_DAY_FIX_INVOICE_GUIDE)
-        Me.PNL_DAY_FIX_INVOICE.Location = New System.Drawing.Point(5, 95)
-        Me.PNL_DAY_FIX_INVOICE.Name = "PNL_DAY_FIX_INVOICE"
-        Me.PNL_DAY_FIX_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_DAY_FIX_INVOICE.TabIndex = 8
+        Me.PNL_FLAG_INVOICE_FIXDAY.Controls.Add(Me.CMB_FLAG_INVOICE_FIXDAY)
+        Me.PNL_FLAG_INVOICE_FIXDAY.Controls.Add(Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE)
+        Me.PNL_FLAG_INVOICE_FIXDAY.Location = New System.Drawing.Point(5, 95)
+        Me.PNL_FLAG_INVOICE_FIXDAY.Name = "PNL_FLAG_INVOICE_FIXDAY"
+        Me.PNL_FLAG_INVOICE_FIXDAY.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_INVOICE_FIXDAY.TabIndex = 8
         '
-        'CMB_DAY_FIX_INVOICE
+        'CMB_FLAG_INVOICE_FIXDAY
         '
-        Me.CMB_DAY_FIX_INVOICE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_DAY_FIX_INVOICE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_DAY_FIX_INVOICE.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_DAY_FIX_INVOICE.Name = "CMB_DAY_FIX_INVOICE"
-        Me.CMB_DAY_FIX_INVOICE.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_DAY_FIX_INVOICE.TabIndex = 1
-        Me.CMB_DAY_FIX_INVOICE.Tag = "Clear"
+        Me.CMB_FLAG_INVOICE_FIXDAY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_INVOICE_FIXDAY.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_INVOICE_FIXDAY.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_INVOICE_FIXDAY.Name = "CMB_FLAG_INVOICE_FIXDAY"
+        Me.CMB_FLAG_INVOICE_FIXDAY.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_INVOICE_FIXDAY.TabIndex = 1
+        Me.CMB_FLAG_INVOICE_FIXDAY.Tag = "Clear"
         '
-        'LBL_DAY_FIX_INVOICE_GUIDE
+        'LBL_FLAG_INVOICE_FIXDAY_GUIDE
         '
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.AutoEllipsis = True
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.Name = "LBL_DAY_FIX_INVOICE_GUIDE"
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.TabIndex = 0
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.Text = "請求締日"
-        Me.LBL_DAY_FIX_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.Name = "LBL_FLAG_INVOICE_FIXDAY_GUIDE"
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.Text = "請求締日"
+        Me.LBL_FLAG_INVOICE_FIXDAY_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_NAME_ADDRESS_02
         '
@@ -724,7 +724,7 @@ Partial Class FRM_MAIN
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_DATA.ResumeLayout(False)
         Me.PNL_FLAG_OWNER.ResumeLayout(False)
-        Me.PNL_DAY_FIX_INVOICE.ResumeLayout(False)
+        Me.PNL_FLAG_INVOICE_FIXDAY.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.ResumeLayout(False)
         Me.PNL_NAME_ADDRESS_02.PerformLayout()
         Me.PNL_NAME_ADDRESS_01.ResumeLayout(False)
@@ -778,9 +778,9 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_NAME_ADDRESS_02 As Panel
     Friend WithEvents TXT_NAME_ADDRESS_02 As TextBox
     Friend WithEvents LBL_NAME_ADDRESS_02_GUIDE As Label
-    Friend WithEvents PNL_DAY_FIX_INVOICE As Panel
-    Friend WithEvents CMB_DAY_FIX_INVOICE As ComboBox
-    Friend WithEvents LBL_DAY_FIX_INVOICE_GUIDE As Label
+    Friend WithEvents PNL_FLAG_INVOICE_FIXDAY As Panel
+    Friend WithEvents CMB_FLAG_INVOICE_FIXDAY As ComboBox
+    Friend WithEvents LBL_FLAG_INVOICE_FIXDAY_GUIDE As Label
     Friend WithEvents PNL_FLAG_OWNER As Panel
     Friend WithEvents CMB_FLAG_OWNER As ComboBox
     Friend WithEvents LBL_FLAG_OWNER_GUIDE As Label

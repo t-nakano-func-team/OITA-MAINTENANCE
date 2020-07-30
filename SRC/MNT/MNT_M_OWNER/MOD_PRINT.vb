@@ -29,12 +29,12 @@
         Public CODE_POST As Integer
         Public NAME_ADDRESS_01 As String
         Public NAME_ADDRESS_02 As String
-        Public DAY_FIX_INVOICE As Integer
+        Public FLAG_INVOICE_FIXDAY As Integer
         Public FLAG_INVALID As Integer
 
         Public FLAG_OWNER_NAME As String
         Public CODE_POST_VIEW As String
-        Public DAY_FIX_INVOICE_NAME As String
+        Public FLAG_INVOICE_FIXDAY_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 #End Region
@@ -84,11 +84,11 @@
                 .CODE_POST = CInt(SDR_READER.Item("CODE_POST"))
                 .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
                 .NAME_ADDRESS_02 = CStr(SDR_READER.Item("NAME_ADDRESS_02"))
-                .DAY_FIX_INVOICE = CInt(SDR_READER.Item("DAY_FIX_INVOICE"))
+                .FLAG_INVOICE_FIXDAY = CInt(SDR_READER.Item("FLAG_INVOICE_FIXDAY"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
                 .FLAG_OWNER_NAME = ""
-                .DAY_FIX_INVOICE_NAME = ""
+                .FLAG_INVOICE_FIXDAY_NAME = ""
                 .FLAG_INVALID_NAME = ""
             End With
         End While
@@ -183,7 +183,7 @@
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
             .FLAG_OWNER_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_OWNER, .FLAG_OWNER, True)
-            .DAY_FIX_INVOICE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.DAY_FIX_INVOICE, .DAY_FIX_INVOICE, True)
+            .FLAG_INVOICE_FIXDAY_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVOICE_FIXDAY, .FLAG_INVOICE_FIXDAY, True)
             .FLAG_INVALID_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
 
             If .CODE_POST <= 0 Then
@@ -212,8 +212,8 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_POST_VIEW))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_01))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_02))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DAY_FIX_INVOICE))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DAY_FIX_INVOICE_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVOICE_FIXDAY))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVOICE_FIXDAY_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID_NAME))
         End With
