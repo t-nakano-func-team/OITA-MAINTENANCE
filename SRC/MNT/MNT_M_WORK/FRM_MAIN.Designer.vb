@@ -389,11 +389,11 @@ Partial Class FRM_MAIN
         '
         Me.TXT_CODE_MAINTENANCE.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_CODE_MAINTENANCE.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_MAINTENANCE.MaxLength = 3
+        Me.TXT_CODE_MAINTENANCE.MaxLength = 4
         Me.TXT_CODE_MAINTENANCE.Name = "TXT_CODE_MAINTENANCE"
         Me.TXT_CODE_MAINTENANCE.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_MAINTENANCE.TabIndex = 1
-        Me.TXT_CODE_MAINTENANCE.Tag = "Clear,Numeric,Format=000,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_MAINTENANCE.Tag = "Clear,Numeric,Format=0000,Check,NotNull,NotZero,Plus"
         Me.TXT_CODE_MAINTENANCE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRP_FOOT

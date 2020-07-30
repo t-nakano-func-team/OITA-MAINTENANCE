@@ -317,11 +317,11 @@ Partial Class FRM_MAIN
         '
         Me.TXT_CODE_ACCOUNT_CONNECT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_CODE_ACCOUNT_CONNECT.Location = New System.Drawing.Point(100, 1)
-        Me.TXT_CODE_ACCOUNT_CONNECT.MaxLength = 3
+        Me.TXT_CODE_ACCOUNT_CONNECT.MaxLength = 4
         Me.TXT_CODE_ACCOUNT_CONNECT.Name = "TXT_CODE_ACCOUNT_CONNECT"
         Me.TXT_CODE_ACCOUNT_CONNECT.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_ACCOUNT_CONNECT.TabIndex = 1
-        Me.TXT_CODE_ACCOUNT_CONNECT.Tag = "Clear,Numeric,Format=000,Check,NotNull,Plus"
+        Me.TXT_CODE_ACCOUNT_CONNECT.Tag = "Clear,Numeric,Format=0000,Check,NotNull,Plus"
         Me.TXT_CODE_ACCOUNT_CONNECT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_NAME_ACCOUNT
@@ -427,11 +427,11 @@ Partial Class FRM_MAIN
         '
         Me.TXT_CODE_ACCOUNT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_CODE_ACCOUNT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_CODE_ACCOUNT.MaxLength = 2
+        Me.TXT_CODE_ACCOUNT.MaxLength = 3
         Me.TXT_CODE_ACCOUNT.Name = "TXT_CODE_ACCOUNT"
         Me.TXT_CODE_ACCOUNT.Size = New System.Drawing.Size(80, 25)
         Me.TXT_CODE_ACCOUNT.TabIndex = 1
-        Me.TXT_CODE_ACCOUNT.Tag = "Clear,Numeric,Format=00,Check,NotNull,NotZero,Plus"
+        Me.TXT_CODE_ACCOUNT.Tag = "Clear,Numeric,Format=000,Check,NotNull,NotZero,Plus"
         Me.TXT_CODE_ACCOUNT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'GRP_FOOT
