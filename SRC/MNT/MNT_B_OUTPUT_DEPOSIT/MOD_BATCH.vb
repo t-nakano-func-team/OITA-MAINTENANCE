@@ -85,6 +85,11 @@
 
     Friend Function FUNC_BACTH_MAIN(ByRef BLN_PUT As Boolean, ByRef SRT_CONDITIONS As SRT_BATCH_CONDITIONS) As Boolean
 
+        If Not FUNC_FILE_DELETE(SRT_CONDITIONS.PATH_FILE) Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = str_FILE_TOOL_LAST_ERR_STRING
+            Return False
+        End If
+
         SRT_CONDITIONS.RET_OUTPUT_COUNT = 0
 
         Dim STR_SQL As String
@@ -138,6 +143,7 @@
         Call SDR_READER.Close()
         SDR_READER = Nothing
 
+        BLN_PUT = True
         SRT_CONDITIONS.RET_OUTPUT_COUNT = (SRT_DEPOSIT.Length - 1)
 
         'ファイル情報作成
@@ -154,10 +160,6 @@
             Next
         Next
 
-        If Not FUNC_FILE_DELETE(SRT_CONDITIONS.PATH_FILE) Then
-            STR_FUNC_BATCH_MAIN_ERR_STR = str_FILE_TOOL_LAST_ERR_STRING
-            Return False
-        End If
         Dim STW_CSV_WRITER As System.IO.StreamWriter 'ファイル出力用のIOオブジェクト
         Try
             STW_CSV_WRITER = New System.IO.StreamWriter(SRT_CONDITIONS.PATH_FILE, False, System.Text.Encoding.Default)   'ファイルライターを開く
