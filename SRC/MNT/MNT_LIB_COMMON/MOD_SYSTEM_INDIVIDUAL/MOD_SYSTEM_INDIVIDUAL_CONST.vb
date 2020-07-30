@@ -46,6 +46,9 @@
 
 #Region "種別特定関連"
     Public Const CST_SYSTEM_ACCOUNT_CODE_KIND_ORDINARY_DEPOSIT As Integer = 1 '普通預金
+    Public Const CST_SYSTEM_ACCOUNT_CODE_KIND_ORDINARY_VAT As Integer = 1 '仮払消費税
+    Public Const CST_SYSTEM_ACCOUNT_CODE_KIND_ORDINARY_FEE As Integer = 1 '支払手数料
+
 #End Region
 
 ＃Region "システムコード"

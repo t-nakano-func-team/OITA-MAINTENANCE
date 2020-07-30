@@ -49,6 +49,8 @@
         FLAG_DEPOSIT = 2
         FLAG_COST = 3
         KIND_PAYEE = 4
+        KIND_VAT = 5
+        KIND_FEE = 6
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_DONE

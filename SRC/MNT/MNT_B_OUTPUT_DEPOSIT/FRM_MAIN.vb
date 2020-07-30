@@ -101,7 +101,7 @@
         Dim SFD_DIALOG As System.Windows.Forms.SaveFileDialog
         SFD_DIALOG = New System.Windows.Forms.SaveFileDialog
         SFD_DIALOG.Filter = "CSVファイル(*.csv)|*.csv"
-        Const CST_NAME_FILE_DEFAULT As String = "deposit"
+        Const CST_NAME_FILE_DEFAULT As String = "HanyoUke"
         SFD_DIALOG.FileName = CST_NAME_FILE_DEFAULT & "." & "csv"
         RST_DIAG = SFD_DIALOG.ShowDialog()
 
