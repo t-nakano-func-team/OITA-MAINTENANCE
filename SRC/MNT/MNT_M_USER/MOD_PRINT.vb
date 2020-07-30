@@ -27,8 +27,10 @@
         Public USER_ID As String
         Public PASS_WORD As String
         Public FLAG_GRANT As Integer
+        Public FLAG_INVALID As Integer
 
         Public FLAG_GRANT_NAME As String
+        Public FLAG_INVALID_NAME As String
     End Structure
 #End Region
 
@@ -75,6 +77,7 @@
                 .USER_ID = CStr(SDR_READER.Item("USER_ID"))
                 .PASS_WORD = CStr(SDR_READER.Item("PASS_WORD"))
                 .FLAG_GRANT = CInt(SDR_READER.Item("FLAG_GRANT"))
+                .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
 
                 .FLAG_GRANT_NAME = ""
             End With
@@ -170,6 +173,7 @@
     Private Sub SUB_REPLACE_DATA(ByRef SRT_DATA As SRT_PRINT_DATA)
         With SRT_DATA
             .FLAG_GRANT_NAME = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_GRANT, .FLAG_GRANT)
+            .FLAG_INVALID_NAME = FUNC_GET_MNG_M_KIND_NAME_KIND(ENM_MNG_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID)
         End With
     End Sub
 
@@ -189,6 +193,8 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.PASS_WORD))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_GRANT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_GRANT_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVALID_NAME))
         End With
         STR_RET = FUNC_GET_ONE_ROW_LIST_CSV(STR_ROW)
 
