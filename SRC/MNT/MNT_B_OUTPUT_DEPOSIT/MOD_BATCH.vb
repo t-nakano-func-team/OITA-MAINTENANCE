@@ -15,7 +15,25 @@
 
         Public RET_OUTPUT_COUNT As Integer
     End Structure
+
+    Private Structure SRT_INFO_FILE
+        Public NO As Integer
+        Public FLAG_BALANCE As Integer '借方=1,貸方=2
+        Public CODE_ACCOUNT As Integer '科目コード
+        Public KINGAKU_DETAIL As Long
+        Public KINGAKU_VAT As Long
+        Public KINGAKU_TOTATL As Long
+    End Structure
+
 #End Region
+
+#Region "バッチ用・列挙定数"
+    Private Enum ENM_FLAG_BALANCE
+        KARIKATA = 1
+        KASIKATA = 2
+    End Enum
+#End Region
+
 
     Friend Function FUNC_BACTH_MAIN(ByRef BLN_PUT As Boolean, ByRef SRT_CONDITIONS As SRT_BATCH_CONDITIONS) As Boolean
 
@@ -62,6 +80,18 @@
         SDR_READER = Nothing
 
         'ファイル出力
+        Dim SRT_FILE_ROW() As SRT_INFO_FILE
+        ReDim SRT_FILE_ROW(0)
+        For i = 1 To (SRT_DEPOSIT.Length - 1)
+            Dim SRT_FILE_DEPOSIT() As SRT_INFO_FILE
+            SRT_FILE_DEPOSIT = FUNC_GET_FILE_INFO(SRT_DEPOSIT(i))
+            For j = 1 To (SRT_FILE_DEPOSIT.Length - 1)
+                Dim INT_INDEX As Integer
+                INT_INDEX = SRT_FILE_ROW.Length
+                ReDim Preserve SRT_FILE_ROW(INT_INDEX)
+                SRT_FILE_ROW(INT_INDEX) = SRT_FILE_DEPOSIT(j)
+            Next
+        Next
 
         SRT_CONDITIONS.RET_OUTPUT_COUNT = (SRT_DEPOSIT.Length - 1)
         If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
@@ -115,6 +145,26 @@
         End With
 
         Return STR_SQL.ToString
+    End Function
+
+    Private Function FUNC_GET_FILE_INFO(ByRef SRT_DATA As SRT_TABLE_MNT_T_DEPOSIT) As SRT_INFO_FILE()
+        Dim SRT_RET() As SRT_INFO_FILE
+        ReDim SRT_RET(0)
+
+        Dim INT_INDEX As Integer
+        Dim INT_CODE_ACCOUNT_LINK As Integer
+
+        With SRT_DATA
+            '売上
+            INT_CODE_ACCOUNT_LINK = FUNC_GET_MNT_M_ACCOUNT_CODE_ACCOUNT_CONNECT(ENM_SYSTEM_INDIVIDUAL_FLAG_ACCOUNT.FLAG_SALE, .DATA.)
+
+        End With
+
+
+
+
+        Return SRT_RET
+
     End Function
 
 #Region "内部処理-汎用"

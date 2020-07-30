@@ -338,6 +338,46 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_M_ACCOUNT
         Return STR_RET
     End Function
 
+    Private SRT_CASH_GET_MNT_M_ACCOUNT_CODE_ACCOUNT_CONNECT() As SRT_CASH_INT_INT_INT
+    Public Function FUNC_GET_MNT_M_ACCOUNT_CODE_ACCOUNT_CONNECT(
+    ByVal ENM_FLAG_ACCOUNT As ENM_SYSTEM_INDIVIDUAL_FLAG_ACCOUNT,
+    ByVal INT_CODE_ACCOUNT As Integer,
+    Optional ByVal BLN_CASH As Boolean = False
+    ) As Integer
+
+        Dim INT_RET As Integer
+        INT_RET = -1
+
+        Dim SRT_MY_CASH() As SRT_CASH_INT_INT_INT
+        SRT_MY_CASH = SRT_CASH_GET_MNT_M_ACCOUNT_CODE_ACCOUNT_CONNECT
+        If BLN_CASH Then
+            Dim INT_CASH_INDEX As Integer
+            INT_CASH_INDEX = FUNC_SEARCH_CASH_INT_INT_INT(SRT_MY_CASH, ENM_FLAG_ACCOUNT, INT_CODE_ACCOUNT)
+            If INT_CASH_INDEX <> -1 Then
+                Return SRT_MY_CASH(INT_CASH_INDEX).VALUE
+            End If
+        End If
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "CODE_ACCOUNT_CONNECT"
+            ReDim .WHERE(2)
+            .WHERE(1).COL_NAME = "FLAG_ACCOUNT"
+            .WHERE(1).VALUE = CInt(ENM_FLAG_ACCOUNT.GetHashCode)
+            .WHERE(2).COL_NAME = "CODE_ACCOUNT"
+            .WHERE(2).VALUE = INT_CODE_ACCOUNT
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL)
+
+        Call SUB_ADD_CASH_INT_INT_INT(SRT_CASH_GET_MNT_M_ACCOUNT_CODE_ACCOUNT_CONNECT, ENM_FLAG_ACCOUNT, INT_CODE_ACCOUNT, INT_RET)
+
+        Return INT_RET
+    End Function
 
 End Module
 

@@ -521,10 +521,10 @@ Public Module MOD_SYSTEM_TOTAL_MST_SELECT_MNG_M_USER
         Return strRET
     End Function
 
-    Private srtCASH_GET_MNG_M_USER_FLAG_DELETE() As SRT_CASH_INT_INT
-    Public Function FUNC_GET_MNG_M_USER_FLAG_DELETE( _
-    ByVal intCODE_STAFF As Integer, _
-    Optional ByVal blnCASH As Boolean = False _
+    Private srtCASH_GET_MNG_M_USER_FLAG_INVALID() As SRT_CASH_INT_INT
+    Public Function FUNC_GET_MNG_M_USER_FLAG_INVALID(
+    ByVal intCODE_STAFF As Integer,
+    Optional ByVal blnCASH As Boolean = False
     ) As Integer
         Dim intRET As Integer
         Dim srtMY_CASH() As SRT_CASH_INT_INT
@@ -534,7 +534,7 @@ Public Module MOD_SYSTEM_TOTAL_MST_SELECT_MNG_M_USER
 
         intRET = 0
 
-        srtMY_CASH = srtCASH_GET_MNG_M_USER_FLAG_DELETE
+        srtMY_CASH = srtCASH_GET_MNG_M_USER_FLAG_INVALID
         If blnCASH Then
             intCASH_INDEX = FUNC_SEARCH_CASH_INT_INT(srtMY_CASH, intCODE_STAFF)
             If intCASH_INDEX <> -1 Then
@@ -544,7 +544,7 @@ Public Module MOD_SYSTEM_TOTAL_MST_SELECT_MNG_M_USER
 
         With srtSQL
             .TABLE_NAME = strSYSTEM_PUBLIC_MNGDB_PREFIX & CST_TABLE_NAME_DEFAULT
-            .COL_NAME = "FLAG_DELETE"
+            .COL_NAME = "FLAG_INVALID"
             ReDim .WHERE(1)
             .WHERE(1).COL_NAME = "CODE_STAFF"
             .WHERE(1).VALUE = intCODE_STAFF

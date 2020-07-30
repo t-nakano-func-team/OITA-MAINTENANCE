@@ -114,7 +114,7 @@
         Dim strPASSWORD As String
         Dim strPASSWORD_GET As String
         Dim intCODE_STAFF As Integer
-        Dim intFLAG_DELETE As Integer
+        Dim intFLAG_INVALID As Integer
 
         'Enable = True の入力項目すべてチェック対象(TAG=Check_Head)
         ctlCONTROL = Nothing
@@ -158,8 +158,8 @@
 
         'その他入力項目との関連性のないチェック
         ctlCONTROL = TXT_ID_USER
-        intFLAG_DELETE = FUNC_GET_MNG_M_USER_FLAG_DELETE(intCODE_STAFF)
-        If FUNC_CAST_INT_TO_BOOL(intFLAG_DELETE) Then
+        intFLAG_INVALID = FUNC_GET_MNG_M_USER_FLAG_INVALID(intCODE_STAFF)
+        If FUNC_CAST_INT_TO_BOOL(intFLAG_INVALID) Then
             strERR_MSG = "入力された" & FUNC_GET_TEXT_GUIDE_LABEL(ctlCONTROL) & "は使用不可に設定されています"
             Call MessageBox.Show(strERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Call ctlCONTROL.Focus()

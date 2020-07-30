@@ -27,7 +27,7 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
         Public USER_ID As String
         Public PASS_WORD As String
         Public NAME_STAFF As String
-        Public FLAG_DELETE As Integer
+        Public FLAG_INVALID As Integer
     End Structure
 #End Region
 
@@ -98,7 +98,7 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
             .USER_ID = ""
             .PASS_WORD = ""
             .NAME_STAFF = ""
-            .FLAG_DELETE = 0
+            .FLAG_INVALID = 0
         End With
 
         If blnCASH Then
@@ -138,7 +138,7 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
             .USER_ID = CStr(sdrREADER.Item("USER_ID"))
             .PASS_WORD = CStr(sdrREADER.Item("PASS_WORD"))
             .NAME_STAFF = CStr(sdrREADER.Item("NAME_STAFF"))
-            .FLAG_DELETE = CInt(sdrREADER.Item("FLAG_DELETE"))
+            .FLAG_INVALID = CInt(sdrREADER.Item("FLAG_INVALID"))
         End With
 
         Call sdrREADER.Close()
@@ -197,7 +197,7 @@ Public Module MOD_SYSTEM_TOTAL_TABLE_STRUCTURE_MNG_M_USER
             Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.USER_ID) & "," & Environment.NewLine)
             Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.PASS_WORD) & "," & Environment.NewLine)
             Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_STAFF) & "," & Environment.NewLine)
-            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_DELETE) & Environment.NewLine)
+            Call strSQL.Append(FUNC_GET_VALUE_SQL_STRING(.FLAG_INVALID) & Environment.NewLine)
         End With
         Call strSQL.Append(")" & Environment.NewLine)
 
