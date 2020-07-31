@@ -212,13 +212,19 @@
             Call .Append("FROM" & System.Environment.NewLine)
             Call .Append("MNT_T_DEPOSIT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
 
+            Call .Append("INNER JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT AS SUB_01 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
+
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
-            Call .Append("AND FLAG_OUTPUT=" & ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT.NOT_DONE & System.Environment.NewLine) '定期
-            Call .Append("AND DATE_DEPOSIT<=" & FUNC_ADD_ENCLOSED_SCOT(SRT_CONDITIONS.DATE_DEPOSIT_TO.ToShortDateString) & System.Environment.NewLine) '自動継続
+            Call .Append("AND MAIN.FLAG_OUTPUT=" & ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT.NOT_DONE & System.Environment.NewLine) '定期
+            Call .Append("AND MAIN.DATE_DEPOSIT<=" & FUNC_ADD_ENCLOSED_SCOT(SRT_CONDITIONS.DATE_DEPOSIT_TO.ToShortDateString) & System.Environment.NewLine) '自動継続
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & System.Environment.NewLine)
+            Call .Append("MAIN.DATE_DEPOSIT,SUB_01.CODE_OWNER,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT,MAIN.SERIAL_INVOICE" & System.Environment.NewLine)
         End With
 
         Return STR_SQL.ToString
@@ -385,9 +391,9 @@
         End With
         With SRT_DATA.KARIKATA
             STR_RET &= "    " & "," '空白
-            STR_RET &= .CODE_ACCOUNT_PRINT & ","
-            STR_RET &= .CODE_SUBACCOUNT_PRINT & ","
-            STR_RET &= .KINGAKU_TOTAL & ","
+            STR_RET &= FUNC_APPEND_LEFT_CHAR(.CODE_ACCOUNT_PRINT, 4) & ","
+            STR_RET &= FUNC_APPEND_LEFT_CHAR(.CODE_SUBACCOUNT_PRINT, 4) & ","
+            STR_RET &= FUNC_APPEND_LEFT_CHAR(.KINGAKU_TOTAL, 11) & ","
             STR_RET &= "          " & "," '空白
             STR_RET &= " " & "," '空白
             STR_RET &= " " & 0 & "," '0
@@ -395,9 +401,9 @@
         End With
         With SRT_DATA.KASIKATA
             STR_RET &= "    " & "," '空白
-            STR_RET &= .CODE_ACCOUNT_PRINT & ","
-            STR_RET &= .CODE_SUBACCOUNT_PRINT & ","
-            STR_RET &= .KINGAKU_TOTAL & ","
+            STR_RET &= FUNC_APPEND_LEFT_CHAR(.CODE_ACCOUNT_PRINT, 4) & ","
+            STR_RET &= FUNC_APPEND_LEFT_CHAR(.CODE_SUBACCOUNT_PRINT, 4) & ","
+            STR_RET &= FUNC_APPEND_LEFT_CHAR(.KINGAKU_TOTAL, 11) & ","
             STR_RET &= "          " & "," '空白
             STR_RET &= " " & "," '空白
             STR_RET &= " " & 0 & "," '0
@@ -410,11 +416,26 @@
 
         Return STR_RET
     End Function
+
 #Region "内部処理-汎用"
     Private Sub SUB_PUT_GUIDE(ByRef objFORM As Object, ByVal strGUIDE As String)
         Call objFORM.SUB_PUT_PROGRESS_GUIDE(strGUIDE)
     End Sub
 
 #End Region
+
+    Private Function FUNC_APPEND_LEFT_CHAR(ByVal STR_BASE As String, ByVal INT_APPEND As Integer) As String
+        Dim STR_APPEND As String
+        STR_APPEND = New String(" ", INT_APPEND)
+
+        Dim STR_TEMP As String
+        STR_TEMP = STR_APPEND & STR_BASE
+
+        Dim STR_RET As String
+        STR_RET = STR_TEMP.Substring(STR_BASE.Length, INT_APPEND)
+
+        Return STR_RET
+    End Function
+
 
 End Module
