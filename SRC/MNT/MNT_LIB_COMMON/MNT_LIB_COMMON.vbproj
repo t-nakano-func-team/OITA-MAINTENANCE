@@ -380,6 +380,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Search_16x.png" />
+    <Content Include="BACKUP\DAYLY\ReadMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BACKUP\ReadMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="WORK\ReadMe.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

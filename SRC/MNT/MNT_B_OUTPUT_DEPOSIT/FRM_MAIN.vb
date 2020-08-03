@@ -124,6 +124,10 @@
             .FORM = Me
 
             .RET_OUTPUT_COUNT = 0
+
+            .ENABLED_FILE_MOVE = FUNC_CAST_INT_TO_BOOL(CInt(System.Configuration.ConfigurationManager.AppSettings("enabled_file_move")))
+            .FILE_PATH_MOVE = System.Configuration.ConfigurationManager.AppSettings("file_path_move")
+            .FILE_MOVE_MAKE_DIR_UNIT = CInt(System.Configuration.ConfigurationManager.AppSettings("file_move_make_dir_unit"))
         End With
 
         Dim STR_MSG As String
@@ -148,6 +152,14 @@
 
         If Not BLN_PUT Then
             Call MessageBox.Show("対象データがありません。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Call SUB_PUT_PROGRESS_GUIDE("ファイルのバックアップを行っています")
+        BLN_RET = FUNC_BATCH_MAIN_BACKUP(BLN_PUT, SRT_CONDITIONS)
+        Call SUB_PUT_PROGRESS_GUIDE("")
+        If Not BLN_RET Then
+            Call MessageBox.Show(MOD_BATCH.STR_FUNC_BATCH_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 

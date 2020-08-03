@@ -82,4 +82,11 @@
         NO_CONTINUE = 0 '継続しない
         AUTO_CONTINUE = 1 '自動継続
     End Enum
+
+    Public Enum ENM_MAKE_DIR_UNIT 'ディレクトリ作成単位
+        NONE = 0
+        YEARLY = 1
+        MONTHLY = 2
+        DAYLY = 3
+    End Enum
 End Module

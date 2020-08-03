@@ -14,6 +14,10 @@
         Public FORM As Object
 
         Public RET_OUTPUT_COUNT As Integer
+
+        Public ENABLED_FILE_MOVE As Boolean
+        Public FILE_PATH_MOVE As String
+        Public FILE_MOVE_MAKE_DIR_UNIT As ENM_MAKE_DIR_UNIT
     End Structure
 
     Private Structure SRT_INFO_FILE_DETAIL
@@ -201,6 +205,8 @@
 
         Return True
     End Function
+
+#Region "内部処理"
 
     Private Function FUNC_GET_SQL(ByRef SRT_CONDITIONS As SRT_BATCH_CONDITIONS) As String
         Dim STR_SQL As System.Text.StringBuilder
@@ -417,13 +423,6 @@
         Return STR_RET
     End Function
 
-#Region "内部処理-汎用"
-    Private Sub SUB_PUT_GUIDE(ByRef objFORM As Object, ByVal strGUIDE As String)
-        Call objFORM.SUB_PUT_PROGRESS_GUIDE(strGUIDE)
-    End Sub
-
-#End Region
-
     Private Function FUNC_APPEND_LEFT_CHAR(ByVal STR_BASE As String, ByVal INT_APPEND As Integer) As String
         Dim STR_APPEND As String
         STR_APPEND = New String(" ", INT_APPEND)
@@ -436,6 +435,76 @@
 
         Return STR_RET
     End Function
+#End Region
 
+#Region "内部処理-汎用"
+    Private Sub SUB_PUT_GUIDE(ByRef objFORM As Object, ByVal strGUIDE As String)
+        Call objFORM.SUB_PUT_PROGRESS_GUIDE(strGUIDE)
+    End Sub
+#End Region
+
+    Friend Function FUNC_BATCH_MAIN_BACKUP(
+    ByRef BLN_PUT As Boolean,
+    ByRef SRT_CONDITIONS As SRT_BATCH_CONDITIONS
+    ) As Boolean
+        If Not SRT_CONDITIONS.ENABLED_FILE_MOVE Then
+            Return True '処理なし正常終了
+        End If
+
+        If Not FUNC_DIR_CHECK(SRT_CONDITIONS.FILE_PATH_MOVE) Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = "バックアップディレクトリ" & System.Environment.NewLine & SRT_CONDITIONS.FILE_PATH_MOVE & System.Environment.NewLine & "が存在しません"
+            Return False
+        End If
+
+        Dim STR_MAKE_DIR As String
+        Select Case SRT_CONDITIONS.FILE_MOVE_MAKE_DIR_UNIT
+            Case ENM_MAKE_DIR_UNIT.NONE
+                STR_MAKE_DIR = ""
+            Case ENM_MAKE_DIR_UNIT.YEARLY
+                STR_MAKE_DIR = SRT_CONDITIONS.DATE_DO_BATCH.Year
+            Case ENM_MAKE_DIR_UNIT.MONTHLY
+                STR_MAKE_DIR = FUNC_GET_YYYYMM_FROM_DATE(SRT_CONDITIONS.DATE_DO_BATCH)
+            Case ENM_MAKE_DIR_UNIT.DAYLY
+                STR_MAKE_DIR = Format(SRT_CONDITIONS.DATE_DO_BATCH, "yyyyMMdd")
+            Case Else
+                STR_MAKE_DIR = ""
+        End Select
+
+        Dim STR_MAKE_DIR_PATH As String
+        If STR_MAKE_DIR = "" Then
+            STR_MAKE_DIR_PATH = SRT_CONDITIONS.FILE_PATH_MOVE
+        Else
+            STR_MAKE_DIR_PATH = SRT_CONDITIONS.FILE_PATH_MOVE & "\" & STR_MAKE_DIR
+        End If
+
+        If Not FUNC_DIR_CHECK(STR_MAKE_DIR_PATH) Then '存在しない場合は
+            If Not FUNC_DIR_MAKE(STR_MAKE_DIR_PATH) Then '作成
+                STR_FUNC_BATCH_MAIN_ERR_STR = str_FILE_TOOL_LAST_ERR_STRING
+                Return False
+            End If
+        End If
+
+        Dim STR_FILE_NAME As String
+        STR_FILE_NAME = FUNC_PATH_TO_FILENAME(SRT_CONDITIONS.PATH_FILE)
+
+        Dim STR_FILE_PATH_BACKUP As String
+        STR_FILE_PATH_BACKUP = STR_MAKE_DIR_PATH & "\" & STR_FILE_NAME
+
+        Const CST_MAX_INDEX As Integer = 99
+        For i = 0 To CST_MAX_INDEX
+            Dim STR_TEMP As String
+            STR_TEMP = STR_FILE_PATH_BACKUP & If(i = 0, "", "_" & Format(i, "00"))
+            If Not FUNC_FILE_CHECK(STR_TEMP) Then
+                Exit For
+            End If
+        Next
+
+        If Not FUNC_FILE_COPY(SRT_CONDITIONS.PATH_FILE, STR_FILE_PATH_BACKUP) Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = str_FILE_TOOL_LAST_ERR_STRING
+            Return False
+        End If
+
+        Return True
+    End Function
 
 End Module
