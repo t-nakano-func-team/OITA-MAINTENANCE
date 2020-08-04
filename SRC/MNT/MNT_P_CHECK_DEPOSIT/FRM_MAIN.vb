@@ -225,6 +225,40 @@
             Return False
         End If
 
+        '入金日 大小チェック
+        CTL_CONTROL = DTP_DATE_DEPOSIT_FROM
+        If DTP_DATE_DEPOSIT_FROM.Value > DTP_DATE_DEPOSIT_TO.Value Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_FROM_TO, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        '処理日 大小チェック
+        CTL_CONTROL = DTP_DATE_ACTIVE_FROM
+        If DTP_DATE_ACTIVE_FROM.Value > DTP_DATE_ACTIVE_TO.Value Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_FROM_TO, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
+        'オーナー 大小チェック
+        If FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, 0) <> 0 And
+           FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, 0) <> 0 Then
+            CTL_CONTROL = TXT_CODE_OWNER_FROM
+            Dim INT_CODE_OWNER_FROM As Integer
+            INT_CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(CTL_CONTROL.Text, 0)
+            Dim INT_CODE_OWNER_TO As Integer
+            INT_CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, 0)
+            If INT_CODE_OWNER_FROM > INT_CODE_OWNER_TO Then
+                STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_FROM_TO, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+                Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Call CTL_CONTROL.Focus()
+                Return False
+            End If
+        End If
+
         Return True
     End Function
 #End Region

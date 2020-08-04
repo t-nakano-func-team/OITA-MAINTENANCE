@@ -658,6 +658,7 @@
             Return False
         End If
 
+        '請求日　大小チェック
         CTL_CONTROL = DTP_DATE_INVOICE_FROM
         Dim DAT_DATE_INVOICE_FROM As DateTime
         DAT_DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
