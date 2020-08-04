@@ -22,7 +22,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -251,14 +251,14 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 100)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -417,7 +417,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         '
         Me.TXT_KANA_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_KANA_OWNER.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KANA_OWNER.MaxLength = 12
+        Me.TXT_KANA_OWNER.MaxLength = 40
         Me.TXT_KANA_OWNER.Name = "TXT_KANA_OWNER"
         Me.TXT_KANA_OWNER.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KANA_OWNER.TabIndex = 1
@@ -449,7 +449,7 @@ Partial Class FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER
         '
         Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
-        Me.TXT_NAME_OWNER.MaxLength = 12
+        Me.TXT_NAME_OWNER.MaxLength = 40
         Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
         Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
         Me.TXT_NAME_OWNER.TabIndex = 1
