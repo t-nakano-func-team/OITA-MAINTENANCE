@@ -675,6 +675,16 @@
             Return False
         End If
 
+        CTL_CONTROL = TXT_CODE_OWNER
+        Dim INT_CODE_OWNER As Integer
+        INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(CTL_CONTROL.Text)
+        If Not FUNC_CHECK_MNT_M_OWNER(INT_CODE_OWNER, True) Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_NO_DATA, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
         Return True
     End Function
 #End Region

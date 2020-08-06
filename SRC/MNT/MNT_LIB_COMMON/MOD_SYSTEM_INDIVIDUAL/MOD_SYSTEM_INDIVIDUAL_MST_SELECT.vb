@@ -284,6 +284,44 @@ Public Module MOD_SYSTEM_INDIVIDUAL_MST_SELECT_MNT_M_OWNER
         Return INT_RET
     End Function
 
+    Private SRT_CASH_CHECK_MNT_M_OWNER() As SRT_CASH_INT_BOOL
+    Public Function FUNC_CHECK_MNT_M_OWNER(
+    ByVal INT_CODE_OWNER As Integer,
+    Optional ByVal BLN_CASH As Boolean = False
+    ) As Integer
+
+        Dim SRT_MY_CASH() As SRT_CASH_INT_BOOL
+        SRT_MY_CASH = SRT_CASH_CHECK_MNT_M_OWNER
+        If BLN_CASH Then
+            Dim INT_CASH_INDEX As Integer
+            INT_CASH_INDEX = FUNC_SEARCH_CASH_INT_BOOL(SRT_MY_CASH, INT_CODE_OWNER)
+            If INT_CASH_INDEX <> -1 Then
+                Return SRT_MY_CASH(INT_CASH_INDEX).VALUE
+            End If
+        End If
+
+        Dim SRT_SQL As SRT_SQL_TOOL_SELECT_ONE_COL
+        With SRT_SQL
+            .TABLE_NAME = CST_TABLE_NAME_DEFAULT
+            .COL_NAME = "COUNT(*)"
+            ReDim .WHERE(1)
+            .WHERE(1).COL_NAME = "CODE_OWNER"
+            .WHERE(1).VALUE = INT_CODE_OWNER
+            .ORDER_KEY = ""
+        End With
+
+        Dim STR_SQL As String
+        STR_SQL = FUNC_GET_SQL_TOOL_SELECT_ONE_COL(SRT_SQL)
+
+        Dim INT_COUNT As Integer
+        INT_COUNT = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL, 0)
+
+        Dim BLN_RET As Boolean
+        BLN_RET = (INT_COUNT > 0)
+        Call SUB_ADD_CASH_INT_BOOL(SRT_CASH_CHECK_MNT_M_OWNER, INT_CODE_OWNER, BLN_RET)
+
+        Return BLN_RET
+    End Function
 
 End Module
 
