@@ -8,6 +8,7 @@
         DO_SHOW_SEARCH = 1
         DO_PREVIEW
         DO_PRINT
+        DO_PUT_FILE
         DO_CLEAR
         DO_END = 81
         DO_SHOW_SETTING
@@ -83,6 +84,8 @@
                 Call SUB_PRINT(True, False)
             Case ENM_MY_EXEC_DO.DO_PRINT
                 Call SUB_PRINT(False, False)
+            Case ENM_MY_EXEC_DO.DO_PUT_FILE
+                Call SUB_PRINT(False, True)
             Case ENM_MY_EXEC_DO.DO_CLEAR
                 Call SUB_CLEAR()
             Case ENM_MY_EXEC_DO.DO_END
@@ -429,6 +432,11 @@
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PRINT)
     End Sub
 
+    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs) Handles BTN_PUT_FILE.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PUT_FILE)
+    End Sub
+
+
     Private Sub BTN_CLEAR_Click(sender As Object, e As EventArgs) Handles BTN_CLEAR.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_CLEAR)
     End Sub
@@ -477,5 +485,4 @@
     Private Sub FRM_MAIN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
-
 End Class

@@ -9,6 +9,7 @@
         DO_SHOW_SEARCH = 1
         DO_PREVIEW
         DO_PRINT
+        DO_PUT_FILE
         DO_SEARCH
         DO_CLEAR
         DO_END = 81
@@ -162,6 +163,8 @@
                 Call SUB_PRINT(True, False)
             Case ENM_MY_EXEC_DO.DO_PRINT
                 Call SUB_PRINT(False, False)
+            Case ENM_MY_EXEC_DO.DO_PUT_FILE
+                Call SUB_PRINT(False, True)
             Case ENM_MY_EXEC_DO.DO_CLEAR
                 Call SUB_CLEAR()
             Case ENM_MY_EXEC_DO.DO_END
@@ -889,6 +892,10 @@
 
     Private Sub BTN_PRINT_Click(sender As Object, e As EventArgs) Handles BTN_PRINT.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PRINT)
+    End Sub
+
+    Private Sub BTN_PUT_FILE_Click(sender As Object, e As EventArgs) Handles BTN_PUT_FILE.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_PUT_FILE)
     End Sub
 
     Private Sub BTN_CLEAR_Click(sender As Object, e As EventArgs) Handles BTN_CLEAR.Click
