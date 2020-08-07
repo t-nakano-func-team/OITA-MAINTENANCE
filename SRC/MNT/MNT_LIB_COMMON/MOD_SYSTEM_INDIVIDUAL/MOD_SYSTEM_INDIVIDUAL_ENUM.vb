@@ -15,6 +15,7 @@
         FLAG_INVALID = 22 '有効無効フラグ
         FLAG_INVALID_SHORT = 23 '有効無効フラグ（短）
         FLAG_CONTINUE = 24 '自動継続
+        METHOD_INVOICE = 25 '請求方法
     End Enum
 
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY
@@ -81,6 +82,10 @@
     Public Enum ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE
         NO_CONTINUE = 0 '継続しない
         AUTO_CONTINUE = 1 '自動継続
+    End Enum
+
+    Public Enum ENM_SYSTEM_INDIVIDUAL_METHOD_INVOICE
+        NONE = 0
     End Enum
 
     Public Enum ENM_MAKE_DIR_UNIT 'ディレクトリ作成単位

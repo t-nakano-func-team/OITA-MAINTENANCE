@@ -977,6 +977,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
         Public NAME_CONTRACT As String
         Public DATE_MAINTENANCE_START As DateTime
         Public DATE_MAINTENANCE_END As DateTime
+        Public METHOD_INVOICE As Integer
         Public DATE_INVOICE_BASE As DateTime
         Public SPAN_INVOICE As Integer
         Public COUNT_INVOICE As Integer
@@ -1056,6 +1057,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .NAME_CONTRACT = ""
             .DATE_MAINTENANCE_START = cstVB_DATE_MIN
             .DATE_MAINTENANCE_END = cstVB_DATE_MIN
+            .METHOD_INVOICE = -1
             .DATE_INVOICE_BASE = cstVB_DATE_MIN
             .SPAN_INVOICE = 0
             .COUNT_INVOICE = 0
@@ -1115,6 +1117,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
             .DATE_MAINTENANCE_START = CDate(SDR_READER.Item("DATE_MAINTENANCE_START"))
             .DATE_MAINTENANCE_END = CDate(SDR_READER.Item("DATE_MAINTENANCE_END"))
+            .METHOD_INVOICE = CInt(SDR_READER.Item("METHOD_INVOICE"))
             .DATE_INVOICE_BASE = CDate(SDR_READER.Item("DATE_INVOICE_BASE"))
             .SPAN_INVOICE = CInt(SDR_READER.Item("SPAN_INVOICE"))
             .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
@@ -1190,6 +1193,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.NAME_CONTRACT) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_MAINTENANCE_START) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_MAINTENANCE_END) & "," & Environment.NewLine)
+            Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.METHOD_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_INVOICE_BASE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.SPAN_INVOICE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.COUNT_INVOICE) & "," & Environment.NewLine)
@@ -1200,7 +1204,6 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_MNT_T_CONTRACT
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_ACTIVE) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.CODE_EDIT_STAFF) & "," & Environment.NewLine)
             Call STR_SQL.Append(FUNC_GET_VALUE_SQL_STRING(.DATE_EDIT) & "" & Environment.NewLine)
-
         End With
         Call STR_SQL.Append(")" & Environment.NewLine)
 
