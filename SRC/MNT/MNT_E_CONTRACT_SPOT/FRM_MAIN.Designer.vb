@@ -585,7 +585,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_CONTRACT.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_CONTRACT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_CONTRACT.MaxLength = 20
+        Me.TXT_NAME_CONTRACT.MaxLength = 40
         Me.TXT_NAME_CONTRACT.Name = "TXT_NAME_CONTRACT"
         Me.TXT_NAME_CONTRACT.Size = New System.Drawing.Size(400, 25)
         Me.TXT_NAME_CONTRACT.TabIndex = 1
@@ -810,7 +810,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_MEMO.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_MEMO.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_MEMO.MaxLength = 20
+        Me.TXT_NAME_MEMO.MaxLength = 40
         Me.TXT_NAME_MEMO.Name = "TXT_NAME_MEMO"
         Me.TXT_NAME_MEMO.Size = New System.Drawing.Size(270, 25)
         Me.TXT_NAME_MEMO.TabIndex = 1
