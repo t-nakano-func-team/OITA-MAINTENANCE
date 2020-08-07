@@ -449,6 +449,15 @@
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
     End Sub
+
+    Private Sub BTN_CODE_OWNER_FROM_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_FROM_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_TO_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_TO_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
 #End Region
 
 #Region "イベント-テキストチェンジ"
@@ -490,6 +499,5 @@
     Private Sub FRM_MAIN_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
-
 
 End Class

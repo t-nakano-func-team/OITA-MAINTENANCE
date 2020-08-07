@@ -32,6 +32,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
+        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
         Me.BTN_PRINT = New System.Windows.Forms.Button()
         Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
@@ -60,7 +61,6 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_DEPOSIT_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_DEPOSIT_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
-        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -199,6 +199,18 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
         Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(440, 40)
         Me.pnlFUNCTION_GROUP.TabIndex = 0
+        '
+        'BTN_PUT_FILE
+        '
+        Me.BTN_PUT_FILE.AutoSize = True
+        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
+        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.TabIndex = 2
+        Me.BTN_PUT_FILE.Text = "ファイル"
+        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
         '
         'BTN_PRINT
         '
@@ -526,18 +538,6 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_DEPOSIT_GUIDE.TabIndex = 0
         Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金日"
         Me.LBL_DATE_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'BTN_PUT_FILE
-        '
-        Me.BTN_PUT_FILE.AutoSize = True
-        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(180, 5)
-        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
-        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.TabIndex = 2
-        Me.BTN_PUT_FILE.Text = "ファイル"
-        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
         '
         'FRM_MAIN
         '

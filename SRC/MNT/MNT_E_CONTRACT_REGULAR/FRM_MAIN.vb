@@ -689,6 +689,15 @@
             Return False
         End If
 
+        '作業期間 大小チェック
+        CTL_CONTROL = DTP_DATE_MAINTENANCE_START
+        If DTP_DATE_MAINTENANCE_START.Value > DTP_DATE_MAINTENANCE_END.Value Then
+            STR_ERR_MSG = FUNC_GET_INPUT_CHECK_ERROR_MESSAGE(ENM_SYSTEM_INDIVIDUAL_INPUT_CHECK.CHK_ERR_FROM_TO, FUNC_GET_TEXT_GUIDE_LABEL(CTL_CONTROL))
+            Call MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Call CTL_CONTROL.Focus()
+            Return False
+        End If
+
         Return True
     End Function
 #End Region
