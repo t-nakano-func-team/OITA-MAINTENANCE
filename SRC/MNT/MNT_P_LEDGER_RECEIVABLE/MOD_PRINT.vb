@@ -36,7 +36,7 @@
         Public SERIAL_CONTRACT As Integer
         Public NAME_CONTRACT As String
         Public DATE_CONTRACT As DateTime
-        Public METHOD_INVOICE As Integer
+        Public FLAG_INVOICE_METHOD As Integer
         Public COUNT_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
 
@@ -51,7 +51,7 @@
         Public FLAG_CONTRACT_NAME As String
         Public CODE_OWNER_NAME As String
         Public DATE_CONTRACT_INT As Integer
-        Public METHOD_INVOICE_NAME As String
+        Public FLAG_INVOICE_METHOD_NAME As String
         Public NUMBER_BREAK As Integer
 
         Public Function NUMBER_CONTRACT_VEIW() As String
@@ -117,7 +117,7 @@
                 .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
                 .NAME_CONTRACT = CStr(SDR_READER.Item("NAME_CONTRACT"))
                 .DATE_CONTRACT = CDate(SDR_READER.Item("DATE_CONTRACT"))
-                .METHOD_INVOICE = CInt(SDR_READER.Item("METHOD_INVOICE"))
+                .FLAG_INVOICE_METHOD = CInt(SDR_READER.Item("FLAG_INVOICE_METHOD"))
                 .COUNT_INVOICE = CInt(SDR_READER.Item("COUNT_INVOICE"))
                 .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
                 .KINGAKU_INVOICE_TOTAL = CLng(SDR_READER.Item("KINGAKU_INVOICE_TOTAL"))
@@ -218,7 +218,7 @@
             Call .Append("SUB_01.FLAG_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.DATE_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.NAME_CONTRACT" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.METHOD_INVOICE" & "," & System.Environment.NewLine)
+            Call .Append("SUB_01.FLAG_INVOICE_METHOD" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.COUNT_INVOICE" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.KINGAKU_CONTRACT" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.NAME_MEMO" & "" & System.Environment.NewLine)
@@ -328,7 +328,7 @@
             .CODE_OWNER_NAME = FUNC_GET_NAME_OWNER_FROM_COTRACT(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
             .DATE_CONTRACT_INT = FUNC_CONVERT_DATETIME_TO_NUMERIC_DATE(.DATE_CONTRACT)
 
-            .METHOD_INVOICE_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.METHOD_INVOICE, .METHOD_INVOICE, True)
+            .FLAG_INVOICE_METHOD_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_INVOICE_METHOD, .FLAG_INVOICE_METHOD, True)
 
             Dim LNG_KINGAKU_CONTRACT_VAT As Long
             LNG_KINGAKU_CONTRACT_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_CONTRACT, .DATE_CONTRACT)
@@ -375,7 +375,7 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_VEIW))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.METHOD_INVOICE_NAME))
+            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVOICE_METHOD_NAME))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE))

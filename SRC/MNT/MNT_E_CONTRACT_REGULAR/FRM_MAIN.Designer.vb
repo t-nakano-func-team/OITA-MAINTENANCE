@@ -32,9 +32,9 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_DATA = New System.Windows.Forms.Panel()
-        Me.PNL_METHOD_INVOICE = New System.Windows.Forms.Panel()
-        Me.CMB_METHOD_INVOICE = New System.Windows.Forms.ComboBox()
-        Me.LBL_METHOD_INVOICE_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_FLAG_INVOICE_METHOD = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_INVOICE_METHOD = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_FLAG_CONTINUE = New System.Windows.Forms.Panel()
         Me.CHK_FLAG_CONTINUE = New System.Windows.Forms.CheckBox()
         Me.LBL_FLAG_CONTINUE_GUIDE = New System.Windows.Forms.Label()
@@ -112,7 +112,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_DATA.SuspendLayout()
-        Me.PNL_METHOD_INVOICE.SuspendLayout()
+        Me.PNL_FLAG_INVOICE_METHOD.SuspendLayout()
         Me.PNL_FLAG_CONTINUE.SuspendLayout()
         Me.PNL_CODE_MAINTENANCE.SuspendLayout()
         Me.PNL_FLAG_WORK.SuspendLayout()
@@ -254,7 +254,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_DATA.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_DATA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_METHOD_INVOICE)
+        Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_INVOICE_METHOD)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_CONTINUE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_CODE_MAINTENANCE)
         Me.PNL_INPUT_DATA.Controls.Add(Me.PNL_FLAG_WORK)
@@ -276,37 +276,37 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_DATA.TabIndex = 1
         '
-        'PNL_METHOD_INVOICE
+        'PNL_FLAG_INVOICE_METHOD
         '
-        Me.PNL_METHOD_INVOICE.Controls.Add(Me.CMB_METHOD_INVOICE)
-        Me.PNL_METHOD_INVOICE.Controls.Add(Me.LBL_METHOD_INVOICE_GUIDE)
-        Me.PNL_METHOD_INVOICE.Location = New System.Drawing.Point(5, 180)
-        Me.PNL_METHOD_INVOICE.Name = "PNL_METHOD_INVOICE"
-        Me.PNL_METHOD_INVOICE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_METHOD_INVOICE.TabIndex = 9
+        Me.PNL_FLAG_INVOICE_METHOD.Controls.Add(Me.CMB_FLAG_INVOICE_METHOD)
+        Me.PNL_FLAG_INVOICE_METHOD.Controls.Add(Me.LBL_FLAG_INVOICE_METHOD_GUIDE)
+        Me.PNL_FLAG_INVOICE_METHOD.Location = New System.Drawing.Point(5, 180)
+        Me.PNL_FLAG_INVOICE_METHOD.Name = "PNL_FLAG_INVOICE_METHOD"
+        Me.PNL_FLAG_INVOICE_METHOD.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_INVOICE_METHOD.TabIndex = 9
         '
-        'CMB_METHOD_INVOICE
+        'CMB_FLAG_INVOICE_METHOD
         '
-        Me.CMB_METHOD_INVOICE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CMB_METHOD_INVOICE.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.CMB_METHOD_INVOICE.Location = New System.Drawing.Point(80, 1)
-        Me.CMB_METHOD_INVOICE.Name = "CMB_METHOD_INVOICE"
-        Me.CMB_METHOD_INVOICE.Size = New System.Drawing.Size(150, 26)
-        Me.CMB_METHOD_INVOICE.TabIndex = 1
-        Me.CMB_METHOD_INVOICE.Tag = "Clear"
+        Me.CMB_FLAG_INVOICE_METHOD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_INVOICE_METHOD.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_INVOICE_METHOD.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_INVOICE_METHOD.Name = "CMB_FLAG_INVOICE_METHOD"
+        Me.CMB_FLAG_INVOICE_METHOD.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_INVOICE_METHOD.TabIndex = 1
+        Me.CMB_FLAG_INVOICE_METHOD.Tag = "Clear"
         '
-        'LBL_METHOD_INVOICE_GUIDE
+        'LBL_FLAG_INVOICE_METHOD_GUIDE
         '
-        Me.LBL_METHOD_INVOICE_GUIDE.AutoEllipsis = True
-        Me.LBL_METHOD_INVOICE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_METHOD_INVOICE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_METHOD_INVOICE_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_METHOD_INVOICE_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_METHOD_INVOICE_GUIDE.Name = "LBL_METHOD_INVOICE_GUIDE"
-        Me.LBL_METHOD_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_METHOD_INVOICE_GUIDE.TabIndex = 0
-        Me.LBL_METHOD_INVOICE_GUIDE.Text = "請求方法"
-        Me.LBL_METHOD_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.Name = "LBL_FLAG_INVOICE_METHOD_GUIDE"
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.Text = "請求方法"
+        Me.LBL_FLAG_INVOICE_METHOD_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_FLAG_CONTINUE
         '
@@ -1126,7 +1126,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_DATA.ResumeLayout(False)
-        Me.PNL_METHOD_INVOICE.ResumeLayout(False)
+        Me.PNL_FLAG_INVOICE_METHOD.ResumeLayout(False)
         Me.PNL_FLAG_CONTINUE.ResumeLayout(False)
         Me.PNL_FLAG_CONTINUE.PerformLayout()
         Me.PNL_CODE_MAINTENANCE.ResumeLayout(False)
@@ -1244,7 +1244,7 @@ Partial Class FRM_MAIN
     Friend WithEvents CHK_FLAG_CONTINUE As CheckBox
     Friend WithEvents LBL_FLAG_CONTINUE_GUIDE As Label
     Friend WithEvents LBL_FLAG_CONTINUE_BACK As Label
-    Friend WithEvents PNL_METHOD_INVOICE As Panel
-    Friend WithEvents CMB_METHOD_INVOICE As ComboBox
-    Friend WithEvents LBL_METHOD_INVOICE_GUIDE As Label
+    Friend WithEvents PNL_FLAG_INVOICE_METHOD As Panel
+    Friend WithEvents CMB_FLAG_INVOICE_METHOD As ComboBox
+    Friend WithEvents LBL_FLAG_INVOICE_METHOD_GUIDE As Label
 End Class
