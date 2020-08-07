@@ -70,10 +70,10 @@ Partial Class FRM_MAIN
         Me.PNL_EXT_SPOT = New System.Windows.Forms.Panel()
         Me.PNL_NAME_ADDRESS_02 = New System.Windows.Forms.Panel()
         Me.TXT_NAME_ADDRESS_02 = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_ADDRESS_02 = New System.Windows.Forms.Label()
+        Me.LBL_NAME_ADDRESS_02_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_NAME_ADDRESS_01 = New System.Windows.Forms.Panel()
         Me.TXT_NAME_ADDRESS_01 = New System.Windows.Forms.TextBox()
-        Me.LBL_NAME_ADDRESS_01 = New System.Windows.Forms.Label()
+        Me.LBL_NAME_ADDRESS_01_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_CODE_POST = New System.Windows.Forms.Panel()
         Me.LBL_CODE_POST_GUIDE = New System.Windows.Forms.Label()
         Me.TXT_CODE_POST = New System.Windows.Forms.TextBox()
@@ -671,7 +671,7 @@ Partial Class FRM_MAIN
         'PNL_NAME_ADDRESS_02
         '
         Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.TXT_NAME_ADDRESS_02)
-        Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.LBL_NAME_ADDRESS_02)
+        Me.PNL_NAME_ADDRESS_02.Controls.Add(Me.LBL_NAME_ADDRESS_02_GUIDE)
         Me.PNL_NAME_ADDRESS_02.Location = New System.Drawing.Point(250, 30)
         Me.PNL_NAME_ADDRESS_02.Name = "PNL_NAME_ADDRESS_02"
         Me.PNL_NAME_ADDRESS_02.Size = New System.Drawing.Size(240, 30)
@@ -685,25 +685,25 @@ Partial Class FRM_MAIN
         Me.TXT_NAME_ADDRESS_02.Name = "TXT_NAME_ADDRESS_02"
         Me.TXT_NAME_ADDRESS_02.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_ADDRESS_02.TabIndex = 1
-        Me.TXT_NAME_ADDRESS_02.Tag = "Clear,Check,Char,NotNull"
+        Me.TXT_NAME_ADDRESS_02.Tag = "Clear,Check,Char"
         '
-        'LBL_NAME_ADDRESS_02
+        'LBL_NAME_ADDRESS_02_GUIDE
         '
-        Me.LBL_NAME_ADDRESS_02.AutoEllipsis = True
-        Me.LBL_NAME_ADDRESS_02.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_ADDRESS_02.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_02.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_ADDRESS_02.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_ADDRESS_02.Name = "LBL_NAME_ADDRESS_02"
-        Me.LBL_NAME_ADDRESS_02.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_NAME_ADDRESS_02.TabIndex = 0
-        Me.LBL_NAME_ADDRESS_02.Text = "住所2"
-        Me.LBL_NAME_ADDRESS_02.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_NAME_ADDRESS_02_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_ADDRESS_02_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_ADDRESS_02_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_ADDRESS_02_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_ADDRESS_02_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_ADDRESS_02_GUIDE.Name = "LBL_NAME_ADDRESS_02_GUIDE"
+        Me.LBL_NAME_ADDRESS_02_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_NAME_ADDRESS_02_GUIDE.TabIndex = 0
+        Me.LBL_NAME_ADDRESS_02_GUIDE.Text = "住所2"
+        Me.LBL_NAME_ADDRESS_02_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_NAME_ADDRESS_01
         '
         Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.TXT_NAME_ADDRESS_01)
-        Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.LBL_NAME_ADDRESS_01)
+        Me.PNL_NAME_ADDRESS_01.Controls.Add(Me.LBL_NAME_ADDRESS_01_GUIDE)
         Me.PNL_NAME_ADDRESS_01.Location = New System.Drawing.Point(5, 30)
         Me.PNL_NAME_ADDRESS_01.Name = "PNL_NAME_ADDRESS_01"
         Me.PNL_NAME_ADDRESS_01.Size = New System.Drawing.Size(240, 30)
@@ -719,18 +719,18 @@ Partial Class FRM_MAIN
         Me.TXT_NAME_ADDRESS_01.TabIndex = 1
         Me.TXT_NAME_ADDRESS_01.Tag = "Clear,Check,Char,NotNull"
         '
-        'LBL_NAME_ADDRESS_01
+        'LBL_NAME_ADDRESS_01_GUIDE
         '
-        Me.LBL_NAME_ADDRESS_01.AutoEllipsis = True
-        Me.LBL_NAME_ADDRESS_01.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_NAME_ADDRESS_01.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_NAME_ADDRESS_01.ForeColor = System.Drawing.Color.Black
-        Me.LBL_NAME_ADDRESS_01.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_NAME_ADDRESS_01.Name = "LBL_NAME_ADDRESS_01"
-        Me.LBL_NAME_ADDRESS_01.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_NAME_ADDRESS_01.TabIndex = 0
-        Me.LBL_NAME_ADDRESS_01.Text = "住所1"
-        Me.LBL_NAME_ADDRESS_01.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_NAME_ADDRESS_01_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_ADDRESS_01_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_ADDRESS_01_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_ADDRESS_01_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_ADDRESS_01_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_ADDRESS_01_GUIDE.Name = "LBL_NAME_ADDRESS_01_GUIDE"
+        Me.LBL_NAME_ADDRESS_01_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_NAME_ADDRESS_01_GUIDE.TabIndex = 0
+        Me.LBL_NAME_ADDRESS_01_GUIDE.Text = "住所1"
+        Me.LBL_NAME_ADDRESS_01_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_CODE_POST
         '
@@ -1114,10 +1114,10 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_NAME_OWNER_GUIDE As Label
     Friend WithEvents PNL_NAME_ADDRESS_02 As Panel
     Friend WithEvents TXT_NAME_ADDRESS_02 As TextBox
-    Friend WithEvents LBL_NAME_ADDRESS_02 As Label
+    Friend WithEvents LBL_NAME_ADDRESS_02_GUIDE As Label
     Friend WithEvents PNL_NAME_ADDRESS_01 As Panel
     Friend WithEvents TXT_NAME_ADDRESS_01 As TextBox
-    Friend WithEvents LBL_NAME_ADDRESS_01 As Label
+    Friend WithEvents LBL_NAME_ADDRESS_01_GUIDE As Label
     Friend WithEvents PNL_DATE_WORK As Panel
     Friend WithEvents DTP_DATE_MAINTENANCE_START As DateTimePicker
     Friend WithEvents LBL_DATE_WORK_GUIDE As Label
