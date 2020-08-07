@@ -569,7 +569,7 @@ Partial Class FRM_MAIN
         Me.TXT_NUMBER_ORDER.Name = "TXT_NUMBER_ORDER"
         Me.TXT_NUMBER_ORDER.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NUMBER_ORDER.TabIndex = 1
-        Me.TXT_NUMBER_ORDER.Tag = "Clear,Numeric,Format=000000,Check,Plus"
+        Me.TXT_NUMBER_ORDER.Tag = "Clear,Numeric,Format=000000,Check,NotNull,Plus"
         Me.TXT_NUMBER_ORDER.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_NAME_CONTRACT
