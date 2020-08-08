@@ -381,7 +381,7 @@ Partial Class FRM_MAIN
         Me.LBL_FLAG_CONTRACT_GUIDE.Name = "LBL_FLAG_CONTRACT_GUIDE"
         Me.LBL_FLAG_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
         Me.LBL_FLAG_CONTRACT_GUIDE.TabIndex = 0
-        Me.LBL_FLAG_CONTRACT_GUIDE.Text = "契約種別"
+        Me.LBL_FLAG_CONTRACT_GUIDE.Text = "契約形態"
         Me.LBL_FLAG_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_CODE_SHINTO_PARENT
