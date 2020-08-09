@@ -331,9 +331,15 @@
         End With
 
         With SRT_DATA
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT_YEAR))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT_MONTH))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT_DAY))
+            If SRT_CONDITIONS.ENABLED_DATE_PRINT Then
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT_YEAR))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT_MONTH))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(.DATE_PRINT_DAY))
+            Else
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+                Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+            End If
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.CODE_POST))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_01))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_ADDRESS_02))
