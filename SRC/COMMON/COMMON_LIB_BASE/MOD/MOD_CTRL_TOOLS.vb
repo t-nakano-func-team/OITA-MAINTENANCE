@@ -15,6 +15,8 @@
 
     Private Const cst_COMMON_CONTROL_SUFFIX_FROM As String = "FROM"
     Private Const cst_COMMON_CONTROL_SUFFIX_TO As String = "TO"
+    Private Const cst_COMMON_CONTROL_SUFFIX_START As String = "START"
+    Private Const cst_COMMON_CONTROL_SUFFIX_END As String = "END"
     Private Const cst_COMMON_CONTROL_SUFFIX_FIRST As String = "FIRST"
     Private Const cst_COMMON_CONTROL_SUFFIX_LAST As String = "LAST"
     Private Const cst_COMMON_CONTROL_SUFFIX_DETAIL As String = "DETAIL"
@@ -347,6 +349,8 @@
         strRET = strNAME_CONTROL
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_FROM) '"_FROM"を外す
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_TO) '"_TO"を外す
+        strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_START) '"_START"を外す
+        strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_END) '"_END"を外す
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_FIRST) '"_FIRST"を外す
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_LAST) '"_LAST"を外す
         strRET = FUNC_R_REMOVE_STRING(strRET, "_" & cst_COMMON_CONTROL_SUFFIX_DETAIL) '"_DETAIL"を外す

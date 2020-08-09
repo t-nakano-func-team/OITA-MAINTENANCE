@@ -809,6 +809,8 @@
                 End If
             Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_LAST
                 DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_CALC_BASE)
+            Case Else
+                DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_CALC_BASE)
         End Select
 
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)

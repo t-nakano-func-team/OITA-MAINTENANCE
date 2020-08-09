@@ -77,7 +77,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE = New System.Windows.Forms.Label()
         Me.DTP_DATE_MAINTENANCE_END = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_MAINTENANCE_START = New System.Windows.Forms.DateTimePicker()
-        Me.LBL_DATE_WORK_GUIDE = New System.Windows.Forms.Label()
+        Me.LBL_DATE_MAINTENANCE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_NAME_MEMO = New System.Windows.Forms.Panel()
         Me.TXT_NAME_MEMO = New System.Windows.Forms.TextBox()
         Me.LBL_NAME_MEMO_GUIDE = New System.Windows.Forms.Label()
@@ -733,7 +733,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_MAINTENANCE_START_TO_GUIDE)
         Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_MAINTENANCE_END)
         Me.PNL_DATE_WORK.Controls.Add(Me.DTP_DATE_MAINTENANCE_START)
-        Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_WORK_GUIDE)
+        Me.PNL_DATE_WORK.Controls.Add(Me.LBL_DATE_MAINTENANCE_GUIDE)
         Me.PNL_DATE_WORK.Location = New System.Drawing.Point(5, 145)
         Me.PNL_DATE_WORK.Name = "PNL_DATE_WORK"
         Me.PNL_DATE_WORK.Size = New System.Drawing.Size(485, 30)
@@ -768,18 +768,18 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_MAINTENANCE_START.TabIndex = 1
         Me.DTP_DATE_MAINTENANCE_START.Tag = "Clear"
         '
-        'LBL_DATE_WORK_GUIDE
+        'LBL_DATE_MAINTENANCE_GUIDE
         '
-        Me.LBL_DATE_WORK_GUIDE.AutoEllipsis = True
-        Me.LBL_DATE_WORK_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_DATE_WORK_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DATE_WORK_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DATE_WORK_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_DATE_WORK_GUIDE.Name = "LBL_DATE_WORK_GUIDE"
-        Me.LBL_DATE_WORK_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_DATE_WORK_GUIDE.TabIndex = 0
-        Me.LBL_DATE_WORK_GUIDE.Text = "作業期間"
-        Me.LBL_DATE_WORK_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LBL_DATE_MAINTENANCE_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_MAINTENANCE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_MAINTENANCE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_MAINTENANCE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_MAINTENANCE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_MAINTENANCE_GUIDE.Name = "LBL_DATE_MAINTENANCE_GUIDE"
+        Me.LBL_DATE_MAINTENANCE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_MAINTENANCE_GUIDE.TabIndex = 0
+        Me.LBL_DATE_MAINTENANCE_GUIDE.Text = "作業期間"
+        Me.LBL_DATE_MAINTENANCE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_NAME_MEMO
         '
@@ -839,7 +839,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_KINGAKU_CONTRACT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_CONTRACT.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KINGAKU_CONTRACT.MaxLength = 12
+        Me.TXT_KINGAKU_CONTRACT.MaxLength = 9
         Me.TXT_KINGAKU_CONTRACT.Name = "TXT_KINGAKU_CONTRACT"
         Me.TXT_KINGAKU_CONTRACT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_CONTRACT.TabIndex = 1
@@ -1177,7 +1177,7 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_DATE_MAINTENANCE_START_TO_GUIDE As Label
     Friend WithEvents DTP_DATE_MAINTENANCE_END As DateTimePicker
     Friend WithEvents DTP_DATE_MAINTENANCE_START As DateTimePicker
-    Friend WithEvents LBL_DATE_WORK_GUIDE As Label
+    Friend WithEvents LBL_DATE_MAINTENANCE_GUIDE As Label
     Friend WithEvents PNL_NAME_MEMO As Panel
     Friend WithEvents TXT_NAME_MEMO As TextBox
     Friend WithEvents LBL_NAME_MEMO_GUIDE As Label

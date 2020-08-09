@@ -36,6 +36,9 @@ Partial Class FRM_SUB_01
         Me.CMB_CODE_SECTION = New System.Windows.Forms.ComboBox()
         Me.LBL_CODE_SECTION_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_DEPOSIT_INPUT_AREA = New System.Windows.Forms.Panel()
+        Me.PNL_FLAG_OUTPUT = New System.Windows.Forms.Panel()
+        Me.LBL_FLAG_OUTPUT = New System.Windows.Forms.Label()
+        Me.LBL_FLAG_OUTPUT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_FLAG_SALE = New System.Windows.Forms.Panel()
         Me.CMB_FLAG_SALE = New System.Windows.Forms.ComboBox()
         Me.LBL_FLAG_SALE_GUIDE = New System.Windows.Forms.Label()
@@ -100,9 +103,6 @@ Partial Class FRM_SUB_01
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_ENTER = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
-        Me.PNL_FLAG_OUTPUT = New System.Windows.Forms.Panel()
-        Me.LBL_FLAG_OUTPUT = New System.Windows.Forms.Label()
-        Me.LBL_FLAG_OUTPUT_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -111,6 +111,7 @@ Partial Class FRM_SUB_01
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_CODE_SECTION.SuspendLayout()
         Me.PNL_DEPOSIT_INPUT_AREA.SuspendLayout()
+        Me.PNL_FLAG_OUTPUT.SuspendLayout()
         Me.PNL_FLAG_SALE.SuspendLayout()
         Me.PNL_SERIAL_DEPOSIT.SuspendLayout()
         Me.PNL_FLAG_DEPOSIT_SUB.SuspendLayout()
@@ -130,7 +131,6 @@ Partial Class FRM_SUB_01
         Me.PNL_NUMBER_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
-        Me.PNL_FLAG_OUTPUT.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -309,6 +309,42 @@ Partial Class FRM_SUB_01
         Me.PNL_DEPOSIT_INPUT_AREA.Size = New System.Drawing.Size(740, 215)
         Me.PNL_DEPOSIT_INPUT_AREA.TabIndex = 3
         '
+        'PNL_FLAG_OUTPUT
+        '
+        Me.PNL_FLAG_OUTPUT.Controls.Add(Me.LBL_FLAG_OUTPUT)
+        Me.PNL_FLAG_OUTPUT.Controls.Add(Me.LBL_FLAG_OUTPUT_GUIDE)
+        Me.PNL_FLAG_OUTPUT.Location = New System.Drawing.Point(495, 5)
+        Me.PNL_FLAG_OUTPUT.Name = "PNL_FLAG_OUTPUT"
+        Me.PNL_FLAG_OUTPUT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_OUTPUT.TabIndex = 9
+        '
+        'LBL_FLAG_OUTPUT
+        '
+        Me.LBL_FLAG_OUTPUT.AutoEllipsis = True
+        Me.LBL_FLAG_OUTPUT.BackColor = System.Drawing.Color.White
+        Me.LBL_FLAG_OUTPUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_OUTPUT.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_FLAG_OUTPUT.Location = New System.Drawing.Point(80, 1)
+        Me.LBL_FLAG_OUTPUT.Name = "LBL_FLAG_OUTPUT"
+        Me.LBL_FLAG_OUTPUT.Size = New System.Drawing.Size(150, 25)
+        Me.LBL_FLAG_OUTPUT.TabIndex = 10
+        Me.LBL_FLAG_OUTPUT.Tag = "Clear"
+        Me.LBL_FLAG_OUTPUT.Text = "＊＊＊"
+        Me.LBL_FLAG_OUTPUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_FLAG_OUTPUT_GUIDE
+        '
+        Me.LBL_FLAG_OUTPUT_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_OUTPUT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_OUTPUT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_OUTPUT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_OUTPUT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_OUTPUT_GUIDE.Name = "LBL_FLAG_OUTPUT_GUIDE"
+        Me.LBL_FLAG_OUTPUT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_OUTPUT_GUIDE.TabIndex = 3
+        Me.LBL_FLAG_OUTPUT_GUIDE.Text = "連携出力"
+        Me.LBL_FLAG_OUTPUT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_FLAG_SALE
         '
         Me.PNL_FLAG_SALE.Controls.Add(Me.CMB_FLAG_SALE)
@@ -470,7 +506,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_COST_VAT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_COST_VAT.Location = New System.Drawing.Point(230, 1)
-        Me.TXT_KINGAKU_COST_VAT.MaxLength = 12
+        Me.TXT_KINGAKU_COST_VAT.MaxLength = 9
         Me.TXT_KINGAKU_COST_VAT.Name = "TXT_KINGAKU_COST_VAT"
         Me.TXT_KINGAKU_COST_VAT.Size = New System.Drawing.Size(95, 25)
         Me.TXT_KINGAKU_COST_VAT.TabIndex = 4
@@ -494,7 +530,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_COST_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_COST_DETAIL.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KINGAKU_COST_DETAIL.MaxLength = 12
+        Me.TXT_KINGAKU_COST_DETAIL.MaxLength = 9
         Me.TXT_KINGAKU_COST_DETAIL.Name = "TXT_KINGAKU_COST_DETAIL"
         Me.TXT_KINGAKU_COST_DETAIL.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_COST_DETAIL.TabIndex = 1
@@ -550,6 +586,7 @@ Partial Class FRM_SUB_01
         Me.CMB_KINGAKU_FEE_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.CMB_KINGAKU_FEE_DETAIL.Items.AddRange(New Object() {"0", "200", "300", "400", "500", "600", "700"})
         Me.CMB_KINGAKU_FEE_DETAIL.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_KINGAKU_FEE_DETAIL.MaxLength = 9
         Me.CMB_KINGAKU_FEE_DETAIL.Name = "CMB_KINGAKU_FEE_DETAIL"
         Me.CMB_KINGAKU_FEE_DETAIL.Size = New System.Drawing.Size(150, 26)
         Me.CMB_KINGAKU_FEE_DETAIL.TabIndex = 0
@@ -573,7 +610,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_FEE_VAT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_FEE_VAT.Location = New System.Drawing.Point(230, 1)
-        Me.TXT_KINGAKU_FEE_VAT.MaxLength = 12
+        Me.TXT_KINGAKU_FEE_VAT.MaxLength = 9
         Me.TXT_KINGAKU_FEE_VAT.Name = "TXT_KINGAKU_FEE_VAT"
         Me.TXT_KINGAKU_FEE_VAT.Size = New System.Drawing.Size(95, 25)
         Me.TXT_KINGAKU_FEE_VAT.TabIndex = 1
@@ -727,7 +764,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_INVOICE_VAT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_INVOICE_VAT.Location = New System.Drawing.Point(250, 1)
-        Me.TXT_KINGAKU_INVOICE_VAT.MaxLength = 12
+        Me.TXT_KINGAKU_INVOICE_VAT.MaxLength = 9
         Me.TXT_KINGAKU_INVOICE_VAT.Name = "TXT_KINGAKU_INVOICE_VAT"
         Me.TXT_KINGAKU_INVOICE_VAT.Size = New System.Drawing.Size(75, 25)
         Me.TXT_KINGAKU_INVOICE_VAT.TabIndex = 4
@@ -751,7 +788,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_INVOICE_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_INVOICE_DETAIL.Location = New System.Drawing.Point(100, 1)
-        Me.TXT_KINGAKU_INVOICE_DETAIL.MaxLength = 12
+        Me.TXT_KINGAKU_INVOICE_DETAIL.MaxLength = 9
         Me.TXT_KINGAKU_INVOICE_DETAIL.Name = "TXT_KINGAKU_INVOICE_DETAIL"
         Me.TXT_KINGAKU_INVOICE_DETAIL.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_INVOICE_DETAIL.TabIndex = 1
@@ -1057,42 +1094,6 @@ Partial Class FRM_SUB_01
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
-        'PNL_FLAG_OUTPUT
-        '
-        Me.PNL_FLAG_OUTPUT.Controls.Add(Me.LBL_FLAG_OUTPUT)
-        Me.PNL_FLAG_OUTPUT.Controls.Add(Me.LBL_FLAG_OUTPUT_GUIDE)
-        Me.PNL_FLAG_OUTPUT.Location = New System.Drawing.Point(495, 5)
-        Me.PNL_FLAG_OUTPUT.Name = "PNL_FLAG_OUTPUT"
-        Me.PNL_FLAG_OUTPUT.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_FLAG_OUTPUT.TabIndex = 9
-        '
-        'LBL_FLAG_OUTPUT
-        '
-        Me.LBL_FLAG_OUTPUT.AutoEllipsis = True
-        Me.LBL_FLAG_OUTPUT.BackColor = System.Drawing.Color.White
-        Me.LBL_FLAG_OUTPUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_OUTPUT.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_FLAG_OUTPUT.Location = New System.Drawing.Point(80, 1)
-        Me.LBL_FLAG_OUTPUT.Name = "LBL_FLAG_OUTPUT"
-        Me.LBL_FLAG_OUTPUT.Size = New System.Drawing.Size(150, 25)
-        Me.LBL_FLAG_OUTPUT.TabIndex = 10
-        Me.LBL_FLAG_OUTPUT.Tag = "Clear"
-        Me.LBL_FLAG_OUTPUT.Text = "＊＊＊"
-        Me.LBL_FLAG_OUTPUT.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBL_FLAG_OUTPUT_GUIDE
-        '
-        Me.LBL_FLAG_OUTPUT_GUIDE.AutoEllipsis = True
-        Me.LBL_FLAG_OUTPUT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_FLAG_OUTPUT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_FLAG_OUTPUT_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_FLAG_OUTPUT_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_FLAG_OUTPUT_GUIDE.Name = "LBL_FLAG_OUTPUT_GUIDE"
-        Me.LBL_FLAG_OUTPUT_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_FLAG_OUTPUT_GUIDE.TabIndex = 3
-        Me.LBL_FLAG_OUTPUT_GUIDE.Text = "連携出力"
-        Me.LBL_FLAG_OUTPUT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'FRM_SUB_01
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -1117,6 +1118,7 @@ Partial Class FRM_SUB_01
         Me.PNL_INPUT_DATA.ResumeLayout(False)
         Me.PNL_CODE_SECTION.ResumeLayout(False)
         Me.PNL_DEPOSIT_INPUT_AREA.ResumeLayout(False)
+        Me.PNL_FLAG_OUTPUT.ResumeLayout(False)
         Me.PNL_FLAG_SALE.ResumeLayout(False)
         Me.PNL_SERIAL_DEPOSIT.ResumeLayout(False)
         Me.PNL_FLAG_DEPOSIT_SUB.ResumeLayout(False)
@@ -1142,7 +1144,6 @@ Partial Class FRM_SUB_01
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
-        Me.PNL_FLAG_OUTPUT.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

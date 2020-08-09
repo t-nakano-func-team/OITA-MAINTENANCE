@@ -173,7 +173,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_INVOICE_VAT.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_INVOICE_VAT.Location = New System.Drawing.Point(230, 1)
-        Me.TXT_KINGAKU_INVOICE_VAT.MaxLength = 12
+        Me.TXT_KINGAKU_INVOICE_VAT.MaxLength = 9
         Me.TXT_KINGAKU_INVOICE_VAT.Name = "TXT_KINGAKU_INVOICE_VAT"
         Me.TXT_KINGAKU_INVOICE_VAT.Size = New System.Drawing.Size(95, 25)
         Me.TXT_KINGAKU_INVOICE_VAT.TabIndex = 4
@@ -197,7 +197,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_KINGAKU_INVOICE_DETAIL.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.TXT_KINGAKU_INVOICE_DETAIL.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_KINGAKU_INVOICE_DETAIL.MaxLength = 12
+        Me.TXT_KINGAKU_INVOICE_DETAIL.MaxLength = 9
         Me.TXT_KINGAKU_INVOICE_DETAIL.Name = "TXT_KINGAKU_INVOICE_DETAIL"
         Me.TXT_KINGAKU_INVOICE_DETAIL.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_INVOICE_DETAIL.TabIndex = 1
