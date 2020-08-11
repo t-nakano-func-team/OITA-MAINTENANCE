@@ -350,6 +350,7 @@
             Call .Append("SUB_01.CODE_OWNER" & "," & Environment.NewLine)
             Call .Append("SUB_01.NAME_CONTRACT" & "," & Environment.NewLine)
             Call .Append("SUB_01.COUNT_INVOICE" & "," & Environment.NewLine)
+            Call .Append("SUB_03.NAME_OWNER" & "," & Environment.NewLine)
             Call .Append("IIF(SUB_02.NUMBER_CONTRACT IS NULL, 0, 1) AS FLAG_DEPOSIT_DONE" & "" & Environment.NewLine)
 
             Call .Append("FROM" & Environment.NewLine)
@@ -365,6 +366,11 @@
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_02.NUMBER_CONTRACT" & Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_02.SERIAL_CONTRACT" & Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_INVOICE=SUB_02.SERIAL_INVOICE" & Environment.NewLine)
+            Call .Append("LEFT JOIN" & Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT_SPOT AS SUB_03 WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("ON" & Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_03.NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_03.SERIAL_CONTRACT" & Environment.NewLine)
 
             Call .Append(") AS MAIN" & Environment.NewLine)
 
@@ -693,6 +699,9 @@
             STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_TO, "CODE_OWNER", "<=")
             If .FLAG_DEPOSIT_DONE >= 0 Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.FLAG_DEPOSIT_DONE, "FLAG_DEPOSIT_DONE", "=")
+            End If
+            If .NAME_OWNER <> "" Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_OWNER, "NAME_OWNER")
             End If
         End With
 
