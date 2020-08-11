@@ -496,23 +496,30 @@
     End Sub
 
     Private Function FUNC_RETURN_KEYDOWN() As Boolean
-        Dim ctlACTIVE As Control
-        Dim blnRET As Boolean
+        Dim CTL_ACTIVE As Control
+        Dim BLN_RET As Boolean
 
         If IsNothing(Me.ActiveControl) Then
             Return False
         End If
 
-        ctlACTIVE = Me.ActiveControl
+        CTL_ACTIVE = Me.ActiveControl
 
         Select Case True
+            Case CTL_ACTIVE Is TXT_CODE_OWNER_FROM
+                If Not (CTL_ACTIVE.Text = "") Then
+                    If TXT_CODE_OWNER_TO.Text = "" Then
+                        TXT_CODE_OWNER_TO.Text = CTL_ACTIVE.Text
+                    End If
+                End If
+                BLN_RET = True
             Case Else
-                blnRET = True
+                BLN_RET = True
         End Select
 
-        ctlACTIVE = Nothing
+        CTL_ACTIVE = Nothing
 
-        Return blnRET
+        Return BLN_RET
 
         Return True
     End Function
