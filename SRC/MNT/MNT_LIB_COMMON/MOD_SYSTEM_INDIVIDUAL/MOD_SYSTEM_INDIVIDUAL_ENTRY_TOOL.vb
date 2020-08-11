@@ -271,6 +271,7 @@
             End With
             With SRT_RET(INT_INDEX).DATA
                 .DATE_INVOICE = CDate(SDR_READER.Item("DATE_INVOICE"))
+                .CODE_SECTION = CInt(SDR_READER.Item("CODE_SECTION"))
                 .KINGAKU_INVOICE_DETAIL = CLng(SDR_READER.Item("KINGAKU_INVOICE_DETAIL"))
                 .KINGAKU_INVOICE_VAT = CLng(SDR_READER.Item("KINGAKU_INVOICE_VAT"))
             End With
