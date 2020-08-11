@@ -6,7 +6,8 @@
 
 #Region "画面用・列挙定数"
     Private Enum ENM_MY_EXEC_DO
-        DO_SEARCH = 1
+        DO_SHOW_SEARCH = 1
+        DO_SEARCH
         DO_OK
         DO_CANCEL
         DO_CLEAR
@@ -117,6 +118,8 @@
         Call System.Windows.Forms.Application.DoEvents()
 
         Select Case enmEXEC_DO
+            Case ENM_MY_EXEC_DO.DO_SHOW_SEARCH
+                Call SUB_SHOW_SEARCH()
             Case ENM_MY_EXEC_DO.DO_SEARCH
                 Call SUB_SEARCH()
             Case ENM_MY_EXEC_DO.DO_OK
@@ -134,6 +137,51 @@
 #End Region
 
 #Region "実行処理群"
+
+    Private Sub SUB_SHOW_SEARCH()
+
+        Dim CTL_ACTIVE As Control
+        CTL_ACTIVE = Me.ActiveControl
+
+        Dim CTL_SEARCH As Control
+        CTL_SEARCH = Nothing
+        Select Case True
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_FROM) Or (CTL_ACTIVE Is BTN_CODE_OWNER_FROM_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_FROM
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_TO) Or (CTL_ACTIVE Is BTN_CODE_OWNER_TO_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_TO
+            Case Else
+
+        End Select
+
+        If CTL_SEARCH Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim SNG_FONT_SIZE As Single
+        SNG_FONT_SIZE = Me.Font.Size
+
+        Dim BLN_RET As Boolean
+        BLN_RET = False
+        Select Case True
+            Case (CTL_SEARCH Is TXT_CODE_OWNER_FROM) Or (CTL_SEARCH Is TXT_CODE_OWNER_TO)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_CODE_OWNER As Integer
+                INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
+
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_OWNER(INT_CODE_OWNER, SNG_FONT_SIZE)
+
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
+            Case Else
+                'スルー
+        End Select
+    End Sub
+
     Private Sub SUB_SEARCH()
 
         If Not FUNC_CHECK_INPUT_KEY() Then
@@ -437,6 +485,16 @@
         End Select
     End Sub
 
+    '通常のコマンドキー制御(CTRL)
+    Private Sub SUB_KEY_DOWN_CTRL(ByVal enmKEY_CODE As Windows.Forms.Keys, ByRef blnHandled As Boolean)
+        Select Case enmKEY_CODE
+            Case Keys.F
+                Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+            Case Else
+                'スルー
+        End Select
+    End Sub
+
     Private Function FUNC_RETURN_KEYDOWN() As Boolean
         Dim ctlACTIVE As Control
         Dim blnRET As Boolean
@@ -532,6 +590,17 @@
     End Function
 #End Region
 
+#Region "NEW"
+    Public Sub New()
+
+        ' この呼び出しはデザイナーで必要です。
+        InitializeComponent()
+
+        ' InitializeComponent() 呼び出しの後で初期化を追加します。
+        Call SUB_CTRL_NEW_INIT()
+    End Sub
+#End Region
+
 #Region "イベントハンドル(フォーカス制御)"
     Private Sub SUB_CTRL_EVENT_HANDLED_ADD() '共通イベントハンドルの追加
         Call SUB_CTRL_EVENT_HANDLED_ADD_MAIN(Me)
@@ -607,6 +676,25 @@
     Private Sub BTN_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_SEARCH.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SEARCH)
     End Sub
+
+    Private Sub BTN_CODE_OWNER_FROM_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_FROM_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_TO_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_TO_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+#End Region
+
+#Region "イベント-テキストチェンジ"
+
+    Private Sub TXT_CODE_OWNER_FROM_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_FROM.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+
+    Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
 #End Region
 
 #Region "イベント-グリッドダブルクリック"
@@ -637,6 +725,7 @@
     Private Sub FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Select Case True
             Case e.Control
+                Call SUB_KEY_DOWN_CTRL(e.KeyCode, e.Handled)
             Case e.Alt
             Case e.Shift
             Case Else
@@ -647,4 +736,5 @@
     Private Sub FRM_SYSTEM_INDIVIDUAL_SEARCH_OWNER_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
+
 End Class
