@@ -234,6 +234,16 @@
             Dim STR_WHERE As String
             STR_WHERE = FUNC_GET_SQL_WHERE(SRT_CONDITIONS)
             Call .Append(STR_WHERE)
+
+            Call .Append("AND NOT(" & Environment.NewLine) '全ての金額関係が0の場合は省く
+            Call .Append("SUB_01.KINGAKU_INVOICE_DETAIL=" & 0 & Environment.NewLine)
+            Call .Append("AND SUB_01.KINGAKU_INVOICE_VAT=" & 0 & Environment.NewLine)
+            Call .Append("AND MAIN.KINGAKU_FEE_DETAIL=" & 0 & Environment.NewLine)
+            Call .Append("AND MAIN.KINGAKU_FEE_VAT=" & 0 & Environment.NewLine)
+            Call .Append("AND MAIN.KINGAKU_COST_DETAIL=" & 0 & Environment.NewLine)
+            Call .Append("AND MAIN.KINGAKU_COST_VAT=" & 0 & Environment.NewLine)
+            Call .Append(")" & Environment.NewLine)
+
             Call .Append("ORDER BY" & Environment.NewLine)
             Select Case SRT_CONDITIONS.KIND_SORT
                 Case ENM_SYSTEM_INDIVIDUAL_KIND_SORT_CHECK_DEPOSIT.DATE_ACTIVE

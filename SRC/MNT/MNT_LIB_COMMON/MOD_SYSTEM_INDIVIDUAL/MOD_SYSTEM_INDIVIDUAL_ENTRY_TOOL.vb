@@ -19,7 +19,7 @@
     End Sub
 #End Region
 
-#Region "CONTRACT"
+#Region "契約関連"
     Public Function FUNC_GET_NUMBER_CONTRACT_NEW(ByVal BLN_CASH As Boolean) As Integer
         Dim INT_RET As Integer
 
@@ -51,6 +51,42 @@
             Case Else
                 INT_RET = 0
         End Select
+
+        Return INT_RET
+    End Function
+
+    Public Function FUNC_GET_COUNT_NUMBER_LIST_INVOICE_COUNT(ByVal INT_CODE_OWNER As Integer, ByVal INT_NUMBER_LIST_INVOICE As Integer) As Integer
+        Dim STR_SQL As System.Text.StringBuilder
+
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("SELECT" & System.Environment.NewLine)
+            .Append("COUNT(*)" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_CONTRACT AS MAIN WITH(NOLOCK)" & System.Environment.NewLine)
+
+            .Append("INNER JOIN" & System.Environment.NewLine)
+            .Append("(" & System.Environment.NewLine)
+            .Append("SELECT" & System.Environment.NewLine)
+            .Append("NUMBER_CONTRACT" & "," & System.Environment.NewLine)
+            .Append("MAX(SERIAL_CONTRACT) AS SERIAL_CONTRACT" & "" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_CONTRACT WITH(NOLOCK)" & System.Environment.NewLine)
+            .Append("GROUP BY" & System.Environment.NewLine)
+            .Append("NUMBER_CONTRACT" & System.Environment.NewLine)
+            .Append(") AS SUB_01" & System.Environment.NewLine)
+            .Append("ON" & System.Environment.NewLine)
+            .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & System.Environment.NewLine)
+            .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & System.Environment.NewLine)
+
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append("AND CODE_OWNER=" & INT_CODE_OWNER & System.Environment.NewLine)
+            .Append("AND NUMBER_LIST_INVOICE=" & INT_NUMBER_LIST_INVOICE & System.Environment.NewLine)
+        End With
+
+        Dim INT_RET As Integer
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL.ToString, 0)
 
         Return INT_RET
     End Function
@@ -121,7 +157,7 @@
                 .KINGAKU_COST_VAT = 0
                 .FLAG_OUTPUT = ENM_SYSTEM_INDIVIDUAL_FLAG_DEPOSIT_DONE.DONE '完了扱い
                 .NAME_MEMO = "0円請求分"
-                .DATE_ACTIVE = .DATE_DEPOSIT '入金同日に処理したものとする
+                .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
                 .SERIAL_DEPOSIT = FUNC_GET_MNT_T_DEPOSIT_MAX_SERIAL_DEPOSIT(.DATE_ACTIVE) + 1
                 .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
                 .DATE_EDIT = System.DateTime.Today

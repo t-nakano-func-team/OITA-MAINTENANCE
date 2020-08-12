@@ -698,6 +698,68 @@
             Return False
         End If
 
+        '請求書番号チェック
+        Dim INT_NUMBER_CONTRACT As Integer
+        INT_NUMBER_CONTRACT = CInt(TXT_NUMBER_CONTRACT.Text)
+        Dim INT_SERIAL_CONTRACT As Integer
+        INT_SERIAL_CONTRACT = CInt(TXT_SERIAL_CONTRACT.Text)
+        Dim INT_SERIAL_CONTRACT_MAX As Integer
+        INT_SERIAL_CONTRACT_MAX = FUNC_GET_MNT_T_CONTRACT_MAX_SERIAL_CONTRACT(INT_NUMBER_CONTRACT)
+        Dim BLN_SERIAL_INVOICE_NEW As Integer
+        BLN_SERIAL_INVOICE_NEW = False
+        If INT_SERIAL_CONTRACT_MAX = 0 Then '新規登録の場合
+            BLN_SERIAL_INVOICE_NEW = True
+        End If
+        If INT_SERIAL_CONTRACT = INT_SERIAL_CONTRACT_MAX Then '最新を修正中の場合
+            BLN_SERIAL_INVOICE_NEW = True
+        End If
+        If BLN_SERIAL_INVOICE_NEW Then '契約連番が最新の場合のみチェック（過去分はチェックできない-有効な請求が数えられない）
+            CTL_CONTROL = TXT_NUMBER_LIST_INVOICE
+            INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER.Text)
+            Dim INT_NUMBER_LIST_INVOICE As Integer
+            INT_NUMBER_LIST_INVOICE = FUNC_VALUE_CONVERT_NUMERIC_INT(CTL_CONTROL.Text)
+
+            Dim INT_COUNT As Integer
+            INT_COUNT = FUNC_GET_COUNT_NUMBER_LIST_INVOICE_COUNT(INT_CODE_OWNER, INT_NUMBER_LIST_INVOICE)
+
+            Const CST_LIST_INVOICE_ROW_MAX As Integer = 6
+            Select Case ENM_WINDOW_MODE_CURRENT
+                Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE '更新の場合で
+                    Dim SRT_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
+                    With SRT_CONTRACT.KEY
+                        .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+                        .SERIAL_CONTRACT = INT_SERIAL_CONTRACT
+                    End With
+                    SRT_CONTRACT.DATA = Nothing
+                    Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_CONTRACT.KEY, SRT_CONTRACT.DATA)
+
+                    If SRT_CONTRACT.DATA.NUMBER_LIST_INVOICE = INT_NUMBER_LIST_INVOICE Then '請求書番号を変えてない場合は
+                        INT_COUNT -= 1 '1件（自分の分を）引く
+                    End If
+                Case Else
+                    'スルー
+            End Select
+
+            Dim BLN_CHECK_INVOICE_COUNT As Boolean
+            If INT_COUNT >= CST_LIST_INVOICE_ROW_MAX Then '既に6件あると不可
+                BLN_CHECK_INVOICE_COUNT = True
+            Else
+                BLN_CHECK_INVOICE_COUNT = False
+            End If
+
+            If BLN_CHECK_INVOICE_COUNT Then
+                STR_ERR_MSG = ""
+                STR_ERR_MSG &= "このオーナーは同一の" & LBL_NUMBER_LIST_INVOICE_GUIDE.Text & "が" & CST_LIST_INVOICE_ROW_MAX & "件を超えています。" & System.Environment.NewLine
+                STR_ERR_MSG &= "このまま" & BTN_ENTER.Text & "を行いますか？" & System.Environment.NewLine
+                Dim RST_MSG As System.Windows.Forms.DialogResult
+                RST_MSG = MessageBox.Show(STR_ERR_MSG, Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                If RST_MSG = Windows.Forms.DialogResult.No Then
+                    CTL_CONTROL.Focus()
+                    Return False
+                End If
+            End If
+        End If
+
         Return True
     End Function
 #End Region
