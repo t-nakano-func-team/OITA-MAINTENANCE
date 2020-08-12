@@ -166,7 +166,7 @@
                     .NUMBER_CONTRACT = -1
                     .SERIAL_CONTRACT = -1
                 End With
-                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT(INT_NS_CONTRT, SNG_FONT_SIZE)
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_CONTRACT(INT_NS_CONTRT, SNG_FONT_SIZE, ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT)
                 If BLN_RET Then
                     TXT_SEARCH.Text = Format(INT_NS_CONTRT.NUMBER_CONTRACT, New String("0", TXT_SEARCH.MaxLength))
                     Call TXT_SEARCH.Focus()

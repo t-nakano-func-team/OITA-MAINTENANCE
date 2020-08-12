@@ -79,6 +79,8 @@
 #Region "プロパティ用"
     Private BLN_PROPERTY_SEARCH_CANCEL As Boolean 'キャンセルフラグ(True:キャンセル / False:決定)
     Private SRT_PROPERTY_RET_CODE As SRT_NUMBER_SERIAL_CONTRACT '返却コード
+
+    Private ENM_PROPERTY_FLAG_CONTRACT_CONDTION As ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT '契約形態
 #End Region
 
 #Region "プロパティ"
@@ -102,6 +104,15 @@
         End Set
     End Property
 
+    '契約形態
+    Friend Property FLAG_CONTRACT_CONDTION() As ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT
+        Get
+            Return ENM_PROPERTY_FLAG_CONTRACT_CONDTION
+        End Get
+        Set(ByVal Value As ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT)
+            ENM_PROPERTY_FLAG_CONTRACT_CONDTION = Value
+        End Set
+    End Property
 #End Region
 
 #Region "各処理呼出元"
@@ -270,7 +281,11 @@
     Private Sub SUB_CTRL_VALUE_INIT()
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
-        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_CONTRACT)
+        If Me.FLAG_CONTRACT_CONDTION > 0 Then
+            Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_CONTRACT, Me.FLAG_CONTRACT_CONDTION)
+        Else
+            Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_CONTRACT)
+        End If
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
