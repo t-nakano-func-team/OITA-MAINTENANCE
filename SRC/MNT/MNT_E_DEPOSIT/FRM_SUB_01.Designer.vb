@@ -458,7 +458,7 @@ Partial Class FRM_SUB_01
         '
         Me.TXT_NAME_MEMO.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_MEMO.Location = New System.Drawing.Point(80, 1)
-        Me.TXT_NAME_MEMO.MaxLength = 20
+        Me.TXT_NAME_MEMO.MaxLength = 40
         Me.TXT_NAME_MEMO.Name = "TXT_NAME_MEMO"
         Me.TXT_NAME_MEMO.Size = New System.Drawing.Size(395, 25)
         Me.TXT_NAME_MEMO.TabIndex = 1
