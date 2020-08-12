@@ -710,7 +710,7 @@
         Dim INT_DAY As Integer
         If INT_DAY_TEMP >= 28 Then
             Dim DAT_TEMP As DateTime
-            DAT_TEMP = New DateTime(INT_YEAR, INT_MONTH, INT_DAY_TEMP) '対象の1日を取得
+            DAT_TEMP = New DateTime(INT_YEAR, INT_MONTH, 1) '対象の1日を取得
             DAT_TEMP = FUNC_GET_DATE_LASTMONTH(DAT_TEMP) '月末へ変換
             INT_DAY = DAT_TEMP.Day
         Else
