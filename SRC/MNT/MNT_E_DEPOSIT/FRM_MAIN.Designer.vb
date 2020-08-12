@@ -333,7 +333,7 @@ Partial Class FRM_MAIN
         '
         Me.TXT_NAME_OWNER.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.TXT_NAME_OWNER.Location = New System.Drawing.Point(90, 1)
-        Me.TXT_NAME_OWNER.MaxLength = 12
+        Me.TXT_NAME_OWNER.MaxLength = 40
         Me.TXT_NAME_OWNER.Name = "TXT_NAME_OWNER"
         Me.TXT_NAME_OWNER.Size = New System.Drawing.Size(140, 25)
         Me.TXT_NAME_OWNER.TabIndex = 1
