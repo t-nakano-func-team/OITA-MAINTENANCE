@@ -7,7 +7,7 @@
 
     Private Const CST_PRINT_RECORD_MAX_COUNT As Integer = 1000 '印刷最大レコード数
 
-    Private Const CST_PRINT_INVOICE_DETAIL_ROW As Integer = 6
+    Private Const CST_PRINT_INVOICE_DETAIL_ROW As Integer = 5
 #End Region
 
 #Region "帳票用・列挙定数"

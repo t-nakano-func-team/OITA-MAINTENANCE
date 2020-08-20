@@ -51,18 +51,14 @@ CMPCTTYPE   NO
 Œ_–ñ“à—e‚T  
 ‹àŠz‚T  
 Á”ïÅ‚T  
-Œ_–ñ“à—e‚U  
-‹àŠz‚U  
-Á”ïÅ‚U  
 Åž‹àŠz‚P  CAL(‹àŠz‚P +  Á”ïÅ‚P)
 Åž‹àŠz‚Q  CAL(‹àŠz‚Q +  Á”ïÅ‚Q)
 Åž‹àŠz‚R  CAL(‹àŠz‚R +  Á”ïÅ‚R)
 Åž‹àŠz‚S  CAL(‹àŠz‚S +  Á”ïÅ‚S)
 Åž‹àŠz‚T  CAL(‹àŠz‚T +  Á”ïÅ‚T)
-Åž‹àŠz‚U  CAL(‹àŠz‚U +  Á”ïÅ‚U)
-‹àŠz‡Œv  CAL(‹àŠz‚P +  ‹àŠz‚Q + ‹àŠz‚R + ‹àŠz‚S + ‹àŠz‚T + ‹àŠz‚U)
-Á”ïÅ‡Œv  CAL(Á”ïÅ‚P +  Á”ïÅ‚Q + Á”ïÅ‚R + Á”ïÅ‚S + Á”ïÅ‚T + Á”ïÅ‚U)
-Åž‹àŠz‡Œv  CAL(Åž‹àŠz‚P +  Åž‹àŠz‚Q + Åž‹àŠz‚R + Åž‹àŠz‚S + Åž‹àŠz‚T + Åž‹àŠz‚U)
+‹àŠz‡Œv  CAL(‹àŠz‚P +  ‹àŠz‚Q + ‹àŠz‚R + ‹àŠz‚S + ‹àŠz‚T)
+Á”ïÅ‡Œv  CAL(Á”ïÅ‚P +  Á”ïÅ‚Q + Á”ïÅ‚R + Á”ïÅ‚S + Á”ïÅ‚T)
+Åž‹àŠz‡Œv  CAL(Åž‹àŠz‚P +  Åž‹àŠz‚Q + Åž‹àŠz‚R + Åž‹àŠz‚S + Åž‹àŠz‚T)
 “–ŒŽ‚¨”ƒãŠz  SET(Åž‹àŠz‡Œv)
 ¡‰ñ‚²¿‹Šz  CAL(‘O‰ñ‚²¿‹Šz +  “–ŒŽ‚¨”ƒãŠz - “–ŒŽ‚²“ü‹àŠz)
 ˆóü“ú•t”N•›  SET(ˆóü“ú•t”N)
@@ -96,10 +92,6 @@ CMPCTTYPE   NO
 ‹àŠz‚T•›  SET(‹àŠz‚T)
 Á”ïÅ‚T•›  SET(Á”ïÅ‚T)
 Åž‹àŠz‚T•›  SET(Åž‹àŠz‚T)
-Œ_–ñ“à—e‚U•›  SET(Œ_–ñ“à—e‚U)
-‹àŠz‚U•›  SET(‹àŠz‚U)
-Á”ïÅ‚U•›  SET(Á”ïÅ‚U)
-Åž‹àŠz‚U•›  SET(Åž‹àŠz‚U)
 ‹àŠz‡Œv•›  SET(‹àŠz‡Œv)
 Á”ïÅ‡Œv•›  SET(Á”ïÅ‡Œv)
 Åž‹àŠz‡Œv•›  SET(Åž‹àŠz‡Œv)
@@ -110,7 +102,6 @@ COMPUTE Åž‹àŠz‚Q
 COMPUTE Åž‹àŠz‚R
 COMPUTE Åž‹àŠz‚S
 COMPUTE Åž‹àŠz‚T
-COMPUTE Åž‹àŠz‚U
 COMPUTE ‹àŠz‡Œv
 COMPUTE Á”ïÅ‡Œv
 COMPUTE Åž‹àŠz‡Œv
@@ -124,7 +115,6 @@ COMPUTE Œ_–ñ“à—e‚Q•› ‹àŠz‚Q•› Á”ïÅ‚Q•› Åž‹àŠz‚Q•›
 COMPUTE Œ_–ñ“à—e‚R•› ‹àŠz‚R•› Á”ïÅ‚R•› Åž‹àŠz‚R•›
 COMPUTE Œ_–ñ“à—e‚S•› ‹àŠz‚S•› Á”ïÅ‚S•› Åž‹àŠz‚S•›
 COMPUTE Œ_–ñ“à—e‚T•› ‹àŠz‚T•› Á”ïÅ‚T•› Åž‹àŠz‚T•›
-COMPUTE Œ_–ñ“à—e‚U•› ‹àŠz‚U•› Á”ïÅ‚U•› Åž‹àŠz‚U•›
 COMPUTE ‹àŠz‡Œv•› Á”ïÅ‡Œv•› Åž‹àŠz‡Œv•›
 DETAIL DE
 CNTL-FOOT  ƒuƒŒƒCƒN˜A”Ô  CF1
