@@ -83,6 +83,7 @@
         SRT_CONTRACT.DATA = Nothing
         Call FUNC_SELECT_TABLE_MNT_T_CONTRACT(SRT_CONTRACT.KEY, SRT_CONTRACT.DATA)
         TXT_COUNT_INVOICE.Text = CStr(SRT_CONTRACT.DATA.COUNT_INVOICE)
+        Call SUB_REFRESH_COUNT_DEPOSIT()
     End Sub
 #End Region
 
@@ -123,6 +124,9 @@
         Dim INT_COUNT_INVOICE As Integer
         INT_COUNT_INVOICE = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_COUNT_INVOICE.Text, 0)
 
+        Dim INT_COUNT_DEPOSIT As Integer
+        INT_COUNT_DEPOSIT = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_COUNT_DEPOSIT.Text, 0)
+
         If Not FUNC_DELETE_INVOICE_CONTRACT(Me.NUMBER_CONTRACT, Me.SERIAL_CONTRACT) Then
             Exit Sub
         End If
@@ -160,8 +164,10 @@
             Dim DAT_DATE_DEPOSIT As DateTime
             DAT_DATE_DEPOSIT = New DateTime(INT_YEAR_DEPOSIT, INT_MONTH_DEPOSIT, 1) '翌月月初
 
-            If Not FUNC_MAKE_NEW_DEPOSIT(Me.NUMBER_CONTRACT, Me.SERIAL_CONTRACT, INT_SERIAL_INVOICE, DAT_DATE_DEPOSIT) Then
-                Exit Sub
+            If i <= INT_COUNT_DEPOSIT Then
+                If Not FUNC_MAKE_NEW_DEPOSIT(Me.NUMBER_CONTRACT, Me.SERIAL_CONTRACT, INT_SERIAL_INVOICE, DAT_DATE_DEPOSIT) Then
+                    Exit Sub
+                End If
             End If
         Next
 
@@ -250,6 +256,12 @@
 #End Region
 
 #Region "内部処理"
+
+    Private Sub SUB_REFRESH_COUNT_DEPOSIT()
+        Dim INT_COUNT_INVOICE As Integer
+        INT_COUNT_INVOICE = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_COUNT_INVOICE.Text, 0)
+        TXT_COUNT_DEPOSIT.Text = INT_COUNT_INVOICE
+    End Sub
 #End Region
 
 #Region "NEW"
@@ -335,6 +347,13 @@
 
 #End Region
 
+#Region "イベント-テキストチェンジ"
+
+    Private Sub TXT_COUNT_INVOICE_TextChanged(sender As Object, e As EventArgs) Handles TXT_COUNT_INVOICE.TextChanged
+        Call SUB_REFRESH_COUNT_DEPOSIT()
+    End Sub
+#End Region
+
     Private Sub FRM_SUB_01_Load(sender As Object, e As EventArgs) Handles Me.Load
         Call SUB_CTRL_VIEW_INIT()
         Call SUB_CTRL_VALUE_INIT()
@@ -364,4 +383,5 @@
     Private Sub FRM_SUB_01_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
+
 End Class
