@@ -377,6 +377,30 @@
         Return LNG_RET
     End Function
 
+    Public Function FUNC_GET_INVOICE_DATE_INVOICE_BEFORE(
+    ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer,
+    ByVal DAT_DATE_INVOICE_TO As DateTime
+    ) As Integer
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("SELECT" & System.Environment.NewLine)
+            .Append("MAX(SERIAL_INVOICE)" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_INVOICE WITH(NOLOCK)" & System.Environment.NewLine)
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append(FUNC_GET_SQL_WHERE_INT(INT_NUMBER_CONTRACT, "NUMBER_CONTRACT", "="))
+            .Append(FUNC_GET_SQL_WHERE_INT(INT_SERIAL_CONTRACT, "SERIAL_CONTRACT", "="))
+            .Append(FUNC_GET_SQL_WHERE_DATE(DAT_DATE_INVOICE_TO, "DATE_INVOICE", "<="))
+        End With
+
+        Dim INT_RET As Integer
+        INT_RET = FUNC_SYSTEM_GET_SQL_SINGLE_VALUE_NUMERIC(STR_SQL.ToString)
+
+        Return INT_RET
+    End Function
+
     '(次回)請求予定日の取得
     Public Function FUNC_GET_DATE_INVOICE_PLAN(ByVal INT_NUMBER_CONTRACT As Integer, ByVal INT_SERIAL_CONTRACT As Integer) As DateTime
         Dim SRT_CONTRACT As SRT_TABLE_MNT_T_CONTRACT

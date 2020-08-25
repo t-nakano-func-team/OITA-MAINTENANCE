@@ -52,7 +52,8 @@
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
 
         Dim DAT_FROM As DateTime
-        DAT_FROM = FUNC_GET_DATE_FIRSMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(-1))
+        DAT_FROM = datSYSTEM_TOTAL_DATE_ACTIVE.AddYears(-1)
+        DAT_FROM = FUNC_GET_DATE_FIRSMONTH(DAT_FROM.AddMonths(-1))
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_CONTRACT_FROM, DAT_FROM)
 
         Dim DAT_TO As DateTime

@@ -722,7 +722,7 @@
             Dim INT_COUNT As Integer
             INT_COUNT = FUNC_GET_COUNT_NUMBER_LIST_INVOICE_COUNT(INT_CODE_OWNER, INT_NUMBER_LIST_INVOICE)
 
-            Const CST_LIST_INVOICE_ROW_MAX As Integer = 6
+            Const CST_LIST_INVOICE_ROW_MAX As Integer = 5
             Select Case ENM_WINDOW_MODE_CURRENT
                 Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE '更新の場合で
                     Dim SRT_CONTRACT As SRT_TABLE_MNT_T_CONTRACT
@@ -741,7 +741,7 @@
             End Select
 
             Dim BLN_CHECK_INVOICE_COUNT As Boolean
-            If INT_COUNT >= CST_LIST_INVOICE_ROW_MAX Then '既に6件あると不可
+            If INT_COUNT >= CST_LIST_INVOICE_ROW_MAX Then '既に5件あると不可
                 BLN_CHECK_INVOICE_COUNT = True
             Else
                 BLN_CHECK_INVOICE_COUNT = False
