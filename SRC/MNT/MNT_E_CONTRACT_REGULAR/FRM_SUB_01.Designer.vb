@@ -39,6 +39,10 @@ Partial Class FRM_SUB_01
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
         Me.BTN_OK = New System.Windows.Forms.Button()
         Me.BTN_CANCEL = New System.Windows.Forms.Button()
+        Me.PNL_COUNT_DEPOSIT = New System.Windows.Forms.Panel()
+        Me.LBL_COUNT_DEPOSIT_UNIT = New System.Windows.Forms.Label()
+        Me.LBL_COUNT_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_COUNT_DEPOSIT = New System.Windows.Forms.TextBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_TITLE_HEAD.SuspendLayout()
@@ -48,6 +52,7 @@ Partial Class FRM_SUB_01
         Me.PNL_COUNT_INVOICE.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
+        Me.PNL_COUNT_DEPOSIT.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -130,6 +135,7 @@ Partial Class FRM_SUB_01
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_COUNT_DEPOSIT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_BATCH_GUIDE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_COUNT_INVOICE)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
@@ -250,6 +256,51 @@ Partial Class FRM_SUB_01
         Me.BTN_CANCEL.Text = "キャンセル"
         Me.BTN_CANCEL.UseVisualStyleBackColor = False
         '
+        'PNL_COUNT_DEPOSIT
+        '
+        Me.PNL_COUNT_DEPOSIT.Controls.Add(Me.LBL_COUNT_DEPOSIT_UNIT)
+        Me.PNL_COUNT_DEPOSIT.Controls.Add(Me.LBL_COUNT_DEPOSIT_GUIDE)
+        Me.PNL_COUNT_DEPOSIT.Controls.Add(Me.TXT_COUNT_DEPOSIT)
+        Me.PNL_COUNT_DEPOSIT.Location = New System.Drawing.Point(5, 35)
+        Me.PNL_COUNT_DEPOSIT.Name = "PNL_COUNT_DEPOSIT"
+        Me.PNL_COUNT_DEPOSIT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_COUNT_DEPOSIT.TabIndex = 14
+        '
+        'LBL_COUNT_DEPOSIT_UNIT
+        '
+        Me.LBL_COUNT_DEPOSIT_UNIT.AutoEllipsis = True
+        Me.LBL_COUNT_DEPOSIT_UNIT.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_DEPOSIT_UNIT.Location = New System.Drawing.Point(140, 1)
+        Me.LBL_COUNT_DEPOSIT_UNIT.Name = "LBL_COUNT_DEPOSIT_UNIT"
+        Me.LBL_COUNT_DEPOSIT_UNIT.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_COUNT_DEPOSIT_UNIT.TabIndex = 9
+        Me.LBL_COUNT_DEPOSIT_UNIT.Text = "回"
+        Me.LBL_COUNT_DEPOSIT_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBL_COUNT_DEPOSIT_GUIDE
+        '
+        Me.LBL_COUNT_DEPOSIT_GUIDE.AutoEllipsis = True
+        Me.LBL_COUNT_DEPOSIT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_COUNT_DEPOSIT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_COUNT_DEPOSIT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_DEPOSIT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_COUNT_DEPOSIT_GUIDE.Name = "LBL_COUNT_DEPOSIT_GUIDE"
+        Me.LBL_COUNT_DEPOSIT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_COUNT_DEPOSIT_GUIDE.TabIndex = 3
+        Me.LBL_COUNT_DEPOSIT_GUIDE.Text = "入金回数"
+        Me.LBL_COUNT_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TXT_COUNT_DEPOSIT
+        '
+        Me.TXT_COUNT_DEPOSIT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_COUNT_DEPOSIT.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_COUNT_DEPOSIT.MaxLength = 2
+        Me.TXT_COUNT_DEPOSIT.Name = "TXT_COUNT_DEPOSIT"
+        Me.TXT_COUNT_DEPOSIT.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_COUNT_DEPOSIT.TabIndex = 1
+        Me.TXT_COUNT_DEPOSIT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus,NotZero"
+        Me.TXT_COUNT_DEPOSIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'FRM_SUB_01
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -277,6 +328,8 @@ Partial Class FRM_SUB_01
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
+        Me.PNL_COUNT_DEPOSIT.ResumeLayout(False)
+        Me.PNL_COUNT_DEPOSIT.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -298,4 +351,8 @@ Partial Class FRM_SUB_01
     Friend WithEvents TXT_COUNT_INVOICE As TextBox
     Friend WithEvents PNL_BATCH_GUIDE As Panel
     Friend WithEvents LBL_BATCH_GUIDE As Label
+    Friend WithEvents PNL_COUNT_DEPOSIT As Panel
+    Friend WithEvents LBL_COUNT_DEPOSIT_UNIT As Label
+    Friend WithEvents LBL_COUNT_DEPOSIT_GUIDE As Label
+    Friend WithEvents TXT_COUNT_DEPOSIT As TextBox
 End Class
