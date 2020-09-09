@@ -442,6 +442,7 @@
             If .FLAG_OWNER >= 0 Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.FLAG_OWNER, "FLAG_OWNER", "=")
             End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL, "FLAG_INVALID", "=")
         End With
         Return STR_WHERE
     End Function

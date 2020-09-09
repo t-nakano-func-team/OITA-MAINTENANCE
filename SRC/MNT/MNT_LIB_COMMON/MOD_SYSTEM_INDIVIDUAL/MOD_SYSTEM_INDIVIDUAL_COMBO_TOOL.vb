@@ -258,6 +258,7 @@
             Call .Append("MNT_M_MAINTENANCE" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("FLAG_WORK=" & ENM_FLAG_WORK & Environment.NewLine)
+            Call .Append("AND FLAG_INVALID=" & ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL & Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
             Call .Append("CODE_MAINTENANCE" & Environment.NewLine)
         End With
@@ -333,6 +334,8 @@
             Call .Append("NAME_SECTION AS NAME" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_M_SECTION" & Environment.NewLine)
+            Call .Append("WHERE" & Environment.NewLine)
+            Call .Append("FLAG_INVALID=" & ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL & Environment.NewLine)
             Call .Append("ORDER BY" & Environment.NewLine)
             Call .Append("CODE_SECTION" & Environment.NewLine)
         End With
