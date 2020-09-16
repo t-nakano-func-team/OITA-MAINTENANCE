@@ -20,7 +20,7 @@ COMMENT     "êøãÅèë"
 OUTPUT-XLSXFILE 0
 [PRINTER]
 COPYG       1
-SUPLY       NO
+SUPLY       MA
 SIDE        N
 BANNER      N
 FORMKIND    C
