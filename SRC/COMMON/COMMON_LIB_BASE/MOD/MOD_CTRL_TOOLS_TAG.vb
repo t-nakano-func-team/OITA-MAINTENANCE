@@ -528,9 +528,9 @@
                 End If
             Case CONTROL_CHECK_ERR_CODE.ErrNotSelected
                 If strNAME_VALUE = "" Then
-                    strRET = "コンボボックスから値を選択してください" '***を選択してください
+                    strRET = "プルダウンリストを選択してください" '***を選択してください
                 Else
-                    strRET = strNAME_VALUE & "の" & "値が選択されていません" '***を選択してください
+                    strRET = strNAME_VALUE & "が" & "選択されていません" '***を選択してください
                 End If
             Case CONTROL_CHECK_ERR_CODE.ErrNotHalfKana
                 If strNAME_VALUE = "" Then

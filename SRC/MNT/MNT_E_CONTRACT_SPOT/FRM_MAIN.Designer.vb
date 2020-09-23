@@ -357,7 +357,7 @@ Partial Class FRM_MAIN
         Me.CMB_CODE_MAINTENANCE.Name = "CMB_CODE_MAINTENANCE"
         Me.CMB_CODE_MAINTENANCE.Size = New System.Drawing.Size(150, 26)
         Me.CMB_CODE_MAINTENANCE.TabIndex = 1
-        Me.CMB_CODE_MAINTENANCE.Tag = "Clear"
+        Me.CMB_CODE_MAINTENANCE.Tag = "Clear,Check,Selected"
         '
         'LBL_CODE_MAINTENANCE_GUIDE
         '
