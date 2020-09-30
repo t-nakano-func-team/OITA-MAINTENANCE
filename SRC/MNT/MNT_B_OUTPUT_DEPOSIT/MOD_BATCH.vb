@@ -74,7 +74,22 @@
 
             Dim STR_RET As String
             'STR_RET = Me.DATE_DEPOSIT.ToString("yyMMdd", CUL_JP)
-            STR_RET = Format(Me.DATE_DEPOSIT.Year, "0000") & Format(Me.DATE_DEPOSIT.Month, "00") & Format(Me.DATE_DEPOSIT.Day, "00")
+            Dim STR_YEAR As String
+            STR_YEAR = Me.DATE_DEPOSIT.ToString("yy")
+
+            Dim STR_MONTH As String
+            STR_MONTH = Me.DATE_DEPOSIT.ToString("M")
+            If STR_MONTH.Length <= 1 Then
+                STR_MONTH = " " & STR_MONTH
+            End If
+
+            Dim STR_DAY As String
+            STR_DAY = Me.DATE_DEPOSIT.ToString("d")
+            If STR_DAY.Length <= 1 Then
+                STR_DAY = " " & STR_DAY
+            End If
+
+            STR_RET = STR_YEAR & STR_MONTH & STR_DAY
 
             Return STR_RET
         End Function
