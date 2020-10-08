@@ -420,7 +420,8 @@
             STR_RET &= "          " & "," '空白
             STR_RET &= " " & "," '空白
             STR_RET &= " " & 0 & "," '0
-            STR_RET &= CInt(.RATE_VAT) & ","
+            'STR_RET &= CInt(.RATE_VAT) & ","
+            STR_RET &= (5) & "," '伝票区分（5固定）
         End With
         With SRT_DATA.KASIKATA
             STR_RET &= "    " & "," '空白
@@ -430,7 +431,8 @@
             STR_RET &= "          " & "," '空白
             STR_RET &= " " & "," '空白
             STR_RET &= " " & 0 & "," '0
-            STR_RET &= CInt(.RATE_VAT) & ","
+            'STR_RET &= CInt(.RATE_VAT) & ","
+            STR_RET &= (5) & "," '伝票区分（5固定）
         End With
         With SRT_DATA
             STR_RET &= .NAME_MEMO & ""
