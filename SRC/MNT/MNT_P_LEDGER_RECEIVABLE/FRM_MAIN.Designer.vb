@@ -32,6 +32,16 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_CODE_MAINTENANCE = New System.Windows.Forms.Panel()
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_CODE_MAINTENANCE_TO = New System.Windows.Forms.TextBox()
+        Me.LBL_CODE_MAINTENANCE_TO_NAME = New System.Windows.Forms.Label()
+        Me.LBL_CODE_MAINTENANCE_GUIDE = New System.Windows.Forms.Label()
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME = New System.Windows.Forms.Label()
+        Me.TXT_CODE_MAINTENANCE_FROM = New System.Windows.Forms.TextBox()
+        Me.PNL_FLAG_CONTRACT = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_CONTRACT = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_KIND_TARGET = New System.Windows.Forms.Panel()
         Me.CMB_KIND_TARGET = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_TARGET_GUIDE = New System.Windows.Forms.Label()
@@ -70,6 +80,8 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_CODE_MAINTENANCE.SuspendLayout()
+        Me.PNL_FLAG_CONTRACT.SuspendLayout()
         Me.PNL_KIND_TARGET.SuspendLayout()
         Me.PNL_DATE_CALC.SuspendLayout()
         Me.PNL_CODE_SECTION.SuspendLayout()
@@ -196,6 +208,8 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_MAINTENANCE)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_CONTRACT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_TARGET)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_CALC)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_SECTION)
@@ -206,14 +220,133 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 400)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
+        'PNL_CODE_MAINTENANCE
+        '
+        Me.PNL_CODE_MAINTENANCE.Controls.Add(Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE)
+        Me.PNL_CODE_MAINTENANCE.Controls.Add(Me.TXT_CODE_MAINTENANCE_TO)
+        Me.PNL_CODE_MAINTENANCE.Controls.Add(Me.LBL_CODE_MAINTENANCE_TO_NAME)
+        Me.PNL_CODE_MAINTENANCE.Controls.Add(Me.LBL_CODE_MAINTENANCE_GUIDE)
+        Me.PNL_CODE_MAINTENANCE.Controls.Add(Me.LBL_CODE_MAINTENANCE_FROM_NAME)
+        Me.PNL_CODE_MAINTENANCE.Controls.Add(Me.TXT_CODE_MAINTENANCE_FROM)
+        Me.PNL_CODE_MAINTENANCE.Location = New System.Drawing.Point(5, 145)
+        Me.PNL_CODE_MAINTENANCE.Name = "PNL_CODE_MAINTENANCE"
+        Me.PNL_CODE_MAINTENANCE.Size = New System.Drawing.Size(730, 30)
+        Me.PNL_CODE_MAINTENANCE.TabIndex = 4
+        '
+        'LBL_CODE_MAINTENANCE_FROM_TO_GUIDE
+        '
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.Location = New System.Drawing.Point(390, 1)
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.Name = "LBL_CODE_MAINTENANCE_FROM_TO_GUIDE"
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.TabIndex = 4
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_CODE_MAINTENANCE_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TXT_CODE_MAINTENANCE_TO
+        '
+        Me.TXT_CODE_MAINTENANCE_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_MAINTENANCE_TO.Location = New System.Drawing.Point(415, 1)
+        Me.TXT_CODE_MAINTENANCE_TO.MaxLength = 6
+        Me.TXT_CODE_MAINTENANCE_TO.Name = "TXT_CODE_MAINTENANCE_TO"
+        Me.TXT_CODE_MAINTENANCE_TO.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_CODE_MAINTENANCE_TO.TabIndex = 5
+        Me.TXT_CODE_MAINTENANCE_TO.Tag = "Clear,Numeric,Format=0000,Check,NotZero,Plus"
+        Me.TXT_CODE_MAINTENANCE_TO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LBL_CODE_MAINTENANCE_TO_NAME
+        '
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.AutoEllipsis = True
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.BackColor = System.Drawing.Color.White
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.Location = New System.Drawing.Point(475, 1)
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.Name = "LBL_CODE_MAINTENANCE_TO_NAME"
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.Size = New System.Drawing.Size(245, 25)
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.TabIndex = 7
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.Tag = "Clear"
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.Text = "＊＊＊"
+        Me.LBL_CODE_MAINTENANCE_TO_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBL_CODE_MAINTENANCE_GUIDE
+        '
+        Me.LBL_CODE_MAINTENANCE_GUIDE.AutoEllipsis = True
+        Me.LBL_CODE_MAINTENANCE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_CODE_MAINTENANCE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_MAINTENANCE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_CODE_MAINTENANCE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_CODE_MAINTENANCE_GUIDE.Name = "LBL_CODE_MAINTENANCE_GUIDE"
+        Me.LBL_CODE_MAINTENANCE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_CODE_MAINTENANCE_GUIDE.TabIndex = 0
+        Me.LBL_CODE_MAINTENANCE_GUIDE.Text = "作業コード"
+        Me.LBL_CODE_MAINTENANCE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'LBL_CODE_MAINTENANCE_FROM_NAME
+        '
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.AutoEllipsis = True
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.BackColor = System.Drawing.Color.White
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.Location = New System.Drawing.Point(140, 1)
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.Name = "LBL_CODE_MAINTENANCE_FROM_NAME"
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.Size = New System.Drawing.Size(245, 25)
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.TabIndex = 3
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.Tag = "Clear"
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.Text = "＊＊＊"
+        Me.LBL_CODE_MAINTENANCE_FROM_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TXT_CODE_MAINTENANCE_FROM
+        '
+        Me.TXT_CODE_MAINTENANCE_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_CODE_MAINTENANCE_FROM.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_CODE_MAINTENANCE_FROM.MaxLength = 6
+        Me.TXT_CODE_MAINTENANCE_FROM.Name = "TXT_CODE_MAINTENANCE_FROM"
+        Me.TXT_CODE_MAINTENANCE_FROM.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_CODE_MAINTENANCE_FROM.TabIndex = 1
+        Me.TXT_CODE_MAINTENANCE_FROM.Tag = "Clear,Numeric,Format=0000,Check,NotZero,Plus"
+        Me.TXT_CODE_MAINTENANCE_FROM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'PNL_FLAG_CONTRACT
+        '
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.CMB_FLAG_CONTRACT)
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.LBL_FLAG_CONTRACT_GUIDE)
+        Me.PNL_FLAG_CONTRACT.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_FLAG_CONTRACT.Name = "PNL_FLAG_CONTRACT"
+        Me.PNL_FLAG_CONTRACT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_CONTRACT.TabIndex = 2
+        '
+        'CMB_FLAG_CONTRACT
+        '
+        Me.CMB_FLAG_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_CONTRACT.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_CONTRACT.Name = "CMB_FLAG_CONTRACT"
+        Me.CMB_FLAG_CONTRACT.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_CONTRACT.TabIndex = 1
+        Me.CMB_FLAG_CONTRACT.Tag = "Clear"
+        '
+        'LBL_FLAG_CONTRACT_GUIDE
+        '
+        Me.LBL_FLAG_CONTRACT_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_CONTRACT_GUIDE.Name = "LBL_FLAG_CONTRACT_GUIDE"
+        Me.LBL_FLAG_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_CONTRACT_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_CONTRACT_GUIDE.Text = "契約形態"
+        Me.LBL_FLAG_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_KIND_TARGET
         '
         Me.PNL_KIND_TARGET.Controls.Add(Me.CMB_KIND_TARGET)
         Me.PNL_KIND_TARGET.Controls.Add(Me.LBL_KIND_TARGET_GUIDE)
-        Me.PNL_KIND_TARGET.Location = New System.Drawing.Point(5, 145)
+        Me.PNL_KIND_TARGET.Location = New System.Drawing.Point(5, 215)
         Me.PNL_KIND_TARGET.Name = "PNL_KIND_TARGET"
         Me.PNL_KIND_TARGET.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_KIND_TARGET.TabIndex = 4
+        Me.PNL_KIND_TARGET.TabIndex = 6
         '
         'CMB_KIND_TARGET
         '
@@ -244,10 +377,10 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_CALC.Controls.Add(Me.LBL_DATE_CALC_FROM_TO_GUIDE)
         Me.PNL_DATE_CALC.Controls.Add(Me.DTP_DATE_CALC_FROM)
         Me.PNL_DATE_CALC.Controls.Add(Me.LBL_DATE_CALC_GUIDE)
-        Me.PNL_DATE_CALC.Location = New System.Drawing.Point(5, 110)
+        Me.PNL_DATE_CALC.Location = New System.Drawing.Point(5, 180)
         Me.PNL_DATE_CALC.Name = "PNL_DATE_CALC"
         Me.PNL_DATE_CALC.Size = New System.Drawing.Size(420, 30)
-        Me.PNL_DATE_CALC.TabIndex = 3
+        Me.PNL_DATE_CALC.TabIndex = 5
         '
         'DTP_DATE_CALC_TO
         '
@@ -333,10 +466,10 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_OWNER.Controls.Add(Me.LBL_CODE_OWNER_FROM_NAME)
         Me.PNL_CODE_OWNER.Controls.Add(Me.BTN_CODE_OWNER_FROM_SEARCH)
         Me.PNL_CODE_OWNER.Controls.Add(Me.TXT_CODE_OWNER_FROM)
-        Me.PNL_CODE_OWNER.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_CODE_OWNER.Location = New System.Drawing.Point(5, 110)
         Me.PNL_CODE_OWNER.Name = "PNL_CODE_OWNER"
         Me.PNL_CODE_OWNER.Size = New System.Drawing.Size(730, 30)
-        Me.PNL_CODE_OWNER.TabIndex = 2
+        Me.PNL_CODE_OWNER.TabIndex = 3
         '
         'LBL_CODE_OWNER_FROM_TO_GUIDE
         '
@@ -598,6 +731,9 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_ACTIVE_HEAD.ResumeLayout(False)
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_CODE_MAINTENANCE.ResumeLayout(False)
+        Me.PNL_CODE_MAINTENANCE.PerformLayout()
+        Me.PNL_FLAG_CONTRACT.ResumeLayout(False)
         Me.PNL_KIND_TARGET.ResumeLayout(False)
         Me.PNL_DATE_CALC.ResumeLayout(False)
         Me.PNL_CODE_SECTION.ResumeLayout(False)
@@ -653,4 +789,14 @@ Partial Class FRM_MAIN
     Friend WithEvents DTP_DATE_CALC_TO As DateTimePicker
     Friend WithEvents LBL_DATE_CALC_FROM_TO_GUIDE As Label
     Friend WithEvents BTN_PUT_FILE As Button
+    Friend WithEvents PNL_CODE_MAINTENANCE As Panel
+    Friend WithEvents LBL_CODE_MAINTENANCE_FROM_TO_GUIDE As Label
+    Friend WithEvents TXT_CODE_MAINTENANCE_TO As TextBox
+    Friend WithEvents LBL_CODE_MAINTENANCE_TO_NAME As Label
+    Friend WithEvents LBL_CODE_MAINTENANCE_GUIDE As Label
+    Friend WithEvents LBL_CODE_MAINTENANCE_FROM_NAME As Label
+    Friend WithEvents TXT_CODE_MAINTENANCE_FROM As TextBox
+    Friend WithEvents PNL_FLAG_CONTRACT As Panel
+    Friend WithEvents CMB_FLAG_CONTRACT As ComboBox
+    Friend WithEvents LBL_FLAG_CONTRACT_GUIDE As Label
 End Class
