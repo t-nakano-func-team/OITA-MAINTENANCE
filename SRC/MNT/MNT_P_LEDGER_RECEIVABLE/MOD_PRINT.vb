@@ -42,6 +42,7 @@
         Public FLAG_INVOICE_METHOD As Integer
         Public COUNT_INVOICE As Integer
         Public KINGAKU_CONTRACT As Long
+        Public NUMBER_ORDER As Integer
 
         Public KINGAKU_INVOICE_BEFORE As Long
         Public KINGAKU_INVOICE_CURRENT As Long
@@ -125,6 +126,7 @@
                 .KINGAKU_CONTRACT = CLng(SDR_READER.Item("KINGAKU_CONTRACT"))
                 .KINGAKU_INVOICE_TOTAL = CLng(SDR_READER.Item("KINGAKU_INVOICE_TOTAL"))
                 .KINGAKU_DEPOSIT_TOTAL = CLng(SDR_READER.Item("KINGAKU_DEPOSIT_TOTAL"))
+                .NUMBER_ORDER = FUNC_VALUE_CONVERT_NUMERIC_INT(SDR_READER.Item("NUMBER_ORDER"), 0)
             End With
         End While
 
@@ -224,7 +226,8 @@
             Call .Append("SUB_01.FLAG_INVOICE_METHOD" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.COUNT_INVOICE" & "," & System.Environment.NewLine)
             Call .Append("SUB_01.KINGAKU_CONTRACT" & "," & System.Environment.NewLine)
-            Call .Append("SUB_01.NAME_MEMO" & "" & System.Environment.NewLine)
+            Call .Append("SUB_01.NAME_MEMO" & "," & System.Environment.NewLine)
+            Call .Append("SUB_03.NUMBER_ORDER" & "" & System.Environment.NewLine)
 
             Call .Append("FROM" & System.Environment.NewLine)
 
@@ -280,6 +283,12 @@
             Call .Append("ON" & System.Environment.NewLine)
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_02.NUMBER_CONTRACT" & System.Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_02.SERIAL_CONTRACT" & System.Environment.NewLine)
+
+            Call .Append("LEFT JOIN" & System.Environment.NewLine)
+            Call .Append("MNT_T_CONTRACT_SPOT AS SUB_03 WITH(NOLOCK)" & System.Environment.NewLine)
+            Call .Append("ON" & System.Environment.NewLine)
+            Call .Append("MAIN.NUMBER_CONTRACT=SUB_03.NUMBER_CONTRACT" & System.Environment.NewLine)
+            Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_03.SERIAL_CONTRACT" & System.Environment.NewLine)
 
             Call .Append("WHERE" & System.Environment.NewLine)
             Call .Append("1 = 1" & System.Environment.NewLine)
@@ -401,7 +410,14 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.SERIAL_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_VEIW))
-            Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVOICE_METHOD_NAME))
+            Select Case .FLAG_CONTRACT
+                Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
+                    Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVOICE_METHOD_NAME))
+                Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT
+                    Call SUB_ADD_STR_ROW(STR_ROW, Format(.NUMBER_ORDER, "000000"))
+                Case Else
+                    Call SUB_ADD_STR_ROW(STR_ROW, "")
+            End Select
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.COUNT_INVOICE))
