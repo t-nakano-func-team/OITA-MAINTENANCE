@@ -17,6 +17,25 @@
 
         CTL_NAME.Text = FUNC_GET_MNT_M_OWNER_NAME_OWNER(INT_CODE, True)
     End Sub
+
+    Public Sub SUB_GET_NAME_MAINTENANCE_INPUT(ByRef TXT_INPUT As System.Windows.Forms.TextBox)
+        Dim CTL_NAME As System.Windows.Forms.Label
+        CTL_NAME = FUNC_GET_CONTROL_NAME_LABEL(TXT_INPUT, False)
+        If CTL_NAME Is Nothing Then
+            Exit Sub
+        End If
+        CTL_NAME.Text = ""
+
+        If Not IsNumeric(TXT_INPUT.Text) Then
+            Exit Sub
+        End If
+        Dim INT_CODE As Integer
+        INT_CODE = CInt(TXT_INPUT.Text)
+
+        CTL_NAME.Text = FUNC_GET_MNT_M_MAINTENANCE_NAME_MAINTENANCE(INT_CODE, True)
+
+    End Sub
+
 #End Region
 
 #Region "契約関連"
