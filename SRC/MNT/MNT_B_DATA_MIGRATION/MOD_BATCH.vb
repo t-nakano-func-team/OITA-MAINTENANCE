@@ -5,20 +5,31 @@
 
 #Region "バッチ用列挙定数"
     Private Enum ENM_XLSX_INDEX
-        CODE_STORE = 1
-        CODE_CLASS00 = 3
-        CODE_CLASS01
-        CODE_CLASS02
-        CODE_GOODS
+        OWNERCD = 1
+        GENBACD
+        GENBANM
+        GENBARYAKU
+        SAGYOCD
+        KEIYAKUNO
+        KEIYAKUEDANO
+        KIKAKU
+        SAGYONAIYO
+        KEIYAKUBI
+        SAGYOSTRBI
+        SAGYOENDBI
+        SEIKYUSTRTUKI
+        SEIKYUENDTUKI
+        KEIYAKUKIN
 
-        CUR_INGAI_OLD = 8
-        CUR_KUMIAI_OLD
+        KEIBUSYOCD = 20
 
-        CUR_INGAI_PROSPECT = 12
-        CUR_KUMIAI_PROSPECT
+        KAIYAKUKBN = 149
+        KAIYAKUBI
 
-        CUR_INGAI_INPUT = 14
-        CUR_KUMIAI_INPUT
+        INSERTDATE = 216
+        INSERTTIME
+        UPDATEDATE
+        UPDATETIME
     End Enum
 #End Region
 
@@ -31,25 +42,32 @@
     End Structure
 
     Private Structure SRT_XLSX_INFO 'XLSXファイル構造
-        Public CODE_STORE As Integer
-        Public CODE_CLASS00 As Integer
-        Public CODE_CLASS01 As Integer
-        Public CODE_CLASS02 As Integer
-        Public CODE_GOODS As Integer
 
-        Public CUR_INGAI_OLD As Decimal
-        Public CUR_KUMIAI_OLD As Decimal
+        Public OWNERCD As Integer
+        Public GENBACD As Integer
+        Public GENBANM As String
+        Public GENBARYAKU As String
+        Public SAGYOCD As Integer
+        Public KEIYAKUNO As Integer
+        Public KEIYAKUEDANO As Integer
+        Public KIKAKU As String
+        Public SAGYONAIYO As String
+        Public KEIYAKUBI As Integer
+        Public SAGYOSTRBI As Integer
+        Public SAGYOENDBI As Integer
+        Public SEIKYUSTRTUKI As Integer
+        Public SEIKYUENDTUKI As Integer
+        Public KEIYAKUKIN As Long
 
-        Public CUR_INGAI_PROSPECT As Decimal
-        Public CUR_KUMIAI_PROSPECT As Decimal
+        Public KEIBUSYOCD As Integer
 
-        Public CUR_INGAI_INPUT As Decimal
-        Public CUR_KUMIAI_INPUT As Decimal
-        Public BLN_INGAI_INPUT As Boolean
-        Public BLN_KUMIAI_INPUT As Boolean
+        Public KAIYAKUKBN As Integer
+        Public KAIYAKUBI As Integer
 
-        Public CUR_INGAI_SET As Decimal
-        Public CUR_KUMIAI_SET As Decimal
+        Public INSERTDATE As Integer
+        Public INSERTTIME As Integer
+        Public UPDATEDATE As Integer
+        Public UPDATETIME As Integer
     End Structure
 #End Region
 
@@ -71,6 +89,66 @@
         End If
         Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
 
+        Dim SRT_FILE_ENABLED() As SRT_XLSX_INFO
+        ReDim SRT_FILE_ENABLED(0)
+        Dim INT_LOOP_INDEX_MAX As Integer
+        INT_LOOP_INDEX_MAX = (SRT_FILE.Length - 1)
+        For i = 1 To INT_LOOP_INDEX_MAX
+            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "解約チェック中：" & i & "/" & INT_LOOP_INDEX_MAX)
+            If Not FUNC_CHECK_KAIYAKU(SRT_FILE(i)) Then
+                Dim INT_INDEX As Integer
+                INT_INDEX = SRT_FILE_ENABLED.Length
+                ReDim Preserve SRT_FILE_ENABLED(INT_INDEX)
+                SRT_FILE_ENABLED(INT_INDEX) = SRT_FILE(i)
+            End If
+        Next
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
+
+        INT_COUNT = (SRT_FILE_ENABLED.Length - 1)
+        If INT_COUNT <= 0 Then
+            Return True 'データなし正常終了
+        End If
+
+        BLN_PUT = True
+
+        Dim SRT_TABLE() As SRT_TABLE_MNT_T_CONTRACT
+        ReDim SRT_TABLE(0)
+        INT_LOOP_INDEX_MAX = (SRT_FILE_ENABLED.Length - 1)
+        For i = 1 To INT_LOOP_INDEX_MAX
+            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "テーブル情報作成中：" & i & "/" & INT_LOOP_INDEX_MAX)
+            Dim INT_INDEX As Integer
+            INT_INDEX = SRT_TABLE.Length
+            ReDim Preserve SRT_TABLE(INT_INDEX)
+            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i))
+        Next
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+            Return False
+        End If
+
+        INT_LOOP_INDEX_MAX = (SRT_TABLE.Length - 1)
+        For i = 1 To INT_LOOP_INDEX_MAX
+            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "テーブル挿入中：" & i & "/" & INT_LOOP_INDEX_MAX)
+            Dim INT_NUMBER_CONTRACT As Integer
+            INT_NUMBER_CONTRACT = FUNC_GET_NUMBER_CONTRACT_NEW(True)
+            With SRT_TABLE(i).KEY
+                .NUMBER_CONTRACT = INT_NUMBER_CONTRACT
+            End With
+
+            If Not FUNC_INSERT_TABLE_MNT_T_CONTRACT(SRT_TABLE(i)) Then
+                STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+                Return False
+            End If
+        Next
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+            Return False
+        End If
+
 
         Return True
     End Function
@@ -79,7 +157,7 @@
     Private Function FUNC_GET_FILE_DATA_FROM_XLSX(ByVal STR_FILE_PATH As String, ByRef SRT_FILE() As SRT_XLSX_INFO) As Boolean
         ReDim SRT_FILE(0)
 
-        If Not FUNC_INIT_XLS(STR_FILE_PATH) Then
+        If Not FUNC_INIT_XLS(STR_FILE_PATH, 2) Then
             Return False
         End If
 
@@ -93,7 +171,7 @@
             End If
 
             Dim STR_TEMP As String
-            STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CODE_STORE)
+            STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.OWNERCD)
             If Not IsNumeric(STR_TEMP) Then
                 Exit Do
             End If
@@ -102,36 +180,55 @@
             INT_INDEX = SRT_FILE.Length
             ReDim Preserve SRT_FILE(INT_INDEX)
             With SRT_FILE(INT_INDEX)
-                .CODE_STORE = CInt(STR_TEMP)
+                .OWNERCD = CInt(STR_TEMP)
                 Try
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CODE_CLASS00)
-                    .CODE_CLASS00 = CInt(STR_TEMP)
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CODE_CLASS01)
-                    .CODE_CLASS01 = CInt(STR_TEMP)
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CODE_CLASS02)
-                    .CODE_CLASS02 = CInt(STR_TEMP)
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CODE_GOODS)
-                    .CODE_GOODS = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.GENBACD)
+                    .GENBACD = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.GENBANM)
+                    .GENBANM = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.GENBARYAKU)
+                    .GENBARYAKU = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SAGYOCD)
+                    .SAGYOCD = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KEIYAKUNO)
+                    .KEIYAKUNO = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KEIYAKUEDANO)
+                    .KEIYAKUEDANO = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KIKAKU)
+                    .KIKAKU = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SAGYONAIYO)
+                    .SAGYONAIYO = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KEIYAKUBI)
+                    .KEIYAKUBI = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SAGYOSTRBI)
+                    .SAGYOSTRBI = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SAGYOENDBI)
+                    .SAGYOENDBI = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SEIKYUSTRTUKI)
+                    .SEIKYUSTRTUKI = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SEIKYUENDTUKI)
+                    .SEIKYUENDTUKI = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.SEIKYUENDTUKI)
+                    .SEIKYUENDTUKI = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KEIYAKUKIN)
+                    .KEIYAKUKIN = CLng(STR_TEMP)
 
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CUR_INGAI_OLD)
-                    .CUR_INGAI_OLD = CDec(STR_TEMP)
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CUR_KUMIAI_OLD)
-                    .CUR_KUMIAI_OLD = CDec(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KEIBUSYOCD)
+                    .KEIBUSYOCD = CLng(STR_TEMP)
 
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CUR_INGAI_PROSPECT)
-                    .CUR_INGAI_PROSPECT = CDec(STR_TEMP)
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CUR_KUMIAI_PROSPECT)
-                    .CUR_KUMIAI_PROSPECT = CDec(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KAIYAKUKBN)
+                    .KAIYAKUKBN = CInt(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.KAIYAKUBI)
+                    .KAIYAKUBI = CInt(STR_TEMP)
 
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CUR_INGAI_INPUT)
-                    .BLN_INGAI_INPUT = IsNumeric(STR_TEMP)
-                    If Not .BLN_INGAI_INPUT Then
-                        .BLN_KUMIAI_INPUT = False
-                    End If
-                    .CUR_INGAI_INPUT = CDec(FUNC_VALUE_CONVERT_NUMERIC(STR_TEMP, 0))
-                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.CUR_KUMIAI_INPUT)
-                    .BLN_KUMIAI_INPUT = IsNumeric(STR_TEMP)
-                    .CUR_KUMIAI_INPUT = CDec(FUNC_VALUE_CONVERT_NUMERIC(STR_TEMP, 0))
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.INSERTDATE)
+                    .INSERTDATE = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 99981231)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.INSERTTIME)
+                    .INSERTTIME = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 1159)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.UPDATEDATE)
+                    .UPDATEDATE = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 99981231)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.UPDATETIME)
+                    .UPDATETIME = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 1159)
                 Catch ex As Exception
                     Call FUNC_END_XLS()
                     Return False
@@ -143,6 +240,142 @@
 
         Return True
     End Function
+
+    Private Function FUNC_CHECK_KAIYAKU(ByRef SRT_DATA As SRT_XLSX_INFO) As Boolean
+        With SRT_DATA
+
+            If .KAIYAKUKBN <> 0 Then
+                Return True
+            End If
+
+            'If .KAIYAKUBI <> 0 Then
+            '    Return True
+            'End If
+
+        End With
+
+        Return False
+    End Function
+
+    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO) As SRT_TABLE_MNT_T_CONTRACT
+        Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT
+        With SRT_RET.KEY
+            .NUMBER_CONTRACT = 0
+            .SERIAL_CONTRACT = 1
+        End With
+
+        With SRT_RET.DATA
+            .FLAG_CONTRACT = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
+            .DATE_CONTRACT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.KEIYAKUBI)
+            .CODE_OWNER = SRT_DATA.OWNERCD
+            .CODE_SECTION = SRT_DATA.KEIBUSYOCD
+            .CODE_MAINTENANCE = SRT_DATA.SAGYOCD
+            .NAME_CONTRACT = FUNC_GET_NAME_CONTRACT(SRT_DATA)
+            If .NAME_CONTRACT.Length > 40 Then
+                .NAME_CONTRACT = .NAME_CONTRACT.Substring(0, 40)
+            End If
+            .DATE_MAINTENANCE_START = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.SAGYOSTRBI)
+            .DATE_MAINTENANCE_END = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.SAGYOENDBI)
+
+            Dim INT_SEIKYU_FROM As Integer
+            INT_SEIKYU_FROM = FUNC_GET_SEIKYU_FROM(SRT_DATA)
+            Dim ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY
+            ENM_KIND_FIX_DATE = FUNC_GET_MNT_M_OWNER_FLAG_INVOICE_FIXDAY(.CODE_OWNER, True)
+            If ENM_KIND_FIX_DATE <= 0 Then
+                ENM_KIND_FIX_DATE = ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_LAST
+            End If
+            Dim DAT_SEIKYU_BASE As DateTime
+            Dim INT_SEIKYU_FROM_YEAR As Integer
+            INT_SEIKYU_FROM_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_SEIKYU_FROM)
+            Dim INT_SEIKYU_FROM_MONTH As Integer
+            INT_SEIKYU_FROM_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_SEIKYU_FROM)
+            Select Case ENM_KIND_FIX_DATE
+                Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_10, ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_20, ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_25
+                    DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, CInt(ENM_KIND_FIX_DATE))
+                Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_LAST
+                    DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, 1)
+                    DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
+                Case Else
+                    DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, 1)
+                    DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
+            End Select
+            .DATE_INVOICE_BASE = DAT_SEIKYU_BASE
+            .SPAN_INVOICE = 1
+            .COUNT_INVOICE = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
+            Select Case .SPAN_INVOICE
+                Case 1
+                    .FLAG_INVOICE_METHOD = 1
+                Case 2
+                    Dim INT_MONTH As Integer
+                    INT_MONTH = .DATE_INVOICE_BASE.Month
+                    If (INT_MONTH Mod 2) = 0 Then
+                        .FLAG_INVOICE_METHOD = 3
+                    Else
+                        .FLAG_INVOICE_METHOD = 2
+                    End If
+                Case 3
+                    Dim INT_MONTH As Integer
+                    INT_MONTH = .DATE_INVOICE_BASE.Month
+                    Select Case INT_MONTH
+                        Case 6, 9, 12, 3
+                            .FLAG_INVOICE_METHOD = 5
+                        Case Else
+                            .FLAG_INVOICE_METHOD = 4
+                    End Select
+                Case 6
+                    .FLAG_INVOICE_METHOD = 6
+                Case Else
+                    .FLAG_INVOICE_METHOD = 0
+            End Select
+            .NUMBER_LIST_INVOICE = 1
+
+            .KINGAKU_CONTRACT = SRT_DATA.KEIYAKUKIN
+            .NAME_MEMO = CStr(SRT_DATA.KEIYAKUNO)
+            .FLAG_CONTINUE = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE.AUTO_CONTINUE
+            .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
+            .CODE_EDIT_STAFF = srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF
+            .DATE_EDIT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.UPDATEDATE)
+        End With
+
+        Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_NAME_CONTRACT(ByRef SRT_DATA As SRT_XLSX_INFO) As String
+        Dim STR_RET As String
+        STR_RET = ""
+
+        With SRT_DATA
+            If .GENBANM = "" Then
+                STR_RET = .SAGYONAIYO
+            Else
+                STR_RET = .GENBANM & "-" & .SAGYONAIYO
+            End If
+        End With
+
+        Return STR_RET
+    End Function
+
+    Private Function FUNC_GET_SEIKYU_FROM(ByRef SRT_DATA As SRT_XLSX_INFO) As Integer
+
+        Dim INT_TUKI As Integer
+        INT_TUKI = FUNC_GET_MONTH_FROM_TO(SRT_DATA.SEIKYUSTRTUKI, SRT_DATA.SEIKYUENDTUKI)
+        INT_TUKI += 1
+
+        If (INT_TUKI Mod 12) = 0 Then
+            Return SRT_DATA.SEIKYUSTRTUKI
+        End If
+
+        Dim DAT_SAGYO_FROM As DateTime
+        DAT_SAGYO_FROM = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.SAGYOSTRBI)
+        Dim INT_SAGYO_FROM As Integer
+        INT_SAGYO_FROM = FUNC_GET_YYYYMM_FROM_DATE(DAT_SAGYO_FROM)
+        'If INT_SAGYO_FROM > SRT_DATA.SEIKYUSTRTUKI Then
+        '    Return INT_SAGYO_FROM
+        'End If
+
+        Return SRT_DATA.SEIKYUSTRTUKI
+    End Function
+
 #End Region
 
 #Region "内部処理（汎用）"

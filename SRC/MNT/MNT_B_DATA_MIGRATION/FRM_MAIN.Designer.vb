@@ -41,10 +41,10 @@ Partial Class FRM_MAIN
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
         Me.PNL_COUNT_BATCH = New System.Windows.Forms.Panel()
+        Me.LBL_COUNT_BATCH_UNIT = New System.Windows.Forms.Label()
         Me.LBL_COUNT_BATCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_BATCH_GUIDE = New System.Windows.Forms.Label()
         Me.OFD_FILE_OPEN = New System.Windows.Forms.OpenFileDialog()
-        Me.LBL_COUNT_BATCH_UNIT = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -285,6 +285,17 @@ Partial Class FRM_MAIN
         Me.PNL_COUNT_BATCH.Size = New System.Drawing.Size(240, 30)
         Me.PNL_COUNT_BATCH.TabIndex = 0
         '
+        'LBL_COUNT_BATCH_UNIT
+        '
+        Me.LBL_COUNT_BATCH_UNIT.AutoEllipsis = True
+        Me.LBL_COUNT_BATCH_UNIT.ForeColor = System.Drawing.Color.Black
+        Me.LBL_COUNT_BATCH_UNIT.Location = New System.Drawing.Point(200, 1)
+        Me.LBL_COUNT_BATCH_UNIT.Name = "LBL_COUNT_BATCH_UNIT"
+        Me.LBL_COUNT_BATCH_UNIT.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_COUNT_BATCH_UNIT.TabIndex = 10
+        Me.LBL_COUNT_BATCH_UNIT.Text = "件"
+        Me.LBL_COUNT_BATCH_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'LBL_COUNT_BATCH
         '
         Me.LBL_COUNT_BATCH.AutoEllipsis = True
@@ -315,18 +326,7 @@ Partial Class FRM_MAIN
         'OFD_FILE_OPEN
         '
         Me.OFD_FILE_OPEN.DefaultExt = "CSV"
-        Me.OFD_FILE_OPEN.Filter = "CSVカンマ区切り(*.csv)|*.csv"
-        '
-        'LBL_COUNT_BATCH_UNIT
-        '
-        Me.LBL_COUNT_BATCH_UNIT.AutoEllipsis = True
-        Me.LBL_COUNT_BATCH_UNIT.ForeColor = System.Drawing.Color.Black
-        Me.LBL_COUNT_BATCH_UNIT.Location = New System.Drawing.Point(200, 1)
-        Me.LBL_COUNT_BATCH_UNIT.Name = "LBL_COUNT_BATCH_UNIT"
-        Me.LBL_COUNT_BATCH_UNIT.Size = New System.Drawing.Size(20, 25)
-        Me.LBL_COUNT_BATCH_UNIT.TabIndex = 10
-        Me.LBL_COUNT_BATCH_UNIT.Text = "件"
-        Me.LBL_COUNT_BATCH_UNIT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.OFD_FILE_OPEN.Filter = "Excelブック(*.xlsx)|*.xlsx"
         '
         'FRM_MAIN
         '
