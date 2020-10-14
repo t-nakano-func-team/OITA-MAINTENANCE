@@ -412,11 +412,14 @@
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NUMBER_CONTRACT_VEIW))
             Select Case .FLAG_CONTRACT
                 Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
+                    Call SUB_ADD_STR_ROW(STR_ROW, CStr("請求方法"))
                     Call SUB_ADD_STR_ROW(STR_ROW, CStr(.FLAG_INVOICE_METHOD_NAME))
                 Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT
+                    Call SUB_ADD_STR_ROW(STR_ROW, CStr("受注番号"))
                     Call SUB_ADD_STR_ROW(STR_ROW, Format(.NUMBER_ORDER, "000000"))
                 Case Else
-                    Call SUB_ADD_STR_ROW(STR_ROW, "")
+                    Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
+                    Call SUB_ADD_STR_ROW(STR_ROW, CStr(""))
             End Select
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.NAME_CONTRACT))
             Call SUB_ADD_STR_ROW(STR_ROW, CStr(.KINGAKU_CONTRACT))
