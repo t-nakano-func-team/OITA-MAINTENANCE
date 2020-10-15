@@ -227,6 +227,9 @@
                     .INSERTTIME = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 1159)
                     STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.UPDATEDATE)
                     .UPDATEDATE = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 99981231)
+                    If .UPDATEDATE = 0 Then
+                        .UPDATEDATE = 99981231
+                    End If
                     STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_INDEX.UPDATETIME)
                     .UPDATETIME = FUNC_VALUE_CONVERT_NUMERIC_INT(STR_TEMP, 1159)
                 Catch ex As Exception
