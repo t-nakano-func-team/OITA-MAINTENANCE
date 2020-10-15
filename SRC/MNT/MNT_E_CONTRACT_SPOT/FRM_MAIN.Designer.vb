@@ -717,7 +717,7 @@ Partial Class FRM_MAIN
         Me.TXT_NAME_ADDRESS_01.Name = "TXT_NAME_ADDRESS_01"
         Me.TXT_NAME_ADDRESS_01.Size = New System.Drawing.Size(150, 25)
         Me.TXT_NAME_ADDRESS_01.TabIndex = 1
-        Me.TXT_NAME_ADDRESS_01.Tag = "Clear,Check,Char,NotNull"
+        Me.TXT_NAME_ADDRESS_01.Tag = "Clear,Check,Char"
         '
         'LBL_NAME_ADDRESS_01_GUIDE
         '
