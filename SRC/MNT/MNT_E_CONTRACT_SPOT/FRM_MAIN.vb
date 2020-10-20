@@ -761,8 +761,18 @@
             Case (CTL_ACTIVE Is TXT_NUMBER_CONTRACT)
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_DATA_EDIT)
                 BLN_RET = False
+            Case (CTL_ACTIVE Is TXT_NUMBER_ORDER)
+                If TXT_NUMBER_ORDER.Text = "" Then
+                    TXT_NUMBER_ORDER.Text = CStr(0)
+                End If
+                BLN_RET = True
             Case (CTL_ACTIVE Is CMB_CODE_MAINTENANCE)
                 SUB_REFRESH_NAME_COTRACT()
+                BLN_RET = True
+            Case (CTL_ACTIVE Is TXT_CODE_POST)
+                If TXT_CODE_POST.Text = "" Then
+                    TXT_CODE_POST.Text = CStr(0)
+                End If
                 BLN_RET = True
             Case Else
                 BLN_RET = True
