@@ -93,6 +93,9 @@
         Dim SRT_CONDITIONS As MOD_BATCH.SRT_BATCH_CONDITIONS
         With SRT_CONDITIONS
             .FILE_PATH_GET = OFD_FILE_OPEN.FileName
+            .DATE_INVOICE_TO = DTP_DATE_INVOICE.Value
+            .DATE_DEPOSIT_TO = DTP_DATE_DEPOSIT.Value
+            .DELETE_MAKE = CHK_DELETE_MAKE.Checked
 
             .DATE_DO_BATCH = System.DateTime.Today
             .FORM = Me

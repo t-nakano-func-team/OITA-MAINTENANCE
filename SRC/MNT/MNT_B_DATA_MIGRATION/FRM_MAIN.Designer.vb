@@ -40,11 +40,20 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS = New System.Windows.Forms.Panel()
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_DATE_DEPOSIT = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_DEPOSIT = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
+        Me.PNL_DATE_INVOICE = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_INVOICE = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_INVOICE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_COUNT_BATCH = New System.Windows.Forms.Panel()
         Me.LBL_COUNT_BATCH_UNIT = New System.Windows.Forms.Label()
         Me.LBL_COUNT_BATCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_BATCH_GUIDE = New System.Windows.Forms.Label()
         Me.OFD_FILE_OPEN = New System.Windows.Forms.OpenFileDialog()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.LBL_DELETE_MAKE_GUIDE = New System.Windows.Forms.Label()
+        Me.CHK_DELETE_MAKE = New System.Windows.Forms.CheckBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -55,7 +64,10 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_BATCH_PROGRESS.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_DATE_DEPOSIT.SuspendLayout()
+        Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_COUNT_BATCH.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -269,11 +281,76 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.Panel1)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_DEPOSIT)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_INVOICE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_COUNT_BATCH)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_KEY.TabIndex = 0
+        '
+        'PNL_DATE_DEPOSIT
+        '
+        Me.PNL_DATE_DEPOSIT.Controls.Add(Me.DTP_DATE_DEPOSIT)
+        Me.PNL_DATE_DEPOSIT.Controls.Add(Me.LBL_DATE_DEPOSIT_GUIDE)
+        Me.PNL_DATE_DEPOSIT.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_DATE_DEPOSIT.Name = "PNL_DATE_DEPOSIT"
+        Me.PNL_DATE_DEPOSIT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_DATE_DEPOSIT.TabIndex = 12
+        '
+        'DTP_DATE_DEPOSIT
+        '
+        Me.DTP_DATE_DEPOSIT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_DEPOSIT.Location = New System.Drawing.Point(80, 1)
+        Me.DTP_DATE_DEPOSIT.Name = "DTP_DATE_DEPOSIT"
+        Me.DTP_DATE_DEPOSIT.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_DEPOSIT.TabIndex = 1
+        Me.DTP_DATE_DEPOSIT.Tag = "Clear"
+        '
+        'LBL_DATE_DEPOSIT_GUIDE
+        '
+        Me.LBL_DATE_DEPOSIT_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_DEPOSIT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_DEPOSIT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_DEPOSIT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_DEPOSIT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_DEPOSIT_GUIDE.Name = "LBL_DATE_DEPOSIT_GUIDE"
+        Me.LBL_DATE_DEPOSIT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_DEPOSIT_GUIDE.TabIndex = 0
+        Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金完了日"
+        Me.LBL_DATE_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'PNL_DATE_INVOICE
+        '
+        Me.PNL_DATE_INVOICE.Controls.Add(Me.DTP_DATE_INVOICE)
+        Me.PNL_DATE_INVOICE.Controls.Add(Me.LBL_DATE_INVOICE_GUIDE)
+        Me.PNL_DATE_INVOICE.Location = New System.Drawing.Point(5, 40)
+        Me.PNL_DATE_INVOICE.Name = "PNL_DATE_INVOICE"
+        Me.PNL_DATE_INVOICE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_DATE_INVOICE.TabIndex = 11
+        '
+        'DTP_DATE_INVOICE
+        '
+        Me.DTP_DATE_INVOICE.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_INVOICE.Location = New System.Drawing.Point(80, 1)
+        Me.DTP_DATE_INVOICE.Name = "DTP_DATE_INVOICE"
+        Me.DTP_DATE_INVOICE.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_INVOICE.TabIndex = 1
+        Me.DTP_DATE_INVOICE.Tag = "Clear"
+        '
+        'LBL_DATE_INVOICE_GUIDE
+        '
+        Me.LBL_DATE_INVOICE_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_INVOICE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_INVOICE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_INVOICE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_INVOICE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_INVOICE_GUIDE.Name = "LBL_DATE_INVOICE_GUIDE"
+        Me.LBL_DATE_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_INVOICE_GUIDE.TabIndex = 0
+        Me.LBL_DATE_INVOICE_GUIDE.Text = "請求完了日"
+        Me.LBL_DATE_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PNL_COUNT_BATCH
         '
@@ -328,6 +405,38 @@ Partial Class FRM_MAIN
         Me.OFD_FILE_OPEN.DefaultExt = "CSV"
         Me.OFD_FILE_OPEN.Filter = "Excelブック(*.xlsx)|*.xlsx"
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.CHK_DELETE_MAKE)
+        Me.Panel1.Controls.Add(Me.LBL_DELETE_MAKE_GUIDE)
+        Me.Panel1.Location = New System.Drawing.Point(5, 110)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(480, 30)
+        Me.Panel1.TabIndex = 13
+        '
+        'LBL_DELETE_MAKE_GUIDE
+        '
+        Me.LBL_DELETE_MAKE_GUIDE.AutoEllipsis = True
+        Me.LBL_DELETE_MAKE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DELETE_MAKE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DELETE_MAKE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DELETE_MAKE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DELETE_MAKE_GUIDE.Name = "LBL_DELETE_MAKE_GUIDE"
+        Me.LBL_DELETE_MAKE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DELETE_MAKE_GUIDE.TabIndex = 0
+        Me.LBL_DELETE_MAKE_GUIDE.Text = "既移行削除"
+        Me.LBL_DELETE_MAKE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'CHK_DELETE_MAKE
+        '
+        Me.CHK_DELETE_MAKE.AutoSize = True
+        Me.CHK_DELETE_MAKE.Location = New System.Drawing.Point(80, 4)
+        Me.CHK_DELETE_MAKE.Name = "CHK_DELETE_MAKE"
+        Me.CHK_DELETE_MAKE.Size = New System.Drawing.Size(254, 22)
+        Me.CHK_DELETE_MAKE.TabIndex = 15
+        Me.CHK_DELETE_MAKE.Text = "作成者=9999999のレコードを削除します"
+        Me.CHK_DELETE_MAKE.UseVisualStyleBackColor = True
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -356,7 +465,11 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.ResumeLayout(False)
         Me.PNL_BATCH_PROGRESS.PerformLayout()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
+        Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_COUNT_BATCH.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -384,4 +497,13 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_COUNT_BATCH_GUIDE As Label
     Friend WithEvents OFD_FILE_OPEN As OpenFileDialog
     Friend WithEvents LBL_COUNT_BATCH_UNIT As Label
+    Friend WithEvents PNL_DATE_INVOICE As Panel
+    Friend WithEvents DTP_DATE_INVOICE As DateTimePicker
+    Friend WithEvents LBL_DATE_INVOICE_GUIDE As Label
+    Friend WithEvents PNL_DATE_DEPOSIT As Panel
+    Friend WithEvents DTP_DATE_DEPOSIT As DateTimePicker
+    Friend WithEvents LBL_DATE_DEPOSIT_GUIDE As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents CHK_DELETE_MAKE As CheckBox
+    Friend WithEvents LBL_DELETE_MAKE_GUIDE As Label
 End Class

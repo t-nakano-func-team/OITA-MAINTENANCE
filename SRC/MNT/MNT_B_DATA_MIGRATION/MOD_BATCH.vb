@@ -36,6 +36,9 @@
 #Region "バッチ用・構造体"
     Public Structure SRT_BATCH_CONDITIONS 'バッチ条件
         Public FILE_PATH_GET As String
+        Public DATE_INVOICE_TO As DateTime
+        Public DATE_DEPOSIT_TO As DateTime
+        Public DELETE_MAKE As Boolean
 
         Public DATE_DO_BATCH As DateTime
         Public FORM As Object
@@ -128,6 +131,15 @@
             Return False
         End If
 
+        If SRT_CONDITIONS.DELETE_MAKE Then
+            Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "削除中")
+            If Not FUNC_DETELE_MAKE(9999999) Then
+                STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+                Return False
+            End If
+        End If
+
         INT_LOOP_INDEX_MAX = (SRT_TABLE.Length - 1)
         For i = 1 To INT_LOOP_INDEX_MAX
             If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "テーブル挿入中：" & i & "/" & INT_LOOP_INDEX_MAX)
@@ -138,6 +150,12 @@
             End With
 
             If Not FUNC_INSERT_TABLE_MNT_T_CONTRACT(SRT_TABLE(i)) Then
+                STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+                Return False
+            End If
+
+            If Not FUNC_MAKE_INVOICE(SRT_TABLE(i), SRT_CONDITIONS.DATE_INVOICE_TO, SRT_CONDITIONS.DATE_DEPOSIT_TO) Then
                 STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
                 Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
                 Return False
@@ -379,6 +397,79 @@
         Return SRT_DATA.SEIKYUSTRTUKI
     End Function
 
+    Private Function FUNC_MAKE_INVOICE(ByRef SRT_DATA As SRT_TABLE_MNT_T_CONTRACT, ByVal DAT_DATE_INVOICE_TO As DateTime, ByVal DAT_DATE_DEPOSIT_TO As DateTime) As Boolean
+
+        For i = 1 To SRT_DATA.DATA.COUNT_INVOICE
+            Dim DAT_DATE_INVOICE As DateTime
+            DAT_DATE_INVOICE = FUNC_GET_DATE_INVOICE_PLAN(SRT_DATA.KEY.NUMBER_CONTRACT, SRT_DATA.KEY.SERIAL_CONTRACT)
+
+            Dim SRT_EDIT As SRT_EDIT_INVOICE
+            With SRT_EDIT
+                .CEHCK_EDIT = False
+                .CODE_SECTION = 0
+                .KINGAKU_INVOICE_DETAIL = 0
+                .KINGAKU_INVOICE_VAT = 0
+            End With
+
+            If DAT_DATE_INVOICE_TO <= DAT_DATE_INVOICE_TO Then
+                If Not FUNC_MAKE_NEW_INVOICE(SRT_DATA.KEY.NUMBER_CONTRACT, SRT_DATA.KEY.SERIAL_CONTRACT, DAT_DATE_INVOICE, SRT_EDIT) Then
+                    Return False
+                End If
+            Else
+                Continue For
+            End If
+
+            Dim INT_SERIAL_INVOICE As Integer
+            INT_SERIAL_INVOICE = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(SRT_DATA.KEY.NUMBER_CONTRACT, SRT_DATA.KEY.SERIAL_CONTRACT)
+
+            Dim DAT_DATE_DEPOSIT As DateTime
+            DAT_DATE_DEPOSIT = FUNC_GET_DATE_NEXT_MONTH_FIRST(DAT_DATE_INVOICE)
+            If DAT_DATE_DEPOSIT <= DAT_DATE_DEPOSIT_TO Then
+                If Not FUNC_MAKE_NEW_DEPOSIT(SRT_DATA.KEY.NUMBER_CONTRACT, SRT_DATA.KEY.SERIAL_CONTRACT, INT_SERIAL_INVOICE, DAT_DATE_DEPOSIT) Then
+                    Return False
+                End If
+            End If
+
+        Next
+
+        Return True
+    End Function
+
+    Private Function FUNC_GET_DATE_NEXT_MONTH_FIRST(ByVal DAT_DATE_BASE As DateTime) As DateTime
+
+        Dim INT_YYYYMM As Integer
+        INT_YYYYMM = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_BASE)
+
+        Dim INT_YYYYMM_NEXT As Integer
+        INT_YYYYMM_NEXT = FUNC_ADD_MONTH_YYYYMM(INT_YYYYMM, 1) '翌月
+
+        Dim INT_YEAR As Integer
+        INT_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM_NEXT)
+
+        Dim INT_MONTH As Integer
+        INT_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM_NEXT)
+
+        Dim DAT_RET As DateTime
+        DAT_RET = New DateTime(INT_YEAR, INT_MONTH, 1) '翌月月初
+
+        Return DAT_RET
+    End Function
+
+    Private Function FUNC_DETELE_MAKE(ByVal INT_CODE_STAFF As Integer) As Boolean
+        Dim STR_SQL As System.Text.StringBuilder
+
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("DELETE" & System.Environment.NewLine)
+            .Append("FROM" & System.Environment.NewLine)
+            .Append("MNT_T_CONTRACT WITH(ROWLOCK)" & System.Environment.NewLine)
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append("AND " & System.Environment.NewLine)
+        End With
+
+        Return True
+    End Function
 #End Region
 
 #Region "内部処理（汎用）"
