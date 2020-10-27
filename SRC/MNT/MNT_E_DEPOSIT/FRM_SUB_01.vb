@@ -149,6 +149,8 @@
                 Call SUB_CLEAR()
             Case ENM_MY_EXEC_DO.DO_END
                 Call SUB_END()
+            Case ENM_MY_EXEC_DO.DO_OUTPUT_DONE
+                Call SUB_OUTPUT_DONE()
             Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
                 Call SUB_SHOW_SETTING()
             Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
@@ -223,6 +225,30 @@
 
         Return True
     End Function
+
+    Private Function FUNC_UPDATE_RECORD_OUTPUT_DONE(ByRef SRT_KEY_DEPOSIT As SRT_TABLE_MNT_T_DEPOSIT_KEY) As Boolean
+
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+        With STR_SQL
+            .Append("UPDATE" & System.Environment.NewLine)
+            .Append("MNT_T_DEPOSIT WITH(ROWLOCK)" & System.Environment.NewLine)
+            .Append("SET" & System.Environment.NewLine)
+            .Append("FLAG_OUTPUT=" & ENM_SYSTEM_INDIVIDUAL_FLAG_OUTPUT.DONE & System.Environment.NewLine)
+            .Append("WHERE" & System.Environment.NewLine)
+            .Append("1=1" & System.Environment.NewLine)
+            .Append("AND NUMBER_CONTRACT=" & SRT_KEY_DEPOSIT.NUMBER_CONTRACT & System.Environment.NewLine)
+            .Append("AND SERIAL_CONTRACT=" & SRT_KEY_DEPOSIT.SERIAL_CONTRACT & System.Environment.NewLine)
+            .Append("AND SERIAL_INVOICE=" & SRT_KEY_DEPOSIT.SERIAL_INVOICE & System.Environment.NewLine)
+        End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
 #End Region
 
     Private Sub SUB_CLEAR()
@@ -234,6 +260,43 @@
 
     Private Sub SUB_END()
         Call Me.Close()
+    End Sub
+
+    Private Sub SUB_OUTPUT_DONE()
+
+        If Not CHK_FLAG_DEPOSIT_DONE.Checked Then
+            Exit Sub
+        End If
+
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show("データを入金連携出力済みにします。" & Environment.NewLine & "よろしいですか？", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Dim SRT_INSERT As SRT_TABLE_MNT_T_DEPOSIT
+        SRT_INSERT.KEY = FUNC_GET_INPUT_KEY_DEPOSIT()
+        SRT_INSERT.DATA = FUNC_GET_INPUT_DATA_DEPOSIT()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not FUNC_UPDATE_RECORD_OUTPUT_DONE(SRT_INSERT.KEY) Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+            Exit Sub
+        End If
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Me.RET_EDIT_CANCEL = False
+        Call SUB_END()
+
     End Sub
 
     Private Sub SUB_SHOW_SETTING()
