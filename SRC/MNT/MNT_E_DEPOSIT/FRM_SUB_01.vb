@@ -9,6 +9,7 @@
         DO_ENTER
         DO_CLEAR
         DO_END = 81
+        DO_OUTPUT_DONE
         DO_SHOW_SETTING
         DO_SHOW_COMMANDLINE
         DO_SHOW_CONFIG_SETTINGS
@@ -540,6 +541,8 @@
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_CONFIG_SETTINGS)
             Case Keys.S
                 Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SETTING)
+            Case Keys.I
+                Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_OUTPUT_DONE)
             Case Else
                 'スルー
         End Select
