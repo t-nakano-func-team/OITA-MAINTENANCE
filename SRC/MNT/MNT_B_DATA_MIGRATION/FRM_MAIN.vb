@@ -42,6 +42,16 @@
 
         LBL_NAME_USER_HEAD.Text = FUNC_GET_MNG_M_USER_NAME_STAFF(srtSYSTEM_TOTAL_COMMANDLINE.CODE_STAFF)
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
+
+        Dim DAT_DATE_INVOICE As DateTime
+        If FUNC_CHECK_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE) Then
+            DAT_DATE_INVOICE = datSYSTEM_TOTAL_DATE_ACTIVE
+        Else
+            DAT_DATE_INVOICE = datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(-1)
+            DAT_DATE_INVOICE = FUNC_GET_DATE_LASTMONTH(DAT_DATE_INVOICE)
+        End If
+        DTP_DATE_INVOICE.Value = DAT_DATE_INVOICE
+        Call SUB_REFRESH_DATE_DEPOSIT()
     End Sub
 #End Region
 
@@ -301,6 +311,10 @@
 #End Region
 
 #Region "内部処理"
+    Private Sub SUB_REFRESH_DATE_DEPOSIT()
+
+        DTP_DATE_DEPOSIT.Value = DTP_DATE_INVOICE.Value
+    End Sub
     Private Sub SUB_SET_COUNT_LINK(ByVal INT_CNT As Integer)
 
         LBL_COUNT_BATCH.Text = Format(INT_CNT, "#,##0")
@@ -397,6 +411,13 @@
 
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
+    End Sub
+#End Region
+
+#Region "イベント-バリューチェンジ"
+
+    Private Sub DTP_DATE_INVOICE_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_INVOICE.ValueChanged
+        Call SUB_REFRESH_DATE_DEPOSIT()
     End Sub
 #End Region
 

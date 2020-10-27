@@ -40,6 +40,9 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS = New System.Windows.Forms.Panel()
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CHK_DELETE_MAKE = New System.Windows.Forms.CheckBox()
+        Me.LBL_DELETE_MAKE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_DATE_DEPOSIT = New System.Windows.Forms.Panel()
         Me.DTP_DATE_DEPOSIT = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
@@ -51,9 +54,6 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_BATCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_BATCH_GUIDE = New System.Windows.Forms.Label()
         Me.OFD_FILE_OPEN = New System.Windows.Forms.OpenFileDialog()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.LBL_DELETE_MAKE_GUIDE = New System.Windows.Forms.Label()
-        Me.CHK_DELETE_MAKE = New System.Windows.Forms.CheckBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -64,10 +64,10 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_DATA.SuspendLayout()
         Me.PNL_BATCH_PROGRESS.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.PNL_DATE_DEPOSIT.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_COUNT_BATCH.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -290,6 +290,38 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 350)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.CHK_DELETE_MAKE)
+        Me.Panel1.Controls.Add(Me.LBL_DELETE_MAKE_GUIDE)
+        Me.Panel1.Location = New System.Drawing.Point(5, 110)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(480, 30)
+        Me.Panel1.TabIndex = 13
+        '
+        'CHK_DELETE_MAKE
+        '
+        Me.CHK_DELETE_MAKE.AutoSize = True
+        Me.CHK_DELETE_MAKE.Location = New System.Drawing.Point(80, 4)
+        Me.CHK_DELETE_MAKE.Name = "CHK_DELETE_MAKE"
+        Me.CHK_DELETE_MAKE.Size = New System.Drawing.Size(254, 22)
+        Me.CHK_DELETE_MAKE.TabIndex = 15
+        Me.CHK_DELETE_MAKE.Text = "作成者=9999998のレコードを削除します"
+        Me.CHK_DELETE_MAKE.UseVisualStyleBackColor = True
+        '
+        'LBL_DELETE_MAKE_GUIDE
+        '
+        Me.LBL_DELETE_MAKE_GUIDE.AutoEllipsis = True
+        Me.LBL_DELETE_MAKE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DELETE_MAKE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DELETE_MAKE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DELETE_MAKE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DELETE_MAKE_GUIDE.Name = "LBL_DELETE_MAKE_GUIDE"
+        Me.LBL_DELETE_MAKE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DELETE_MAKE_GUIDE.TabIndex = 0
+        Me.LBL_DELETE_MAKE_GUIDE.Text = "既移行削除"
+        Me.LBL_DELETE_MAKE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_DATE_DEPOSIT
         '
         Me.PNL_DATE_DEPOSIT.Controls.Add(Me.DTP_DATE_DEPOSIT)
@@ -405,38 +437,6 @@ Partial Class FRM_MAIN
         Me.OFD_FILE_OPEN.DefaultExt = "CSV"
         Me.OFD_FILE_OPEN.Filter = "Excelブック(*.xlsx)|*.xlsx"
         '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.CHK_DELETE_MAKE)
-        Me.Panel1.Controls.Add(Me.LBL_DELETE_MAKE_GUIDE)
-        Me.Panel1.Location = New System.Drawing.Point(5, 110)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(480, 30)
-        Me.Panel1.TabIndex = 13
-        '
-        'LBL_DELETE_MAKE_GUIDE
-        '
-        Me.LBL_DELETE_MAKE_GUIDE.AutoEllipsis = True
-        Me.LBL_DELETE_MAKE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.LBL_DELETE_MAKE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBL_DELETE_MAKE_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_DELETE_MAKE_GUIDE.Location = New System.Drawing.Point(1, 1)
-        Me.LBL_DELETE_MAKE_GUIDE.Name = "LBL_DELETE_MAKE_GUIDE"
-        Me.LBL_DELETE_MAKE_GUIDE.Size = New System.Drawing.Size(79, 25)
-        Me.LBL_DELETE_MAKE_GUIDE.TabIndex = 0
-        Me.LBL_DELETE_MAKE_GUIDE.Text = "既移行削除"
-        Me.LBL_DELETE_MAKE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'CHK_DELETE_MAKE
-        '
-        Me.CHK_DELETE_MAKE.AutoSize = True
-        Me.CHK_DELETE_MAKE.Location = New System.Drawing.Point(80, 4)
-        Me.CHK_DELETE_MAKE.Name = "CHK_DELETE_MAKE"
-        Me.CHK_DELETE_MAKE.Size = New System.Drawing.Size(254, 22)
-        Me.CHK_DELETE_MAKE.TabIndex = 15
-        Me.CHK_DELETE_MAKE.Text = "作成者=9999999のレコードを削除します"
-        Me.CHK_DELETE_MAKE.UseVisualStyleBackColor = True
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -465,11 +465,11 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.ResumeLayout(False)
         Me.PNL_BATCH_PROGRESS.PerformLayout()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_COUNT_BATCH.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
