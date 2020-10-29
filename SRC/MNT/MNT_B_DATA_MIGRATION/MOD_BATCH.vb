@@ -188,6 +188,7 @@
             End If
         End If
 
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "テーブル挿入中" & "")
         INT_LOOP_INDEX_MAX = (SRT_TABLE.Length - 1)
         For i = 1 To INT_LOOP_INDEX_MAX
             If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "テーブル挿入中：" & i & "/" & INT_LOOP_INDEX_MAX)
@@ -209,6 +210,7 @@
                 Return False
             End If
         Next
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
 
         If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
             STR_FUNC_BATCH_MAIN_ERR_STR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
@@ -647,8 +649,12 @@
             .Append("MNT_T_CONTRACT WITH(ROWLOCK)" & System.Environment.NewLine)
             .Append("WHERE" & System.Environment.NewLine)
             .Append("1=1" & System.Environment.NewLine)
-            .Append("AND " & System.Environment.NewLine)
+            .Append("AND CODE_EDIT_STAFF=" & INT_CODE_STAFF & System.Environment.NewLine)
         End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
+            Return False
+        End If
 
         Return True
     End Function
