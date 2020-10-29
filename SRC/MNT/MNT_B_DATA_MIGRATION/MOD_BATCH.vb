@@ -33,6 +33,13 @@
         UPDATEDATE
         UPDATETIME
     End Enum
+
+    Private Enum ENM_XLSX_ETC_INDEX
+        KEY = 1
+        NAME_OWNER
+        KIND_SEIKYU
+        NAME_MEMO
+    End Enum
 #End Region
 
 #Region "バッチ用・構造体"
@@ -74,6 +81,24 @@
         Public UPDATEDATE As Integer
         Public UPDATETIME As Integer
     End Structure
+
+    Private Structure SRT_XLSX_ETC_INFO 'XLSXファイル構造
+        Public KEY As String
+        Public NAME_OWNER As String
+        Public KIND_SEIKYU As String
+        Public NAME_MEMO As String
+    End Structure
+
+    Private Structure SRT_ETC_CHECK
+        Public OWNERCD As Integer
+        Public GENBACD As Integer
+        Public SAGYOCD As Integer
+
+        Public SPAN_INVOICE As Integer
+        Public NAME_MEMO As String
+    End Structure
+
+
 #End Region
 
 #Region "バッチ用・変数"
@@ -89,6 +114,15 @@
 
         Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "Excelファイル読込中：" & SRT_CONDITIONS.FILE_PATH_GET & "")
         If Not FUNC_GET_FILE_DATA_FROM_XLSX(SRT_CONDITIONS.FILE_PATH_GET, SRT_FILE) Then
+            STR_FUNC_BATCH_MAIN_ERR_STR = "ファイルの読取に失敗しました。" & System.Environment.NewLine & SRT_CONDITIONS.FILE_PATH_GET
+            Return False
+        End If
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
+
+        Dim SRT_FILE_ETC() As SRT_XLSX_ETC_INFO
+        ReDim SRT_FILE_ETC(0)
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "Excelファイル追加データ読込中：" & SRT_CONDITIONS.FILE_PATH_GET & "")
+        If Not FUNC_GET_FILE_DATA_ETC_FROM_XLSX(SRT_CONDITIONS.FILE_PATH_GET, SRT_FILE_ETC) Then
             STR_FUNC_BATCH_MAIN_ERR_STR = "ファイルの読取に失敗しました。" & System.Environment.NewLine & SRT_CONDITIONS.FILE_PATH_GET
             Return False
         End If
@@ -116,6 +150,18 @@
 
         BLN_PUT = True
 
+        Dim SRT_ETC() As SRT_ETC_CHECK
+        INT_LOOP_INDEX_MAX = (SRT_FILE_ETC.Length - 1)
+        ReDim SRT_ETC(INT_LOOP_INDEX_MAX)
+        For i = 1 To INT_LOOP_INDEX_MAX
+            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "追加データ解析中：" & i & "/" & INT_LOOP_INDEX_MAX)
+            If Not FUNC_MAKE_ETC_DATA(SRT_FILE_ETC(i), SRT_ETC(i)) Then
+                STR_FUNC_BATCH_MAIN_ERR_STR = "追加データの解析に失敗しました。" & System.Environment.NewLine & SRT_CONDITIONS.FILE_PATH_GET
+                Return False
+            End If
+        Next
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
+
         Dim SRT_TABLE() As SRT_TABLE_MNT_T_CONTRACT
         ReDim SRT_TABLE(0)
         INT_LOOP_INDEX_MAX = (SRT_FILE_ENABLED.Length - 1)
@@ -124,7 +170,7 @@
             Dim INT_INDEX As Integer
             INT_INDEX = SRT_TABLE.Length
             ReDim Preserve SRT_TABLE(INT_INDEX)
-            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i))
+            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i), SRT_ETC)
         Next
         Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
 
@@ -177,7 +223,7 @@
     Private Function FUNC_GET_FILE_DATA_FROM_XLSX(ByVal STR_FILE_PATH As String, ByRef SRT_FILE() As SRT_XLSX_INFO) As Boolean
         ReDim SRT_FILE(0)
 
-        If Not FUNC_INIT_XLS(STR_FILE_PATH, 2) Then
+        If Not FUNC_INIT_XLS(STR_FILE_PATH, 1) Then
             Return False
         End If
 
@@ -264,6 +310,50 @@
         Return True
     End Function
 
+    Private Function FUNC_GET_FILE_DATA_ETC_FROM_XLSX(ByVal STR_FILE_PATH As String, ByRef SRT_FILE() As SRT_XLSX_ETC_INFO) As Boolean
+        If Not FUNC_INIT_XLS(STR_FILE_PATH, 2) Then
+            Return False
+        End If
+
+        Dim INT_ROW As Integer
+
+        INT_ROW = 0
+        Do
+            INT_ROW += 1
+            If INT_ROW <= 1 Then 'ヘッダ読飛
+                Continue Do
+            End If
+
+            Dim STR_TEMP As String
+            STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.KEY)
+            If STR_TEMP = "" Then
+                Exit Do
+            End If
+
+            Dim INT_INDEX As Integer
+            INT_INDEX = SRT_FILE.Length
+            ReDim Preserve SRT_FILE(INT_INDEX)
+            With SRT_FILE(INT_INDEX)
+                .KEY = CStr(STR_TEMP)
+                Try
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.NAME_OWNER)
+                    .NAME_OWNER = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.KIND_SEIKYU)
+                    .KIND_SEIKYU = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.NAME_MEMO)
+                    .NAME_MEMO = CStr(STR_TEMP)
+                Catch ex As Exception
+                    Call FUNC_END_XLS()
+                    Return False
+                End Try
+            End With
+        Loop
+
+        Call FUNC_END_XLS()
+
+        Return True
+    End Function
+
     Private Function FUNC_CHECK_KAIYAKU(ByRef SRT_DATA As SRT_XLSX_INFO) As Boolean
         With SRT_DATA
 
@@ -280,12 +370,74 @@
         Return False
     End Function
 
-    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO) As SRT_TABLE_MNT_T_CONTRACT
+    Private Function FUNC_MAKE_ETC_DATA(ByRef SRT_DATA As SRT_XLSX_ETC_INFO, ByRef SRT_RET As SRT_ETC_CHECK) As Boolean
+
+        With SRT_RET
+            Dim STR_TEMP As String
+            STR_TEMP = SRT_DATA.KEY
+            .OWNERCD = FUNC_SPLIT_STR(STR_TEMP, 0, "-")
+            .GENBACD = FUNC_SPLIT_STR(STR_TEMP, 1, "-")
+            .SAGYOCD = FUNC_SPLIT_STR(STR_TEMP, 2, "-")
+
+            STR_TEMP = SRT_DATA.KIND_SEIKYU
+            .SPAN_INVOICE = FUNC_GET_SPAN_SEIKYU(STR_TEMP)
+            .NAME_MEMO = SRT_DATA.NAME_MEMO
+        End With
+        Return True
+    End Function
+
+    Private Function FUNC_GET_SPAN_SEIKYU(ByVal STR_KIND_SEIKYU As String) As Integer
+        Dim INT_RET As Integer
+
+        Select Case STR_KIND_SEIKYU
+            Case "各月"
+                INT_RET = 1
+            Case "偶数月"
+                INT_RET = 2
+            Case "奇数月"
+                INT_RET = 2
+            Case "年６回"
+                INT_RET = 2
+            Case "年6回"
+                INT_RET = 2
+            Case "年六回"
+                INT_RET = 2
+            Case "年４回"
+                INT_RET = 2
+            Case "年4回"
+                INT_RET = 3
+            Case "年四回"
+                INT_RET = 3
+            Case "年３回"
+                INT_RET = 4
+            Case "年3回"
+                INT_RET = 4
+            Case "年三回"
+                INT_RET = 4
+            Case "年２回"
+                INT_RET = 6
+            Case "年2回"
+                INT_RET = 6
+            Case "年二回"
+                INT_RET = 6
+            Case "一括"
+                INT_RET = 12
+            Case Else
+                INT_RET = 1
+        End Select
+
+        Return INT_RET
+    End Function
+
+    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO, ByRef SRT_CHECK() As SRT_ETC_CHECK) As SRT_TABLE_MNT_T_CONTRACT
         Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT
         With SRT_RET.KEY
             .NUMBER_CONTRACT = 0
             .SERIAL_CONTRACT = 1
         End With
+
+        Dim INT_INDEX_CHECK As Integer
+        INT_INDEX_CHECK = FUNC_GET_INDEX_CHECK(SRT_CHECK, SRT_DATA.OWNERCD, SRT_DATA.GENBACD, SRT_DATA.SAGYOCD)
 
         With SRT_RET.DATA
             .FLAG_CONTRACT = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
@@ -323,8 +475,16 @@
                     DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
             End Select
             .DATE_INVOICE_BASE = DAT_SEIKYU_BASE
-            .SPAN_INVOICE = 1
+            If INT_INDEX_CHECK >= 0 Then
+                .SPAN_INVOICE = SRT_CHECK(INT_INDEX_CHECK).SPAN_INVOICE
+            Else
+                .SPAN_INVOICE = 1
+            End If
             .COUNT_INVOICE = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
+            If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
+                .SPAN_INVOICE = 1
+            End If
+
             Select Case .SPAN_INVOICE
                 Case 1
                     .FLAG_INVOICE_METHOD = 1
@@ -353,7 +513,12 @@
             .NUMBER_LIST_INVOICE = 1
 
             .KINGAKU_CONTRACT = SRT_DATA.KEIYAKUKIN
-            .NAME_MEMO = CStr(SRT_DATA.KEIYAKUNO)
+
+            If INT_INDEX_CHECK >= 0 Then
+                .NAME_MEMO = SRT_CHECK(INT_INDEX_CHECK).NAME_MEMO
+            Else
+                .NAME_MEMO = CStr(SRT_DATA.KEIYAKUNO)
+            End If
             .FLAG_CONTINUE = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE.AUTO_CONTINUE
             .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
             .CODE_EDIT_STAFF = CST_CODE_EDIT_STAFF
@@ -361,6 +526,19 @@
         End With
 
         Return SRT_RET
+    End Function
+
+    Private Function FUNC_GET_INDEX_CHECK(ByRef SRT_DATA() As SRT_ETC_CHECK, ByVal INT_OWNERCD As Integer, ByVal INT_GENBACD As Integer, ByVal INT_SAGYOCD As Integer) As Integer
+
+        For i = 1 To (SRT_DATA.Length - 1)
+            With SRT_DATA(i)
+                If .OWNERCD = INT_OWNERCD And .GENBACD = INT_GENBACD And .SAGYOCD = INT_SAGYOCD Then
+                    Return i
+                End If
+            End With
+        Next
+
+        Return -1
     End Function
 
     Private Function FUNC_GET_NAME_CONTRACT(ByRef SRT_DATA As SRT_XLSX_INFO) As String
@@ -373,6 +551,8 @@
             Else
                 STR_RET = .GENBANM & "-" & .SAGYONAIYO
             End If
+
+            STR_RET = .SAGYONAIYO
         End With
 
         Return STR_RET
