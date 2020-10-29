@@ -110,7 +110,7 @@
     Private Sub SUB_CTRL_VIEW_INIT()
         Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,請求年月,オーナー,請求金額", "BSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,5,6", "CLRLR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,15,6", "CLRLR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
