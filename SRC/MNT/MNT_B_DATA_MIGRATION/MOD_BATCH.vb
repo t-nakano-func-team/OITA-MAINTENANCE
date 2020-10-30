@@ -482,7 +482,9 @@
             Else
                 .SPAN_INVOICE = 1
             End If
-            .COUNT_INVOICE = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
+            Dim INT_KIKAN_SEIKYU As Integer
+            INT_KIKAN_SEIKYU = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
+            .COUNT_INVOICE = CInt(FUNC_MATH_FLOOR(INT_KIKAN_SEIKYU / .SPAN_INVOICE))
             If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
                 .SPAN_INVOICE = 1
             End If
@@ -595,7 +597,7 @@
                 .KINGAKU_INVOICE_VAT = 0
             End With
 
-            If DAT_DATE_INVOICE_TO <= DAT_DATE_INVOICE_TO Then
+            If DAT_DATE_INVOICE <= DAT_DATE_INVOICE_TO Then
                 If Not FUNC_MAKE_NEW_INVOICE(SRT_DATA.KEY.NUMBER_CONTRACT, SRT_DATA.KEY.SERIAL_CONTRACT, DAT_DATE_INVOICE, SRT_EDIT) Then
                     Return False
                 End If
