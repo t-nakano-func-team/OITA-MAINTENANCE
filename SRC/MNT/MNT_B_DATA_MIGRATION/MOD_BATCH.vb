@@ -392,6 +392,52 @@
         Dim INT_RET As Integer
 
         Select Case STR_KIND_SEIKYU
+            Case "1回当り"
+                INT_RET = 1
+            Case "一括"
+                INT_RET = 13
+            Case "奇数月"
+                INT_RET = 2
+            Case "偶数"
+                INT_RET = 2
+            Case "偶数月"
+                INT_RET = 2
+            Case "月額"
+                INT_RET = 1
+            Case "出来高"
+                INT_RET = 1
+            Case "専伝票"
+                INT_RET = 1
+            Case "日付なし"
+                INT_RET = 1
+            Case "年1回"
+                INT_RET = 12
+            Case "年１回"
+                INT_RET = 12
+            Case "年2回"
+                INT_RET = 6
+            Case "年２回"
+                INT_RET = 6
+            Case "年3回"
+                INT_RET = 4
+            Case "年4回"
+                INT_RET = 3
+            Case "年４回"
+                INT_RET = 3
+            Case "年5回"
+                INT_RET = 2
+            Case "年6回"
+                INT_RET = 2
+            Case "年６回"
+                INT_RET = 2
+            Case "年額"
+                INT_RET = 13
+            Case "別請求"
+                INT_RET = 13
+            Case "毎月"
+                INT_RET = 1
+            Case ""
+                INT_RET = 1
             Case "各月"
                 INT_RET = 1
             Case "偶数月"
@@ -461,22 +507,8 @@
             If ENM_KIND_FIX_DATE <= 0 Then
                 ENM_KIND_FIX_DATE = ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_LAST
             End If
-            Dim DAT_SEIKYU_BASE As DateTime
-            Dim INT_SEIKYU_FROM_YEAR As Integer
-            INT_SEIKYU_FROM_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_SEIKYU_FROM)
-            Dim INT_SEIKYU_FROM_MONTH As Integer
-            INT_SEIKYU_FROM_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_SEIKYU_FROM)
-            Select Case ENM_KIND_FIX_DATE
-                Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_10, ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_20, ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_25
-                    DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, CInt(ENM_KIND_FIX_DATE))
-                Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_LAST
-                    DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, 1)
-                    DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
-                Case Else
-                    DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, 1)
-                    DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
-            End Select
-            .DATE_INVOICE_BASE = DAT_SEIKYU_BASE
+            .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+
             If INT_INDEX_CHECK >= 0 Then
                 .SPAN_INVOICE = SRT_CHECK(INT_INDEX_CHECK).SPAN_INVOICE
             Else
@@ -487,6 +519,38 @@
             .COUNT_INVOICE = CInt(FUNC_MATH_FLOOR(INT_KIKAN_SEIKYU / .SPAN_INVOICE))
             If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
                 .SPAN_INVOICE = 1
+            End If
+
+            If .SPAN_INVOICE = 13 And INT_KIKAN_SEIKYU = 12 Then
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(SRT_DATA.SEIKYUENDTUKI, ENM_KIND_FIX_DATE)
+                .SPAN_INVOICE = 12
+                .COUNT_INVOICE = 1
+            End If
+            If .SPAN_INVOICE = 13 And INT_KIKAN_SEIKYU = 36 Then
+                INT_SEIKYU_FROM = FUNC_ADD_MONTH_YYYYMM(SRT_DATA.SEIKYUSTRTUKI, 11)
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+                .SPAN_INVOICE = 12
+                .COUNT_INVOICE = 3
+            End If
+
+            If .SPAN_INVOICE = 2 And INT_KIKAN_SEIKYU = 12 Then
+                INT_SEIKYU_FROM = FUNC_ADD_MONTH_YYYYMM(SRT_DATA.SEIKYUSTRTUKI, 1)
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+            End If
+
+            If .SPAN_INVOICE = 3 And INT_KIKAN_SEIKYU = 12 Then
+                INT_SEIKYU_FROM = FUNC_ADD_MONTH_YYYYMM(SRT_DATA.SEIKYUSTRTUKI, 2)
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+            End If
+
+            If .SPAN_INVOICE = 4 And INT_KIKAN_SEIKYU = 12 Then
+                INT_SEIKYU_FROM = FUNC_ADD_MONTH_YYYYMM(SRT_DATA.SEIKYUSTRTUKI, 3)
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+            End If
+
+            If .SPAN_INVOICE = 6 And INT_KIKAN_SEIKYU = 12 Then
+                INT_SEIKYU_FROM = FUNC_ADD_MONTH_YYYYMM(SRT_DATA.SEIKYUSTRTUKI, 5)
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
             End If
 
             Select Case .SPAN_INVOICE
@@ -511,6 +575,10 @@
                     End Select
                 Case 6
                     .FLAG_INVOICE_METHOD = 6
+                Case 12
+                    If .COUNT_INVOICE = 1 Then
+                        .FLAG_INVOICE_METHOD = 7
+                    End If
                 Case Else
                     .FLAG_INVOICE_METHOD = 0
             End Select
@@ -523,6 +591,10 @@
             Else
                 .NAME_MEMO = CStr(SRT_DATA.KEIYAKUNO)
             End If
+            If .NAME_MEMO.Length > 40 Then
+                .NAME_MEMO = .NAME_MEMO.Substring(0, 40)
+            End If
+
             .FLAG_CONTINUE = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE.AUTO_CONTINUE
             .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
             .CODE_EDIT_STAFF = CST_CODE_EDIT_STAFF
@@ -530,6 +602,27 @@
         End With
 
         Return SRT_RET
+    End Function
+
+    Private Function FUNC_INVOICE_BASE(ByVal INT_YYYYMM As Integer, ByVal ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY) As DateTime
+
+        Dim INT_SEIKYU_FROM_YEAR As Integer
+        INT_SEIKYU_FROM_YEAR = FUNC_GET_YYYY_FROM_YYYYMM(INT_YYYYMM)
+        Dim INT_SEIKYU_FROM_MONTH As Integer
+        INT_SEIKYU_FROM_MONTH = FUNC_GET_MM_FROM_YYYYMM(INT_YYYYMM)
+
+        Dim DAT_SEIKYU_BASE As DateTime
+        Select Case ENM_KIND_FIX_DATE
+            Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_10, ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_20, ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_25
+                DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, CInt(ENM_KIND_FIX_DATE))
+            Case ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY.FIX_LAST
+                DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, 1)
+                DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
+            Case Else
+                DAT_SEIKYU_BASE = New Date(INT_SEIKYU_FROM_YEAR, INT_SEIKYU_FROM_MONTH, 1)
+                DAT_SEIKYU_BASE = FUNC_GET_DATE_LASTMONTH(DAT_SEIKYU_BASE)
+        End Select
+        Return DAT_SEIKYU_BASE
     End Function
 
     Private Function FUNC_GET_INDEX_CHECK(ByRef SRT_DATA() As SRT_ETC_CHECK, ByVal INT_OWNERCD As Integer, ByVal INT_GENBACD As Integer, ByVal INT_SAGYOCD As Integer) As Integer
@@ -555,8 +648,6 @@
             Else
                 STR_RET = .GENBANM & "-" & .SAGYONAIYO
             End If
-
-            STR_RET = .SAGYONAIYO
         End With
 
         Return STR_RET
