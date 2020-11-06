@@ -96,6 +96,7 @@
 
         Public SPAN_INVOICE As Integer
         Public NAME_MEMO As String
+        Public FLAG_IKKATU As Integer
     End Structure
 
 
@@ -383,6 +384,7 @@
 
             STR_TEMP = SRT_DATA.KIND_SEIKYU
             .SPAN_INVOICE = FUNC_GET_SPAN_SEIKYU(STR_TEMP)
+            .FLAG_IKKATU = If(STR_TEMP = "一括", 1, 0)
             .NAME_MEMO = SRT_DATA.NAME_MEMO
         End With
         Return True
@@ -395,7 +397,7 @@
             Case "1回当り"
                 INT_RET = 1
             Case "一括"
-                INT_RET = 13
+                INT_RET = 1
             Case "奇数月"
                 INT_RET = 2
             Case "偶数"
@@ -438,38 +440,6 @@
                 INT_RET = 1
             Case ""
                 INT_RET = 1
-            Case "各月"
-                INT_RET = 1
-            Case "偶数月"
-                INT_RET = 2
-            Case "奇数月"
-                INT_RET = 2
-            Case "年６回"
-                INT_RET = 2
-            Case "年6回"
-                INT_RET = 2
-            Case "年六回"
-                INT_RET = 2
-            Case "年４回"
-                INT_RET = 2
-            Case "年4回"
-                INT_RET = 3
-            Case "年四回"
-                INT_RET = 3
-            Case "年３回"
-                INT_RET = 4
-            Case "年3回"
-                INT_RET = 4
-            Case "年三回"
-                INT_RET = 4
-            Case "年２回"
-                INT_RET = 6
-            Case "年2回"
-                INT_RET = 6
-            Case "年二回"
-                INT_RET = 6
-            Case "一括"
-                INT_RET = 12
             Case Else
                 INT_RET = 1
         End Select
@@ -509,10 +479,13 @@
             End If
             .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
 
+            Dim INT_IKKATU As Integer
             If INT_INDEX_CHECK >= 0 Then
                 .SPAN_INVOICE = SRT_CHECK(INT_INDEX_CHECK).SPAN_INVOICE
+                INT_IKKATU = SRT_CHECK(INT_INDEX_CHECK).FLAG_IKKATU
             Else
                 .SPAN_INVOICE = 1
+                INT_IKKATU = 0
             End If
             Dim INT_KIKAN_SEIKYU As Integer
             INT_KIKAN_SEIKYU = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
@@ -555,7 +528,11 @@
 
             Select Case .SPAN_INVOICE
                 Case 1
-                    .FLAG_INVOICE_METHOD = 1
+                    If INT_IKKATU = 1 Then
+                        .FLAG_INVOICE_METHOD = 7
+                    Else
+                        .FLAG_INVOICE_METHOD = 1
+                    End If
                 Case 2
                     Dim INT_MONTH As Integer
                     INT_MONTH = .DATE_INVOICE_BASE.Month
@@ -573,18 +550,34 @@
                         Case Else
                             .FLAG_INVOICE_METHOD = 4
                     End Select
+                Case 4
+                    .FLAG_INVOICE_METHOD = 9
                 Case 6
                     .FLAG_INVOICE_METHOD = 6
                 Case 12
-                    If .COUNT_INVOICE = 1 Then
-                        .FLAG_INVOICE_METHOD = 7
-                    End If
+                    'If .COUNT_INVOICE = 1 Then
+                    '    .FLAG_INVOICE_METHOD = 8
+                    'End If
+                    .FLAG_INVOICE_METHOD = 8
                 Case Else
                     .FLAG_INVOICE_METHOD = 0
             End Select
             .NUMBER_LIST_INVOICE = 1
 
-            .KINGAKU_CONTRACT = SRT_DATA.KEIYAKUKIN
+            Select Case .COUNT_INVOICE
+                Case 2
+                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                Case 3
+                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                Case 4
+                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                Case 6
+                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                Case 12
+                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                Case Else
+                    .KINGAKU_CONTRACT = SRT_DATA.KEIYAKUKIN
+            End Select
 
             If INT_INDEX_CHECK >= 0 Then
                 .NAME_MEMO = SRT_CHECK(INT_INDEX_CHECK).NAME_MEMO
