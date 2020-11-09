@@ -531,6 +531,10 @@
             Dim INT_KIKAN_SEIKYU As Integer
             INT_KIKAN_SEIKYU = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
             .COUNT_INVOICE = CInt(FUNC_MATH_FLOOR(INT_KIKAN_SEIKYU / .SPAN_INVOICE))
+            If .COUNT_INVOICE >= 0 Then
+                .COUNT_INVOICE = 1
+            End If
+
             If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
                 .SPAN_INVOICE = 1
             End If
