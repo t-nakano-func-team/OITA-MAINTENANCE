@@ -50,6 +50,7 @@
         Public DATE_INVOICE_TO As DateTime
         Public DATE_DEPOSIT_TO As DateTime
         Public DELETE_MAKE As Boolean
+        Public DATE_ACTIVE As DateTime
 
         Public DATE_DO_BATCH As DateTime
         Public FORM As Object
@@ -180,7 +181,7 @@
             Dim INT_INDEX As Integer
             INT_INDEX = SRT_TABLE.Length
             ReDim Preserve SRT_TABLE(INT_INDEX)
-            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i), SRT_ETC)
+            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i), SRT_ETC, SRT_CONDITIONS)
         Next
         Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
 
@@ -483,7 +484,7 @@
         Return INT_RET
     End Function
 
-    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO, ByRef SRT_CHECK() As SRT_ETC_CHECK) As SRT_TABLE_MNT_T_CONTRACT
+    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO, ByRef SRT_CHECK() As SRT_ETC_CHECK, ByRef SRT_CONDTIONS As SRT_BATCH_CONDITIONS) As SRT_TABLE_MNT_T_CONTRACT
         Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT
         With SRT_RET.KEY
             .NUMBER_CONTRACT = 0
@@ -648,7 +649,7 @@
             End If
 
             .FLAG_CONTINUE = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE.AUTO_CONTINUE
-            .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
+            .DATE_ACTIVE = SRT_CONDTIONS.DATE_ACTIVE
             .CODE_EDIT_STAFF = CST_CODE_EDIT_STAFF
             .DATE_EDIT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.UPDATEDATE)
         End With
