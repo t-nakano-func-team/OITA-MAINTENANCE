@@ -52,6 +52,7 @@
         End If
         DTP_DATE_INVOICE.Value = DAT_DATE_INVOICE
         Call SUB_REFRESH_DATE_DEPOSIT()
+        DTP_DATE_ACTIVE.Value = datSYSTEM_TOTAL_DATE_ACTIVE
     End Sub
 #End Region
 
@@ -106,6 +107,7 @@
             .DATE_INVOICE_TO = DTP_DATE_INVOICE.Value
             .DATE_DEPOSIT_TO = DTP_DATE_DEPOSIT.Value
             .DELETE_MAKE = CHK_DELETE_MAKE.Checked
+            .DATE_ACTIVE = DTP_DATE_ACTIVE.Value
 
             .DATE_DO_BATCH = System.DateTime.Today
             .FORM = Me

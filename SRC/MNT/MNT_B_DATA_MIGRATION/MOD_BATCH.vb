@@ -39,6 +39,8 @@
         NAME_OWNER
         KIND_SEIKYU
         NAME_MEMO
+        NAME_OPTION
+        SEIKYUSTR
     End Enum
 #End Region
 
@@ -48,6 +50,7 @@
         Public DATE_INVOICE_TO As DateTime
         Public DATE_DEPOSIT_TO As DateTime
         Public DELETE_MAKE As Boolean
+        Public DATE_ACTIVE As DateTime
 
         Public DATE_DO_BATCH As DateTime
         Public FORM As Object
@@ -87,6 +90,10 @@
         Public NAME_OWNER As String
         Public KIND_SEIKYU As String
         Public NAME_MEMO As String
+        Public NAME_OPTION As String
+        Public FLAG_CHANGE_KINGAKU_KEIYAKU As Boolean
+        Public KINGAKU_KEIYAKU As Long
+        Public SEIKYUSTR As Integer
     End Structure
 
     Private Structure SRT_ETC_CHECK
@@ -97,6 +104,9 @@
         Public SPAN_INVOICE As Integer
         Public NAME_MEMO As String
         Public FLAG_IKKATU As Integer
+        Public FLAG_CHANGE_KINGAKU_KEIYAKU As Boolean
+        Public KINGAKU_KEIYAKU As Long
+        Public SEIKYUSTR As Integer
     End Structure
 
 
@@ -171,7 +181,7 @@
             Dim INT_INDEX As Integer
             INT_INDEX = SRT_TABLE.Length
             ReDim Preserve SRT_TABLE(INT_INDEX)
-            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i), SRT_ETC)
+            SRT_TABLE(INT_INDEX) = FUNC_GET_TABLE_DATA(SRT_FILE_ENABLED(i), SRT_ETC, SRT_CONDITIONS)
         Next
         Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
 
@@ -345,6 +355,30 @@
                     .KIND_SEIKYU = CStr(STR_TEMP)
                     STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.NAME_MEMO)
                     .NAME_MEMO = CStr(STR_TEMP)
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.NAME_OPTION)
+                    .NAME_OPTION = CStr(STR_TEMP)
+
+                    If .NAME_OPTION = "" Then
+                        .FLAG_CHANGE_KINGAKU_KEIYAKU = False
+                        .KINGAKU_KEIYAKU = 0
+                    Else
+                        If IsNumeric(.NAME_OPTION) Then
+                            .FLAG_CHANGE_KINGAKU_KEIYAKU = True
+                            .KINGAKU_KEIYAKU = CLng(.NAME_OPTION)
+                        Else
+                            .FLAG_CHANGE_KINGAKU_KEIYAKU = False
+                            .KINGAKU_KEIYAKU = 0
+                            .KIND_SEIKYU = .NAME_OPTION
+                        End If
+                    End If
+
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.SEIKYUSTR)
+                    If IsNumeric(STR_TEMP) Then
+                        .SEIKYUSTR = CInt(STR_TEMP)
+                    Else
+                        .SEIKYUSTR = 0
+                    End If
+
                 Catch ex As Exception
                     Call FUNC_END_XLS()
                     Return False
@@ -386,6 +420,9 @@
             .SPAN_INVOICE = FUNC_GET_SPAN_SEIKYU(STR_TEMP)
             .FLAG_IKKATU = If(STR_TEMP = "一括", 1, 0)
             .NAME_MEMO = SRT_DATA.NAME_MEMO
+            .FLAG_CHANGE_KINGAKU_KEIYAKU = SRT_DATA.FLAG_CHANGE_KINGAKU_KEIYAKU
+            .KINGAKU_KEIYAKU = SRT_DATA.KINGAKU_KEIYAKU
+            .SEIKYUSTR = SRT_DATA.SEIKYUSTR
         End With
         Return True
     End Function
@@ -447,7 +484,7 @@
         Return INT_RET
     End Function
 
-    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO, ByRef SRT_CHECK() As SRT_ETC_CHECK) As SRT_TABLE_MNT_T_CONTRACT
+    Private Function FUNC_GET_TABLE_DATA(ByRef SRT_DATA As SRT_XLSX_INFO, ByRef SRT_CHECK() As SRT_ETC_CHECK, ByRef SRT_CONDTIONS As SRT_BATCH_CONDITIONS) As SRT_TABLE_MNT_T_CONTRACT
         Dim SRT_RET As SRT_TABLE_MNT_T_CONTRACT
         With SRT_RET.KEY
             .NUMBER_CONTRACT = 0
@@ -472,6 +509,11 @@
 
             Dim INT_SEIKYU_FROM As Integer
             INT_SEIKYU_FROM = FUNC_GET_SEIKYU_FROM(SRT_DATA)
+            If INT_INDEX_CHECK >= 0 Then
+                If SRT_CHECK(INT_INDEX_CHECK).SEIKYUSTR > 0 Then
+                    INT_SEIKYU_FROM = SRT_CHECK(INT_INDEX_CHECK).SEIKYUSTR
+                End If
+            End If
             Dim ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY
             ENM_KIND_FIX_DATE = FUNC_GET_MNT_M_OWNER_FLAG_INVOICE_FIXDAY(.CODE_OWNER, True)
             If ENM_KIND_FIX_DATE <= 0 Then
@@ -490,6 +532,10 @@
             Dim INT_KIKAN_SEIKYU As Integer
             INT_KIKAN_SEIKYU = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
             .COUNT_INVOICE = CInt(FUNC_MATH_FLOOR(INT_KIKAN_SEIKYU / .SPAN_INVOICE))
+            If .COUNT_INVOICE <= 0 Then
+                .COUNT_INVOICE = 1
+            End If
+
             If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
                 .SPAN_INVOICE = 1
             End If
@@ -564,20 +610,34 @@
             End Select
             .NUMBER_LIST_INVOICE = 1
 
-            Select Case .COUNT_INVOICE
-                Case 2
-                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
-                Case 3
-                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
-                Case 4
-                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
-                Case 6
-                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
-                Case 12
-                    .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
-                Case Else
-                    .KINGAKU_CONTRACT = SRT_DATA.KEIYAKUKIN
-            End Select
+            Dim BLN_CHANGE_KEIYAKUKIN As Boolean
+            Dim LNG_CHANGE_KEIYAKUKIN As Long
+            If INT_INDEX_CHECK >= 0 Then
+                BLN_CHANGE_KEIYAKUKIN = SRT_CHECK(INT_INDEX_CHECK).FLAG_CHANGE_KINGAKU_KEIYAKU
+                LNG_CHANGE_KEIYAKUKIN = SRT_CHECK(INT_INDEX_CHECK).KINGAKU_KEIYAKU
+            Else
+                BLN_CHANGE_KEIYAKUKIN = False
+                LNG_CHANGE_KEIYAKUKIN = 0
+            End If
+
+            If BLN_CHANGE_KEIYAKUKIN Then
+                .KINGAKU_CONTRACT = LNG_CHANGE_KEIYAKUKIN
+            Else
+                Select Case .COUNT_INVOICE
+                    Case 2
+                        .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                    Case 3
+                        .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                    Case 4
+                        .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                    Case 6
+                        .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                    Case 12
+                        .KINGAKU_CONTRACT = CLng(SRT_DATA.KEIYAKUKIN / .COUNT_INVOICE)
+                    Case Else
+                        .KINGAKU_CONTRACT = SRT_DATA.KEIYAKUKIN
+                End Select
+            End If
 
             If INT_INDEX_CHECK >= 0 Then
                 .NAME_MEMO = SRT_CHECK(INT_INDEX_CHECK).NAME_MEMO
@@ -589,7 +649,7 @@
             End If
 
             .FLAG_CONTINUE = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTINUE.AUTO_CONTINUE
-            .DATE_ACTIVE = datSYSTEM_TOTAL_DATE_ACTIVE
+            .DATE_ACTIVE = SRT_CONDTIONS.DATE_ACTIVE
             .CODE_EDIT_STAFF = CST_CODE_EDIT_STAFF
             .DATE_EDIT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.UPDATEDATE)
         End With

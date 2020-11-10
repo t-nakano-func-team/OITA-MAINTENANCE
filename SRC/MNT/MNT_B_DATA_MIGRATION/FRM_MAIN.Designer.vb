@@ -54,6 +54,9 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_BATCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_BATCH_GUIDE = New System.Windows.Forms.Label()
         Me.OFD_FILE_OPEN = New System.Windows.Forms.OpenFileDialog()
+        Me.PNL_DATE_ACTIVE = New System.Windows.Forms.Panel()
+        Me.DTP_DATE_ACTIVE = New System.Windows.Forms.DateTimePicker()
+        Me.LBL_DATE_ACTIVE_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -68,6 +71,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_DEPOSIT.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_COUNT_BATCH.SuspendLayout()
+        Me.PNL_DATE_ACTIVE.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -281,6 +285,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_ACTIVE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.Panel1)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_DEPOSIT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_INVOICE)
@@ -437,6 +442,37 @@ Partial Class FRM_MAIN
         Me.OFD_FILE_OPEN.DefaultExt = "CSV"
         Me.OFD_FILE_OPEN.Filter = "Excelブック(*.xlsx)|*.xlsx"
         '
+        'PNL_DATE_ACTIVE
+        '
+        Me.PNL_DATE_ACTIVE.Controls.Add(Me.DTP_DATE_ACTIVE)
+        Me.PNL_DATE_ACTIVE.Controls.Add(Me.LBL_DATE_ACTIVE_GUIDE)
+        Me.PNL_DATE_ACTIVE.Location = New System.Drawing.Point(5, 145)
+        Me.PNL_DATE_ACTIVE.Name = "PNL_DATE_ACTIVE"
+        Me.PNL_DATE_ACTIVE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_DATE_ACTIVE.TabIndex = 14
+        '
+        'DTP_DATE_ACTIVE
+        '
+        Me.DTP_DATE_ACTIVE.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.DTP_DATE_ACTIVE.Location = New System.Drawing.Point(80, 1)
+        Me.DTP_DATE_ACTIVE.Name = "DTP_DATE_ACTIVE"
+        Me.DTP_DATE_ACTIVE.Size = New System.Drawing.Size(150, 25)
+        Me.DTP_DATE_ACTIVE.TabIndex = 1
+        Me.DTP_DATE_ACTIVE.Tag = "Clear"
+        '
+        'LBL_DATE_ACTIVE_GUIDE
+        '
+        Me.LBL_DATE_ACTIVE_GUIDE.AutoEllipsis = True
+        Me.LBL_DATE_ACTIVE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_DATE_ACTIVE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_DATE_ACTIVE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_DATE_ACTIVE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_DATE_ACTIVE_GUIDE.Name = "LBL_DATE_ACTIVE_GUIDE"
+        Me.LBL_DATE_ACTIVE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_DATE_ACTIVE_GUIDE.TabIndex = 0
+        Me.LBL_DATE_ACTIVE_GUIDE.Text = "処理日"
+        Me.LBL_DATE_ACTIVE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -470,6 +506,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_COUNT_BATCH.ResumeLayout(False)
+        Me.PNL_DATE_ACTIVE.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -506,4 +543,7 @@ Partial Class FRM_MAIN
     Friend WithEvents Panel1 As Panel
     Friend WithEvents CHK_DELETE_MAKE As CheckBox
     Friend WithEvents LBL_DELETE_MAKE_GUIDE As Label
+    Friend WithEvents PNL_DATE_ACTIVE As Panel
+    Friend WithEvents DTP_DATE_ACTIVE As DateTimePicker
+    Friend WithEvents LBL_DATE_ACTIVE_GUIDE As Label
 End Class
