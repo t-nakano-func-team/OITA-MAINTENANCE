@@ -10,6 +10,7 @@
         DO_CLEAR
         DO_END = 81
         DO_SHOW_INVOICE_DONE
+        DO_SHOW_INVOICE_CHECK
         DO_SHOW_SETTING
         DO_SHOW_COMMANDLINE
         DO_SHOW_CONFIG_SETTINGS
@@ -121,6 +122,8 @@
                 Call SUB_END()
             Case ENM_MY_EXEC_DO.DO_SHOW_INVOICE_DONE
                 Call SUB_SHOW_INVOICE_DOONE()
+            Case ENM_MY_EXEC_DO.DO_SHOW_INVOICE_CHECK
+                Call SUB_SHOW_INVOICE_CHECK()
             Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
                 Call SUB_SHOW_SETTING()
             Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
@@ -442,6 +445,33 @@
         End If
 
         Call SUB_CLEAR()
+    End Sub
+
+    Private Sub SUB_SHOW_INVOICE_CHECK()
+
+        Dim BLN_SHOW As Boolean
+        Select Case ENM_WINDOW_MODE_CURRENT
+            Case ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_INVOICE, ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE_NORMAL
+                BLN_SHOW = True
+            Case Else
+                BLN_SHOW = False
+        End Select
+
+        If Not BLN_SHOW Then
+            Exit Sub
+        End If
+
+        Dim FRM_SHOW As FRM_SUB_02
+        FRM_SHOW = New FRM_SUB_02
+        FRM_SHOW.Font = New System.Drawing.Font(FRM_SHOW.Font.Name, Me.Font.Size)
+        FRM_SHOW.Text = Me.Text & " " & "既請求確認"
+        FRM_SHOW.NUMBER_CONTRACT = CInt(TXT_NUMBER_CONTRACT.Text)
+        FRM_SHOW.SERIAL_CONTRACT = CInt(TXT_SERIAL_CONTRACT.Text)
+
+        Call FRM_SHOW.ShowDialog()
+
+        Call FRM_SHOW.Dispose()
+        FRM_SHOW = Nothing
     End Sub
 
     Private Sub SUB_SHOW_SETTING()
@@ -1101,6 +1131,13 @@
 
     Private Sub CMB_FLAG_WORK_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CMB_FLAG_WORK.SelectedIndexChanged
         Call SUB_REFRESH_CODE_MAINTENANCE()
+    End Sub
+#End Region
+
+#Region "イベント-ダブルクリック"
+
+    Private Sub LBL_COUNT_INVOICE_ALREADY_DoubleClick(sender As Object, e As EventArgs) Handles LBL_COUNT_INVOICE_ALREADY.DoubleClick
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_INVOICE_CHECK)
     End Sub
 #End Region
 
