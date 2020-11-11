@@ -416,8 +416,8 @@
             .GENBACD = FUNC_SPLIT_STR(STR_TEMP, 1, "-")
             .SAGYOCD = FUNC_SPLIT_STR(STR_TEMP, 2, "-")
 
-            If .OWNERCD = 15012 Then
-                .OWNERCD = 15012
+            If .OWNERCD = 2066 Then
+                .OWNERCD = 2066
             End If
 
             STR_TEMP = SRT_DATA.KIND_SEIKYU
@@ -504,8 +504,8 @@
             .DATE_CONTRACT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.KEIYAKUBI)
             .CODE_OWNER = SRT_DATA.OWNERCD
 
-            If .CODE_OWNER = 15012 Then
-                .CODE_OWNER = 15012
+            If .CODE_OWNER = 2066 Then
+                .CODE_OWNER = 2066
             End If
             .CODE_SECTION = SRT_DATA.KEIBUSYOCD
             .CODE_MAINTENANCE = SRT_DATA.SAGYOCD
@@ -518,11 +518,7 @@
 
             Dim INT_SEIKYU_FROM As Integer
             INT_SEIKYU_FROM = FUNC_GET_SEIKYU_FROM(SRT_DATA)
-            If INT_INDEX_CHECK >= 0 Then
-                If SRT_CHECK(INT_INDEX_CHECK).SEIKYUSTR > 0 Then
-                    INT_SEIKYU_FROM = SRT_CHECK(INT_INDEX_CHECK).SEIKYUSTR
-                End If
-            End If
+
             Dim ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY
             ENM_KIND_FIX_DATE = FUNC_GET_MNT_M_OWNER_FLAG_INVOICE_FIXDAY(.CODE_OWNER, True)
             If ENM_KIND_FIX_DATE <= 0 Then
@@ -545,9 +541,9 @@
                 .COUNT_INVOICE = 1
             End If
 
-            If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
-                .SPAN_INVOICE = 1
-            End If
+            'If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
+            '    .SPAN_INVOICE = 1
+            'End If
 
             If .SPAN_INVOICE = 13 And INT_KIKAN_SEIKYU = 12 Then
                 .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(SRT_DATA.SEIKYUENDTUKI, ENM_KIND_FIX_DATE)
@@ -579,6 +575,13 @@
             If .SPAN_INVOICE = 6 And INT_KIKAN_SEIKYU = 12 Then
                 INT_SEIKYU_FROM = FUNC_ADD_MONTH_YYYYMM(SRT_DATA.SEIKYUSTRTUKI, 5)
                 .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+            End If
+
+            If INT_INDEX_CHECK >= 0 Then
+                If SRT_CHECK(INT_INDEX_CHECK).SEIKYUSTR > 0 Then
+                    INT_SEIKYU_FROM = SRT_CHECK(INT_INDEX_CHECK).SEIKYUSTR
+                    .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_FROM, ENM_KIND_FIX_DATE)
+                End If
             End If
 
             Select Case .SPAN_INVOICE
@@ -651,7 +654,7 @@
             If INT_INDEX_CHECK >= 0 Then
                 .NAME_MEMO = SRT_CHECK(INT_INDEX_CHECK).NAME_MEMO
             Else
-                .NAME_MEMO = CStr(SRT_DATA.KEIYAKUNO)
+                .NAME_MEMO = "旧契約" & ":" & CStr(SRT_DATA.KEIYAKUNO)
             End If
             If .NAME_MEMO.Length > 40 Then
                 .NAME_MEMO = .NAME_MEMO.Substring(0, 40)

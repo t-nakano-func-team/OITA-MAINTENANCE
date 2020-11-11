@@ -26,6 +26,7 @@
         Public CODE_OWNER_FROM As Integer
         Public CODE_OWNER_TO As Integer
         Public NAME_OWNER As String
+        Public NAME_MEMO As String
     End Structure
 
     Public Structure SRT_PRINT_DATA '印刷データ
@@ -266,6 +267,10 @@
 
             If .NAME_OWNER <> "" Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_OWNER, "SUB_01.NAME_OWNER")
+            End If
+
+            If .NAME_MEMO <> "" Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_MEMO, "MAIN.NAME_MEMO")
             End If
         End With
 
