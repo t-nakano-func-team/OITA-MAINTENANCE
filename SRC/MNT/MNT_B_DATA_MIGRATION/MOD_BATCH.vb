@@ -558,9 +558,9 @@
                 .COUNT_INVOICE = 1
             End If
 
-            'If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
-            '    .SPAN_INVOICE = 1
-            'End If
+            If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
+                .SPAN_INVOICE = 1
+            End If
 
             If .SPAN_INVOICE = 13 And INT_KIKAN_SEIKYU = 12 Then
                 .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_END, ENM_KIND_FIX_DATE)

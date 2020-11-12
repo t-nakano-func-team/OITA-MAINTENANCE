@@ -92,12 +92,6 @@
     <Compile Include="FRM_SUB_01.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FRM_SUB_02.Designer.vb">
-      <DependentUpon>FRM_SUB_02.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FRM_SUB_02.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="MOD_MAIN.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -122,9 +116,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FRM_SUB_01.resx">
       <DependentUpon>FRM_SUB_01.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FRM_SUB_02.resx">
-      <DependentUpon>FRM_SUB_02.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
