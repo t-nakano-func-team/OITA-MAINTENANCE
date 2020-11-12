@@ -218,6 +218,15 @@
     End Function
 
     Private Function FUNC_GET_DATE_CONTRACT(ByVal DAT_DATE_CONTRACT As DateTime, ByVal DAT_DATE_MAINTENANCE_START As DateTime, ByVal DAT_DATE_MAINTENANCE_END As DateTime) As DateTime
+        Dim DAT_RET As DateTime
+
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = FUNC_CHECK_NORMAL_DATE(DAT_DATE_MAINTENANCE_START, DAT_DATE_MAINTENANCE_END)
+        If BLN_CHECK Then
+            DAT_RET = DAT_DATE_CONTRACT.AddYears(1)
+            Return DAT_RET
+        End If
+
         Dim INT_YYYYMM_MAINTENANCE_START As Integer
         INT_YYYYMM_MAINTENANCE_START = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_MAINTENANCE_START)
         Dim INT_YYYYMM_MAINTENANCE_END As Integer
@@ -226,7 +235,7 @@
         Dim INT_DEF As Integer
         INT_DEF = FUNC_GET_MONTH_FROM_TO(INT_YYYYMM_MAINTENANCE_START, INT_YYYYMM_MAINTENANCE_END) + 1
 
-        Dim DAT_RET As DateTime
+
         If INT_DEF > 0 Then
             DAT_RET = FUNC_SYSTEM_INDVIDUAL_ADD_MONTH(DAT_DATE_CONTRACT, INT_DEF)
             Return DAT_RET
@@ -236,7 +245,41 @@
         Return DAT_RET
     End Function
 
+    Private Function FUNC_CHECK_NORMAL_DATE(ByVal DAT_DATE_STRAT As DateTime, ByVal DAT_DATE_END As DateTime)
+        Dim TIS_ONE As TimeSpan
+        TIS_ONE = New TimeSpan
+        TIS_ONE = DAT_DATE_END - DAT_DATE_STRAT
+
+        Dim INT_DAY As Integer
+        INT_DAY = TIS_ONE.Days
+
+        Select Case INT_DAY
+            Case 365, 366
+            Case Else
+                Return False
+        End Select
+
+        If (DAT_DATE_STRAT.Day = 1) Then
+            Return False
+        End If
+
+        If (FUNC_CHECK_DATE_LASTMONTH(DAT_DATE_END)) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
     Private Function FUNC_GET_DATE_MAINTENANCE_START(ByVal DAT_DATE_MAINTENANCE_START As DateTime, ByVal DAT_DATE_MAINTENANCE_END As DateTime) As DateTime
+        Dim DAT_RET As DateTime
+
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = FUNC_CHECK_NORMAL_DATE(DAT_DATE_MAINTENANCE_START, DAT_DATE_MAINTENANCE_END)
+        If BLN_CHECK Then
+            DAT_RET = DAT_DATE_MAINTENANCE_START.AddYears(1)
+            Return DAT_RET
+        End If
+
         Dim INT_YYYYMM_MAINTENANCE_START As Integer
         INT_YYYYMM_MAINTENANCE_START = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_MAINTENANCE_START)
         Dim INT_YYYYMM_MAINTENANCE_END As Integer
@@ -245,7 +288,6 @@
         Dim INT_DEF As Integer
         INT_DEF = FUNC_GET_MONTH_FROM_TO(INT_YYYYMM_MAINTENANCE_START, INT_YYYYMM_MAINTENANCE_END) + 1
 
-        Dim DAT_RET As DateTime
         If INT_DEF <= 0 Then
             DAT_RET = FUNC_SYSTEM_INDVIDUAL_ADD_MONTH(DAT_DATE_MAINTENANCE_START, 1)
             Return DAT_RET
@@ -262,6 +304,15 @@
     End Function
 
     Private Function FUNC_GET_DATE_MAINTENANCE_END(ByVal DAT_DATE_MAINTENANCE_START As DateTime, ByVal DAT_DATE_MAINTENANCE_END As DateTime) As DateTime
+        Dim DAT_RET As DateTime
+
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = FUNC_CHECK_NORMAL_DATE(DAT_DATE_MAINTENANCE_START, DAT_DATE_MAINTENANCE_END)
+        If BLN_CHECK Then
+            DAT_RET = DAT_DATE_MAINTENANCE_END.AddYears(1)
+            Return DAT_RET
+        End If
+
         Dim INT_YYYYMM_MAINTENANCE_START As Integer
         INT_YYYYMM_MAINTENANCE_START = FUNC_GET_YYYYMM_FROM_DATE(DAT_DATE_MAINTENANCE_START)
         Dim INT_YYYYMM_MAINTENANCE_END As Integer
@@ -270,7 +321,6 @@
         Dim INT_DEF As Integer
         INT_DEF = FUNC_GET_MONTH_FROM_TO(INT_YYYYMM_MAINTENANCE_START, INT_YYYYMM_MAINTENANCE_END) + 1
 
-        Dim DAT_RET As DateTime
         If INT_DEF <= 0 Then
             DAT_RET = FUNC_SYSTEM_INDVIDUAL_ADD_MONTH(DAT_DATE_MAINTENANCE_END, 1)
             Return DAT_RET
