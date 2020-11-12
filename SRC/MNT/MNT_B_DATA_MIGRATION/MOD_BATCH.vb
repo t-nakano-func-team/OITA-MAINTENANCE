@@ -536,7 +536,7 @@
                 .COUNT_INVOICE = 1
             End If
 
-            If .SPAN_INVOICE >= 12 And .COUNT_INVOICE = 1 Then
+            If .SPAN_INVOICE > 12 And .COUNT_INVOICE = 1 Then
                 .SPAN_INVOICE = 1
             End If
 
