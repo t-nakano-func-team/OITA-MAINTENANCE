@@ -416,8 +416,8 @@
             .GENBACD = FUNC_SPLIT_STR(STR_TEMP, 1, "-")
             .SAGYOCD = FUNC_SPLIT_STR(STR_TEMP, 2, "-")
 
-            If .OWNERCD = 2066 Then
-                .OWNERCD = 2066
+            If .OWNERCD = 42031 Then
+                .OWNERCD = 42031
             End If
 
             STR_TEMP = SRT_DATA.KIND_SEIKYU
@@ -504,8 +504,8 @@
             .DATE_CONTRACT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.KEIYAKUBI)
             .CODE_OWNER = SRT_DATA.OWNERCD
 
-            If .CODE_OWNER = 2066 Then
-                .CODE_OWNER = 2066
+            If .CODE_OWNER = 42031 Then
+                .CODE_OWNER = 42031
             End If
             .CODE_SECTION = SRT_DATA.KEIBUSYOCD
             .CODE_MAINTENANCE = SRT_DATA.SAGYOCD
