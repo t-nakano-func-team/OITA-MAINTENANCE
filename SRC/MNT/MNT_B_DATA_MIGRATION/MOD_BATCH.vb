@@ -41,6 +41,7 @@
         NAME_MEMO
         NAME_OPTION
         SEIKYUSTR
+        SEIKYUEND
     End Enum
 #End Region
 
@@ -94,6 +95,7 @@
         Public FLAG_CHANGE_KINGAKU_KEIYAKU As Boolean
         Public KINGAKU_KEIYAKU As Long
         Public SEIKYUSTR As Integer
+        Public SEIKYUEND As Integer
     End Structure
 
     Private Structure SRT_ETC_CHECK
@@ -107,6 +109,7 @@
         Public FLAG_CHANGE_KINGAKU_KEIYAKU As Boolean
         Public KINGAKU_KEIYAKU As Long
         Public SEIKYUSTR As Integer
+        Public SEIKYUEND As Integer
     End Structure
 
 
@@ -379,6 +382,12 @@
                         .SEIKYUSTR = 0
                     End If
 
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.SEIKYUEND)
+                    If IsNumeric(STR_TEMP) Then
+                        .SEIKYUEND = CInt(STR_TEMP)
+                    Else
+                        .SEIKYUEND = 0
+                    End If
                 Catch ex As Exception
                     Call FUNC_END_XLS()
                     Return False
@@ -427,6 +436,7 @@
             .FLAG_CHANGE_KINGAKU_KEIYAKU = SRT_DATA.FLAG_CHANGE_KINGAKU_KEIYAKU
             .KINGAKU_KEIYAKU = SRT_DATA.KINGAKU_KEIYAKU
             .SEIKYUSTR = SRT_DATA.SEIKYUSTR
+            .SEIKYUEND = SRT_DATA.SEIKYUEND
         End With
         Return True
     End Function
@@ -504,8 +514,8 @@
             .DATE_CONTRACT = FUNC_CONVERT_NUMERIC_DATE_TO_DATETIME(SRT_DATA.KEIYAKUBI)
             .CODE_OWNER = SRT_DATA.OWNERCD
 
-            If .CODE_OWNER = 42031 Then
-                .CODE_OWNER = 42031
+            If .CODE_OWNER = 5117 Then
+                .CODE_OWNER = 5117
             End If
             .CODE_SECTION = SRT_DATA.KEIBUSYOCD
             .CODE_MAINTENANCE = SRT_DATA.SAGYOCD
@@ -523,6 +533,9 @@
             Dim INT_SEIKYU_FROM As Integer
             INT_SEIKYU_FROM = FUNC_GET_SEIKYU_FROM(SRT_DATA)
 
+            Dim INT_SEIKYU_END As Integer
+            INT_SEIKYU_END = SRT_DATA.SEIKYUENDTUKI
+
             Dim ENM_KIND_FIX_DATE As ENM_SYSTEM_INDIVIDUAL_FLAG_INVOICE_FIXDAY
             ENM_KIND_FIX_DATE = FUNC_GET_MNT_M_OWNER_FLAG_INVOICE_FIXDAY(.CODE_OWNER, True)
             If ENM_KIND_FIX_DATE <= 0 Then
@@ -539,8 +552,8 @@
                 INT_IKKATU = 0
             End If
             Dim INT_KIKAN_SEIKYU As Integer
-            INT_KIKAN_SEIKYU = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, SRT_DATA.SEIKYUENDTUKI) + 1
-            .COUNT_INVOICE = CInt(FUNC_MATH_FLOOR(INT_KIKAN_SEIKYU / .SPAN_INVOICE))
+            INT_KIKAN_SEIKYU = FUNC_GET_MONTH_FROM_TO(INT_SEIKYU_FROM, INT_SEIKYU_END) + 1
+            .COUNT_INVOICE = CInt(FUNC_MATH_CEILING(INT_KIKAN_SEIKYU / .SPAN_INVOICE))
             If .COUNT_INVOICE <= 0 Then
                 .COUNT_INVOICE = 1
             End If
@@ -550,7 +563,7 @@
             'End If
 
             If .SPAN_INVOICE = 13 And INT_KIKAN_SEIKYU = 12 Then
-                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(SRT_DATA.SEIKYUENDTUKI, ENM_KIND_FIX_DATE)
+                .DATE_INVOICE_BASE = FUNC_INVOICE_BASE(INT_SEIKYU_END, ENM_KIND_FIX_DATE)
                 .SPAN_INVOICE = 12
                 .COUNT_INVOICE = 1
             End If
