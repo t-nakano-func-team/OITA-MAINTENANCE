@@ -64,6 +64,9 @@ Partial Class FRM_MAIN
         Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
         Me.BTN_END = New System.Windows.Forms.Button()
+        Me.PNL_NAME_MEMO = New System.Windows.Forms.Panel()
+        Me.TXT_NAME_MEMO = New System.Windows.Forms.TextBox()
+        Me.LBL_NAME_MEMO_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -77,6 +80,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_CONTRACT.SuspendLayout()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
+        Me.PNL_NAME_MEMO.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -196,6 +200,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_NAME_MEMO)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_NAME_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_CONTRACT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_OWNER)
@@ -576,6 +581,38 @@ Partial Class FRM_MAIN
         Me.BTN_END.Text = "終了"
         Me.BTN_END.UseVisualStyleBackColor = False
         '
+        'PNL_NAME_MEMO
+        '
+        Me.PNL_NAME_MEMO.Controls.Add(Me.TXT_NAME_MEMO)
+        Me.PNL_NAME_MEMO.Controls.Add(Me.LBL_NAME_MEMO_GUIDE)
+        Me.PNL_NAME_MEMO.Location = New System.Drawing.Point(5, 180)
+        Me.PNL_NAME_MEMO.Name = "PNL_NAME_MEMO"
+        Me.PNL_NAME_MEMO.Size = New System.Drawing.Size(420, 30)
+        Me.PNL_NAME_MEMO.TabIndex = 6
+        '
+        'TXT_NAME_MEMO
+        '
+        Me.TXT_NAME_MEMO.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.TXT_NAME_MEMO.Location = New System.Drawing.Point(90, 1)
+        Me.TXT_NAME_MEMO.MaxLength = 40
+        Me.TXT_NAME_MEMO.Name = "TXT_NAME_MEMO"
+        Me.TXT_NAME_MEMO.Size = New System.Drawing.Size(320, 25)
+        Me.TXT_NAME_MEMO.TabIndex = 1
+        Me.TXT_NAME_MEMO.Tag = "Clear,Check,Char"
+        '
+        'LBL_NAME_MEMO_GUIDE
+        '
+        Me.LBL_NAME_MEMO_GUIDE.AutoEllipsis = True
+        Me.LBL_NAME_MEMO_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_NAME_MEMO_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_NAME_MEMO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_NAME_MEMO_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_NAME_MEMO_GUIDE.Name = "LBL_NAME_MEMO_GUIDE"
+        Me.LBL_NAME_MEMO_GUIDE.Size = New System.Drawing.Size(89, 25)
+        Me.LBL_NAME_MEMO_GUIDE.TabIndex = 0
+        Me.LBL_NAME_MEMO_GUIDE.Text = "備考"
+        Me.LBL_NAME_MEMO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -608,6 +645,8 @@ Partial Class FRM_MAIN
         Me.GRP_FOOT.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.ResumeLayout(False)
         Me.pnlFUNCTION_GROUP.PerformLayout()
+        Me.PNL_NAME_MEMO.ResumeLayout(False)
+        Me.PNL_NAME_MEMO.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -654,4 +693,7 @@ Partial Class FRM_MAIN
     Friend WithEvents TXT_NAME_OWNER As TextBox
     Friend WithEvents LBL_NAME_OWNER_GUIDE As Label
     Friend WithEvents BTN_PUT_FILE As Button
+    Friend WithEvents PNL_NAME_MEMO As Panel
+    Friend WithEvents TXT_NAME_MEMO As TextBox
+    Friend WithEvents LBL_NAME_MEMO_GUIDE As Label
 End Class
