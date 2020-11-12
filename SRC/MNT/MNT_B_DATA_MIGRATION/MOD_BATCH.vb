@@ -509,6 +509,10 @@
             End If
             .CODE_SECTION = SRT_DATA.KEIBUSYOCD
             .CODE_MAINTENANCE = SRT_DATA.SAGYOCD
+            If .CODE_MAINTENANCE >= 1000 Then
+                .CODE_MAINTENANCE = 900
+            End If
+
             .NAME_CONTRACT = FUNC_GET_NAME_CONTRACT(SRT_DATA)
             If .NAME_CONTRACT.Length > 40 Then
                 .NAME_CONTRACT = .NAME_CONTRACT.Substring(0, 40)
