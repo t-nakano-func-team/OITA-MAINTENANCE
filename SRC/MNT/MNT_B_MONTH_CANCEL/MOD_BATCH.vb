@@ -108,7 +108,7 @@
                 Dim DAT_DATE_MONTH_FIRST As DateTime
                 DAT_DATE_MONTH_FIRST = FUNC_GET_DATE_FROM_YEARMONTH(INT_YYYYNN_B_MONTH_CANCEL)
                 If Not (DAT_DATE_MONTH_FIRST <= DAT_DATE_INVOICE And DAT_DATE_INVOICE <= DAT_DATE_MONTH_LAST) Then '対象月次期間が最終請求日でない場合は
-                    Exit For '対象外
+                    Continue For  '対象外
                 End If
 
             End With
