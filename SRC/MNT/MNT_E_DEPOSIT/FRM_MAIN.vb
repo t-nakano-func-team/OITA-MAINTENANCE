@@ -104,6 +104,8 @@
         Public CODE_OWNER_TO As Integer
         Public NAME_OWNER As String
         Public FLAG_DEPOSIT_DONE As Integer
+        Public CHECK_KINGAKU_INVOICE As Boolean
+        Public KINGAKU_INVOICE As Long
     End Structure
 #End Region
 
@@ -678,6 +680,13 @@
             .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
             .NAME_OWNER = TXT_NAME_OWNER.Text
             .FLAG_DEPOSIT_DONE = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_DEPOSIT_DONE)
+            If IsNumeric(TXT_KINGAKU_INVOICE.Text) Then
+                .CHECK_KINGAKU_INVOICE = True
+                .KINGAKU_INVOICE = CLng(TXT_KINGAKU_INVOICE.Text)
+            Else
+                .CHECK_KINGAKU_INVOICE = False
+                .KINGAKU_INVOICE = 0
+            End If
         End With
 
         Return SRT_RET
@@ -703,6 +712,11 @@
             If .NAME_OWNER <> "" Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_STR_LIKE(.NAME_OWNER, "NAME_OWNER")
             End If
+
+            If .CHECK_KINGAKU_INVOICE Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.KINGAKU_INVOICE, "(KINGAKU_INVOICE_DETAIL + KINGAKU_INVOICE_VAT)", "=")
+            End If
+
         End With
 
         Return STR_WHERE

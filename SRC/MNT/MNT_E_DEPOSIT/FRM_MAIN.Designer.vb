@@ -22,7 +22,7 @@ Partial Class FRM_MAIN
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRP_HEAD = New System.Windows.Forms.GroupBox()
         Me.PNL_INFO_GUIDE = New System.Windows.Forms.Panel()
         Me.PNL_NAME_USER_HEAD = New System.Windows.Forms.Panel()
@@ -37,6 +37,9 @@ Partial Class FRM_MAIN
         Me.LBL_BATCH_PROGRESS = New System.Windows.Forms.Label()
         Me.DGV_VIEW_DATA = New System.Windows.Forms.DataGridView()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_KINGAKU_INVOICE = New System.Windows.Forms.Panel()
+        Me.TXT_KINGAKU_INVOICE = New System.Windows.Forms.TextBox()
+        Me.LBL_KINGAKU_INVOICE_GUIDE = New System.Windows.Forms.Label()
         Me.PNL_FLAG_DEPOSIT_DONE = New System.Windows.Forms.Panel()
         Me.CMB_FLAG_DEPOSIT_DONE = New System.Windows.Forms.ComboBox()
         Me.LBL_FLAG_DEPOSIT_DONE_GUIDE = New System.Windows.Forms.Label()
@@ -79,6 +82,7 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.SuspendLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_KINGAKU_INVOICE.SuspendLayout()
         Me.PNL_FLAG_DEPOSIT_DONE.SuspendLayout()
         Me.PNL_NAME_OWNER.SuspendLayout()
         Me.PNL_FLAG_CONTRACT.SuspendLayout()
@@ -244,14 +248,14 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_VIEW_DATA.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(118, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 135)
         Me.DGV_VIEW_DATA.MultiSelect = False
@@ -277,6 +281,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KINGAKU_INVOICE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_DEPOSIT_DONE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_NAME_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_CONTRACT)
@@ -288,6 +293,39 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 110)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
+        'PNL_KINGAKU_INVOICE
+        '
+        Me.PNL_KINGAKU_INVOICE.Controls.Add(Me.TXT_KINGAKU_INVOICE)
+        Me.PNL_KINGAKU_INVOICE.Controls.Add(Me.LBL_KINGAKU_INVOICE_GUIDE)
+        Me.PNL_KINGAKU_INVOICE.Location = New System.Drawing.Point(495, 40)
+        Me.PNL_KINGAKU_INVOICE.Name = "PNL_KINGAKU_INVOICE"
+        Me.PNL_KINGAKU_INVOICE.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_KINGAKU_INVOICE.TabIndex = 3
+        '
+        'TXT_KINGAKU_INVOICE
+        '
+        Me.TXT_KINGAKU_INVOICE.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_KINGAKU_INVOICE.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_KINGAKU_INVOICE.MaxLength = 9
+        Me.TXT_KINGAKU_INVOICE.Name = "TXT_KINGAKU_INVOICE"
+        Me.TXT_KINGAKU_INVOICE.Size = New System.Drawing.Size(150, 25)
+        Me.TXT_KINGAKU_INVOICE.TabIndex = 4
+        Me.TXT_KINGAKU_INVOICE.Tag = "Clear,Numeric,Format=#@##0,Check,Plus"
+        Me.TXT_KINGAKU_INVOICE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LBL_KINGAKU_INVOICE_GUIDE
+        '
+        Me.LBL_KINGAKU_INVOICE_GUIDE.AutoEllipsis = True
+        Me.LBL_KINGAKU_INVOICE_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_KINGAKU_INVOICE_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_KINGAKU_INVOICE_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_KINGAKU_INVOICE_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_KINGAKU_INVOICE_GUIDE.Name = "LBL_KINGAKU_INVOICE_GUIDE"
+        Me.LBL_KINGAKU_INVOICE_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_KINGAKU_INVOICE_GUIDE.TabIndex = 3
+        Me.LBL_KINGAKU_INVOICE_GUIDE.Text = "請求金額"
+        Me.LBL_KINGAKU_INVOICE_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'PNL_FLAG_DEPOSIT_DONE
         '
         Me.PNL_FLAG_DEPOSIT_DONE.Controls.Add(Me.CMB_FLAG_DEPOSIT_DONE)
@@ -295,7 +333,7 @@ Partial Class FRM_MAIN
         Me.PNL_FLAG_DEPOSIT_DONE.Location = New System.Drawing.Point(250, 75)
         Me.PNL_FLAG_DEPOSIT_DONE.Name = "PNL_FLAG_DEPOSIT_DONE"
         Me.PNL_FLAG_DEPOSIT_DONE.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 4
+        Me.PNL_FLAG_DEPOSIT_DONE.TabIndex = 5
         '
         'CMB_FLAG_DEPOSIT_DONE
         '
@@ -327,7 +365,7 @@ Partial Class FRM_MAIN
         Me.PNL_NAME_OWNER.Location = New System.Drawing.Point(5, 75)
         Me.PNL_NAME_OWNER.Name = "PNL_NAME_OWNER"
         Me.PNL_NAME_OWNER.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_NAME_OWNER.TabIndex = 3
+        Me.PNL_NAME_OWNER.TabIndex = 4
         '
         'TXT_NAME_OWNER
         '
@@ -396,14 +434,14 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_SHINTO_PARENT.Controls.Add(Me.TXT_CODE_OWNER_FROM)
         Me.PNL_CODE_SHINTO_PARENT.Location = New System.Drawing.Point(5, 40)
         Me.PNL_CODE_SHINTO_PARENT.Name = "PNL_CODE_SHINTO_PARENT"
-        Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(730, 30)
+        Me.PNL_CODE_SHINTO_PARENT.Size = New System.Drawing.Size(485, 30)
         Me.PNL_CODE_SHINTO_PARENT.TabIndex = 2
         '
         'LBL_CODE_OWNER_FROM_TO_GUIDE
         '
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE.AutoEllipsis = True
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
-        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Location = New System.Drawing.Point(400, 1)
+        Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Location = New System.Drawing.Point(280, 1)
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Name = "LBL_CODE_OWNER_FROM_TO_GUIDE"
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
         Me.LBL_CODE_OWNER_FROM_TO_GUIDE.TabIndex = 4
@@ -414,7 +452,7 @@ Partial Class FRM_MAIN
         '
         Me.BTN_CODE_OWNER_TO_SEARCH.BackgroundImage = Global.MNT_E_DEPOSIT.My.Resources.Resources.Search_16x
         Me.BTN_CODE_OWNER_TO_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BTN_CODE_OWNER_TO_SEARCH.Location = New System.Drawing.Point(485, 1)
+        Me.BTN_CODE_OWNER_TO_SEARCH.Location = New System.Drawing.Point(350, 1)
         Me.BTN_CODE_OWNER_TO_SEARCH.Margin = New System.Windows.Forms.Padding(0)
         Me.BTN_CODE_OWNER_TO_SEARCH.Name = "BTN_CODE_OWNER_TO_SEARCH"
         Me.BTN_CODE_OWNER_TO_SEARCH.Size = New System.Drawing.Size(25, 25)
@@ -425,10 +463,10 @@ Partial Class FRM_MAIN
         'TXT_CODE_OWNER_TO
         '
         Me.TXT_CODE_OWNER_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TXT_CODE_OWNER_TO.Location = New System.Drawing.Point(425, 1)
+        Me.TXT_CODE_OWNER_TO.Location = New System.Drawing.Point(300, 1)
         Me.TXT_CODE_OWNER_TO.MaxLength = 6
         Me.TXT_CODE_OWNER_TO.Name = "TXT_CODE_OWNER_TO"
-        Me.TXT_CODE_OWNER_TO.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_CODE_OWNER_TO.Size = New System.Drawing.Size(50, 25)
         Me.TXT_CODE_OWNER_TO.TabIndex = 5
         Me.TXT_CODE_OWNER_TO.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
         Me.TXT_CODE_OWNER_TO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -439,9 +477,9 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_OWNER_TO_NAME.BackColor = System.Drawing.Color.White
         Me.LBL_CODE_OWNER_TO_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_CODE_OWNER_TO_NAME.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_CODE_OWNER_TO_NAME.Location = New System.Drawing.Point(510, 1)
+        Me.LBL_CODE_OWNER_TO_NAME.Location = New System.Drawing.Point(375, 1)
         Me.LBL_CODE_OWNER_TO_NAME.Name = "LBL_CODE_OWNER_TO_NAME"
-        Me.LBL_CODE_OWNER_TO_NAME.Size = New System.Drawing.Size(210, 25)
+        Me.LBL_CODE_OWNER_TO_NAME.Size = New System.Drawing.Size(105, 25)
         Me.LBL_CODE_OWNER_TO_NAME.TabIndex = 7
         Me.LBL_CODE_OWNER_TO_NAME.Tag = "Clear"
         Me.LBL_CODE_OWNER_TO_NAME.Text = "＊＊＊"
@@ -466,9 +504,9 @@ Partial Class FRM_MAIN
         Me.LBL_CODE_OWNER_FROM_NAME.BackColor = System.Drawing.Color.White
         Me.LBL_CODE_OWNER_FROM_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LBL_CODE_OWNER_FROM_NAME.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LBL_CODE_OWNER_FROM_NAME.Location = New System.Drawing.Point(185, 1)
+        Me.LBL_CODE_OWNER_FROM_NAME.Location = New System.Drawing.Point(175, 1)
         Me.LBL_CODE_OWNER_FROM_NAME.Name = "LBL_CODE_OWNER_FROM_NAME"
-        Me.LBL_CODE_OWNER_FROM_NAME.Size = New System.Drawing.Size(210, 25)
+        Me.LBL_CODE_OWNER_FROM_NAME.Size = New System.Drawing.Size(105, 25)
         Me.LBL_CODE_OWNER_FROM_NAME.TabIndex = 3
         Me.LBL_CODE_OWNER_FROM_NAME.Tag = "Clear"
         Me.LBL_CODE_OWNER_FROM_NAME.Text = "＊＊＊"
@@ -478,7 +516,7 @@ Partial Class FRM_MAIN
         '
         Me.BTN_CODE_OWNER_FROM_SEARCH.BackgroundImage = Global.MNT_E_DEPOSIT.My.Resources.Resources.Search_16x
         Me.BTN_CODE_OWNER_FROM_SEARCH.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BTN_CODE_OWNER_FROM_SEARCH.Location = New System.Drawing.Point(160, 1)
+        Me.BTN_CODE_OWNER_FROM_SEARCH.Location = New System.Drawing.Point(150, 1)
         Me.BTN_CODE_OWNER_FROM_SEARCH.Margin = New System.Windows.Forms.Padding(0)
         Me.BTN_CODE_OWNER_FROM_SEARCH.Name = "BTN_CODE_OWNER_FROM_SEARCH"
         Me.BTN_CODE_OWNER_FROM_SEARCH.Size = New System.Drawing.Size(25, 25)
@@ -492,7 +530,7 @@ Partial Class FRM_MAIN
         Me.TXT_CODE_OWNER_FROM.Location = New System.Drawing.Point(100, 1)
         Me.TXT_CODE_OWNER_FROM.MaxLength = 6
         Me.TXT_CODE_OWNER_FROM.Name = "TXT_CODE_OWNER_FROM"
-        Me.TXT_CODE_OWNER_FROM.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_CODE_OWNER_FROM.Size = New System.Drawing.Size(50, 25)
         Me.TXT_CODE_OWNER_FROM.TabIndex = 1
         Me.TXT_CODE_OWNER_FROM.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
         Me.TXT_CODE_OWNER_FROM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -562,7 +600,7 @@ Partial Class FRM_MAIN
         Me.PNL_SEARCH.MinimumSize = New System.Drawing.Size(100, 25)
         Me.PNL_SEARCH.Name = "PNL_SEARCH"
         Me.PNL_SEARCH.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_SEARCH.TabIndex = 5
+        Me.PNL_SEARCH.TabIndex = 6
         '
         'LBL_COUNT_SEARCH_MAX
         '
@@ -702,6 +740,8 @@ Partial Class FRM_MAIN
         Me.PNL_BATCH_PROGRESS.PerformLayout()
         CType(Me.DGV_VIEW_DATA, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_KINGAKU_INVOICE.ResumeLayout(False)
+        Me.PNL_KINGAKU_INVOICE.PerformLayout()
         Me.PNL_FLAG_DEPOSIT_DONE.ResumeLayout(False)
         Me.PNL_NAME_OWNER.ResumeLayout(False)
         Me.PNL_NAME_OWNER.PerformLayout()
@@ -765,4 +805,7 @@ Partial Class FRM_MAIN
     Friend WithEvents PNL_FLAG_DEPOSIT_DONE As Panel
     Friend WithEvents CMB_FLAG_DEPOSIT_DONE As ComboBox
     Friend WithEvents LBL_FLAG_DEPOSIT_DONE_GUIDE As Label
+    Friend WithEvents PNL_KINGAKU_INVOICE As Panel
+    Friend WithEvents LBL_KINGAKU_INVOICE_GUIDE As Label
+    Friend WithEvents TXT_KINGAKU_INVOICE As TextBox
 End Class
