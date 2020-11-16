@@ -21,6 +21,7 @@
     Private Enum ENM_MY_GRID_MAIN
         CHECK = 0
         FLAG_CONTRACT_NAME
+        NUMBER_VIEW
         YEARMONTH_INVOICE
         NAME_OWNER
         KINGAKU_INVOICE
@@ -76,6 +77,7 @@
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
         Public DATE_INVOICE_FROM As DateTime
         Public DATE_INVOICE_TO As DateTime
+        Public FLAG_CONTRACT As Integer
     End Structure
 #End Region
 
@@ -108,14 +110,16 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,請求年月,オーナー,請求金額", "BSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,番号,請求年月,オーナー,請求金額", "BSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,5,15,6", "CLRLR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,3,5,15,6", "CLLRLR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
+
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, True, "全て")
 
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_PRINT, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
     End Sub
@@ -133,6 +137,8 @@
         Dim DAT_INVOICE_TO As DateTime
         DAT_INVOICE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_INVOICE_TO)
+
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_CONTRACT)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -383,6 +389,7 @@
             Call .Append("YEAR_INVOICE" & "," & Environment.NewLine)
             Call .Append("MONTH_INVOICE" & "," & Environment.NewLine)
             Call .Append("CODE_OWNER" & "," & Environment.NewLine)
+            Call .Append("CODE_OWNER AS CODE_OWNER_SORT" & "," & Environment.NewLine)
             Call .Append("NUMBER_LIST_INVOICE" & "," & Environment.NewLine)
             Call .Append(0 & " AS NUMBER_CONTRACT" & "," & Environment.NewLine)
             Call .Append(0 & " AS SERIAL_CONTRACT" & "," & Environment.NewLine)
@@ -404,9 +411,6 @@
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & Environment.NewLine)
-            Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("1=1" & Environment.NewLine)
-            Call .Append(STR_WHERE) 'WHERE条件
             Call .Append(") AS MAIN" & Environment.NewLine)
             Call .Append("INNER JOIN" & Environment.NewLine)
             Call .Append("(" & Environment.NewLine)
@@ -421,6 +425,9 @@
             Call .Append("ON" & Environment.NewLine)
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("WHERE" & Environment.NewLine)
+            Call .Append("1=1" & Environment.NewLine)
+            Call .Append(STR_WHERE) 'WHERE条件
             Call .Append(") AS MAIN" & Environment.NewLine)
             Call .Append("GROUP BY" & Environment.NewLine)
             Call .Append("YEAR_INVOICE,MONTH_INVOICE,CODE_OWNER,NUMBER_LIST_INVOICE" & Environment.NewLine)
@@ -432,6 +439,7 @@
             Call .Append("YEAR(MAIN.DATE_INVOICE) AS YEAR_INVOICE" & "," & Environment.NewLine)
             Call .Append("MONTH(MAIN.DATE_INVOICE) AS MONTH_INVOICE" & "," & Environment.NewLine)
             Call .Append("SUB_01.CODE_OWNER" & "," & Environment.NewLine)
+            Call .Append("0 AS CODE_OWNER_SORT" & "," & Environment.NewLine)
             Call .Append("SUB_01.NUMBER_LIST_INVOICE" & "," & Environment.NewLine)
             Call .Append("MAIN.NUMBER_CONTRACT" & "," & Environment.NewLine)
             Call .Append("MAIN.SERIAL_CONTRACT" & "," & Environment.NewLine)
@@ -444,9 +452,6 @@
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & Environment.NewLine)
-            Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("1=1" & Environment.NewLine)
-            Call .Append(STR_WHERE) 'WHERE条件
             Call .Append(") AS MAIN" & Environment.NewLine)
             Call .Append("INNER JOIN" & Environment.NewLine)
             Call .Append("(" & Environment.NewLine)
@@ -461,12 +466,16 @@
             Call .Append("ON" & Environment.NewLine)
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("WHERE" & Environment.NewLine)
+            Call .Append("1=1" & Environment.NewLine)
+            Call .Append(STR_WHERE) 'WHERE条件
+
             'スポット分ココマデ
 
             Call .Append(") AS MAIN" & Environment.NewLine)
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("FLAG_CONTRACT,YEAR_INVOICE,MONTH_INVOICE,CODE_OWNER,NUMBER_LIST_INVOICE,NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & Environment.NewLine)
+            Call .Append("FLAG_CONTRACT,YEAR_INVOICE,MONTH_INVOICE,CODE_OWNER_SORT,NUMBER_LIST_INVOICE,NUMBER_CONTRACT,SERIAL_CONTRACT,SERIAL_INVOICE" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader
@@ -709,6 +718,7 @@
     Private Function FUNC_GET_SEARCH_CONDITHIONS() As SRT_SEARCH_CONDITIONS
         Dim srtCONDITIONS As SRT_SEARCH_CONDITIONS
         With srtCONDITIONS
+            .FLAG_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_CONTRACT)
             .DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
             .DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
         End With
@@ -725,6 +735,10 @@
             SRT_INVOICE_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_INVOICE_FROM
             SRT_INVOICE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_INVOICE_TO
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_INVOICE_PERIOD, "DATE_INVOICE")
+
+            If .FLAG_CONTRACT > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.FLAG_CONTRACT, "SUB_01.FLAG_CONTRACT", "=")
+            End If
         End With
 
         Return STR_WHERE

@@ -33,6 +33,7 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_ACTIVE_HEAD_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_FOOT = New System.Windows.Forms.GroupBox()
         Me.pnlFUNCTION_GROUP = New System.Windows.Forms.Panel()
+        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
         Me.BTN_PRINT = New System.Windows.Forms.Button()
         Me.BTN_PREVIEW = New System.Windows.Forms.Button()
         Me.BTN_CLEAR = New System.Windows.Forms.Button()
@@ -58,7 +59,9 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_SEARCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_SEARCH = New System.Windows.Forms.Button()
-        Me.BTN_PUT_FILE = New System.Windows.Forms.Button()
+        Me.PNL_FLAG_CONTRACT = New System.Windows.Forms.Panel()
+        Me.CMB_FLAG_CONTRACT = New System.Windows.Forms.ComboBox()
+        Me.LBL_FLAG_CONTRACT_GUIDE = New System.Windows.Forms.Label()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -73,6 +76,7 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.SuspendLayout()
         Me.PNL_DATE_INVOICE.SuspendLayout()
         Me.PNL_SEARCH.SuspendLayout()
+        Me.PNL_FLAG_CONTRACT.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -199,6 +203,18 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.Name = "pnlFUNCTION_GROUP"
         Me.pnlFUNCTION_GROUP.Size = New System.Drawing.Size(440, 40)
         Me.pnlFUNCTION_GROUP.TabIndex = 0
+        '
+        'BTN_PUT_FILE
+        '
+        Me.BTN_PUT_FILE.AutoSize = True
+        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(180, 5)
+        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
+        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
+        Me.BTN_PUT_FILE.TabIndex = 2
+        Me.BTN_PUT_FILE.Text = "ファイル"
+        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
         '
         'BTN_PRINT
         '
@@ -357,7 +373,7 @@ Partial Class FRM_MAIN
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 65)
+        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 100)
         Me.DGV_VIEW_DATA.MultiSelect = False
         Me.DGV_VIEW_DATA.Name = "DGV_VIEW_DATA"
         Me.DGV_VIEW_DATA.ReadOnly = True
@@ -372,7 +388,7 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowCellToolTips = False
         Me.DGV_VIEW_DATA.ShowEditingIcon = False
         Me.DGV_VIEW_DATA.ShowRowErrors = False
-        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 310)
+        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 275)
         Me.DGV_VIEW_DATA.TabIndex = 1
         Me.DGV_VIEW_DATA.TabStop = False
         '
@@ -382,11 +398,12 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_FLAG_CONTRACT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_INVOICE)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_SEARCH)
         Me.PNL_INPUT_KEY.Location = New System.Drawing.Point(10, 20)
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
-        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 40)
+        Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 75)
         Me.PNL_INPUT_KEY.TabIndex = 0
         '
         'PNL_DATE_INVOICE
@@ -395,10 +412,10 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_INVOICE.Controls.Add(Me.DTP_DATE_INVOICE_TO)
         Me.PNL_DATE_INVOICE.Controls.Add(Me.DTP_DATE_INVOICE_FROM)
         Me.PNL_DATE_INVOICE.Controls.Add(Me.LBL_DATE_INVOICE_GUIDE)
-        Me.PNL_DATE_INVOICE.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_DATE_INVOICE.Location = New System.Drawing.Point(250, 5)
         Me.PNL_DATE_INVOICE.Name = "PNL_DATE_INVOICE"
         Me.PNL_DATE_INVOICE.Size = New System.Drawing.Size(420, 30)
-        Me.PNL_DATE_INVOICE.TabIndex = 0
+        Me.PNL_DATE_INVOICE.TabIndex = 1
         '
         'LBL_DATE_INVOICE_FROM_TO_GUIDE
         '
@@ -450,11 +467,11 @@ Partial Class FRM_MAIN
         Me.PNL_SEARCH.Controls.Add(Me.LBL_COUNT_SEARCH)
         Me.PNL_SEARCH.Controls.Add(Me.LBL_COUNT_SEARCH_GUIDE)
         Me.PNL_SEARCH.Controls.Add(Me.BTN_SEARCH)
-        Me.PNL_SEARCH.Location = New System.Drawing.Point(430, 5)
+        Me.PNL_SEARCH.Location = New System.Drawing.Point(5, 40)
         Me.PNL_SEARCH.MinimumSize = New System.Drawing.Size(100, 25)
         Me.PNL_SEARCH.Name = "PNL_SEARCH"
         Me.PNL_SEARCH.Size = New System.Drawing.Size(240, 30)
-        Me.PNL_SEARCH.TabIndex = 1
+        Me.PNL_SEARCH.TabIndex = 2
         '
         'LBL_COUNT_SEARCH_MAX
         '
@@ -520,17 +537,37 @@ Partial Class FRM_MAIN
         Me.BTN_SEARCH.Text = "検索"
         Me.BTN_SEARCH.UseVisualStyleBackColor = False
         '
-        'BTN_PUT_FILE
+        'PNL_FLAG_CONTRACT
         '
-        Me.BTN_PUT_FILE.AutoSize = True
-        Me.BTN_PUT_FILE.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.BTN_PUT_FILE.Location = New System.Drawing.Point(180, 5)
-        Me.BTN_PUT_FILE.MinimumSize = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.Name = "BTN_PUT_FILE"
-        Me.BTN_PUT_FILE.Size = New System.Drawing.Size(80, 30)
-        Me.BTN_PUT_FILE.TabIndex = 2
-        Me.BTN_PUT_FILE.Text = "ファイル"
-        Me.BTN_PUT_FILE.UseVisualStyleBackColor = False
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.CMB_FLAG_CONTRACT)
+        Me.PNL_FLAG_CONTRACT.Controls.Add(Me.LBL_FLAG_CONTRACT_GUIDE)
+        Me.PNL_FLAG_CONTRACT.Location = New System.Drawing.Point(5, 5)
+        Me.PNL_FLAG_CONTRACT.Name = "PNL_FLAG_CONTRACT"
+        Me.PNL_FLAG_CONTRACT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_FLAG_CONTRACT.TabIndex = 0
+        '
+        'CMB_FLAG_CONTRACT
+        '
+        Me.CMB_FLAG_CONTRACT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CMB_FLAG_CONTRACT.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.CMB_FLAG_CONTRACT.Location = New System.Drawing.Point(80, 1)
+        Me.CMB_FLAG_CONTRACT.Name = "CMB_FLAG_CONTRACT"
+        Me.CMB_FLAG_CONTRACT.Size = New System.Drawing.Size(150, 26)
+        Me.CMB_FLAG_CONTRACT.TabIndex = 1
+        Me.CMB_FLAG_CONTRACT.Tag = "Clear"
+        '
+        'LBL_FLAG_CONTRACT_GUIDE
+        '
+        Me.LBL_FLAG_CONTRACT_GUIDE.AutoEllipsis = True
+        Me.LBL_FLAG_CONTRACT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_FLAG_CONTRACT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_FLAG_CONTRACT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_FLAG_CONTRACT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_FLAG_CONTRACT_GUIDE.Name = "LBL_FLAG_CONTRACT_GUIDE"
+        Me.LBL_FLAG_CONTRACT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_FLAG_CONTRACT_GUIDE.TabIndex = 0
+        Me.LBL_FLAG_CONTRACT_GUIDE.Text = "契約形態"
+        Me.LBL_FLAG_CONTRACT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FRM_MAIN
         '
@@ -566,6 +603,7 @@ Partial Class FRM_MAIN
         Me.PNL_DATE_INVOICE.ResumeLayout(False)
         Me.PNL_SEARCH.ResumeLayout(False)
         Me.PNL_SEARCH.PerformLayout()
+        Me.PNL_FLAG_CONTRACT.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -606,4 +644,7 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_DATE_PRINT_GUIDE As Label
     Friend WithEvents CHK_DATE_PRINT As CheckBox
     Friend WithEvents BTN_PUT_FILE As Button
+    Friend WithEvents PNL_FLAG_CONTRACT As Panel
+    Friend WithEvents CMB_FLAG_CONTRACT As ComboBox
+    Friend WithEvents LBL_FLAG_CONTRACT_GUIDE As Label
 End Class
