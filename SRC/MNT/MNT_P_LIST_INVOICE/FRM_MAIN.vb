@@ -65,6 +65,25 @@
 
             Return LNG_RET
         End Function
+
+        Public Function FUNC_GET_NUMBER_VIEW() As String
+            Dim STR_RET As String
+
+            Select Case Me.FLAG_CONTRACT
+                Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
+                    STR_RET = ""
+                    STR_RET &= "" & Format(Me.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH))
+                    STR_RET &= "-" & Format(Me.NUMBER_LIST_INVOICE, New String("0", INT_SYSTEM_NUMBER_LIST_INVOICE_MAX_LENGTH))
+                Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.SPOT
+                    STR_RET = ""
+                    STR_RET &= "" & Format(Me.NUMBER_CONTRACT, New String("0", INT_SYSTEM_NUMBER_CONTRACT_MAX_LENGTH))
+                    STR_RET &= "-" & Format(Me.SERIAL_CONTRACT, New String("0", INT_SYSTEM_SERIAL_CONTRACT_MAX_LENGTH))
+                Case Else
+                    STR_RET = ""
+            End Select
+
+            Return STR_RET
+        End Function
     End Structure
 
     Private Structure SRT_MY_INVOICE_DATA
@@ -112,7 +131,7 @@
     Private Sub SUB_CTRL_VIEW_INIT()
         Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,番号,請求年月,オーナー,請求金額", "BSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,3,5,15,6", "CLLRLR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,4,5,15,6", "CLLRLR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
@@ -556,6 +575,7 @@
             With SRT_GRID_DATA_MAIN(i)
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CHECK) = False
                 OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_CONTRACT_NAME) = .FLAG_CONTRACT_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_VIEW) = .FUNC_GET_NUMBER_VIEW
                 OBJ_TEMP(ENM_MY_GRID_MAIN.YEARMONTH_INVOICE) = .FUNC_GET_YEAR_MONTH_INVOICE
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.KINGAKU_INVOICE) = Format(.FUNC_GET_KINGAKU_INVOICE_TOTAL, "#,##0")
