@@ -42,6 +42,7 @@
         NAME_OPTION
         SEIKYUSTR
         SEIKYUEND
+        KAIYAKUKBN
     End Enum
 #End Region
 
@@ -96,6 +97,7 @@
         Public KINGAKU_KEIYAKU As Long
         Public SEIKYUSTR As Integer
         Public SEIKYUEND As Integer
+        Public KAIYAKUKBN As Integer
     End Structure
 
     Private Structure SRT_ETC_CHECK
@@ -110,6 +112,7 @@
         Public KINGAKU_KEIYAKU As Long
         Public SEIKYUSTR As Integer
         Public SEIKYUEND As Integer
+        Public KAIYAKUKBN As Integer
     End Structure
 
 
@@ -142,13 +145,27 @@
         End If
         Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
 
+        Dim INT_LOOP_INDEX_MAX As Integer
+
+        Dim SRT_ETC() As SRT_ETC_CHECK
+        INT_LOOP_INDEX_MAX = (SRT_FILE_ETC.Length - 1)
+        ReDim SRT_ETC(INT_LOOP_INDEX_MAX)
+        For i = 1 To INT_LOOP_INDEX_MAX
+            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "追加データ解析中：" & i & "/" & INT_LOOP_INDEX_MAX)
+            If Not FUNC_MAKE_ETC_DATA(SRT_FILE_ETC(i), SRT_ETC(i)) Then
+                STR_FUNC_BATCH_MAIN_ERR_STR = "追加データの解析に失敗しました。" & System.Environment.NewLine & SRT_CONDITIONS.FILE_PATH_GET
+                Return False
+            End If
+        Next
+        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
+
         Dim SRT_FILE_ENABLED() As SRT_XLSX_INFO
         ReDim SRT_FILE_ENABLED(0)
-        Dim INT_LOOP_INDEX_MAX As Integer
+
         INT_LOOP_INDEX_MAX = (SRT_FILE.Length - 1)
         For i = 1 To INT_LOOP_INDEX_MAX
             If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "解約チェック中：" & i & "/" & INT_LOOP_INDEX_MAX)
-            If Not FUNC_CHECK_KAIYAKU(SRT_FILE(i)) Then
+            If Not FUNC_CHECK_KAIYAKU(SRT_FILE(i), SRT_ETC) Then
                 Dim INT_INDEX As Integer
                 INT_INDEX = SRT_FILE_ENABLED.Length
                 ReDim Preserve SRT_FILE_ENABLED(INT_INDEX)
@@ -164,17 +181,7 @@
 
         BLN_PUT = True
 
-        Dim SRT_ETC() As SRT_ETC_CHECK
-        INT_LOOP_INDEX_MAX = (SRT_FILE_ETC.Length - 1)
-        ReDim SRT_ETC(INT_LOOP_INDEX_MAX)
-        For i = 1 To INT_LOOP_INDEX_MAX
-            If i Mod 5 = 0 Then Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "追加データ解析中：" & i & "/" & INT_LOOP_INDEX_MAX)
-            If Not FUNC_MAKE_ETC_DATA(SRT_FILE_ETC(i), SRT_ETC(i)) Then
-                STR_FUNC_BATCH_MAIN_ERR_STR = "追加データの解析に失敗しました。" & System.Environment.NewLine & SRT_CONDITIONS.FILE_PATH_GET
-                Return False
-            End If
-        Next
-        Call SUB_PUT_GUIDE(SRT_CONDITIONS.FORM, "")
+
 
         Dim SRT_TABLE() As SRT_TABLE_MNT_T_CONTRACT
         ReDim SRT_TABLE(0)
@@ -388,6 +395,12 @@
                     Else
                         .SEIKYUEND = 0
                     End If
+                    STR_TEMP = FUNC_GET_VALUE_XLSX(INT_ROW, ENM_XLSX_ETC_INDEX.KAIYAKUKBN)
+                    If IsNumeric(STR_TEMP) Then
+                        .KAIYAKUKBN = CInt(STR_TEMP)
+                    Else
+                        .KAIYAKUKBN = 0
+                    End If
                 Catch ex As Exception
                     Call FUNC_END_XLS()
                     Return False
@@ -400,7 +413,7 @@
         Return True
     End Function
 
-    Private Function FUNC_CHECK_KAIYAKU(ByRef SRT_DATA As SRT_XLSX_INFO) As Boolean
+    Private Function FUNC_CHECK_KAIYAKU(ByRef SRT_DATA As SRT_XLSX_INFO, ByRef SRT_CHECK() As SRT_ETC_CHECK) As Boolean
         With SRT_DATA
 
             If .KAIYAKUKBN <> 0 Then
@@ -411,6 +424,14 @@
             '    Return True
             'End If
 
+            Dim INT_INDEX_CHECK As Integer
+            INT_INDEX_CHECK = FUNC_GET_INDEX_CHECK(SRT_CHECK, SRT_DATA.OWNERCD, SRT_DATA.GENBACD, SRT_DATA.SAGYOCD)
+
+            If INT_INDEX_CHECK > 0 Then
+                If SRT_CHECK(INT_INDEX_CHECK).KAIYAKUKBN = 1 Then
+                    Return True
+                End If
+            End If
         End With
 
         Return False
@@ -437,6 +458,7 @@
             .KINGAKU_KEIYAKU = SRT_DATA.KINGAKU_KEIYAKU
             .SEIKYUSTR = SRT_DATA.SEIKYUSTR
             .SEIKYUEND = SRT_DATA.SEIKYUEND
+            .KAIYAKUKBN = SRT_DATA.KAIYAKUKBN
         End With
         Return True
     End Function
@@ -507,7 +529,6 @@
 
         Dim INT_INDEX_CHECK As Integer
         INT_INDEX_CHECK = FUNC_GET_INDEX_CHECK(SRT_CHECK, SRT_DATA.OWNERCD, SRT_DATA.GENBACD, SRT_DATA.SAGYOCD)
-
 
         With SRT_RET.DATA
             .FLAG_CONTRACT = ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
