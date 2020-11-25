@@ -80,6 +80,7 @@
       <DependentUpon>FRM_MAIN.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MOD_MAIN.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
