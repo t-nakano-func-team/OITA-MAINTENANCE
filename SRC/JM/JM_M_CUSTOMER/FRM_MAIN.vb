@@ -25,13 +25,8 @@
     End Enum
 
     Private Enum ENM_MY_GRID_MAIN
-        CODE_OWNER
-        NAME_OWNER
-        KANA_OWNER
-        CODE_POST
-        NAME_ADDRESS_01
-        NAME_ADDRESS_02
-        FLAG_INVOICE_FIXDAY_NAME
+        CODE_CUSTOMER
+        NAME_CUSTOMER
         FLAG_INVALID_NAME
         UBOUND = FLAG_INVALID_NAME
     End Enum
@@ -39,20 +34,16 @@
 
 #Region "画面用・構造体"
     Private Structure SRT_MY_GRID_DATA
-        Public CODE_OWNER As Integer
-        Public NAME_OWNER As String
-        Public KANA_OWNER As String
-        Public CODE_POST As String
-        Public NAME_ADDRESS_01 As String
-        Public NAME_ADDRESS_02 As String
-        Public FLAG_INVOICE_FIXDAY As Integer
+        Public NUMBER_USER As Integer
+        Public CODE_CUSTOMER As Integer
+        Public NAME_CUSTOMER As String
         Public FLAG_INVALID As Integer
 
-        Public FLAG_INVOICE_FIXDAY_NAME As String
         Public FLAG_INVALID_NAME As String
     End Structure
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
+        Public NUMBER_USER As Integer
     End Structure
 #End Region
 
@@ -69,9 +60,9 @@
     End Sub
 
     Private Sub SUB_CTRL_VIEW_INIT()
-        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "オーナーコード,オーナー名称,カナ名称,郵便番号,住所1,住所2,請求締日,削除", "SSSSSSSS")
+        Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, "顧客コード,顧客名称,削除", "SSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,7,7,3,4,4,3,2", "RLLLLLLC")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "5,20,2", "RLC")
 
     End Sub
 
@@ -79,7 +70,7 @@
         Call SUB_CONTROL_CLEAR_FORM(Me)
 
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS 'グリッド条件
-        SRT_CONDITIONS = Nothing '条件の取得（項目がない為、クリア）
+        SRT_CONDITIONS = FUNC_GET_SEARCH_CONDITHIONS() '条件の取得（項目がない為、クリア）
         Call SUB_MAKE_GRID_DATA(SRT_CONDITIONS) 'グリッド構造体を作成
         Call SUB_REFRESH_GRID() 'グリッドの表示をリフレッシュ
 
@@ -160,20 +151,169 @@
             Exit Sub
         End If
 
+        Dim SRT_KEY As SRT_TABLE_JM_M_CUSTOMER_KEY
+        SRT_KEY = FUNC_GET_INPUT_KEY()
+
+        Dim BLN_CHECK As Boolean
+        BLN_CHECK = FUNC_CHECK_TABLE_JM_M_CUSTOMER(SRT_KEY)
+
+        Dim ENM_CHANGE_MODE As ENM_MY_WINDOW_MODE
+        If BLN_CHECK Then
+            Dim SRT_DATA As SRT_TABLE_JM_M_CUSTOMER_DATA
+            SRT_DATA = Nothing
+            Call FUNC_SELECT_TABLE_JM_M_CUSTOMER(SRT_KEY, SRT_DATA)
+            Call SUB_SET_INPUT_DATA(SRT_DATA)
+            If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_DELETE '削除
+            Else
+                ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_UPDATE '更新
+            End If
+            Call SUB_SET_INDEX_GRID_FROM_KEY(SRT_KEY)
+        Else
+            ENM_CHANGE_MODE = ENM_MY_WINDOW_MODE.INPUT_DATA_INSERT '新規追加
+        End If
+
+        Call SUB_WINDOW_MODE_CHANGE(ENM_CHANGE_MODE)
+        Call SUB_FOCUS_FIRST_INPUT_CONTROL(Me.PNL_INPUT_DATA)
     End Sub
 
     '登録
     Private Sub SUB_ENTER()
+        If Not FUNC_CHECK_INPUT_DATA() Then
+            Exit Sub
+        End If
 
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show("データを登録します。" & Environment.NewLine & "よろしいですか？", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+        Dim SRT_RECORD As SRT_TABLE_JM_M_CUSTOMER
+        SRT_RECORD.KEY = FUNC_GET_INPUT_KEY()
+        SRT_RECORD.DATA = FUNC_GET_INPUT_DATA()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If Not FUNC_EDIT_RECORD(SRT_RECORD) Then
+            Call MessageBox.Show(STR_FUNC_EDIT_RECORD_LAST_ERROR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+            Exit Sub
+        End If
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Call SUB_CLEAR()
     End Sub
 
     '削除
     Private Sub SUB_DELETE()
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show("データを削除します。" & Environment.NewLine & "よろしいですか？", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
 
+        Dim SRT_KEY As SRT_TABLE_JM_M_CUSTOMER_KEY
+        SRT_KEY = FUNC_GET_INPUT_KEY()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        '物理・論理削除
+        If Not FUNC_DELETE_RECORD(SRT_KEY) Then
+            Call MessageBox.Show(STR_FUNC_DELETE_RECORD_LAST_ERROR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+            Exit Sub
+        End If
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Call SUB_CLEAR()
     End Sub
 
 #Region "登録等・内部処理"
+    Private STR_FUNC_EDIT_RECORD_LAST_ERROR As String
+    Private Function FUNC_EDIT_RECORD(ByRef SRT_RECORD As SRT_TABLE_JM_M_CUSTOMER) As Boolean
 
+        Dim SRT_DATA As SRT_TABLE_JM_M_CUSTOMER_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_JM_M_CUSTOMER(SRT_RECORD.KEY, SRT_DATA)
+
+        If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
+            If Not FUNC_UPDATE_FLAG_INVALID(SRT_RECORD.KEY, ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.NORMAL) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+            If Not FUNC_DELETE_TABLE_JM_M_CUSTOMER(SRT_RECORD.KEY) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+
+            If Not FUNC_INSERT_TABLE_JM_M_CUSTOMER(SRT_RECORD) Then
+                STR_FUNC_EDIT_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        End If
+
+        Return True
+    End Function
+
+    Private STR_FUNC_DELETE_RECORD_LAST_ERROR As String
+    Private Function FUNC_DELETE_RECORD(ByRef SRT_KEY As SRT_TABLE_JM_M_CUSTOMER_KEY) As Boolean
+
+        Dim SRT_DATA As SRT_TABLE_JM_M_CUSTOMER_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_JM_M_CUSTOMER(SRT_KEY, SRT_DATA)
+
+        If SRT_DATA.FLAG_INVALID = ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE Then
+            If Not FUNC_DELETE_TABLE_JM_M_CUSTOMER(SRT_KEY) Then '物理削除
+                STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+            If Not FUNC_UPDATE_FLAG_INVALID(SRT_KEY, ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID.DELETE) Then
+                STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        End If
+
+        Return True
+    End Function
+
+    Private Function FUNC_UPDATE_FLAG_INVALID(ByRef SRT_KEY As SRT_TABLE_JM_M_CUSTOMER_KEY, ByVal ENM_FLAG_INVALID As ENM_SYSTEM_INDIVIDUAL_FLAG_INVALID) As Boolean
+        Dim STR_SQL As System.Text.StringBuilder
+        STR_SQL = New System.Text.StringBuilder
+
+        With STR_SQL
+            Call .Append("UPDATE" & System.Environment.NewLine)
+            Call .Append("JM_M_CUSTOMER WITH(ROWLOCK)" & System.Environment.NewLine)
+            Call .Append("SET" & System.Environment.NewLine)
+            Call .Append("FLAG_INVALID=" & CInt(ENM_FLAG_INVALID) & System.Environment.NewLine)
+            Call .Append("WHERE" & System.Environment.NewLine)
+            Call .Append("1=1" & System.Environment.NewLine)
+            Call .Append("AND NUMBER_USER=" & SRT_KEY.NUMBER_USER & System.Environment.NewLine)
+            Call .Append("AND CODE_CUSTOMER=" & SRT_KEY.CODE_CUSTOMER & System.Environment.NewLine)
+        End With
+
+        If Not FUNC_SYSTEM_DO_SQL_EXECUTE(STR_SQL.ToString) Then
+            Return False
+        End If
+
+        Return True
+    End Function
 #End Region
 
     '印刷/プレビュー/ファイル出力
@@ -263,12 +403,12 @@
             Call .Append("SELECT" & Environment.NewLine)
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
-            Call .Append("MNT_M_OWNER WITH(NOLOCK)" & Environment.NewLine)
+            Call .Append("JM_M_CUSTOMER WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
             Call .Append("1=1" & Environment.NewLine)
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("CODE_OWNER" & Environment.NewLine)
+            Call .Append("CODE_CUSTOMER" & Environment.NewLine)
         End With
 
         SDR_READER = Nothing
@@ -289,13 +429,9 @@
             INT_INDEX = SRT_GRID_DATA_MAIN.Length
             ReDim Preserve SRT_GRID_DATA_MAIN(INT_INDEX)
             With SRT_GRID_DATA_MAIN(INT_INDEX)
-                .CODE_OWNER = CInt(SDR_READER.Item("CODE_OWNER"))
-                .NAME_OWNER = CStr(SDR_READER.Item("NAME_OWNER"))
-                .KANA_OWNER = CStr(SDR_READER.Item("KANA_OWNER"))
-                .CODE_POST = CStr(SDR_READER.Item("CODE_POST"))
-                .NAME_ADDRESS_01 = CStr(SDR_READER.Item("NAME_ADDRESS_01"))
-                .NAME_ADDRESS_02 = CStr(SDR_READER.Item("NAME_ADDRESS_02"))
-                .FLAG_INVOICE_FIXDAY = CInt(SDR_READER.Item("FLAG_INVOICE_FIXDAY"))
+                .NUMBER_USER = CInt(SDR_READER.Item("NUMBER_USER"))
+                .CODE_CUSTOMER = CInt(SDR_READER.Item("CODE_CUSTOMER"))
+                .NAME_CUSTOMER = CStr(SDR_READER.Item("NAME_CUSTOMER"))
                 .FLAG_INVALID = CInt(SDR_READER.Item("FLAG_INVALID"))
             End With
         End While
@@ -304,7 +440,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
-
+                .FLAG_INVALID_NAME = FUNC_GET_JM_M_KIND_NAME_KIND(ENM_JM_M_KIND_CODE_FLAG.FLAG_INVALID_SHORT, .FLAG_INVALID, True)
             End With
         Next
 
@@ -325,13 +461,8 @@
         Dim OBJ_TEMP(ENM_MY_GRID_MAIN.UBOUND) As Object
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_OWNER) = Format(.CODE_OWNER, New String("0", 4))
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .NAME_OWNER
-                OBJ_TEMP(ENM_MY_GRID_MAIN.KANA_OWNER) = .KANA_OWNER
-                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_POST) = If(.CODE_POST = 0, "", CStr(.CODE_POST))
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_ADDRESS_01) = .NAME_ADDRESS_01
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_ADDRESS_02) = .NAME_ADDRESS_02
-                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_INVOICE_FIXDAY_NAME) = .FLAG_INVOICE_FIXDAY_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_CUSTOMER) = Format(.CODE_CUSTOMER, New String("0", INT_SYSTEM_CODE_CUSTOMER_MAX_LENGTH))
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CUSTOMER) = .NAME_CUSTOMER
                 OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_INVALID_NAME) = .FLAG_INVALID_NAME
             End With
             Call glbSubAddRowDataTable(TBL_GRID_DATA_MAIN, OBJ_TEMP)
@@ -358,7 +489,7 @@
 
         Dim INT_RET As Integer
         With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
-            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_OWNER)
+            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_CUSTOMER)
         End With
         Return INT_RET
     End Function
@@ -383,7 +514,7 @@
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1)
             With SRT_GRID_DATA_MAIN(i)
-                If .CODE_OWNER = SRT_KEY.CODE_CUSTOMER Then
+                If .CODE_CUSTOMER = SRT_KEY.CODE_CUSTOMER Then
                     Return i
                 End If
             End With
@@ -569,7 +700,7 @@
         Dim SRT_RET As SRT_TABLE_JM_M_CUSTOMER_KEY
 
         With SRT_RET
-            .NUMBER_USER =
+            .NUMBER_USER = INT_SYSTEM_INDIVIDUAL_NUMBER_USER
             .CODE_CUSTOMER = CInt(TXT_CODE_CUSTOMER.Text)
         End With
 
@@ -600,7 +731,7 @@
     Private Function FUNC_GET_SEARCH_CONDITHIONS() As SRT_SEARCH_CONDITIONS
         Dim SRT_CONDITIONS As SRT_SEARCH_CONDITIONS
         With SRT_CONDITIONS
-            '条件なし
+            .NUMBER_USER = INT_SYSTEM_INDIVIDUAL_NUMBER_USER
         End With
 
         Return SRT_CONDITIONS
@@ -612,7 +743,7 @@
         STR_WHERE = ""
 
         With SRT_CONDITIONS
-            '条件なし
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.NUMBER_USER, "NUMBER_USER", "=")
         End With
 
         Return STR_WHERE
