@@ -188,6 +188,12 @@
     <Compile Include="..\..\COMMON\COMMON_LIB_BASE\MOD_SYSTEM_TOTAL\MOD_SYSTEM_TOTAL_XLS_TOOL.vb">
       <Link>MOD_SYSTEM_TOTAL\MOD_SYSTEM_TOTAL_XLS_TOOL.vb</Link>
     </Compile>
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_CONST.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_ENUM.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_MST_SELECT.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_TABLE_STRUCTURE.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVIDUAL_VARIABLE.vb" />
+    <Compile Include="MOD_SYSTEM_INDIVIDUAL\MOD_SYSTEM_INDIVISUAL_INITIALIZATION_FINALIZATION.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -219,6 +225,7 @@
   <ItemGroup>
     <None Include="..\..\COMMON\COMMON_LIB_BASE\_SystemSettings.config">
       <Link>_SystemSettings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -234,7 +241,6 @@
     <Folder Include="BACKUP\" />
     <Folder Include="BIP\" />
     <Folder Include="FRM_SYSTEM_INDVIDUAL\" />
-    <Folder Include="MOD_SYSTEM_INDIVIDUAL\" />
     <Folder Include="WORK\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -9,6 +9,11 @@
             Exit Sub
         End If
 
+        If Not FUNC_SYSTEM_INDIVISUAL_INITIALIZATION() Then
+            Call MessageBox.Show(STR_FUNC_SYSTEM_INDIVISUAL_INITIALIZATION_MSG, CST_APPL_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         BLN_SHOW_SETTING = False
         Dim SNG_FONT_SIZE As Single
         SNG_FONT_SIZE = 0.0
