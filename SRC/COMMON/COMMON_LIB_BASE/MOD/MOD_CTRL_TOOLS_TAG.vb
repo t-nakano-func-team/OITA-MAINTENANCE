@@ -383,7 +383,7 @@
                             Case Else
                         End Select
 
-                        Dim TXT_CTRL As TextBox
+                        Dim TXT_CTRL As System.Windows.Forms.TextBox
                         TXT_CTRL = ctlFocusCtrl
                         If Not TXT_CTRL.Multiline Then
                             Dim INT_ASCII As Integer

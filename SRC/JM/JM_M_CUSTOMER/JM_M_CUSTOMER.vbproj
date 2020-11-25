@@ -6,24 +6,27 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{489D0603-CE80-42FD-A8D0-0970B7286CEC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>JM_M_CUSTOMER.My.MyApplication</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>JM_M_CUSTOMER</RootNamespace>
     <AssemblyName>JM_M_CUSTOMER</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>JM_M_CUSTOMER.xml</DocumentationFile>
+    <OutputPath>..\..\..\BIN\JM\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +35,8 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>JM_M_CUSTOMER.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -60,7 +64,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="JM_LIB_COMMON" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -80,10 +84,12 @@
       <DependentUpon>FRM_MAIN.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MOD_MAIN.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -115,6 +121,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JM_LIB_COMMON\JM_LIB_COMMON.vbproj">
+      <Project>{b17e7826-d2fd-4841-8cd8-da6ef13de056}</Project>
+      <Name>JM_LIB_COMMON</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
