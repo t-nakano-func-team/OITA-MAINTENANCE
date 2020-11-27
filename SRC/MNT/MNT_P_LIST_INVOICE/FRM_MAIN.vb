@@ -97,6 +97,8 @@
         Public DATE_INVOICE_FROM As DateTime
         Public DATE_INVOICE_TO As DateTime
         Public FLAG_CONTRACT As Integer
+        Public CODE_OWNER_FROM As Integer
+        Public CODE_OWNER_TO As Integer
     End Structure
 #End Region
 
@@ -325,7 +327,10 @@
         Dim CTL_SEARCH As Control
         CTL_SEARCH = Nothing
         Select Case True
-
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_FROM) Or (CTL_ACTIVE Is BTN_CODE_OWNER_FROM_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_FROM
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_TO) Or (CTL_ACTIVE Is BTN_CODE_OWNER_TO_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_TO
             Case Else
 
         End Select
@@ -340,6 +345,19 @@
         Dim BLN_RET As Boolean
         BLN_RET = False
         Select Case True
+            Case (CTL_SEARCH Is TXT_CODE_OWNER_FROM) Or (CTL_SEARCH Is TXT_CODE_OWNER_TO)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_CODE_OWNER As Integer
+                INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
+
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_OWNER(INT_CODE_OWNER, SNG_FONT_SIZE)
+
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
             Case Else
                 'スルー
         End Select
@@ -741,6 +759,8 @@
             .FLAG_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_CONTRACT)
             .DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
             .DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
         End With
 
         Return srtCONDITIONS
