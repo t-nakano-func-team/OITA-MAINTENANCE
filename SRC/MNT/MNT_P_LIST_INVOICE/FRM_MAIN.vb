@@ -779,6 +779,8 @@
             If .FLAG_CONTRACT > 0 Then
                 STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.FLAG_CONTRACT, "SUB_01.FLAG_CONTRACT", "=")
             End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_FROM, "CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_TO, "CODE_OWNER", "<=")
         End With
 
         Return STR_WHERE
@@ -988,6 +990,16 @@
 
     Private Sub CHK_DATE_PRINT_CheckedChanged(sender As Object, e As EventArgs) Handles CHK_DATE_PRINT.CheckedChanged
         Call SUB_REFRESH_ENABLED_DATE_PRINT()
+    End Sub
+#End Region
+
+#Region "イベント-テキストチェンジ"
+    Private Sub TXT_CODE_OWNER_FROM_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_FROM.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+
+    Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
     End Sub
 #End Region
 
