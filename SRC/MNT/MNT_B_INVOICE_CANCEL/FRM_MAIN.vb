@@ -139,6 +139,8 @@
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_FROM, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE_TO, srtSYSTEM_TOTAL_CONFIG_SETTINGS.LOCAL.DATE_SYSTEM_REPLACE, DAT_DATE_TO)
+
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, True, "全て")
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -155,8 +157,47 @@
         DAT_INVOICE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_INVOICE_TO)
 
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_CONTRACT)
+
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
+    End Sub
+#End Region
+
+#Region "各処理呼出元"
+    Private Sub SUB_EXEC_DO(
+    ByVal enmEXEC_DO As ENM_MY_EXEC_DO
+    )
+        If BLN_PROCESS_DOING Then
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        BLN_PROCESS_DOING = True
+        Call Application.DoEvents()
+
+        Select Case enmEXEC_DO
+            Case ENM_MY_EXEC_DO.DO_SHOW_SEARCH
+                Call SUB_SHOW_SEARCH()
+            Case ENM_MY_EXEC_DO.DO_SEARCH
+                Call SUB_SEARCH()
+            Case ENM_MY_EXEC_DO.DO_BATCH
+                Call SUB_BATCH()
+            Case ENM_MY_EXEC_DO.DO_CLEAR
+                Call SUB_CLEAR()
+            Case ENM_MY_EXEC_DO.DO_END
+                Call SUB_END()
+            Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
+                Call SUB_SHOW_SETTING()
+            Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
+                Call SUB_SHOW_COMMANDLINE()
+            Case ENM_MY_EXEC_DO.DO_SHOW_CONFIG_SETTINGS
+                Call SUB_SHOW_CONFIG_SETTINGS()
+        End Select
+
+        Call Application.DoEvents()
+        BLN_PROCESS_DOING = False
+        Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -274,7 +315,10 @@
         Dim CTL_SEARCH As Control
         CTL_SEARCH = Nothing
         Select Case True
-
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_FROM) Or (CTL_ACTIVE Is BTN_CODE_OWNER_FROM_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_FROM
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_TO) Or (CTL_ACTIVE Is BTN_CODE_OWNER_TO_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_TO
             Case Else
 
         End Select
@@ -289,46 +333,22 @@
         Dim BLN_RET As Boolean
         BLN_RET = False
         Select Case True
+            Case (CTL_SEARCH Is TXT_CODE_OWNER_FROM) Or (CTL_SEARCH Is TXT_CODE_OWNER_TO)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_CODE_OWNER As Integer
+                INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
+
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_OWNER(INT_CODE_OWNER, SNG_FONT_SIZE)
+
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
             Case Else
                 'スルー
         End Select
-    End Sub
-#End Region
-
-#Region "各処理呼出元"
-    Private Sub SUB_EXEC_DO(
-    ByVal enmEXEC_DO As ENM_MY_EXEC_DO
-    )
-        If BLN_PROCESS_DOING Then
-            Exit Sub
-        End If
-
-        Me.Cursor = Cursors.WaitCursor
-        BLN_PROCESS_DOING = True
-        Call Application.DoEvents()
-
-        Select Case enmEXEC_DO
-            Case ENM_MY_EXEC_DO.DO_SHOW_SEARCH
-                Call SUB_SHOW_SEARCH()
-            Case ENM_MY_EXEC_DO.DO_SEARCH
-                Call SUB_SEARCH()
-            Case ENM_MY_EXEC_DO.DO_BATCH
-                Call SUB_BATCH()
-            Case ENM_MY_EXEC_DO.DO_CLEAR
-                Call SUB_CLEAR()
-            Case ENM_MY_EXEC_DO.DO_END
-                Call SUB_END()
-            Case ENM_MY_EXEC_DO.DO_SHOW_SETTING
-                Call SUB_SHOW_SETTING()
-            Case ENM_MY_EXEC_DO.DO_SHOW_COMMANDLINE
-                Call SUB_SHOW_COMMANDLINE()
-            Case ENM_MY_EXEC_DO.DO_SHOW_CONFIG_SETTINGS
-                Call SUB_SHOW_CONFIG_SETTINGS()
-        End Select
-
-        Call Application.DoEvents()
-        BLN_PROCESS_DOING = False
-        Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -792,6 +812,13 @@
         CTL_ACTIVE = Me.ActiveControl
 
         Select Case True
+            Case CTL_ACTIVE Is TXT_CODE_OWNER_FROM
+                If Not (CTL_ACTIVE.Text = "") Then
+                    If TXT_CODE_OWNER_TO.Text = "" Then
+                        TXT_CODE_OWNER_TO.Text = CTL_ACTIVE.Text
+                    End If
+                End If
+                BLN_RET = True
             Case Else
                 BLN_RET = True
         End Select
@@ -891,6 +918,14 @@
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
     End Sub
+
+    Private Sub BTN_CODE_OWNER_FROM_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_FROM_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_TO_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_TO_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
 #End Region
 
 #Region "イベント-グリッドクリック"
@@ -913,6 +948,16 @@
         Dim DAT_TO As DateTime
         DAT_TO = FUNC_GET_DATE_LASTMONTH(DAT_FROM)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_TO, DAT_TO)
+    End Sub
+#End Region
+
+#Region "イベント-テキストチェンジ"
+    Private Sub TXT_CODE_OWNER_FROM_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_FROM.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+
+    Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
     End Sub
 #End Region
 
