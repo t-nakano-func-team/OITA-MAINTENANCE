@@ -854,6 +854,13 @@
         CTL_ACTIVE = Me.ActiveControl
 
         Select Case True
+            Case CTL_ACTIVE Is TXT_CODE_OWNER_FROM
+                If Not (CTL_ACTIVE.Text = "") Then
+                    If TXT_CODE_OWNER_TO.Text = "" Then
+                        TXT_CODE_OWNER_TO.Text = CTL_ACTIVE.Text
+                    End If
+                End If
+                BLN_RET = True
             Case Else
                 BLN_RET = True
         End Select
@@ -960,6 +967,14 @@
 
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_FROM_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_FROM_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_TO_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_TO_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
     End Sub
 #End Region
 
