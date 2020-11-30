@@ -99,6 +99,9 @@
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
         Public DATE_INVOICE_FROM As DateTime
         Public DATE_INVOICE_TO As DateTime
+        Public FLAG_CONTRACT As Integer
+        Public CODE_OWNER_FROM As Integer
+        Public CODE_OWNER_TO As Integer
     End Structure
 #End Region
 
@@ -407,15 +410,15 @@
             Call .Append("*" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_INVOICE WITH(NOLOCK)" & Environment.NewLine)
-            Call .Append("WHERE" & Environment.NewLine)
-            Call .Append("1=1" & Environment.NewLine)
-            Call .Append(STR_WHERE) 'WHERE条件
             Call .Append(") AS MAIN" & Environment.NewLine)
             Call .Append("INNER JOIN" & Environment.NewLine)
             Call .Append("MNT_T_CONTRACT AS SUB_01" & Environment.NewLine)
             Call .Append("ON" & Environment.NewLine)
             Call .Append("MAIN.NUMBER_CONTRACT=SUB_01.NUMBER_CONTRACT" & Environment.NewLine)
             Call .Append("AND MAIN.SERIAL_CONTRACT=SUB_01.SERIAL_CONTRACT" & Environment.NewLine)
+            Call .Append("WHERE" & Environment.NewLine)
+            Call .Append("1=1" & Environment.NewLine)
+            Call .Append(STR_WHERE) 'WHERE条件
 
             Call .Append("ORDER BY" & Environment.NewLine)
             Call .Append("SUB_01.FLAG_CONTRACT,MAIN.DATE_INVOICE,MAIN.NUMBER_CONTRACT,MAIN.SERIAL_CONTRACT" & Environment.NewLine)
@@ -516,7 +519,7 @@
                 .COUNT_INVOICE = SRT_RECORD_CONTRACT.DATA.COUNT_INVOICE
                 .KINGAKU_CONTRACT = SRT_RECORD_CONTRACT.DATA.KINGAKU_CONTRACT
 
-                .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT)
+                .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT, True)
                 Select Case .FLAG_CONTRACT
                     Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
                         .CODE_OWNER_NAME = FUNC_GET_MNT_M_OWNER_NAME_OWNER(.CODE_OWNER, True)
@@ -525,7 +528,7 @@
                     Case Else
                         .CODE_OWNER_NAME = ""
                 End Select
-                .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION)
+                .CODE_SECTION_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION, True)
 
                 .KINGAKU_INVOICE_DETAIL = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_DETAIL
                 .KINGAKU_INVOICE_VAT = SRT_RECORD_INVOICE.DATA.KINGAKU_INVOICE_VAT
@@ -735,6 +738,10 @@
         With srtCONDITIONS
             .DATE_INVOICE_FROM = DTP_DATE_INVOICE_FROM.Value
             .DATE_INVOICE_TO = DTP_DATE_INVOICE_TO.Value
+
+            .FLAG_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_CONTRACT)
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
         End With
 
         Return srtCONDITIONS
@@ -748,7 +755,13 @@
             Dim SRT_INVOICE_PERIOD As SRT_DATE_PERIOD
             SRT_INVOICE_PERIOD.DATE_FROM = SRT_CONDITIONS.DATE_INVOICE_FROM
             SRT_INVOICE_PERIOD.DATE_TO = SRT_CONDITIONS.DATE_INVOICE_TO
-            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_INVOICE_PERIOD, "DATE_INVOICE")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_DATE_FROM_TO(SRT_INVOICE_PERIOD, "MAIN.DATE_INVOICE")
+
+            If .FLAG_CONTRACT > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.FLAG_CONTRACT, "SUB_01.FLAG_CONTRACT", "=")
+            End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_FROM, "SUB_01.CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_TO, "SUB_01.CODE_OWNER", "<=")
         End With
 
         Return STR_WHERE

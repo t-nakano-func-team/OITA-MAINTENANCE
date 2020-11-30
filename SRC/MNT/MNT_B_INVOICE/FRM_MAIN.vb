@@ -101,6 +101,9 @@
 
     Public Structure SRT_SEARCH_CONDITIONS '検索条件
         Public DATE_INVOICE As DateTime
+        Public FLAG_CONTRACT As Integer
+        Public CODE_OWNER_FROM As Integer
+        Public CODE_OWNER_TO As Integer
     End Structure
 #End Region
 
@@ -140,6 +143,8 @@
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
         Call SUB_CONTROL_INITALIZE_DateTimePicker(DTP_DATE_INVOICE, cstVB_DATE_MIN, DAT_DATE_TO)
+
+        Call SUB_SYSTEM_COMMBO_MNT_M_KIND(CMB_FLAG_CONTRACT, ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, True, "全て")
     End Sub
 
     Private Sub SUB_CTRL_VALUE_INIT()
@@ -149,6 +154,8 @@
         LBL_DATE_ACTIVE_HEAD.Text = Format(datSYSTEM_TOTAL_DATE_ACTIVE, "yyyy年MM月dd日")
 
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE, datSYSTEM_TOTAL_DATE_ACTIVE)
+
+        Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_CONTRACT)
 
         ReDim SRT_GRID_DATA_MAIN(0)
         Call SUB_REFRESH_GRID()
@@ -349,7 +356,10 @@
         Dim CTL_SEARCH As Control
         CTL_SEARCH = Nothing
         Select Case True
-
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_FROM) Or (CTL_ACTIVE Is BTN_CODE_OWNER_FROM_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_FROM
+            Case (CTL_ACTIVE Is TXT_CODE_OWNER_TO) Or (CTL_ACTIVE Is BTN_CODE_OWNER_TO_SEARCH)
+                CTL_SEARCH = TXT_CODE_OWNER_TO
             Case Else
 
         End Select
@@ -364,6 +374,19 @@
         Dim BLN_RET As Boolean
         BLN_RET = False
         Select Case True
+            Case (CTL_SEARCH Is TXT_CODE_OWNER_FROM) Or (CTL_SEARCH Is TXT_CODE_OWNER_TO)
+                Dim TXT_SEARCH As TextBox
+                TXT_SEARCH = CTL_SEARCH
+                Dim INT_CODE_OWNER As Integer
+                INT_CODE_OWNER = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SEARCH.Text)
+
+                BLN_RET = FUNC_SHOW_SYSTEM_INDIVIDUAL_SEARCH_OWNER(INT_CODE_OWNER, SNG_FONT_SIZE)
+
+                If BLN_RET Then
+                    TXT_SEARCH.Text = Format(INT_CODE_OWNER, New String("0", TXT_SEARCH.MaxLength))
+                    Call TXT_SEARCH.Focus()
+                    Call TXT_SEARCH.SelectAll()
+                End If
             Case Else
                 'スルー
         End Select
@@ -527,7 +550,7 @@
                 .KINGAKU_CONTRACT = SRT_RECORD_CONTRACT.DATA.KINGAKU_CONTRACT
 
                 .SERIAL_INVOICE_MAX = FUNC_GET_MNT_T_INVOICE_MAX_SERIAL_INVOICE(.NUMBER_CONTRACT, .SERIAL_CONTRACT)
-                .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT)
+                .FLAG_CONTRACT_NAME = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_CONTRACT, .FLAG_CONTRACT, True)
                 Select Case .FLAG_CONTRACT
                     Case ENM_SYSTEM_INDIVIDUAL_FLAG_CONTRACT.REGULAR
                         .CODE_OWNER_NAME = FUNC_GET_MNT_M_OWNER_NAME_OWNER(.CODE_OWNER, True)
@@ -537,7 +560,7 @@
                         .CODE_OWNER_NAME = ""
                 End Select
                 .CODE_SECTION_INVOICE = .CODE_SECTION
-                .CODE_SECTION_INVOICE_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION)
+                .CODE_SECTION_INVOICE_NAME = FUNC_GET_MNT_M_SECTION_NAME_SECTION(.CODE_SECTION, True)
 
                 .KINGAKU_INVOICE_DETAIL = .KINGAKU_CONTRACT
                 .KINGAKU_INVOICE_VAT = FUNC_GET_KINGAKU_VAT_FROM_DETAIL(.KINGAKU_INVOICE_DETAIL, SRT_CONDITIONS.DATE_INVOICE)
@@ -853,6 +876,10 @@
         Dim srtCONDITIONS As SRT_SEARCH_CONDITIONS
         With srtCONDITIONS
             .DATE_INVOICE = DTP_DATE_INVOICE.Value
+
+            .FLAG_CONTRACT = FUNC_GET_COMBO_KIND_CODE(CMB_FLAG_CONTRACT)
+            .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
+            .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
         End With
 
         Return srtCONDITIONS
@@ -864,6 +891,11 @@
 
         With SRT_CONDITIONS
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_INVOICE_BASE", "<=")
+            If .FLAG_CONTRACT > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.FLAG_CONTRACT, "FLAG_CONTRACT", "=")
+            End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_FROM, "CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_TO, "CODE_OWNER", "<=")
         End With
 
         Return STR_WHERE
@@ -875,6 +907,11 @@
 
         With SRT_CONDITIONS
             STR_WHERE &= FUNC_GET_SQL_WHERE_DATE(.DATE_INVOICE, "DATE_INVOICE_BASE", "<=")
+            If .FLAG_CONTRACT > 0 Then
+                STR_WHERE &= FUNC_GET_SQL_WHERE_INT(SRT_CONDITIONS.FLAG_CONTRACT, "FLAG_CONTRACT", "=")
+            End If
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_FROM, "CODE_OWNER", ">=")
+            STR_WHERE &= FUNC_GET_SQL_WHERE_INT(.CODE_OWNER_TO, "CODE_OWNER", "<=")
         End With
 
         Return STR_WHERE
@@ -976,6 +1013,13 @@
         CTL_ACTIVE = Me.ActiveControl
 
         Select Case True
+            Case CTL_ACTIVE Is TXT_CODE_OWNER_FROM
+                If Not (CTL_ACTIVE.Text = "") Then
+                    If TXT_CODE_OWNER_TO.Text = "" Then
+                        TXT_CODE_OWNER_TO.Text = CTL_ACTIVE.Text
+                    End If
+                End If
+                BLN_RET = True
             Case Else
                 BLN_RET = True
         End Select
@@ -1075,6 +1119,14 @@
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
     End Sub
+
+    Private Sub BTN_CODE_OWNER_FROM_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_FROM_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
+
+    Private Sub BTN_CODE_OWNER_TO_SEARCH_Click(sender As Object, e As EventArgs) Handles BTN_CODE_OWNER_TO_SEARCH.Click
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SEARCH)
+    End Sub
 #End Region
 
 #Region "イベント-グリッドクリック"
@@ -1093,6 +1145,16 @@
 #Region "イベント-グリッドダブルクリック"
     Private Sub DGV_VIEW_DATA_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_VIEW_DATA.CellDoubleClick
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SHOW_SUB_WINDOW)
+    End Sub
+#End Region
+
+#Region "イベント-テキストチェンジ"
+    Private Sub TXT_CODE_OWNER_FROM_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_FROM.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+
+    Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
+        Call SUB_GET_NAME_OWNER_INPUT(sender)
     End Sub
 #End Region
 
