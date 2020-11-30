@@ -888,6 +888,12 @@
     End Sub
 #End Region
 
+#Region "イベント-ダブルクリック"
+    Private Sub LBL_FLAG_OUTPUT_DoubleClick(sender As Object, e As EventArgs) Handles LBL_FLAG_OUTPUT.DoubleClick
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_OUTPUT_DONE)
+    End Sub
+#End Region
+
     Private Sub FRM_SUB_01_Load(sender As Object, e As EventArgs) Handles Me.Load
         Call SUB_CTRL_VIEW_INIT()
         Call SUB_CTRL_VALUE_INIT()
@@ -918,5 +924,6 @@
     Private Sub FRM_SUB_01_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
         Call SUB_COMMON_EVENT_KEYPRESS(Me, e.KeyChar, e.Handled)
     End Sub
+
 
 End Class
