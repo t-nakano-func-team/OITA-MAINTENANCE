@@ -131,16 +131,17 @@
     'グリッド行選択処理
     Private Sub SUB_SELECT_SEQ()
 
-        Dim INT_CODE_OWNER As Integer
-        INT_CODE_OWNER = FUNC_GET_SELECT_RET_CODE()
-        If INT_CODE_OWNER <= 0 Then
+        Dim SRT_KEY As SRT_TABLE_JM_T_CUSTOMER_CON_KEY
+        SRT_KEY = FUNC_GET_SELECT_RET_CODE()
+        If SRT_KEY.CODE_CUSTOMER <= 0 Then
             Exit Sub
         End If
 
         Call SUB_CLEAR()
 
-        TXT_CODE_CUSTOMER.Text = INT_CODE_OWNER
-        Call TXT_CODE_CUSTOMER.Focus()
+        TXT_CODE_CUSTOMER.Text = SRT_KEY.CODE_CUSTOMER
+        TXT_CODE_CUSTOMER_SUB.Text = SRT_KEY.CODE_CUSTOMER_SUB
+        Call TXT_CODE_CUSTOMER_SUB.Focus()
         Call Application.DoEvents()
 
         Call SUB_DATA_EDIT()
@@ -436,23 +437,31 @@
     End Sub
 
     'グリッドの選択されているキー項目を取得
-    Private Function FUNC_GET_SELECT_RET_CODE() As Integer
+    Private Function FUNC_GET_SELECT_RET_CODE() As SRT_TABLE_JM_T_CUSTOMER_CON_KEY
         Dim INT_SELECT_ROW_INDEX As Integer
         INT_SELECT_ROW_INDEX = FUNC_GET_SELECT_ROW_INDEX(DGV_VIEW_DATA)
 
+        Dim SRT_RET As SRT_TABLE_JM_T_CUSTOMER_CON_KEY
+        With SRT_RET
+            .NUMBER_USER = -1
+            .CODE_CUSTOMER = -1
+            .CODE_CUSTOMER_SUB = -1
+        End With
+
         If INT_SELECT_ROW_INDEX <= 0 Then
-            Return -1
+            Return SRT_RET
         End If
 
         Dim INT_SRT_INDEX As Integer
 
         INT_SRT_INDEX = INT_SELECT_ROW_INDEX
 
-        Dim INT_RET As Integer
         With SRT_GRID_DATA_MAIN(INT_SRT_INDEX)
-            INT_RET = FUNC_VALUE_CONVERT_NUMERIC_INT(.CODE_CUSTOMER)
+            SRT_RET.NUMBER_USER = .NUMBER_USER
+            SRT_RET.CODE_CUSTOMER = .CODE_CUSTOMER
+            SRT_RET.CODE_CUSTOMER_SUB = .CODE_CUSTOMER_SUB
         End With
-        Return INT_RET
+        Return SRT_RET
     End Function
 
     Private Sub SUB_SET_INDEX_GRID_FROM_KEY(ByVal SRT_KEY As SRT_TABLE_JM_T_CUSTOMER_CON_KEY)
@@ -796,6 +805,12 @@
 
     Private Sub BTN_END_Click(sender As Object, e As EventArgs) Handles BTN_END.Click
         Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_END)
+    End Sub
+#End Region
+
+#Region "イベント-グリッドダブルクリック"
+    Private Sub DGV_VIEW_DATA_DoubleClick(sender As Object, e As EventArgs) Handles DGV_VIEW_DATA.DoubleClick
+        Call SUB_EXEC_DO(ENM_MY_EXEC_DO.DO_SELECT_SEQ)
     End Sub
 #End Region
 
