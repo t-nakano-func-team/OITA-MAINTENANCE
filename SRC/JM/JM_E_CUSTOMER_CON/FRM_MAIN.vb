@@ -213,7 +213,31 @@
 
     '削除
     Private Sub SUB_DELETE()
+        Dim RST_MSG As System.Windows.Forms.DialogResult
+        RST_MSG = MessageBox.Show("データを削除します。" & Environment.NewLine & "よろしいですか？", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If RST_MSG = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
 
+        Dim SRT_KEY As SRT_TABLE_JM_T_CUSTOMER_CON_KEY
+        SRT_KEY = FUNC_GET_INPUT_KEY()
+
+        If Not FUNC_SYSTEM_BEGIN_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        '物理・論理削除
+        If Not FUNC_DELETE_RECORD(SRT_KEY) Then
+            Call MessageBox.Show(STR_FUNC_DELETE_RECORD_LAST_ERROR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Call FUNC_SYSTEM_ROLLBACK_TRANSACTION()
+            Exit Sub
+        End If
+
+        If Not FUNC_SYSTEM_COMMIT_TRANSACTION() Then
+            Call MessageBox.Show(FUNC_SYSTEM_SQLGET_ERR_MESSAGE(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         Call SUB_CLEAR()
     End Sub
 
@@ -261,6 +285,37 @@
 
         Return True
     End Function
+
+    Private STR_FUNC_DELETE_RECORD_LAST_ERROR As String
+    Private Function FUNC_DELETE_RECORD(ByRef SRT_KEY As SRT_TABLE_JM_T_CUSTOMER_CON_KEY) As Boolean
+
+        Dim SRT_DATA As SRT_TABLE_JM_T_CUSTOMER_CON_DATA
+        SRT_DATA = Nothing
+        Call FUNC_SELECT_TABLE_JM_T_CUSTOMER_CON(SRT_KEY, SRT_DATA)
+
+        If True Then
+            If Not FUNC_DELETE_TABLE_JM_T_CUSTOMER_CON(SRT_KEY) Then '物理削除
+                STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+
+            Dim SRT_CHILD_KEY As SRT_TABLE_JM_T_CUSTOMER_CON_KEY
+            With SRT_CHILD_KEY
+                .NUMBER_USER = SRT_KEY.NUMBER_USER
+                .CODE_CUSTOMER = SRT_KEY.CODE_CUSTOMER_SUB
+                .CODE_CUSTOMER_SUB = SRT_KEY.CODE_CUSTOMER
+            End With
+
+            If Not FUNC_DELETE_TABLE_JM_T_CUSTOMER_CON(SRT_CHILD_KEY) Then '物理削除
+                STR_FUNC_DELETE_RECORD_LAST_ERROR = FUNC_SYSTEM_SQLGET_ERR_MESSAGE()
+                Return False
+            End If
+        Else
+        End If
+
+        Return True
+    End Function
+
 
 #End Region
 
