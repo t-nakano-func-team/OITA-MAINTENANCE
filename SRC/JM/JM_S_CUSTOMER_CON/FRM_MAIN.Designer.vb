@@ -49,6 +49,7 @@ Partial Class FRM_MAIN
         Me.LBL_COUNT_SEARCH = New System.Windows.Forms.Label()
         Me.LBL_COUNT_SEARCH_GUIDE = New System.Windows.Forms.Label()
         Me.BTN_SEARCH = New System.Windows.Forms.Button()
+        Me.TVW_VIEW_DATA = New System.Windows.Forms.TreeView()
         Me.GRP_FOOT.SuspendLayout()
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_HEAD.SuspendLayout()
@@ -214,6 +215,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GRP_BODY.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.GRP_BODY.Controls.Add(Me.TVW_VIEW_DATA)
         Me.GRP_BODY.Controls.Add(Me.DGV_VIEW_DATA)
         Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_DATA)
         Me.GRP_BODY.Controls.Add(Me.PNL_INPUT_KEY)
@@ -242,7 +244,7 @@ Partial Class FRM_MAIN
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_VIEW_DATA.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_VIEW_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(10, 115)
+        Me.DGV_VIEW_DATA.Location = New System.Drawing.Point(250, 115)
         Me.DGV_VIEW_DATA.MultiSelect = False
         Me.DGV_VIEW_DATA.Name = "DGV_VIEW_DATA"
         Me.DGV_VIEW_DATA.ReadOnly = True
@@ -257,7 +259,7 @@ Partial Class FRM_MAIN
         Me.DGV_VIEW_DATA.ShowCellToolTips = False
         Me.DGV_VIEW_DATA.ShowEditingIcon = False
         Me.DGV_VIEW_DATA.ShowRowErrors = False
-        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(740, 305)
+        Me.DGV_VIEW_DATA.Size = New System.Drawing.Size(500, 305)
         Me.DGV_VIEW_DATA.TabIndex = 2
         Me.DGV_VIEW_DATA.TabStop = False
         '
@@ -412,6 +414,13 @@ Partial Class FRM_MAIN
         Me.BTN_SEARCH.Text = "検索"
         Me.BTN_SEARCH.UseVisualStyleBackColor = False
         '
+        'TVW_VIEW_DATA
+        '
+        Me.TVW_VIEW_DATA.Location = New System.Drawing.Point(10, 115)
+        Me.TVW_VIEW_DATA.Name = "TVW_VIEW_DATA"
+        Me.TVW_VIEW_DATA.Size = New System.Drawing.Size(230, 310)
+        Me.TVW_VIEW_DATA.TabIndex = 3
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -471,4 +480,5 @@ Partial Class FRM_MAIN
     Friend WithEvents LBL_CODE_CUSTOMER_NAME As Label
     Friend WithEvents LBL_CODE_CUSTOMER_GUIDE As Label
     Friend WithEvents TXT_CODE_CUSTOMER As TextBox
+    Friend WithEvents TVW_VIEW_DATA As TreeView
 End Class
