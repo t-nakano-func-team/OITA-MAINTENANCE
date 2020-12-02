@@ -34,10 +34,13 @@
 #Region "画面用・構造体"
     Private Structure SRT_MY_GRID_DATA
         Public COUNT_CONNECTION As Integer
+        Public CODE_CUSTOMER_PAR As Integer
         Public CODE_CUSTOMER As Integer
+        Public CODE_CONNECTION_ONE As Integer
         Public CODE_CONNECTION() As Integer
 
         Public CODE_CUSTOMER_NAME As String
+        Public CODE_CONNECTION_ONE_NAME As String
         Public CODE_CONNECTION_NAME As String
     End Structure
 
@@ -137,7 +140,7 @@
 
         Call SUB_WINDOW_MODE_CHANGE(ENM_MY_WINDOW_MODE.INPUT_DATA)
         Call SUB_REFRESH_GRID()
-
+        Call SUB_REFRESH_TREE()
     End Sub
 
     Private Sub SUB_REFRESH_COUNT(ByVal INT_COUNT As Integer)
@@ -213,23 +216,36 @@
         ReDim SRT_GRID_DATA_MAIN(0)
 
         Dim SRT_RECORD_MAIN() As SRT_TABLE_JM_T_CUSTOMER_CON
-        SRT_RECORD_MAIN = FUNC_GET_CODE_CUSTOMER_CON(SRT_CONDITIONS.NUMBER_USER, SRT_CONDITIONS.CODE_CUSTOMER)
+        ReDim SRT_RECORD_MAIN(1)
+        With SRT_RECORD_MAIN(1).KEY
+            .NUMBER_USER = SRT_CONDITIONS.NUMBER_USER
+            .CODE_CUSTOMER = SRT_CONDITIONS.CODE_CUSTOMER
+            .CODE_CUSTOMER_SUB = SRT_CONDITIONS.CODE_CUSTOMER
+        End With
+        With SRT_RECORD_MAIN(1).DATA
+            .CODE_CONNECTION = 999
+        End With
         Dim INT_CODE_CONNECTION() As Integer
         ReDim INT_CODE_CONNECTION(0)
-        Call SUB_ADD_GRID_DATA(SRT_CONDITIONS.CODE_CUSTOMER, SRT_GRID_DATA_MAIN, SRT_RECORD_MAIN, 1, INT_CODE_CONNECTION)
+        Call SUB_ADD_GRID_DATA(SRT_GRID_DATA_MAIN, SRT_RECORD_MAIN, 0, INT_CODE_CONNECTION)
+
+        SRT_RECORD_MAIN = FUNC_GET_CODE_CUSTOMER_CON(SRT_CONDITIONS.NUMBER_USER, SRT_CONDITIONS.CODE_CUSTOMER)
+        ReDim INT_CODE_CONNECTION(0)
+        Call SUB_ADD_GRID_DATA(SRT_GRID_DATA_MAIN, SRT_RECORD_MAIN, 1, INT_CODE_CONNECTION)
 
         For i = 1 To SRT_RECORD_MAIN.Length - 1
             Dim SRT_RECORD_SUB() As SRT_TABLE_JM_T_CUSTOMER_CON
             SRT_RECORD_SUB = FUNC_GET_CODE_CUSTOMER_CON(SRT_CONDITIONS.NUMBER_USER, SRT_RECORD_MAIN(i).KEY.CODE_CUSTOMER_SUB)
             ReDim INT_CODE_CONNECTION(1)
             INT_CODE_CONNECTION(1) = SRT_RECORD_MAIN(i).DATA.CODE_CONNECTION
-            Call SUB_ADD_GRID_DATA(SRT_CONDITIONS.CODE_CUSTOMER, SRT_GRID_DATA_MAIN, SRT_RECORD_SUB, 2, INT_CODE_CONNECTION)
+            Call SUB_ADD_GRID_DATA(SRT_GRID_DATA_MAIN, SRT_RECORD_SUB, 2, INT_CODE_CONNECTION)
         Next
 
         For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1) '補助情報取得
             With SRT_GRID_DATA_MAIN(i)
                 .CODE_CUSTOMER_NAME = FUNC_GET_JM_M_CUSTOMER_NAME_CUSTOMER(SRT_CONDITIONS.NUMBER_USER, .CODE_CUSTOMER, True)
                 .CODE_CONNECTION_NAME = FUNC_GET_NAME_CODE_CONNECTION(.CODE_CONNECTION)
+                .CODE_CONNECTION_ONE_NAME = FUNC_GET_JM_M_CONNECTION_NAME_CONNECTION(.CODE_CONNECTION_ONE, True)
             End With
         Next
 
@@ -288,16 +304,17 @@
         Return SRT_RET
     End Function
 
-    Private Sub SUB_ADD_GRID_DATA(ByVal INT_CODE_CUSTOMER_MAIN As Integer, ByRef SRT_DATA() As SRT_MY_GRID_DATA, ByRef SRT_RECORD() As SRT_TABLE_JM_T_CUSTOMER_CON, ByVal INT_COUNT_CONNECTION As Integer, ByRef INT_CODE_CONNECTION() As Integer)
+    Private Sub SUB_ADD_GRID_DATA(ByRef SRT_DATA() As SRT_MY_GRID_DATA, ByRef SRT_RECORD() As SRT_TABLE_JM_T_CUSTOMER_CON, ByVal INT_COUNT_CONNECTION As Integer, ByRef INT_CODE_CONNECTION() As Integer)
 
         For i = 1 To (SRT_RECORD.Length - 1)
-            If FUNC_CHECK_CUSTOMER(INT_CODE_CUSTOMER_MAIN, SRT_DATA, SRT_RECORD(i).KEY.CODE_CUSTOMER_SUB) Then
+            If FUNC_CHECK_CUSTOMER(SRT_DATA, SRT_RECORD(i).KEY.CODE_CUSTOMER_SUB) Then
                 Continue For
             End If
             Dim INT_INDEX As Integer
             INT_INDEX = SRT_DATA.Length
             ReDim Preserve SRT_DATA(INT_INDEX)
             With SRT_DATA(INT_INDEX)
+                .CODE_CUSTOMER_PAR = SRT_RECORD(i).KEY.CODE_CUSTOMER
                 .CODE_CUSTOMER = SRT_RECORD(i).KEY.CODE_CUSTOMER_SUB
                 .COUNT_CONNECTION = INT_COUNT_CONNECTION
 
@@ -311,15 +328,17 @@
                 INT_JNDEX = .CODE_CONNECTION.Length
                 ReDim Preserve .CODE_CONNECTION(INT_JNDEX)
                 .CODE_CONNECTION(INT_JNDEX) = SRT_RECORD(i).DATA.CODE_CONNECTION
+
+                .CODE_CONNECTION_ONE = SRT_RECORD(i).DATA.CODE_CONNECTION
             End With
         Next
     End Sub
 
-    Private Function FUNC_CHECK_CUSTOMER(ByVal INT_CODE_CUSTOMER_MAIN As Integer, ByRef SRT_DATA() As SRT_MY_GRID_DATA, ByVal INT_CODE_CUSTOMER As Integer) As Boolean
+    Private Function FUNC_CHECK_CUSTOMER(ByRef SRT_DATA() As SRT_MY_GRID_DATA, ByVal INT_CODE_CUSTOMER As Integer) As Boolean
 
-        If INT_CODE_CUSTOMER_MAIN = INT_CODE_CUSTOMER Then
-            Return True
-        End If
+        'If INT_CODE_CUSTOMER_MAIN = INT_CODE_CUSTOMER Then
+        '    Return True
+        'End If
 
         For i = 1 To (SRT_DATA.Length - 1)
             With SRT_DATA(i)
@@ -338,7 +357,11 @@
 
         For i = 1 To (INT_CODE.Length - 1)
             Dim STR_TEMP As String
-            STR_TEMP = FUNC_GET_JM_M_CONNECTION_NAME_CONNECTION(INT_CODE(i), True)
+            If INT_CODE(i) >= 999 Then
+                STR_TEMP = "自分"
+            Else
+                STR_TEMP = FUNC_GET_JM_M_CONNECTION_NAME_CONNECTION(INT_CODE(i), True)
+            End If
             Dim STR_SEP As String
             If i = 1 Then
                 STR_SEP = ""
@@ -378,6 +401,83 @@
 
         Call SUB_SET_SELECT_ROW_INDEX(DGV_VIEW_DATA, 1)
     End Sub
+
+    Private Sub SUB_REFRESH_TREE()
+        Call TVW_VIEW_DATA.Nodes.Clear()
+        Dim TND_CHILD() As TreeNode
+        TND_CHILD = Nothing
+        For i = 1 To (SRT_GRID_DATA_MAIN.Length - 1)
+            With SRT_GRID_DATA_MAIN(i)
+                If .COUNT_CONNECTION <> 1 Then
+                    Continue For
+                End If
+
+                Dim INT_INDEX As Integer
+                If TND_CHILD Is Nothing Then
+                    INT_INDEX = 0
+                Else
+                    INT_INDEX = TND_CHILD.Length
+                End If
+
+                Dim TND_GCHILD() As TreeNode
+                TND_GCHILD = FUNC_GET_TREE_ONE(SRT_GRID_DATA_MAIN, SRT_GRID_DATA_MAIN(i).CODE_CUSTOMER, 2)
+                ReDim Preserve TND_CHILD(INT_INDEX)
+                If TND_GCHILD Is Nothing Then
+                    TND_CHILD(INT_INDEX) = New TreeNode(FUNC_GET_VIEW_NODE_NAME(SRT_GRID_DATA_MAIN(i)))
+                Else
+                    TND_CHILD(INT_INDEX) = New TreeNode(FUNC_GET_VIEW_NODE_NAME(SRT_GRID_DATA_MAIN(i)), TND_GCHILD)
+                End If
+            End With
+        Next
+
+        Dim TND_SELF As TreeNode
+        TND_SELF = New TreeNode(FUNC_GET_VIEW_NODE_NAME(SRT_GRID_DATA_MAIN(1)), TND_CHILD)
+
+        Dim TND_ROOT() As TreeNode = {TND_SELF}
+
+        Call TVW_VIEW_DATA.Nodes.AddRange(TND_ROOT) '最上位階層に対してまとめて項目（ノード）を追加
+        Call TVW_VIEW_DATA.TopNode.Expand()
+    End Sub
+
+    Private Function FUNC_GET_TREE_ONE(ByVal SRT_DATA() As SRT_MY_GRID_DATA, ByVal INT_CODE_CUSTOMER As Integer, ByVal INT_COUNT_CONNECTION As Integer) As TreeNode()
+        Dim TND_RET() As TreeNode
+        TND_RET = Nothing
+        For i = 1 To (SRT_DATA.Length - 1)
+            With SRT_DATA(i)
+                If .COUNT_CONNECTION <> INT_COUNT_CONNECTION Then
+                    Continue For
+                End If
+                If .CODE_CUSTOMER_PAR <> INT_CODE_CUSTOMER Then
+                    Continue For
+                End If
+
+                Dim INT_INDEX As Integer
+                If TND_RET Is Nothing Then
+                    INT_INDEX = 0
+                Else
+                    INT_INDEX = TND_RET.Length
+                End If
+                ReDim Preserve TND_RET(INT_INDEX)
+                TND_RET(INT_INDEX) = New TreeNode(FUNC_GET_VIEW_NODE_NAME(SRT_DATA(i)))
+            End With
+        Next
+
+        Return TND_RET
+    End Function
+
+    Private Function FUNC_GET_VIEW_NODE_NAME(ByRef SRT_DATA As SRT_MY_GRID_DATA) As String
+        Dim STR_RET As String
+
+        With SRT_DATA
+            If .CODE_CONNECTION_ONE_NAME = "" Then
+                STR_RET = .CODE_CUSTOMER_NAME
+            Else
+                STR_RET = .CODE_CUSTOMER_NAME & ":" & .CODE_CONNECTION_ONE_NAME
+            End If
+        End With
+
+        Return STR_RET
+    End Function
 #End Region
 
 #Region "チェック処理"

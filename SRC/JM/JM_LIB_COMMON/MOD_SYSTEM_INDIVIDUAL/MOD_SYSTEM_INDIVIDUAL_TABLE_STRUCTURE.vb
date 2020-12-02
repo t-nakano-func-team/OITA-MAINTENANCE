@@ -247,7 +247,7 @@ Public Module MOD_SYSTEM_INDIVIUAL_TABLE_STRUCTURE_JM_T_CUSTOMER_CON
 
 #Region "DATA"
     Public Structure SRT_TABLE_JM_T_CUSTOMER_CON_DATA
-        Public CODE_CONNECTION As String
+        Public CODE_CONNECTION As Integer
     End Structure
 #End Region
 
