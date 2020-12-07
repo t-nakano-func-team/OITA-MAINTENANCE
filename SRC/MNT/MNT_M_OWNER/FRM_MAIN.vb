@@ -371,7 +371,7 @@
         If BLN_PUT_FILE Then 'ファイル出力の場合
             Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else '印刷の場合
-            Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Call MessageBox.Show("印刷を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 

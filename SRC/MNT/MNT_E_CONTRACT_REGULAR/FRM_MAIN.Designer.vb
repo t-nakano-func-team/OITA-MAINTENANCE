@@ -843,7 +843,7 @@ Partial Class FRM_MAIN
         Me.TXT_KINGAKU_CONTRACT.Name = "TXT_KINGAKU_CONTRACT"
         Me.TXT_KINGAKU_CONTRACT.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_CONTRACT.TabIndex = 1
-        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_CONTRACT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         Me.TXT_KINGAKU_CONTRACT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_DATE_CONTRACT
