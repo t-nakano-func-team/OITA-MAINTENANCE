@@ -138,7 +138,7 @@
     Private Sub SUB_CTRL_VIEW_INIT()
         Call glbSubMakeDataTable(TBL_GRID_DATA_MAIN, " ,形態,契約番号,請求予定日,オーナー,契約内容,回数,担当部署,請求金額", "BSSSSSSSS")
         DGV_VIEW_DATA.DataSource = TBL_GRID_DATA_MAIN
-        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,3,4,5,6,6,3,3,4", "CLRRLLCLR")
+        Call SUB_DGV_COLUMN_WIDTH_INIT_COUNT_FONT(DGV_VIEW_DATA, "1,2,4,5,7,6,3,3,4", "CLRRLLCLR")
 
         Dim DAT_DATE_TO As DateTime
         DAT_DATE_TO = FUNC_GET_DATE_LASTMONTH(datSYSTEM_TOTAL_DATE_ACTIVE.AddMonths(1))
@@ -444,7 +444,9 @@
         STR_SQL = New System.Text.StringBuilder
         With STR_SQL
             Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("*" & Environment.NewLine)
+            Call .Append("*," & Environment.NewLine)
+            Call .Append("CODE_SECTION AS CODE_SECTION_SORT," & Environment.NewLine)
+            Call .Append("CODE_OWNER AS CODE_OWNER_SORT" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
@@ -453,7 +455,9 @@
             Call .Append(STR_WHERE) 'WHERE条件
             Call .Append("UNION ALL" & Environment.NewLine)
             Call .Append("SELECT" & Environment.NewLine)
-            Call .Append("*" & Environment.NewLine)
+            Call .Append("*," & Environment.NewLine)
+            Call .Append("1 AS CODE_SECTION_SORT," & Environment.NewLine)
+            Call .Append("1 AS CODE_OWNER_SORT" & Environment.NewLine)
             Call .Append("FROM" & Environment.NewLine)
             Call .Append("MNT_T_CONTRACT WITH(NOLOCK)" & Environment.NewLine)
             Call .Append("WHERE" & Environment.NewLine)
@@ -462,7 +466,7 @@
             Call .Append(STR_WHERE_SPOT) 'WHERE条件
 
             Call .Append("ORDER BY" & Environment.NewLine)
-            Call .Append("FLAG_CONTRACT,NUMBER_CONTRACT" & Environment.NewLine)
+            Call .Append("FLAG_CONTRACT,CODE_SECTION_SORT,CODE_OWNER_SORT,NUMBER_CONTRACT,SERIAL_CONTRACT" & Environment.NewLine)
         End With
 
         Dim SDR_READER As SqlClient.SqlDataReader
@@ -597,10 +601,10 @@
         For i = 1 To INT_MAX_INDEX
             With SRT_GRID_DATA_MAIN(i)
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CHECK) = False
-                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_CONTRACT_NAME) = .FLAG_CONTRACT_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.FLAG_CONTRACT_NAME) = .FLAG_CONTRACT_NAME.Substring(0, 2)
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NUMBER_CONTRACT_VIEW) = .FUNC_GET_NUMBER_SERIAL_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.DATE_CONTRACT) = .DATE_INVOICE_PLAN.ToLongDateString
-                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = .CODE_OWNER_NAME
+                OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_OWNER) = Format(.CODE_OWNER, New String("0", INT_SYSTEM_CODE_OWNER_MAX_LENGTH)) & " " & .CODE_OWNER_NAME
                 OBJ_TEMP(ENM_MY_GRID_MAIN.NAME_CONTRACT) = .NAME_CONTRACT
                 OBJ_TEMP(ENM_MY_GRID_MAIN.COUNT_INVOICE_VIEW) = .FUNC_GET_COUNT_INVOICE_VIEW
                 OBJ_TEMP(ENM_MY_GRID_MAIN.CODE_SECTION_NAME) = .CODE_SECTION_INVOICE_NAME
