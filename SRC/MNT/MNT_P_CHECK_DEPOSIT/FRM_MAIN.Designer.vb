@@ -61,6 +61,11 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_DEPOSIT_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_DEPOSIT_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -73,6 +78,7 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_OWNER.SuspendLayout()
         Me.PNL_DATE_ACTIVE.SuspendLayout()
         Me.PNL_DATE_DEPOSIT.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -279,6 +285,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNL_INPUT_KEY.Controls.Add(Me.Panel1)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_SORT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_ACTIVE)
@@ -292,7 +299,7 @@ Partial Class FRM_MAIN
         '
         Me.PNL_KIND_SORT.Controls.Add(Me.CMB_KIND_SORT)
         Me.PNL_KIND_SORT.Controls.Add(Me.LBL_KIND_SORT_GUIDE)
-        Me.PNL_KIND_SORT.Location = New System.Drawing.Point(5, 110)
+        Me.PNL_KIND_SORT.Location = New System.Drawing.Point(5, 145)
         Me.PNL_KIND_SORT.Name = "PNL_KIND_SORT"
         Me.PNL_KIND_SORT.Size = New System.Drawing.Size(240, 30)
         Me.PNL_KIND_SORT.TabIndex = 4
@@ -330,7 +337,7 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_OWNER.Controls.Add(Me.LBL_CODE_OWNER_FROM_NAME)
         Me.PNL_CODE_OWNER.Controls.Add(Me.BTN_CODE_OWNER_FROM_SEARCH)
         Me.PNL_CODE_OWNER.Controls.Add(Me.TXT_CODE_OWNER_FROM)
-        Me.PNL_CODE_OWNER.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_CODE_OWNER.Location = New System.Drawing.Point(5, 110)
         Me.PNL_CODE_OWNER.Name = "PNL_CODE_OWNER"
         Me.PNL_CODE_OWNER.Size = New System.Drawing.Size(730, 30)
         Me.PNL_CODE_OWNER.TabIndex = 3
@@ -539,6 +546,63 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金日"
         Me.LBL_DATE_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.TextBox2)
+        Me.Panel1.Location = New System.Drawing.Point(5, 75)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(240, 30)
+        Me.Panel1.TabIndex = 2
+        '
+        'Label1
+        '
+        Me.Label1.AutoEllipsis = True
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(145, 1)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(20, 25)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "～"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TextBox1
+        '
+        Me.TextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TextBox1.Location = New System.Drawing.Point(170, 1)
+        Me.TextBox1.MaxLength = 3
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(60, 25)
+        Me.TextBox1.TabIndex = 5
+        Me.TextBox1.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
+        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label3
+        '
+        Me.Label3.AutoEllipsis = True
+        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(1, 1)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(79, 25)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "入金連番"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TextBox2
+        '
+        Me.TextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TextBox2.Location = New System.Drawing.Point(80, 1)
+        Me.TextBox2.MaxLength = 3
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(60, 25)
+        Me.TextBox2.TabIndex = 1
+        Me.TextBox2.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
+        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -569,6 +633,8 @@ Partial Class FRM_MAIN
         Me.PNL_CODE_OWNER.PerformLayout()
         Me.PNL_DATE_ACTIVE.ResumeLayout(False)
         Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -612,4 +678,9 @@ Partial Class FRM_MAIN
     Friend WithEvents CMB_KIND_SORT As ComboBox
     Friend WithEvents LBL_KIND_SORT_GUIDE As Label
     Friend WithEvents BTN_PUT_FILE As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TextBox2 As TextBox
 End Class
