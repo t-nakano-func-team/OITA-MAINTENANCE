@@ -39,6 +39,11 @@ Partial Class FRM_MAIN
         Me.BTN_END = New System.Windows.Forms.Button()
         Me.GRP_BODY = New System.Windows.Forms.GroupBox()
         Me.PNL_INPUT_KEY = New System.Windows.Forms.Panel()
+        Me.PNL_SERIAL_DEPOSIT = New System.Windows.Forms.Panel()
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_SERIAL_DEPOSIT_TO = New System.Windows.Forms.TextBox()
+        Me.LBL_SERIAL_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
+        Me.TXT_SERIAL_DEPOSIT_FROM = New System.Windows.Forms.TextBox()
         Me.PNL_KIND_SORT = New System.Windows.Forms.Panel()
         Me.CMB_KIND_SORT = New System.Windows.Forms.ComboBox()
         Me.LBL_KIND_SORT_GUIDE = New System.Windows.Forms.Label()
@@ -61,11 +66,6 @@ Partial Class FRM_MAIN
         Me.DTP_DATE_DEPOSIT_TO = New System.Windows.Forms.DateTimePicker()
         Me.DTP_DATE_DEPOSIT_FROM = New System.Windows.Forms.DateTimePicker()
         Me.LBL_DATE_DEPOSIT_GUIDE = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.GRP_HEAD.SuspendLayout()
         Me.PNL_INFO_GUIDE.SuspendLayout()
         Me.PNL_NAME_USER_HEAD.SuspendLayout()
@@ -74,11 +74,11 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.SuspendLayout()
         Me.GRP_BODY.SuspendLayout()
         Me.PNL_INPUT_KEY.SuspendLayout()
+        Me.PNL_SERIAL_DEPOSIT.SuspendLayout()
         Me.PNL_KIND_SORT.SuspendLayout()
         Me.PNL_CODE_OWNER.SuspendLayout()
         Me.PNL_DATE_ACTIVE.SuspendLayout()
         Me.PNL_DATE_DEPOSIT.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GRP_HEAD
@@ -285,7 +285,7 @@ Partial Class FRM_MAIN
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PNL_INPUT_KEY.BackColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.PNL_INPUT_KEY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNL_INPUT_KEY.Controls.Add(Me.Panel1)
+        Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_SERIAL_DEPOSIT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_KIND_SORT)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_CODE_OWNER)
         Me.PNL_INPUT_KEY.Controls.Add(Me.PNL_DATE_ACTIVE)
@@ -294,6 +294,63 @@ Partial Class FRM_MAIN
         Me.PNL_INPUT_KEY.Name = "PNL_INPUT_KEY"
         Me.PNL_INPUT_KEY.Size = New System.Drawing.Size(740, 400)
         Me.PNL_INPUT_KEY.TabIndex = 0
+        '
+        'PNL_SERIAL_DEPOSIT
+        '
+        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE)
+        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.TXT_SERIAL_DEPOSIT_TO)
+        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.LBL_SERIAL_DEPOSIT_GUIDE)
+        Me.PNL_SERIAL_DEPOSIT.Controls.Add(Me.TXT_SERIAL_DEPOSIT_FROM)
+        Me.PNL_SERIAL_DEPOSIT.Location = New System.Drawing.Point(5, 75)
+        Me.PNL_SERIAL_DEPOSIT.Name = "PNL_SERIAL_DEPOSIT"
+        Me.PNL_SERIAL_DEPOSIT.Size = New System.Drawing.Size(240, 30)
+        Me.PNL_SERIAL_DEPOSIT.TabIndex = 2
+        '
+        'LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE
+        '
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.AutoEllipsis = True
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.Location = New System.Drawing.Point(145, 1)
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.Name = "LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE"
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.Size = New System.Drawing.Size(20, 25)
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.TabIndex = 4
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.Text = "～"
+        Me.LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TXT_SERIAL_DEPOSIT_TO
+        '
+        Me.TXT_SERIAL_DEPOSIT_TO.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_SERIAL_DEPOSIT_TO.Location = New System.Drawing.Point(170, 1)
+        Me.TXT_SERIAL_DEPOSIT_TO.MaxLength = 3
+        Me.TXT_SERIAL_DEPOSIT_TO.Name = "TXT_SERIAL_DEPOSIT_TO"
+        Me.TXT_SERIAL_DEPOSIT_TO.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_SERIAL_DEPOSIT_TO.TabIndex = 5
+        Me.TXT_SERIAL_DEPOSIT_TO.Tag = "Clear,Numeric,Format=000,Check,NotZero,Plus"
+        Me.TXT_SERIAL_DEPOSIT_TO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LBL_SERIAL_DEPOSIT_GUIDE
+        '
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.AutoEllipsis = True
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.ForeColor = System.Drawing.Color.Black
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Location = New System.Drawing.Point(1, 1)
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Name = "LBL_SERIAL_DEPOSIT_GUIDE"
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Size = New System.Drawing.Size(79, 25)
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.TabIndex = 0
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.Text = "入金連番"
+        Me.LBL_SERIAL_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TXT_SERIAL_DEPOSIT_FROM
+        '
+        Me.TXT_SERIAL_DEPOSIT_FROM.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.TXT_SERIAL_DEPOSIT_FROM.Location = New System.Drawing.Point(80, 1)
+        Me.TXT_SERIAL_DEPOSIT_FROM.MaxLength = 3
+        Me.TXT_SERIAL_DEPOSIT_FROM.Name = "TXT_SERIAL_DEPOSIT_FROM"
+        Me.TXT_SERIAL_DEPOSIT_FROM.Size = New System.Drawing.Size(60, 25)
+        Me.TXT_SERIAL_DEPOSIT_FROM.TabIndex = 1
+        Me.TXT_SERIAL_DEPOSIT_FROM.Tag = "Clear,Numeric,Format=000,Check,NotZero,Plus"
+        Me.TXT_SERIAL_DEPOSIT_FROM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_KIND_SORT
         '
@@ -546,63 +603,6 @@ Partial Class FRM_MAIN
         Me.LBL_DATE_DEPOSIT_GUIDE.Text = "入金日"
         Me.LBL_DATE_DEPOSIT_GUIDE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.TextBox1)
-        Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.TextBox2)
-        Me.Panel1.Location = New System.Drawing.Point(5, 75)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(240, 30)
-        Me.Panel1.TabIndex = 2
-        '
-        'Label1
-        '
-        Me.Label1.AutoEllipsis = True
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(145, 1)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(20, 25)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "～"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TextBox1
-        '
-        Me.TextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TextBox1.Location = New System.Drawing.Point(170, 1)
-        Me.TextBox1.MaxLength = 3
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(60, 25)
-        Me.TextBox1.TabIndex = 5
-        Me.TextBox1.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label3
-        '
-        Me.Label3.AutoEllipsis = True
-        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(1, 1)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(79, 25)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "入金連番"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'TextBox2
-        '
-        Me.TextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.TextBox2.Location = New System.Drawing.Point(80, 1)
-        Me.TextBox2.MaxLength = 3
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(60, 25)
-        Me.TextBox2.TabIndex = 1
-        Me.TextBox2.Tag = "Clear,Numeric,Format=000000,Check,NotZero,Plus"
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'FRM_MAIN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
@@ -628,13 +628,13 @@ Partial Class FRM_MAIN
         Me.pnlFUNCTION_GROUP.PerformLayout()
         Me.GRP_BODY.ResumeLayout(False)
         Me.PNL_INPUT_KEY.ResumeLayout(False)
+        Me.PNL_SERIAL_DEPOSIT.ResumeLayout(False)
+        Me.PNL_SERIAL_DEPOSIT.PerformLayout()
         Me.PNL_KIND_SORT.ResumeLayout(False)
         Me.PNL_CODE_OWNER.ResumeLayout(False)
         Me.PNL_CODE_OWNER.PerformLayout()
         Me.PNL_DATE_ACTIVE.ResumeLayout(False)
         Me.PNL_DATE_DEPOSIT.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -678,9 +678,9 @@ Partial Class FRM_MAIN
     Friend WithEvents CMB_KIND_SORT As ComboBox
     Friend WithEvents LBL_KIND_SORT_GUIDE As Label
     Friend WithEvents BTN_PUT_FILE As Button
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents PNL_SERIAL_DEPOSIT As Panel
+    Friend WithEvents LBL_SERIAL_DEPOSIT_FROM_TO_GUIDE As Label
+    Friend WithEvents TXT_SERIAL_DEPOSIT_TO As TextBox
+    Friend WithEvents LBL_SERIAL_DEPOSIT_GUIDE As Label
+    Friend WithEvents TXT_SERIAL_DEPOSIT_FROM As TextBox
 End Class

@@ -61,6 +61,8 @@
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_ACTIVE_FROM, datSYSTEM_TOTAL_DATE_ACTIVE)
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_ACTIVE_TO, datSYSTEM_TOTAL_DATE_ACTIVE)
 
+        Call SUB_REFRESH_SERIAL_DEPOSIT()
+
         Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_KIND_SORT)
     End Sub
 #End Region
@@ -119,6 +121,8 @@
             .DATE_DPOSIT_TO = DTP_DATE_DEPOSIT_TO.Value
             .DATE_ACTIVE_FROM = DTP_DATE_ACTIVE_FROM.Value
             .DATE_ACTIVE_TO = DTP_DATE_ACTIVE_TO.Value
+            .SERIAL_DEPOSIT_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SERIAL_DEPOSIT_FROM.Text, CST_SYSTEM_SERIAL_DEPOSIT_MIN_VALUE)
+            .SERIAL_DEPOSIT_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_SERIAL_DEPOSIT_TO.Text, CST_SYSTEM_SERIAL_DEPOSIT_MAX_VALUE)
             .CODE_OWNER_FROM = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_FROM.Text, CST_SYSTEM_CODE_OWNER_MIN_VALUE)
             .CODE_OWNER_TO = FUNC_VALUE_CONVERT_NUMERIC_INT(TXT_CODE_OWNER_TO.Text, CST_SYSTEM_CODE_OWNER_MAX_VALUE)
             .KIND_SORT = FUNC_GET_COMBO_KIND_CODE(CMB_KIND_SORT)
@@ -316,6 +320,11 @@
         CTL_ACTIVE = Me.ActiveControl
 
         Select Case True
+            Case CTL_ACTIVE Is DTP_DATE_ACTIVE_TO
+                Call System.Windows.Forms.SendKeys.SendWait("{LEFT}")
+                Call Application.DoEvents()
+                Call SUB_REFRESH_SERIAL_DEPOSIT()
+                BLN_RET = True
             Case CTL_ACTIVE Is TXT_CODE_OWNER_FROM
                 If Not (CTL_ACTIVE.Text = "") Then
                     If TXT_CODE_OWNER_TO.Text = "" Then
@@ -348,6 +357,18 @@
             Call MessageBox.Show("ファイル出力を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else '印刷の場合
             Call MessageBox.Show("印刷を行いました。", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub SUB_REFRESH_SERIAL_DEPOSIT()
+
+        Dim BLN_ENABLED As Boolean
+        BLN_ENABLED = (DTP_DATE_ACTIVE_FROM.Value = DTP_DATE_ACTIVE_TO.Value)
+
+        PNL_SERIAL_DEPOSIT.Enabled = BLN_ENABLED
+        If Not BLN_ENABLED Then
+            TXT_SERIAL_DEPOSIT_FROM.Text = ""
+            TXT_SERIAL_DEPOSIT_TO.Text = ""
         End If
     End Sub
 #End Region
@@ -461,6 +482,16 @@
 
     Private Sub TXT_CODE_OWNER_TO_TextChanged(sender As Object, e As EventArgs) Handles TXT_CODE_OWNER_TO.TextChanged
         Call SUB_GET_NAME_OWNER_INPUT(sender)
+    End Sub
+#End Region
+
+#Region "イベント-バリューチェンジ"
+    Private Sub DTP_DATE_ACTIVE_FROM_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_ACTIVE_FROM.ValueChanged
+        Call SUB_REFRESH_SERIAL_DEPOSIT()
+    End Sub
+
+    Private Sub DTP_DATE_ACTIVE_TO_ValueChanged(sender As Object, e As EventArgs) Handles DTP_DATE_ACTIVE_TO.ValueChanged
+        Call SUB_REFRESH_SERIAL_DEPOSIT()
     End Sub
 #End Region
 
