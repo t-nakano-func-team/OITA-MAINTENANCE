@@ -787,8 +787,8 @@
 #Region "その他処理"
     Private Sub SUB_REFRESH_DATE_WORK()
         Dim DAT_SET_FROM As DateTime
-        DAT_SET_FROM = DTP_DATE_CONTRACT.Value.AddDays(-1)
-
+        'DAT_SET_FROM = DTP_DATE_CONTRACT.Value.AddDays(-1)
+        DAT_SET_FROM = DTP_DATE_CONTRACT.Value
         Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_MAINTENANCE_START, DAT_SET_FROM)
 
         Call SUB_REFRESH_DATE_MAINTENANCE_END_VALUE()
