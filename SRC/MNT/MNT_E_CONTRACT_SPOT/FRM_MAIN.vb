@@ -836,7 +836,9 @@
                 End If
         End Select
 
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
+        If DTP_DATE_INVOICE_BASE.Enabled Then
+            Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
+        End If
     End Sub
 
     Private Sub SUB_REFRESH_ID_DONE(ByRef SRT_DATA As SRT_COUNT_ALREADY)

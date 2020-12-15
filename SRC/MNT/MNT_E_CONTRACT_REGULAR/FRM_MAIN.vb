@@ -942,7 +942,9 @@
                 DAT_SET = FUNC_GET_DATE_LASTMONTH(DAT_DATE_CALC_BASE)
         End Select
 
-        Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
+        If DTP_DATE_INVOICE_BASE.Enabled Then
+            Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_INVOICE_BASE, DAT_SET)
+        End If
     End Sub
 
     Private Sub SUB_REFRESH_COUNT_INVOICE()
