@@ -201,6 +201,16 @@
             Exit Sub
         End If
 
+        If CHK_FLAG_DEPOSIT_DONE.Checked Then
+            '項目の値を一部引き継ぐ
+            With SRT_INSERT.DATA
+                DAT_DATE_DEPOSIT_INIT_VALUE = .DATE_DEPOSIT
+                INT_FLAG_SALE_INIT_VALUE = .FLAG_SALE
+                INT_FLAG_DEPOSIT_INIT_VALUE = .FLAG_DEPOSIT
+                INT_FLAG_DEPOSIT_SUB_INIT_VALUE = .FLAG_DEPOSIT_SUB
+            End With
+        End If
+
         Me.RET_EDIT_CANCEL = False
         Call SUB_END()
 
@@ -420,10 +430,21 @@
                 End If
                 LBL_FLAG_OUTPUT.Text = FUNC_GET_MNT_M_KIND_NAME_KIND(ENM_MNT_M_KIND_CODE_FLAG.FLAG_OUTPUT, .FLAG_OUTPUT)
             Else
-                Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, datSYSTEM_TOTAL_DATE_ACTIVE)
-                Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_SALE)
-                Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_DEPOSIT)
+                Call SUB_CONTROL_SET_VALUE_DateTimePicker(DTP_DATE_DEPOSIT, DAT_DATE_DEPOSIT_INIT_VALUE)
+                If INT_FLAG_SALE_INIT_VALUE > 0 Then
+                    Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_SALE, INT_FLAG_SALE_INIT_VALUE)
+                Else
+                    Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_SALE)
+                End If
+                If INT_FLAG_DEPOSIT_INIT_VALUE > 0 Then
+                    Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_DEPOSIT, INT_FLAG_DEPOSIT_INIT_VALUE)
+                Else
+                    Call SUB_SET_COMBO_KIND_CODE_FIRST(CMB_FLAG_DEPOSIT)
+                End If
                 Call SUB_REFRSH_ENABLED_FLAG_DEPOSIT_SUB()
+                If INT_FLAG_DEPOSIT_SUB_INIT_VALUE > 0 Then
+                    Call SUB_SET_COMBO_KIND_CODE(CMB_FLAG_DEPOSIT_SUB, INT_FLAG_DEPOSIT_SUB_INIT_VALUE)
+                End If
                 CMB_KINGAKU_FEE_DETAIL.Text = Format(0, "#,##0")
                 TXT_KINGAKU_FEE_VAT.Text = Format(0, "#,##0")
                 Call SUB_REFRESH_KINGAKU_FEE_TOTAL()

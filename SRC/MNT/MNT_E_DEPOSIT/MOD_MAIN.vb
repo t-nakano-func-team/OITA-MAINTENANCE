@@ -2,6 +2,13 @@
     Private Const CST_APPL_NAME As String = "入金入力"
     Friend BLN_SHOW_SETTING As Boolean
 
+#Region "入力項目-初期値"
+    Friend DAT_DATE_DEPOSIT_INIT_VALUE As DateTime
+    Friend INT_FLAG_SALE_INIT_VALUE As Integer
+    Friend INT_FLAG_DEPOSIT_INIT_VALUE As Integer
+    Friend INT_FLAG_DEPOSIT_SUB_INIT_VALUE As Integer
+#End Region
+
     Public Sub MAIN(ByVal STR_COMMAND_LINE() As String)
 
         If Not FUNC_SYSTEM_TOTAL_INITIALIZATION(STR_COMMAND_LINE) Then
