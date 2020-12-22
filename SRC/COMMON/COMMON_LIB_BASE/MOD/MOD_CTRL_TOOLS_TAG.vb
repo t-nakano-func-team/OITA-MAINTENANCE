@@ -407,6 +407,12 @@
                                         Else
                                             blnHandled = True
                                         End If
+                                    Case "-"
+                                        If InStr(.Tag, cstTagPlusWord) > 0 Then
+                                            blnHandled = True
+                                        Else
+                                            'スルー
+                                        End If
                                     Case Else
                                         Dim intASCII As Integer
                                         intASCII = Convert.ToInt32(chrKeyChar)

@@ -510,7 +510,7 @@ Partial Class FRM_SUB_01
         Me.TXT_KINGAKU_COST_VAT.Name = "TXT_KINGAKU_COST_VAT"
         Me.TXT_KINGAKU_COST_VAT.Size = New System.Drawing.Size(95, 25)
         Me.TXT_KINGAKU_COST_VAT.TabIndex = 4
-        Me.TXT_KINGAKU_COST_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_COST_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         Me.TXT_KINGAKU_COST_VAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LBL_KINGAKU_COST_GUIDE
@@ -534,7 +534,7 @@ Partial Class FRM_SUB_01
         Me.TXT_KINGAKU_COST_DETAIL.Name = "TXT_KINGAKU_COST_DETAIL"
         Me.TXT_KINGAKU_COST_DETAIL.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_COST_DETAIL.TabIndex = 1
-        Me.TXT_KINGAKU_COST_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_COST_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         Me.TXT_KINGAKU_COST_DETAIL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_FLAG_COST
@@ -590,7 +590,7 @@ Partial Class FRM_SUB_01
         Me.CMB_KINGAKU_FEE_DETAIL.Name = "CMB_KINGAKU_FEE_DETAIL"
         Me.CMB_KINGAKU_FEE_DETAIL.Size = New System.Drawing.Size(150, 26)
         Me.CMB_KINGAKU_FEE_DETAIL.TabIndex = 0
-        Me.CMB_KINGAKU_FEE_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.CMB_KINGAKU_FEE_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         '
         'LBL_KINGAKU_FEE_TOTAL
         '
@@ -614,7 +614,7 @@ Partial Class FRM_SUB_01
         Me.TXT_KINGAKU_FEE_VAT.Name = "TXT_KINGAKU_FEE_VAT"
         Me.TXT_KINGAKU_FEE_VAT.Size = New System.Drawing.Size(95, 25)
         Me.TXT_KINGAKU_FEE_VAT.TabIndex = 1
-        Me.TXT_KINGAKU_FEE_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_FEE_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         Me.TXT_KINGAKU_FEE_VAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LBL_KINGAKU_FEE_GUIDE
@@ -768,7 +768,7 @@ Partial Class FRM_SUB_01
         Me.TXT_KINGAKU_INVOICE_VAT.Name = "TXT_KINGAKU_INVOICE_VAT"
         Me.TXT_KINGAKU_INVOICE_VAT.Size = New System.Drawing.Size(75, 25)
         Me.TXT_KINGAKU_INVOICE_VAT.TabIndex = 4
-        Me.TXT_KINGAKU_INVOICE_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_INVOICE_VAT.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         Me.TXT_KINGAKU_INVOICE_VAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'LBL_KINGAKU_INVOICE_GUIDE
@@ -792,7 +792,7 @@ Partial Class FRM_SUB_01
         Me.TXT_KINGAKU_INVOICE_DETAIL.Name = "TXT_KINGAKU_INVOICE_DETAIL"
         Me.TXT_KINGAKU_INVOICE_DETAIL.Size = New System.Drawing.Size(150, 25)
         Me.TXT_KINGAKU_INVOICE_DETAIL.TabIndex = 1
-        Me.TXT_KINGAKU_INVOICE_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull,Plus"
+        Me.TXT_KINGAKU_INVOICE_DETAIL.Tag = "Clear,Numeric,Format=#@##0,Check,NotNull"
         Me.TXT_KINGAKU_INVOICE_DETAIL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'PNL_INPUT_KEY
