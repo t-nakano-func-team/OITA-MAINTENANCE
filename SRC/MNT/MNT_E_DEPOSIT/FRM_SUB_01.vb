@@ -395,6 +395,7 @@
     Private Sub SUB_SET_INPUT_DATA(ByRef SRT_DATA As SRT_TABLE_MNT_T_INVOICE_DATA)
         With SRT_DATA
             TXT_KINGAKU_INVOICE_DETAIL.Text = Format(.KINGAKU_INVOICE_DETAIL, "#,##0")
+            Call Application.DoEvents()
             TXT_KINGAKU_INVOICE_VAT.Text = Format(.KINGAKU_INVOICE_VAT, "#,##0")
             Call SUB_REFRESH_KINGAKU_INVOICE_TOTAL()
             Call SUB_SET_COMBO_KIND_CODE(CMB_CODE_SECTION, .CODE_SECTION)
