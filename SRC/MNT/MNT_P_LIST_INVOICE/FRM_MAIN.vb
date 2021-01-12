@@ -273,7 +273,7 @@
         BLN_RET = MOD_PRINT.FUNC_PRINT_MAIN(BLN_PUT, BLN_CANCEL, SRT_CONDITIONS, BLN_PREVIEW, BLN_PUT_FILE)
 
         If Not BLN_RET Then
-            Call MessageBox.Show(MOD_PRINT_99.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Call MessageBox.Show(MOD_PRINT.STR_FUNC_PRINT_MAIN_ERR_STR, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 

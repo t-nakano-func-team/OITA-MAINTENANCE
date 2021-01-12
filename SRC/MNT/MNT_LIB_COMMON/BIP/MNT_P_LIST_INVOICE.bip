@@ -36,18 +36,23 @@ CMPCTTYPE   NO
 ƒI[ƒi[–¼Ì  
 ‘O‰ñ‚²¿‹Šz  
 “–ŒŽ‚²“ü‹àŠz  
+•”–å‚P  
 Œ_–ñ“à—e‚P  
 ‹àŠz‚P  
 Á”ïÅ‚P  
+•”–å‚Q  
 Œ_–ñ“à—e‚Q  
 ‹àŠz‚Q  
 Á”ïÅ‚Q  
+•”–å‚R  
 Œ_–ñ“à—e‚R  
 ‹àŠz‚R  
 Á”ïÅ‚R  
+•”–å‚S  
 Œ_–ñ“à—e‚S  
 ‹àŠz‚S  
 Á”ïÅ‚S  
+•”–å‚T  
 Œ_–ñ“à—e‚T  
 ‹àŠz‚T  
 Á”ïÅ‚T  
@@ -72,22 +77,27 @@ CMPCTTYPE   NO
 “–ŒŽ‚¨”ƒãŠz•›  SET(“–ŒŽ‚¨”ƒãŠz)
 “–ŒŽ‚²“ü‹àŠz•›  SET(“–ŒŽ‚²“ü‹àŠz)
 ¡‰ñ‚²¿‹Šz•›  SET(¡‰ñ‚²¿‹Šz)
+•”–å‚P•›  SET(•”–å‚P)
 Œ_–ñ“à—e‚P•›  SET(Œ_–ñ“à—e‚P)
 ‹àŠz‚P•›  SET(‹àŠz‚P)
 Á”ïÅ‚P•›  SET(Á”ïÅ‚P)
 Åž‹àŠz‚P•›  SET(Åž‹àŠz‚P)
+•”–å‚Q•›  SET(•”–å‚Q)
 Œ_–ñ“à—e‚Q•›  SET(Œ_–ñ“à—e‚Q)
 ‹àŠz‚Q•›  SET(‹àŠz‚Q)
 Á”ïÅ‚Q•›  SET(Á”ïÅ‚Q)
 Åž‹àŠz‚Q•›  SET(Åž‹àŠz‚Q)
+•”–å‚R•›  SET(•”–å‚R)
 Œ_–ñ“à—e‚R•›  SET(Œ_–ñ“à—e‚R)
 ‹àŠz‚R•›  SET(‹àŠz‚R)
 Á”ïÅ‚R•›  SET(Á”ïÅ‚R)
 Åž‹àŠz‚R•›  SET(Åž‹àŠz‚R)
+•”–å‚S•›  SET(•”–å‚S)
 Œ_–ñ“à—e‚S•›  SET(Œ_–ñ“à—e‚S)
 ‹àŠz‚S•›  SET(‹àŠz‚S)
 Á”ïÅ‚S•›  SET(Á”ïÅ‚S)
 Åž‹àŠz‚S•›  SET(Åž‹àŠz‚S)
+•”–å‚T•›  SET(•”–å‚T)
 Œ_–ñ“à—e‚T•›  SET(Œ_–ñ“à—e‚T)
 ‹àŠz‚T•›  SET(‹àŠz‚T)
 Á”ïÅ‚T•›  SET(Á”ïÅ‚T)
@@ -110,11 +120,11 @@ COMPUTE ¡‰ñ‚²¿‹Šz
 COMPUTE ˆóü“ú•t”N•› ˆóü“ú•tŒŽ•› ˆóü“ú•t“ú•›
 COMPUTE —X•Ö”Ô†•› ZŠ‚P•› ZŠ‚Q•› ƒI[ƒi[–¼Ì•›
 COMPUTE ‘O‰ñ‚²¿‹Šz•› “–ŒŽ‚¨”ƒãŠz•› “–ŒŽ‚²“ü‹àŠz•› ¡‰ñ‚²¿‹Šz•›
-COMPUTE Œ_–ñ“à—e‚P•› ‹àŠz‚P•› Á”ïÅ‚P•› Åž‹àŠz‚P•›
-COMPUTE Œ_–ñ“à—e‚Q•› ‹àŠz‚Q•› Á”ïÅ‚Q•› Åž‹àŠz‚Q•›
-COMPUTE Œ_–ñ“à—e‚R•› ‹àŠz‚R•› Á”ïÅ‚R•› Åž‹àŠz‚R•›
-COMPUTE Œ_–ñ“à—e‚S•› ‹àŠz‚S•› Á”ïÅ‚S•› Åž‹àŠz‚S•›
-COMPUTE Œ_–ñ“à—e‚T•› ‹àŠz‚T•› Á”ïÅ‚T•› Åž‹àŠz‚T•›
+COMPUTE •”–å‚P•› Œ_–ñ“à—e‚P•› ‹àŠz‚P•› Á”ïÅ‚P•› Åž‹àŠz‚P•›
+COMPUTE •”–å‚Q•› Œ_–ñ“à—e‚Q•› ‹àŠz‚Q•› Á”ïÅ‚Q•› Åž‹àŠz‚Q•›
+COMPUTE •”–å‚R•› Œ_–ñ“à—e‚R•› ‹àŠz‚R•› Á”ïÅ‚R•› Åž‹àŠz‚R•›
+COMPUTE •”–å‚S•› Œ_–ñ“à—e‚S•› ‹àŠz‚S•› Á”ïÅ‚S•› Åž‹àŠz‚S•›
+COMPUTE •”–å‚T•› Œ_–ñ“à—e‚T•› ‹àŠz‚T•› Á”ïÅ‚T•› Åž‹àŠz‚T•›
 COMPUTE ‹àŠz‡Œv•› Á”ïÅ‡Œv•› Åž‹àŠz‡Œv•›
 DETAIL DE
 CNTL-FOOT  ƒuƒŒƒCƒN˜A”Ô  CF1
